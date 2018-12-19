@@ -1,0 +1,190 @@
+{mb 'tou'}
+<!--<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />-->
+<style type="text/css">
+
+	#wqb{
+		display: none;
+	}
+	.zw-shenglue{
+	 	overflow: hidden; /*自动隐藏文字*/
+	    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	    white-space: nowrap;/*强制不换行*/
+	}
+	.zw-zhang-t{
+		width: 100%;
+		height: 2.5rem;
+		background: #fff;
+		position: relative;
+		line-height: 2.5rem;
+		text-align: center;
+		font-size: .8rem;
+	}
+	.zw-zhang-t1{
+		position: absolute;
+		left: .2rem;
+		top: .2rem;
+		font-size: .3rem;
+		line-height: .3rem;
+	}
+	.zw-zhang-t2{
+		position: absolute;
+		right: .2rem;
+		bottom: .2rem;
+		font-size: .3rem;
+		line-height: .5rem;
+		height: .5rem;
+		color: #fff;
+		background: #000000;
+		width: 20%;
+		text-align: center;
+		
+	}
+	.zw-zhang-z{
+		width: 100%;
+		height: .8rem;
+		line-height: .8rem;
+		box-sizing: border-box;
+		padding:0 .2rem;
+		background: #fff;
+		font-size: .3rem;
+		margin-top: .2rem;
+	}
+	
+	
+	.mingxi{
+		width: 100%;
+		height: 1rem;
+		padding: 0rem .2rem;
+		font-size: .25rem;
+		box-sizing: border-box;
+	
+	}
+	.mingxi-z{
+		float: left;
+		line-height: .4rem;
+		margin-top: .1rem;
+	}
+	.mingxi-y{
+		float: right;
+		line-height: 1rem;
+		width: 40%;
+		text-align: left;
+	}
+	.zw-zhang-xuan{
+		width: 100%;
+		height: .8rem;
+		font-size: .3rem;
+		margin: .2rem 0;
+	}
+	.zw-zhang-xuan div{
+		text-align: center;
+		width: 50%;
+		height: .8rem;
+		line-height: .8rem;
+		float: left;
+	}
+	.hei{
+		background: #000000;
+		color: #fff;
+	}
+	.bai{
+		background: #fff;
+		color: #000;
+	}
+	
+	
+</style>
+	<div id="wqb">
+
+		<header class="m-navbar">
+		    <a onclick="$z.go()" class="navbar-item">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		        <span class="navbar-title">{{zhuangtai==1?'我的余额':'待到账余额明细'}}</span>
+		    </div>
+		</header>
+		<div class="zw-zhang-t">
+			<div class="zw-zhang-t1">{{zhuangtai==1?'可提现余额':'待到账余额'}}</div>
+			<a href="{php echo UAK('wode/tixian')}" class="zw-zhang-t2">提现</a>
+			{{qian}}
+		</div>
+		<!--<div class="zw-zhang-xuan">
+			<div :class="zhuangtai==0?'hei':'bai'" @click="qiehuan(0)" >待到账</div>
+			<div :class="zhuangtai==1?'hei':'bai'" @click="qiehuan(1)" >已到账 </div>
+		</div>-->
+		<div class="zw-zhang-z">
+			余额明细 
+		</div>
+		
+		<section id="J_List" style="background: #FFFFFF;">
+		    <div id="J_ListContent">
+		    	
+		    	<div class="mingxi" v-for="L in lie">
+		    		<div class="mingxi-z">
+		    			{{L.shijian}}<br />{{L.dingdanhao?'订单号'+L.dingdanhao:'平台充值获得'}}<br />{{L.shuoming}}
+		    		</div>
+		    		<div class="mingxi-y zw-shenglue">
+		    			余额&nbsp; {{L.zhi}}
+		    		</div>
+		    	</div>
+				    
+		    </div>
+		</section>
+	
+	</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+			el:"#wqb",
+			data:{					
+	  			qian:0.00,
+	  			lie:[],
+	  			zhuangtai:1,
+	  			ye:0,
+	  			jitiao:10
+			},
+			methods:{
+				qiehuan:function(e){
+					var that=this;
+					that.zhuangtai=e;
+					that.ye=1;
+					$z.post("{$_W['url']}",{ye:that.ye,jitiao:that.jitiao,zhuangtai:e,bi:'yu_e'},function(ret){            	
+		            	if(ret.shi==1){	            
+		            		that.lie=ret.shu.lie;
+		        		    that.qian=ret.shu.zong;
+			            }              	
+		            });
+				}
+			}
+		})
+	
+   
+
+    $('#J_List').infiniteScroll({
+        pageSize: V.jitiao,
+        initLoad: true,
+        loadingHtml: '<strong>加载中...</strong>',
+        loadListFn: function () {
+            var def = $.Deferred();
+            V.ye=V.ye+1;
+            $z.post("{$_W['url']}",{ye:V.ye,jitiao:V.jitiao,zhuangtai:V.zhuangtai,bi:'yu_e'},function(ret){            	
+            	if(ret.shi==1){	            		
+	            	for(var i in ret.shu.lie){
+        		    	V.$set(V.lie,V.lie.length++,ret.shu.lie[i]);            		    	
+        		    }  
+        		    V.qian=ret.shu.zong;
+	            }              	
+             	if( ret.shu.lie==''){
+	            	ret.shu.lie='没有了';
+	            }
+                def.resolve(ret.shu.lie);               
+                $("#wqb").show();
+            });
+            return def.promise();
+        }
+    });
+</script>
+{mb jiao}
+
+	

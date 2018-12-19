@@ -1,0 +1,38 @@
+<div class="table-responsive m-t-lg">
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="15%">时间</th>
+        <th width="15%">{$bi}</th>
+        <th width="25%">说明</th>
+        <!--<th width="15%">操作入口</th>    -->    
+      </tr>
+    </thead>
+    <tbody>
+    	{loop $yongjin $jf}
+      <tr>
+        <td>{php echo date("Y-m-d H:i:s",$jf['shijian'])}</td>
+        <td>{$jf['zhi']}</td>
+        <td><font>{$jf['shuoming']}</font></td>
+        <!--<td style="overflow: hidden;" title="{$jf['rokouUrl']}">{$jf['rukouUrl']}</td>    -->  
+      </tr>  
+      {/loop}
+    </tbody>
+  </table>
+  <div class="text-left">
+    {$fenye}
+  </div>
+</div>
+<script>
+	 $('.pagination-centered li a').click(function(){	 	 
+	 	  if($(this).attr('href')=='javascript:;'){
+	 	  	 return false;
+	 	  }
+	 	  var url1="{$_W['yuming_']}index.php"+$(this).attr('href')+"&id={$_J['id']}";
+	 	 $.post(url1,{},function(data){
+         $("#shezhi4").html(data);          
+     })
+
+	 	  return false;
+	 });
+</script>

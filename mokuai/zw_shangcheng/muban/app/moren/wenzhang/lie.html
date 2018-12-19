@@ -1,0 +1,147 @@
+{mb 'tou'}
+<style type="text/css">
+	.youkuai{
+		position: absolute;
+		width: 24%;
+		height: 100%;
+		background: #ff6a00;
+		right: 0;
+		color: #fff;
+		line-height: 2rem;
+		text-align: center;
+		top: 0;
+	}
+
+ 
+</style>
+<div id="app">
+
+	<header class="m-navbar">
+		    <a  class="navbar-item" onclick="$z.go()">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		   		   {{zhuantai}}	
+		    </div>
+		    
+	</header>
+	<div class="zw-fenlei2" id="box"> 
+		<div class="zw-fenlei2-hua" id="hua">
+			<div @click="xuan(-1,-1)" :class="[(dian==-1)?'dian':'','zw-fenlei2-k']" >全部</div>
+			<div @click="xuan(i,fen.id)" :class="[(dian==i)?'dian':'','zw-fenlei2-k']"   v-for="(fen,i) in fenlei">{{fen.ming}}</div>
+		</div>
+	</div>
+	
+	<div class="zw-jiegou10" v-for="s in lie" @click="dakai(s.id)">
+        <img class="zw-jiegou10-tu" :src="s.suoluetu" />
+        <div class="zw-jiegou10-y">
+	        <div class="zw-jiegou10-biaoti zw-shenglue">{{s.biaoti}}</div>									
+			<div class="zw-jiegou10-neirong zw-shenglue2">{{s.jianjie}}</div>
+			<!--<div class="zw-jiegou10-di">{{s.shijian}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="tubiao tb-yanjing"></i>{{s.yueducishu}}</div>-->
+		</div>
+	</div>
+</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+		el:"#app",
+		data:{		
+			zhuantai:'咨讯',ye:1,lie:[],id:'',
+			fenlei:[],
+			dian:-1
+		},
+		methods:{			
+			JiaZai:function(shu){	 	
+ 				for(var i=0;i<shu.length;i++){
+ 					this.$set(this.lie,this.lie.length,shu[i]);
+ 				}
+ 			},	
+ 			dakai:function(id){
+ 				$z.dakai("{php echo UAK('wenzhang')}&id="+id);
+ 			},
+ 			xuan:function(i,id){
+ 				this.dian=i;
+ 				this.ye=1;
+ 				this.id=id;
+ 				this.lie=[];
+ 				$z.jiazai_chushihua();
+ 			},
+ 			
+		},
+		beforeCreate:function(){
+			var that=this;
+			$z.post('{$_W["url"]}',{c:'fenlei'},function(shu){
+				if(shu.shi){
+					that.fenlei=shu.shu;
+				}else{
+					$z.toast(shu.shu);
+				}
+			})
+			
+		},
+		updated:function(){
+			kuandu();
+		}
+	}); 
+	$z.jiazai('',function(){
+		
+	    var id=V.id;
+	    var that=this;
+		var ye=V.ye;
+		$z.post('{$_W["url"]}',{ye:ye,id:id},function(ret){
+			if(ret.shi){
+				V.JiaZai(ret.shu);	
+			}else{
+				$z.toast(ret.shu);
+			}
+	        V.ye++;
+		});
+	},1);
+	
+	
+	function kuandu(){
+		var k=0;
+		for(var a=0; a<$('.zw-fenlei2-k').length;a++){
+			k+=parseInt($('.zw-fenlei2-k').eq(a).css('width'));
+		}
+		$('#hua').css('width',k);
+		 _touch();
+	}
+	
+	
+	
+	function _touch(){
+              var startx;//让startx在touch事件函数里是全局性变量。
+              var donx;
+              var yuan;
+               var el=document.getElementById('box');
+               var kuan= parseInt($('#hua').css('width'));
+                var kuan1= parseInt($('#box').css('width'));
+              function cons(){   //独立封装这个事件可以保证执行顺序，从而能够访问得到应该访问的数据。
+              			var zhi= Number(yuan.substring(0,yuan.length-2));
+              			var bian=zhi+donx-startx;
+              		
+              			if(bian>0){
+              				bian=0;
+              			}else if(bian<kuan1-kuan){
+              				bian=kuan1-kuan;
+              			}
+              			
+              			$('#hua').css('left',bian);
+             }
+            el.addEventListener('touchstart',function(e){
+                       var touch=e.changedTouches;
+                     startx=touch[0].clientX;
+                      yuan= $('#hua').css('left');
+                    
+            	});
+            el.addEventListener('touchmove',function(e){
+            	 var touch=e.changedTouches;
+            	 donx=touch[0].clientX;
+            	 cons();
+            	 
+            })    
+     }
+    
+</script>		
+{mb jiao}

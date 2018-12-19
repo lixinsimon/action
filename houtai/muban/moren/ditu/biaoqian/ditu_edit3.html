@@ -1,0 +1,138 @@
+ <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+            font-size: 14px;
+        }
+    </style>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=31hnqKEhOUOWFXXxvWYXiM1v"></script>
+    <title></title>
+</head>
+<body>
+    <div id="allmap">
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图初始化
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom(new BMap.Point(121.26105, 31.003331), 16);
+    map.enableScrollWheelZoom();
+    map.enableContinuousZoom();
+
+    /*-----------------------创建3个多边形-------------------------------*/
+    var polygon1 = new BMap.Polygon([
+        new BMap.Point(121.25266, 31.004538),
+        new BMap.Point(121.252696, 31.000576),
+        new BMap.Point(121.259774, 31.001133),
+        new BMap.Point(121.258948, 31.004848)
+    ], { strokeColor: getRandomColor(), strokeWeight: 3, strokeOpacity: 0.5, fillOpacity: 0.1 });
+    map.addOverlay(polygon1);
+
+    var polygon2 = new BMap.Polygon([
+        new BMap.Point(121.261966, 31.004909),
+        new BMap.Point(121.262218, 31.001566),
+        new BMap.Point(121.267212, 31.002),
+        new BMap.Point(121.266817, 31.005498)
+    ], { strokeColor: getRandomColor(), strokeWeight: 3, strokeOpacity: 0.5, fillOpacity: 0.1 });
+    map.addOverlay(polygon2);
+
+    var polygon3 = new BMap.Polygon([
+        new BMap.Point(121.268614, 31.005528),
+        new BMap.Point(121.268865, 31.002186),
+        new BMap.Point(121.277022, 31.002309),
+        new BMap.Point(121.27695, 31.00624)
+    ], { strokeColor: getRandomColor(), strokeWeight: 3, strokeOpacity: 0.5, fillOpacity: 0.1 });
+    map.addOverlay(polygon3);
+
+    /*-----------------创建3个标注标识多边形标签的大概显示位置-------------*/
+    var tagMarkerIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+        imageOffset: new BMap.Size(0, 0 - 13 * 25) // 设置图片偏移  
+    });
+
+    var marker1 = new BMap.Marker(new BMap.Point(121.25593, 31.003114), { icon: tagMarkerIcon });
+    var label1 = new BMap.Label("第一区域", { offset: new BMap.Size(-15, 2) });
+    marker1.setLabel(label1);
+
+    var marker2 = new BMap.Marker(new BMap.Point(121.264553, 31.003671), { icon: tagMarkerIcon });
+    var label2 = new BMap.Label("第二区域", { offset: new BMap.Size(-15, 2) });
+    marker2.setLabel(label2);
+
+    var marker3 = new BMap.Marker(new BMap.Point(121.273213, 31.004105), { icon: tagMarkerIcon });
+    var label3 = new BMap.Label("第三区域", { offset: new BMap.Size(-15, 2) });
+    marker3.setLabel(label3);
+
+    label1.setStyle({
+        color: "red",
+        fontSize: "9px",
+        backgroundColor: "0.05",
+        border: "0",
+        fontWeight: "bold"
+    });
+    label2.setStyle({
+        color: "red",
+        fontSize: "9px",
+        backgroundColor: "0.05",
+        border: "0",
+        fontWeight: "bold"
+    });
+    label3.setStyle({
+        color: "red",
+        fontSize: "9px",
+        backgroundColor: "0.05",
+        border: "0",
+        fontWeight: "bold"
+    });
+    marker1.setLabel(label1);
+    marker2.setLabel(label2);
+    marker3.setLabel(label3);
+
+    var markerMenu1 = new BMap.ContextMenu();
+    markerMenu1.addItem(new BMap.MenuItem('删除标签', function () {
+        map.removeOverlay(marker1);
+    }));
+    marker1.addContextMenu(markerMenu1);
+
+    //点击弹出信息  
+    marker1.addEventListener(
+        "click",
+        function () {
+            var sContent =
+                "<form method='post' action=''>" +
+                    "<table>" +
+                        "<tr>" +
+                            "<td><b>名称：</b>" +
+                                "<input type='text' name='Name' style='margin-top:10px;width:150px' value='第一区域'/>" +
+                            "</td>" +
+                        "</tr>" +                     
+                        "<tr>" +
+                            "<td style='text-align:right;'>" +
+                                "<input type='button' value='保存' style='width: 40px;line-height: 40px;'/>" +
+                            "</td>" +
+                        "</tr>" +
+                    "</talbe>" +
+                "</form>";
+            var opts = {
+                enableMessage: false
+            };
+            var infoWindow = new BMap.InfoWindow(sContent, opts);
+            this.openInfoWindow(infoWindow);
+        });
+
+    map.addOverlay(marker1);
+    map.addOverlay(marker2);
+    map.addOverlay(marker3);
+
+    function getRandomColor() {
+        return "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6);
+    }
+
+    //map.addEventListener("click", function (e) {
+    //    $("#show>ul").append("<li>" + e.point.lng + "," + e.point.lat + "</li>");
+    //})
+
+</script>

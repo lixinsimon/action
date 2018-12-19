@@ -1,0 +1,176 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <a class="accordion-toggle" style="display:block;" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            筛选
+        </a>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body text-sm">
+            <form class="form-horizontal" method="get">
+                <input type="hidden" name="m" value="{$_W['mo']}"/>
+                <input type="hidden" name="k" value="shangpin"/>
+                <input type="hidden" name="d" value="{$_W['danyuan']}"/>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">关键字</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="guanjianci" placeholder="标题" value="{$_J['guanjianci']}">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">状态</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="zhuangtai">
+                            <option value="">不选</option>
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">分类</label>
+                    {php echo FenLeiXiaLaLieBiao($feileilie)}
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary padder-lg">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div class="table-responsive">
+    <table class="table table-striped b-t b-light">
+        <thead>
+        <tr>
+            <th width="3%">ID</th>
+            <th width="7%">排序</th>
+            <th width="18%">商品</th>
+            <th width="25%">商品属性</th>
+            <th>价格</th>
+            <th>库存</th>
+            <th>销量</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {loop $shangpinlie $lie}
+        <tr>
+            <td style="vertical-align:middle;">{$lie['id']}</td>
+            <td style="vertical-align:middle;"><input type="text" class="form-control" value="{$lie['shunxu']}"></td>
+            <td style="vertical-align:middle;">
+                <div style="float:left;margin-right:5px;"><img src="{$lie['tu']}" style="width:40px;height:40px;padding:1px;border:1px solid #ccc;"></div>
+                <div style="float:left;">
+                    <span class="text-danger">[{$lie['fenlei_yiji_ming']}]</span>
+                    <span class="text-info">[{$lie['fenlei_erji_ming']}]</span>
+                    <br>
+                    <span class="fa-edit-item" style="cursor:pointer"><span class="title">{$lie['ming']}</span></span>
+                </div>
+            </td>
+            <td class="btn-shuxing" style="vertical-align:middle;">
+                <a class="btn btn-sm m-b-xs {php echo empty($lie['xinpin'])?'btn-dark':'btn-success'}" data-id="{$lie['id']}" data-zhuangtai="{$lie['xinpin']}" data-show="{'k0':'新品','k1':'新品'}" data-column="xinpin">新品上架</a>
+                <!--<a class="btn btn-sm m-b-xs {php echo empty($lie['remai'])?'btn-dark':'btn-success'}" data-id="{$lie['id']}" data-zhuangtai="{$lie['remai']}" data-show="{'k0':'热卖','k1':'热卖'}" data-column="remai">热卖</a>-->
+                <a class="btn btn-sm m-b-xs {php echo empty($lie['tuijian'])?'btn-dark':'btn-success'}" data-id="{$lie['id']}" data-zhuangtai="{$lie['tuijian']}" data-show="{'k0':'推荐','k1':'推荐'}" data-column="tuijian">今日推荐</a>
+                <!--<a class="btn btn-sm m-b-xs {php echo empty($lie['cuxiao'])?'btn-dark':'btn-success'}" data-id="{$lie['id']}" data-zhuangtai="{$lie['cuxiao']}" data-show="{'k0':'促销','k1':'促销'}" data-column="cuxiao">促销</a>-->
+                <!--<a class="btn btn-sm m-b-xs {php echo empty($lie['baoyou'])?'btn-dark':'btn-success'}" data-id="{$lie['id']}" data-zhuangtai="{$lie['baoyou']}" data-show="{'k0':'包邮','k1':'包邮'}" data-column="baoyou">包邮</a>-->
+                <!--<a class="btn btn-sm m-b-xs {php echo empty($lie['miaosha'])?'btn-dark':'btn-success'}" data-id="{$lie['id']}" data-zhuangtai="{$lie['miaosha']}" data-show="{'k0':'秒杀','k1':'秒杀'}" data-column="miaosha">秒杀</a>-->
+                <!-- <a class="btn btn-dark shuxing btn-sm m-b-xs ">不参与折扣</a>-->
+            </td>
+            <td style="vertical-align:middle;">{$lie['jiage']}</td>
+            <td style="vertical-align:middle;">{$lie['kucun']}</td>
+            <td style="vertical-align:middle;">{$lie['chushoushu']}</td>
+            <td style="vertical-align:middle;">
+                <a class="btn btn-sm m-b-xs {php echo empty($lie['zhuangtai'])?'btn-dark':'btn-success'}" data-id="{$lie['id']}" data-zhuangtai="{$lie['zhuangtai']}" data-show="{'k0':'下架','k1':'上架'}" data-column="zhuangtai">
+                    {php echo empty($lie['zhuangtai'])?'下架':'上架'}
+                </a>
+
+                <!--  <a class="btn btn-dark shuxing btn-sm m-b-xs">虚拟物品</a>-->
+            </td>
+            <td style="vertical-align:middle;">
+                <a class="btn btn-danger" data-copy="btn" data-url="{php echo UAK('xiangqing', array('id'=>$lie['id']))}" style="position: relative;">复制链接</a>
+                <a class="btn btn-success shangping_edit" href="#bianji"  data-id="{$lie['id']}" data-toggle="tab">编辑</a>
+                <a href="{php echo UHK('shangpin',array('c'=>'shanchu','id'=>$lie['id']))}" class="btn btn-default">删除</a>
+            </td>
+        </tr>
+        {/loop}
+        </tbody>
+    </table>
+</div>
+{$FenYe}
+<footer class="panel-footer">
+    <div class="row">
+        <div class="col-sm-8">
+            <a class="btn btn-default padder-lg" href="{php echo UHK('shangpin',array('c'=>tianjia))}">添加商品</a>
+        </div>
+        <div class="col-sm-4 text-right text-center-xs">
+            <!--加载商品-->
+        </div>
+    </div>
+</footer>
+<script>
+    $('.shangping_edit').click(function(){
+        $('.liebiao li').removeClass('active');
+        $('.liebiao li:last').show().addClass('active');
+        $('#tianjia form').html('');
+        $('#bianji form').html('');
+        $.post("{php echo UHK('shangpin')}",{id:$(this).attr('data-id'),c:'bianji'},function(data){
+            $('#bianji form').html(data);
+        });
+    });
+
+    $('[data-zhuangtai]').click(function(){
+        var t = $(this);
+        var current = t.attr("data-zhuangtai");
+        var id = t.attr("data-id");
+        var column = t.attr("data-column");
+        var show = t.attr('data-show');
+        eval("show = "+show);
+        if(current === "1"){
+            $.post("{php echo UHK('shangpin/index', array('c'=>'zhuangtai'))}", {zhuangtai:0,id:id,column:column}, function(shu){
+                if(shu.shi==1){
+                    t.attr("data-zhuangtai", 0);
+                    t.removeClass("btn-success");
+                    t.addClass("btn-dark");
+                    t.text(show['k0']);
+                }
+            }, 'json');
+
+        }else if(current === "0"){
+            $.post("{php echo UHK('shangpin/index', array('c'=>'zhuangtai'))}",  {zhuangtai:1,id:id,column:column}, function(shu){
+                if(shu.shi==1){
+                    t.attr("data-zhuangtai", 1);
+                    t.removeClass("btn-dark");
+                    t.addClass("btn-success");
+                    t.text(show['k1']);
+                }
+            }, 'json');
+        }
+    });
+</script>
+
+<script type="text/javascript" src="{php echo $_W['yuming']}gongyong/js/jquery.zclip.js"></script>
+<script type="text/javascript">
+
+    $('[data-copy]').each(function(){
+        var url = $(this).attr("data-url");
+        $(this).zclip({
+            path:"{php echo $_W['yuming']}/gongyong/js/ZeroClipboard.swf",
+            copy: url,
+            afterCopy: function(){
+                var obj = $('<em> &nbsp; <span class="label label-success"><i class="fa fa-check-circle"></i> 复制成功</span></em>');
+                var enext = $(this).next().html();
+                if (!enext || enext.indexOf('&nbsp; <span class="label label-success"><i class="fa fa-check-circle"></i> 复制成功</span>')<0) {
+                    $(this).after(obj);
+                }
+                setTimeout(function(){
+                    obj.remove();
+                }, 2000);
+            }
+        });
+    });
+
+</script>

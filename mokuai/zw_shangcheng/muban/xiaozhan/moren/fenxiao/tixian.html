@@ -1,0 +1,124 @@
+{mb 'tou'}
+<header class="m-navbar">
+		    <a onclick="$z.go()" class="navbar-item">
+		        <i  class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		       	申请提现
+		    </div>
+</header>
+		
+	<div id="shenqintixian">
+		<div class="tixian-top">
+			<img src="{$_W['gongyou']}/images/qianbao.png" />
+			<p>我的可提现余额</p>
+			<div>￥<span>{{tixian.ketixian}}</span></div>
+		</div>
+		<div style="background: #fff;margin-top: .4rem;">
+		<label class="cell-item">
+	        <span class="cell-left">提现到银行</span>
+	        <label class="cell-right">
+	            <input type="radio" value="yinghang" v-model="fangshi" name="radio" checked/>
+	            <i class="cell-checkbox-icon"></i>
+	        </label>
+	    </label>
+	    <label class="cell-item">
+	        <span class="cell-left">提现到支付宝</span>
+	        <label class="cell-right">
+	            <input type="radio" value="zhifubao" v-model="fangshi" name="radio"/>
+	            <i class="cell-checkbox-icon"></i>
+	        </label>
+	    </label>
+	    <label class="cell-item">
+	        <span class="cell-left">提现到余额</span>
+	        <label class="cell-right">
+	            <input type="radio" value="yu_e" v-model="fangshi" name="radio"/>
+	            <i class="cell-checkbox-icon"></i>
+	        </label>
+	    </label>
+		</div>
+		
+		 <button type="button" class="btn-block " v-bind:class="{'btn-danger':!annui,yuan:annui}" v-bind:disabled="annui" @click="tijiao">提现</button>
+		 <p style="text-align: center;color: #EF4F4F;font-size: .3rem;">注意：满{{tixian.qidian}}元可提现</p>
+	</div>	
+	{mb js}
+	<script type="text/javascript">
+			new Vue({
+				el:"#shenqintixian",
+				data:{
+					tixian:{qidian:"10",ketixian:"20.34"},
+					annui:false,
+					fangshi:"yu_e"
+				},
+				methods:{
+					tijiao:function(){
+						var that= this;
+						var inputt = document.getElementsByTagName('input');
+						that.tixian.c="shenqingtixian";
+						that.tixian.fangshi=that.fangshi;
+						if(confirm("确认提现")){
+							$z.post('{$_W['url']}',that.tixian,function(shu){
+								if(shu.shi==1){
+										alert('体现成功');
+										window.location.href='http://test.heodo.com/app/index.php?d=12&k=fenxiao&m=zw_shangcheng'
+								}
+							})
+						}else{
+										
+						}
+						
+					},
+				
+				},
+					beforeCreate:function(){
+						var that = this;
+						$z.post('{$_W['url']}',function(shus){
+							if(shus.shi == 1){
+								that.tixian = shus.shu
+								
+								if(that.tixian.qidian>that.tixian.ketixian){
+									that.annui=!that.annui;
+								}
+							}
+						})
+					}
+			})
+		</script>
+	
+	
+	
+	
+	
+	
+	<!--<script>
+	    $.post('{php echo UXK("fenxiao/tixian")}',function(shu){	    	
+	    	$('#ketixian').html(shu.shu.ketixian);
+	    	$('#qidian').html(shu.shu.qidian);
+	    	if(shu.shu.ketixian<=shu.shu.qidian){
+	    		$('#tixian_btn').css('background','#C2CCD1').attr('keti','0');
+	    	}	    	
+	    },'json');
+		$('#tixian_btn').click(function(){
+			var fangshi=$("input:checked").val();			
+			if($(this).attr('keti')==1){
+				if(confirm('确认提现')){
+					$.post('{php echo UXK("fenxiao/tixian")}',{c:'shenqingtixian',fangshi:fangshi},function(shu){
+						$('#tishi').html(shu.shu);
+					},'json');
+					$('#myModal').show().addClass('in');
+				    $('.modal-backdrop').addClass('in').show();
+				    setTimeout(function(){
+				    	window.location.reload();
+				    },1000);
+			    }
+			}			
+		});
+		$('.modal-backdrop,.close').click(function() {
+			$('#myModal').hide().removeClass('in');
+			$('.modal-backdrop').removeClass('in').hide();
+			window.location.reload();
+		});	
+	</script>-->
+{mb jiao}
+
+	 

@@ -1,0 +1,56 @@
+<!--<div class="form-group">
+  <label class="col-sm-2 control-label">会员角色浏览权限</label>
+  <div class="col-sm-10">
+    <label class="checkbox-inline i-checks">
+      <input type="radio" name="liulanquanxian" value="0" {if empty($shangpin['liulanquanxian'])}checked{/if}><i></i>全部会员角色  
+    </label>
+    {loop $huiyuandengji $hy}   
+      <label class="checkbox-inline i-checks">
+        <input type="radio" name="liulanquanxian" value="{$hy['id']}" {if $shangpin['liulanquanxian']==$hy['id']}checked{/if}>
+        <i></i>{$hy['ming']}
+      </label>    
+    {/loop} 
+    
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>-->
+<div class="form-group">
+  <label class="col-sm-2 control-label">会员角色购买权限</label>
+  <div class="col-sm-10">
+    <label class="checkbox-inline i-checks">
+      <input type="radio" name="goumaiquanxian" value="0" {if empty($shangpin['goumaiquanxian'])}checked{/if}><i></i>全部会员角色  
+    </label>
+    {loop $huiyuandengji $hy}   
+      <label class="checkbox-inline i-checks">
+        <input type="radio" name="goumaiquanxian" value="{$hy['id']}" {if $shangpin['goumaiquanxian']==$hy['id']}checked{/if}>
+        <i></i>{$hy['ming']}
+      </label>    
+    {/loop}    
+  </div>
+    
+</div>
+
+<!--<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <div class="alert alert-info m-b-none">
+      只有当折扣大于0的情况下才能生效，否则按自身会员角色折扣计算
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">会员角色折扣</label>
+  <div class="col-sm-10">
+    <div class="input-group m-b">
+      <span class="input-group-addon">默认角色</span>
+      <input type="text" class="form-control" name="zhekou[moren]" value="{$shangpin['zhekou']['moren']}">
+      <span class="input-group-addon">折</span>
+    </div>  
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>-->
+<div class="form-group">
+  <div class="col-sm-4 col-sm-offset-2">
+    <button type="submit" class="btn btn-danger padder-lg">提交</button>
+  </div>
+</div>

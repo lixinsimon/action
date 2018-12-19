@@ -1,0 +1,42 @@
+ <!-- .aside -->
+<aside class="bg-black dk aside hidden-print" id="nav">          
+          <section class="vbox">
+            <section class="w-f-md scrollable">
+              <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">                
+                <!-- nav -->                 
+                <nav class="nav-primary hidden-xs">
+                  <ul class="nav" data-ride="collapse">
+                  	{loop $daohang $dh}
+                    <li class="m-t-md">
+                      <a href="{if empty($dh['erji']) && !empty($dh['url'])}{$dh['url']}{else}#{/if}" class="auto">
+                        <span class="pull-right text-muted">
+                          <i class="fa fa-angle-right text"></i>
+                          <i class="fa fa-angle-down text-active"></i>
+                        </span>
+                        <i class="fa {$dh['tubiao']}">
+                        </i>
+                        <span>{$dh['ming']}</span>
+                      </a>
+                      {if $dh['erji']}
+                      <ul class="nav dk text-sm"> 
+                        {loop $dh['erji'] $ej}	
+                        <li>
+                          <a href="{$ej['url']}" class="auto">                                                        
+                            <i class="fa fa-angle-right text-xs"></i>
+                            <span>{$ej['ming']}</span>
+                          </a>
+                        </li> 
+                        {/loop}
+                      </ul>
+                      {/if}
+                    </li>
+                    {/loop}   
+
+                  </ul>
+                </nav>
+                <!-- / nav -->
+              </div>
+            </section>
+
+          </section>
+</aside>

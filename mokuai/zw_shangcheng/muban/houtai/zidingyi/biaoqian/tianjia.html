@@ -1,0 +1,92 @@
+<style>
+	#bianjihe .tou{ border-bottom: 1px solid #ddd;padding-bottom: 7px;margin-bottom:20px;}   	
+	
+</style>
+<form method="post" id="form">
+	<input type="hidden" name="c" value="post" />
+	<input type="hidden" name="x" value="index" />
+	<input type="hidden" name="m" value="zw_shangcheng" />
+	<input type="hidden" name="k" value="zidingyi" />
+	<input type="hidden" name="shunxu" id="shunxu" value="" />
+	<input type="hidden" name="id" value="{$shu['id']}" />
+<div id="zhuti" class="zw-zuo">
+	<div class="zw-shouji">
+		<div class="zw-shouji-t"></div>
+		<div class="zw-shouji-nei" id="muban">
+			<iframe src="{php echo UHK('zidingyi/yulan',array('id'=>$shu['id']))}" frameborder="0" scrolling="auto" name="iframe" id="iframe" height="500"></iframe>
+		</div>
+	    <div class="zw-shouji-b"></div>
+	</div>
+	<div class="zw-shezhi"  id="bianjihe">
+		{mb 'zujian/jichu_edit'}
+		{loop $z $k $s}
+		     {php $shu['ming']=$k}
+		    <div class="bianji" id="{$k}" style="display: none;">{mb 'zujian/'.$s['zujian'].'_bianji'}</div>
+		{/loop}
+		
+	</div>
+	<div class="zw-tianjia">
+		<div class="zw-tianjia-t" >
+			<div class="zw-tianjia-k caidan" zujian_ming='lunbo'><i class="zw-zuo tubiao tb-jia1"></i>轮播</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='fenlei'><i class="zw-zuo tubiao tb-jia1"></i>分类</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='sousuo'><i class="zw-zuo tubiao tb-jia1"></i>搜索</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='caidan'><i class="zw-zuo tubiao tb-jia1"></i>添加菜单</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='tu'><i class="zw-zuo tubiao tb-jia1"></i>图片</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='tu4'><i class="zw-zuo tubiao tb-jia1"></i>图片4块</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='zuoyoushangpin'><i class="zw-zuo tubiao tb-jia1"></i>商品(左右滑动)</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='shangpin'><i class="zw-zuo tubiao tb-jia1"></i>商品(左右商品)</div>
+			<div class="zw-tianjia-k caidan" zujian_ming='shangpin3'><i class="zw-zuo tubiao tb-jia1"></i>商品3列</div>
+			
+		</div> 
+		<div class="zw-tianjia-b">
+			<!--<div class="btn btn-sm btn-success">另存为模板</div>-->
+			<input type="submit" class="btn btn-sm btn-warning" id="baocun" value="保存页面"/>
+			<!--<div class="btn btn-primary btn-sm">保存并预览</div>-->
+		</div>
+	</div>
+</div>
+	</form>
+{mb shangtu}
+<script>
+	
+$('.caidan').click(function(){
+	var zujian_ming=$(this).attr('zujian_ming');	
+	$.post('{$_W["url"]}',{c:'zujian',zj:zujian_ming},function(shu){	
+	    html=shu.shu.zujian;	    
+	    iframe.window.Append(html);
+	    $('#bianjihe .bianji').hide();
+	    $('#bianjihe').append(shu.shu.bianji);   	    
+	},'json');		
+})
+
+
+
+	function  I(c){
+		return $("#iframe").contents().find(c); 
+	}
+
+
+$('#form').submit(function() {
+	var shunxu = [];
+	var i = '';
+	for(var a=0;a<I('.zujian').length;a++){
+		i+=(I('.zujian').eq(a).attr('id'))+',';
+	}
+	console.log(i);
+	$('#shunxu').val(i);
+//	form['shunxu']=shunxu;
+//	console.log(form);
+//  $.post('{php echo UHK("zidingyi/index",array("c"=>"post"))}',form,function(shu){    
+//  	if(shu.shi){
+//  		$('#id').val(shu.shu);
+//  	}else{
+//  		alert(shu.shu);
+//  	}
+//  },'json');
+//  return false;
+});
+
+
+</script>
+
+

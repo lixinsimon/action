@@ -1,0 +1,13 @@
+{loop $hy $y}
+<li class="mui-table-view-cell mui-media">
+	<img class="mui-media-object mui-pull-left" src="{$y['touxiang']}">
+	<div class="mui-media-body">
+		{$y['nicheng']}
+		<p class='mui-ellipsis'>{php echo date("Y-m-d H:i",$y['shijian'])}</p>
+	</div>
+	<!--<div class="mui-media-right">
+		<span style="display:block;color:#eb5449;">+{$y['cengci']}</span>
+		<span style="display:block;">{$y['chengyuan']}个成员</span>
+	</div>-->
+</li>
+{/loop}

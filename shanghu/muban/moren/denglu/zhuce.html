@@ -1,0 +1,69 @@
+{mb tou}
+
+<section id="content" class="m-t-lg wrapper-md animated fadeInDown">
+	<div class="container aside-xl">
+		<a class="navbar-brand block" href="#"><span class="h1 font-bold">代理管理平台</span></a>
+		<section class="m-b-lg">
+			<header class="wrapper text-center">
+				<strong></strong>
+			</header>
+			<form method="post" enctype="application/x-www-form-urlencoded">
+				<div class="form-group">
+					<input placeholder="账号" name="zhanghao" class="form-control rounded input-lg text-center no-border">
+				</div>
+			<input type="hidden" name="c" id="c" value="zhuce" />
+				<div class="form-group">
+					<input type="password" name="mima" placeholder="密码" class="form-control rounded input-lg text-center no-border">
+				</div>
+				
+				<select class="form-control m-b" id="sheng" name="sheng">
+				</select>
+				<select class="form-control m-b" id="shi" name="shi">
+						<option>请选择市区</option>
+				</select>
+				
+				<div class="checkbox i-checks m-b">
+					<label class="m-l">
+              <input type="checkbox" checked=""><i></i> 同意 <a href="#">注册协议</a>
+            </label>
+				</div>
+				<button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">注册</span></button>
+				<div class="line line-dashed"></div>
+				<p class="text-muted text-center"><small>已经有账号</small></p>
+				<a href="signin.html" class="btn btn-lg btn-info btn-block btn-rounded">登录</a>
+			</form>
+		</section>
+	</div>
+</section>
+
+<script>
+	var sheng = [];
+	$.post("{$_W['url']}",function(shu){
+		sheng=shu.shu;
+		for (var i=0,l=shu.shu.length;i<l;i++) {
+			$('#sheng').append("<option>"+shu.shu[i].sheng.ming+"</option>");				
+		}
+		var a = shu.shu[0].sheng.shi;
+		for(var i in a){
+				$('#shi').append("<option value="+i+">"+a[i].ming+"</option>");				
+	    }
+	},'json')
+	
+	$('#sheng').change(function(e){
+	  	$('#shi option').remove();
+	  	var p = e.currentTarget.selectedIndex
+		var a = sheng[p].sheng.shi;
+		$('#shi').append("<option>请选择市区</option>");			
+		for(var i in a){  
+			$('#shi').append("<option value="+i+">"+a[i].ming+"</option>");				
+	    }  	
+  	});	 
+  	
+	$('#shi').change(function(){
+		$('#xuanze').val($('#shi').val());
+	})
+	
+	
+</script>
+
+{mb jiao}

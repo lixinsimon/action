@@ -1,0 +1,175 @@
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div style="height:100px;width:110px;float:left;">
+           <img src="{$fenxiaoshang['touxiang']}" style="width:100px;height:100px;border:1px solid #ccc;padding:1px">
+      </div>
+      <div style="float:left;height:100px;overflow: hidden;line-height:20px;" class="m-l-md">
+          昵称: {php echo empty($fenxiaoshang['nicheng'])?$fenxiaoshang['zhanghao']:$fenxiaoshang['nicheng']}<br>
+          姓名: {$fenxiaoshang['xingming']} <br>
+          手机号: {$fenxiaoshang['shouji']}<br>
+          我的客户: <span class="text-danger">{$wodekehu}</span> 人<br>
+          我的团队: 共：<span class="text-danger">{$wodetuandui}</span> 人 &nbsp;&nbsp;&nbsp;&nbsp;
+      {loop $meijirenshu $k $mj}
+          {$k}级创客: <span class="text-danger">{$mj} </span>  人 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+      {/loop}        
+      </div>
+    </div>
+  </div>
+ <form action="" method="get" class="form-horizontal" role="form">
+	<input type="hidden" name="m" value="{$_W['mo']}" />
+	<input type="hidden" name="d" value="{$_W['danyuan']}" />
+	<input type="hidden" name="k" value="xiaxian" />
+<div class="form-group">
+  <label class="col-sm-2 control-label">成为创客时间</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="shijian" value="0" checked="">
+        <i></i>不搜索
+      </label>
+    </div>
+    
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="shijian" value="1">
+        <i></i>搜索
+      </label>
+    </div>
+    <div style="display:inline-block;">
+    		{php echo RiQi('kaishi')}      
+    </div>
+    <div style="display:inline-block;">
+    		至   
+    </div>
+    <div style="display:inline-block;">
+    	 {php echo RiQi('jieshu')}      
+    </div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="input-id-1">ID</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="input-id-1" name="id">
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="input-id-1">会员信息</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="input-id-1" name="yonghu" placeholder="可搜索昵称/姓名/手机号">
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="input-id-1">创客角色</label>
+  <div class="col-sm-10">
+    <select  class="form-control" name="dengji">
+        <option value="">不限角色</option>
+        {loop $dengji $dj}
+        <option value="{$dj['id']}">{$dj['ming']}</option>
+        {/loop}       
+    </select>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">状态</label>
+  <div class="col-sm-5">
+      <select  class="form-control" name="zhuangtai">
+          <option value="">不限</option>
+          <option value="0">未审核</option>
+          <option value="1">已审核</option>
+      </select>
+  </div>
+  
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <div class="col-lg-offset-2 col-lg-10">
+    <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+  </div>
+</div>
+</form>
+<div class="line line-dashed b-b line-lg"></div>
+
+<div class="table-responsive m-t-md" style="overflow:visible;">
+<header class="panel-heading font-bold">
+  总数：{$zongshu}
+</header>
+<table class="table table-striped b-light">
+  <thead>
+    <tr>
+      <th width="8%" style="vertical-align:middle;">ID</th>
+      <th width="20%" style="vertical-align:middle;">会员</th>
+      <th width="20%" style="vertical-align:middle;">推荐人</th>     
+      <th width="10%" style="vertical-align:middle;">姓名/手机</th>
+      <th width="10%" style="vertical-align:middle;">创客角色</th>     
+      <th width="10%" style="vertical-align:middle;">累计余额<br>打款余额</th>      
+      <th width="10%" style="vertical-align:middle;">状态</th>
+      <th width="16%" style="vertical-align:middle;">时间</th>
+      <th  style="vertical-align:middle;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{loop $hy $h}
+    <tr>
+      <td style="vertical-align:middle;">{$h['id']}</td>
+      <td style="vertical-align:middle;">
+        <span class="thumb-sm pull-left m-l-xs">                        
+          <img src="{$h['touxiang']}" style="width: 40px;height: 40px;" class="dker" alt="{$h['nicheng']}">
+        </span>
+        <div class="m-l-xs" style="line-height:40px;height: 40px;overflow:hidden; padding-left:5px;">{$h['nicheng']}</div>
+      </td>
+      <td style="vertical-align:middle;">
+        <span class="thumb-sm pull-left m-l-xs">                        
+          <img src="{$h['fu']['touxiang']}" class="dker" alt="{$h['fu']['nicheng']}">
+        </span>
+        <font class="m-l-xs" style="line-height:40px;">{$h['fu']['nicheng']}</font>
+      </td>
+      
+      <td style="vertical-align:middle;">
+       <ul style="padding-left:0;">
+          <li>{$h['xingming']}</li>
+          <li>{$h['shouji']}</li>
+        </ul>
+      </td>
+      <td style="vertical-align:middle;">{$h['dengjiming']}</td>      
+      <td style="vertical-align:middle;">
+       <ul style="padding-left:0;">
+          <li>{$h['yongjin']['zong_e']}</li>
+          <li>{$h['yongjin']['tixian']}</li>
+        </ul>
+      </td>
+     
+      <td style="vertical-align:middle;">
+        <ul style="padding-left:0;">
+          <li style="margin-bottom:8px;">
+          	{if $h['fenxiaozhuangtai']}
+          	<label class="label label-success padder">已审核</label>
+          	{else}
+          	<label class="label label-default padder">待审核</label>
+          	{/if}
+          </li>
+          <!--<li><label class="label label-default padder">未关注</label></li>-->
+        </ul>
+      </td>
+      <td style="vertical-align:middle;">{$h['fenxiaoshijian']}</td>
+      <td style="vertical-align:middle;">
+        <div class="btn-group">
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">操作 <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu-left" role="menu" style="z-index: 99999">
+          	<li><a href='{php echo USK("fenxiao",array("c"=>"fenxiaoshang","id"=>$h["id"]))}' class="shang_btn"><i class="fa fa-edit"></i>创客信息</a></li>
+            <li><a href="{php echo UH('fensi/huiyuan',array('bianji'=>'bianji','id'=>$h['id']))}"><i class="fa fa-user"></i> 会员信息</a></li>                                         
+            <!--<li><a href=""><i class="fa fa-list"></i> 推广订单</a></li> -->                           
+            <li><a href='{php echo USK("fenxiao",array("c"=>"xiaxian","id"=>$h["id"]))}' class="xiaxian_btn"><i class="fa fa-users"></i>推广下线</a></li>       
+            <li><a href='{php echo USK("fenxiao",array("c"=>"shanchufenxiaoshang","id"=>$h["id"]))}'><i class="fa fa-times"></i> &nbsp;删除创客</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+   {/loop}
+  </tbody>
+</table>
+{$fenye}
+</div>

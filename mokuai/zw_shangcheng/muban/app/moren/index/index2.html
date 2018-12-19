@@ -1,0 +1,46 @@
+{mb 'tou'}
+<style>
+
+</style>
+<div  id="app">
+	  <!--组件名直接可以当标签使用。-->
+    <radio-tag rid="rBas" txt="篮球" val="1"></radio-tag>
+ 
+    <!--组件的属性也可以使用Vue的绑定的语法，下面是动态绑定数据给子组件-->
+    <radio-tag :rid="demoId" :txt="demoText" :val="demoVal"></radio-tag>
+    
+     
+	
+
+</div>
+{mb js}
+<script type="text/javascript">
+	
+	 // 定义组件模板，模板必须有且只有一个根元素。
+    var temp = '<div><label v-for="l in rid">{{l}}{{ txt }}</label><input  type="radio" v-bind:value="val"></div>';
+    // 注册一个全局的组件
+    Vue.component('radio-tag', {       // 组件的名字不能有大写字母，跟React的曲别啊。另外组件名最好是小写字母加横线组合。
+      template: temp,
+      props: ['rid', 'txt', 'val'],   // 设置组件的属性有哪些，定义标签的属性一致。
+      data: function () {             // 注意属性名都得是小写，不然会不认的。
+        return {                      // 在组件的定义中data必须是函数，而且必须有返回值。
+          age: 19,                    // 此地方的 age 和 emial都是演示，并么有有到。
+          email: 'flydragonml@gmail.com'
+        }
+      }
+    });
+
+	
+	
+  // 初始化一个Vue实例
+    var app = new Vue({
+      el: '#app',
+      data: {
+        demoId: [1,2,3,4],
+        demoText: '足球',
+        demoVal: 2,
+    });
+
+
+</script>
+{mb jiao}

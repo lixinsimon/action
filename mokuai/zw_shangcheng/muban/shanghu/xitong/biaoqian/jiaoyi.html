@@ -1,0 +1,118 @@
+<style>
+   .ali{margin:5px; border: 1px solid #003366; color: #FFF;background: #003399; padding: 5px 10px; float: left; margin-bottom: 10px;border-radius: 3px;}
+  .ali i{ cursor: pointer;}
+  .ali:hover{color: #666666;}
+</style>
+<form action="" method="post" class="form-horizontal" role="form">
+<input type="hidden" name="c" id="c" value="jiaoyi" />		
+ <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">下单提醒客服</label>
+    <div class="col-sm-10">      
+	  <div class="col-lg-6">
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="输入会员ID\昵称" value="" id='so'>
+	      <span class="input-group-btn">
+	          <button class="btn btn-default" type="button" id="go">搜索</button>
+	      </span>
+	    </div>
+	    
+	  </div>
+	  <div class="col-lg-12" id="aali">	  	   
+  	     {loop $Tx $h}
+	        <a class="ali" data_id="{$h['id']}">{$h['nicheng']}<i class="fa fa-times"  onclick="shanchu(this)"></i></a>		     
+	     {/loop}   
+	  </div>
+	  <input type="hidden" value="{$jiaoyi['tixing']}" name="jiaoyi[tixing]" id="jiaoyi_tixing"/>
+      <div class="col-lg-12">
+                  绑客服在客户下单、付款、完成均能收提醒信息;
+      </div>   
+    </div>
+  </div>
+ <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">开启优惠券</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="jiaoyi[quan]" value="1" {if $jiaoyi['quan']==1}checked='checked'{/if}>
+          <i></i>开启 </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="jiaoyi[quan]" value="0" {if $jiaoyi['quan']==0}checked='checked'{/if}>
+          <i></i>关闭
+        </label>
+      </div>
+      <span class="help-block">默认为关闭；开启：商品详情显示领取入口；<br/>入口链接：
+      <font color="red">{php echo UAK('wode/quan')}</font></span>   
+    </div>
+  </div> 
+  <div class="line line-dashed b-b line-lg"></div>
+    <div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">购物送白积分比例(%)</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="jiaoyi[bai]" class="form-control" value="{$jiaoyi['bai']}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">白积分日转红积分比(%)</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="jiaoyi[bai_ri_hong]" class="form-control" value="{$jiaoyi['bai_ri_hong']}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">白积分兑换红积分率(%)</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="jiaoyi[bai_hong]" class="form-control" value="{$jiaoyi['bai_hong']}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">红积分转现金比例(%)</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="text" name="jiaoyi[hong_rmb]" class="form-control" value="{$jiaoyi['hong_rmb']}">
+			</div>
+		</div>
+    </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-danger padder-lg">提交</button>
+    </div>
+  </div>
+</form>
+<script>
+	$('#go').click(function(){
+		var so=$('#so').val();
+		for(var i=0;i<$('#aali a').length;i++){
+			var id=$('#aali a').eq(i).attr('data_id');
+    		if(id==so){
+    			alert('已经存了');    			
+    			return false;
+    		}
+    	}
+		$.post("{php echo USK('xitong')}",{so:so,c:'so'},function(shu){
+			var html
+			if(shu.shi==1){
+				html='<a class="ali" data_id="'+shu.shu.id+'">'+shu.shu.nicheng+'<i class="fa fa-times" onclick="shanchu(this)"></i></a>	';
+				$('#aali').append(html);
+				zhengli();
+			}else{
+				alert(shu.shu);
+			}
+		},'json');
+	});
+    function shanchu(e){    	
+    	$(e).parent().remove();
+    	zhengli();
+    }
+    function zhengli(){    	
+    	var ids='';
+    	for(var i=0;i<$('#aali a').length;i++){
+    		ids+=','+$('#aali a').eq(i).attr('data_id');    		
+    	}
+    	ids=ids.substring(1,ids.length);    	
+    	$('#jiaoyi_tixing').val(ids);
+    }
+</script>

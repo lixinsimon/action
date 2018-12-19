@@ -1,0 +1,189 @@
+{mb 'tou'}	
+
+<style type="text/css">
+	
+
+	.webuploader-pick{
+		height: 2.2rem;
+		background:transparent;
+		left: 10%;
+	}
+
+	
+</style>
+
+<div class="touhang">
+	<a onclick="$z.go()"><img style="width: auto !important; " src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div >修改信息</div>
+</div>
+    
+    
+    <div id="den">
+        <form method="post">
+            <!--<div class="cell-item" style="background: #fff; margin-top:15px ;">
+                <div class="cell-left" style="width: 20%;">姓名</div>
+                <div class="cell-right"><input type="text" id="xingming" name='xingming' class="cell-input" placeholder="请输入您的姓名" /></div>
+            </div>-->
+            <div class="cell-item" style="background: #fff;">
+                <div class="cell-left" style="width: 20%;">性别</div>
+                <label class="cell-right">
+		            <select class="cell-select" id="sex" style="color: #000000;" name="sex">
+		                <option value="">请选择性别</option>
+		                <option value="1">男</option>
+		                <option value="2">女</option>
+		            </select>
+		        </label>
+            </div>
+            <div class="cell-item" style="background: #fff;">
+                <div class="cell-left" style="width: 20%;">昵称</div>
+                <div class="cell-right"><input id="nicheng" name='nicheng' type="text" class="cell-input" placeholder="请输入您的昵称" /></div>
+            </div>
+            <div class="cell-item" style="background: #fff;">
+                <div class="cell-left" style="width: 20%;">手机</div>
+                <div class="cell-right"><input type="number" id="shouji" name='shouji' class="cell-input" placeholder="请输入您的手机号" /></div>
+            </div>
+            <div class="cell-item" style="background: #fff;">
+                <div class="cell-left" style="width: 20%;">所在地区</div>
+                <div class="cell-right"><input class="cell-input" name='shengshiqu' type="text" readonly id="J_Address2" placeholder="请选择所在地区" value=""></div>
+            </div>
+            <div class="cell-item" style="background: #fff;">
+                <div class="cell-left" style="width: 20%;">详细地址</div>
+                <div class="cell-right"><input id="dizhi" type="text" name='dizhi' class="cell-input" placeholder="请输入详细地址" /></div>
+            </div>
+            <!--<div class="chuan-tu" style="float: left;display: block;" id="shangchuantouxiang">
+                <div class="shangchuan" >上传营业执照</div>
+                <input name="yingyezhizhao" type="hidden" id="yingyezhizhao" value="">
+                <img src="">
+            </div>
+            <div class="chuan-tu" style="float: right;" id="shangchuantouxiang1">
+                <div class="shangchuan">上传店面照</div>
+                <input name="dianzhao" type="hidden" id="dianzhao" value="">
+                <img src="">
+            </div>-->
+
+       
+        <div class="btn-block btn-danger  btn-zhai">保存</div>
+         </form>
+    </div>
+{mb js}                      
+	<script src="{$_W['yuming']}gongyong/js/ydui.citys.js"></script>
+	<script src="{$_W['yuming']}gongyong/js/webuploader/webuploader.min.js"></script>	
+	<script>	
+	
+//			var uploader = WebUploader.create({
+//				server:'{php echo UA("gongyou/wenjian",array("c"=>"upload"))}',
+//				pick:'#shangchuantouxiang',
+//				resize:false,
+//				auto:true,
+//				accept:{
+//					title:'Images',
+//					extensions: 'gif,jpg,jpeg,png',
+//					mineTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+//				}
+//			});
+//			uploader.on('uploadSuccess', function(file, resp){
+//				 $("#yingyezhizhao").val(resp.url);
+//				
+//              $('#shangchuantouxiang').find("img").attr('src', resp.url);
+//			});
+//			var uploader1 = WebUploader.create({
+//				server:'{php echo UA("gongyou/wenjian",array("c"=>"upload"))}',
+//				pick:'#shangchuantouxiang1',
+//				resize:false,
+//				auto:true,
+//				accept:{
+//					title:'Images',
+//					extensions: 'gif,jpg,jpeg,png',
+//					mineTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+//				}
+//			});
+//			uploader1.on('uploadSuccess', function(file, resp){
+//            
+//              $("#dianzhao").val(resp.url); 
+//              $('#shangchuantouxiang1').find("img").attr('src', resp.url);
+//			});
+	    	 chushi();
+            // 保存
+            $('.btn-zhai').click(function() {
+                var zhanghao = $("#shouji").val();
+                var reg = /^1[3|4|5|7|8|][0-9]{9}$/;
+                if (!reg.exec(zhanghao)) {
+                    $z.toast("手机号有误");
+                    return false;
+                }
+                if ($(this).attr('shi') == 1) {
+                    return false;
+                }
+                if($("#yingyezhizhao").val()==''){
+                  $z.toast("营业执照");
+                  return false;
+                }
+                if($("#dianzhao").val()==''){
+                  $z.toast("上传店面照");
+                  return false;
+                }
+                $(this).attr('shi', 1).text('执行中...');
+                var shu = $z.form_val('form');
+                if (shu['sex'] == 1) {
+                    shu['sex'] = '男';
+                } else if (shu['sex'] == 2) {
+                    shu['sex'] = '女';
+                } else {
+                    shu['sex'] = '';
+                }
+                shu['k'] = "wode";
+                shu['x'] = "xiugaixinxi";
+                shu['c'] = "xiugaixinxi";
+                $z.post($z.bhurl, shu, function(s) {
+                    $('.btn-zhai').attr('shi', 0).text('保存');
+//                  chushi();
+                    $z.toast(s.shu);
+                    $z.dakai("{php echo UAK('wode')}");
+                });
+            });
+
+
+        function chushi() {
+            $z.post("{$_W['url']}", function(shu) {
+                if (shu.shi == 1) {
+                 
+                    $("#xingming").val(shu.shu.xingming);
+                    if (shu.shu.xingbie == "女") {
+                        $("#sex").val(2);
+                    } else {
+                        $("#sex").val(1);
+                    }
+                    $("#nicheng").val(shu.shu.nicheng);
+                    $("#shouji").val(shu.shu.shouji);
+
+
+//                  $('#yingyezhizhao').val(shu.shu.qita.yingyezhizhao).next('img').attr('src',shu.shu.qita.yingyezhizhao);
+//                  $('#dianzhao').val(shu.shu.qita.dianzhao).next('img').attr('src',shu.shu.qita.dianzhao);
+
+                    $("#J_Address2").val([shu.shu.shengfen, shu.shu.chengshi, shu.shu.quxian].join(" "));
+                    $("#dizhi").val(shu.shu.dizhi);
+                    var $target = $('#J_Address2');
+                    $target.citySelect({
+                        provance: shu.shu.shengfen,
+                        city: shu.shu.chengshi,
+                        area: shu.shu.quxian
+                    });
+                    $target.on('click', function() {
+                        $target.citySelect('open');
+                    });
+                    $target.on('done.ydui.cityselect', function(ret) {
+                        $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+                    });
+                    
+                    
+                    
+                } else {
+                    $z.toast(shu.shu);
+                }
+
+            }, 'json');
+        }
+	</script>
+{mb jiao}
+
+	

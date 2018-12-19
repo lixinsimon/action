@@ -1,0 +1,42 @@
+ <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+      <div class="navbar-header aside bg-info">
+        <a class="btn btn-link visible-xs">
+          <i class="icon-list"></i>
+        </a>
+        <a href="#" class="navbar-brand text-lt">
+          <i class="iconfont icon-shezhi"></i>
+          <img src="{$_W['yuming']}/gongyong/images/logo.png" alt="." class="hide">
+          <span class="hidden-nav-xs m-l-sm">系统管理</span>
+        </a>
+        <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
+          <i class="icon-settings"></i>
+        </a>
+      </div>
+      <form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
+            </span>
+            <input type="text" class="form-control input-sm no-border rounded" placeholder="请输入微信公众号名称">
+          </div>
+        </div>
+      </form>
+      <div class="navbar-right">
+        <ul class="nav navbar-nav m-n hidden-xs nav-user user">
+          <li class="hidden-xs bg-success">
+            <a href="{php echo US('danyuan')}" class="lt">
+              <i class="iconfont icon-weixin"></i>
+              <span class="hidden-nav-xs m-l-sm">公众号管理</span>
+            </a>
+          </li>
+     
+          <li class="hidden-xs bg-default">
+            <a href="{php echo US('denglu/zhuxiao')}" class="lt">
+              <i class="iconfont icon-tuichu"></i>
+              <span class="hidden-nav-xs m-l-sm">退出</span>
+            </a>
+          </li>
+        </ul>
+      </div>      
+</header>

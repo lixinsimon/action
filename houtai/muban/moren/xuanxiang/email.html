@@ -1,0 +1,74 @@
+ {mb tou}
+<section class="vbox">
+	{mb dingbu_y}
+	<section>
+		<section class="hbox stretch">
+			{mb zuobu}
+			<!-- 内容开始 -->
+			<section id="content">
+				<section class="vbox">
+					<section class="scrollable m-t padder-lg">
+						<h2 class="font-thin m-b" style="font-size:20px;">邮箱接口</h2>
+						<form class="form-horizontal" method="post">
+							<input type="hidden" name="c" value="tianjia" />
+							<!-- 短信接口开始 -->
+							<div class="panel panel-default">
+								<div class="panel-heading">Email									
+								<div class="panel-body">
+									<div class="form-group">
+
+				                      <label class="col-sm-2 control-label">开启邮箱</label>			
+				                      <div class="col-sm-10">  
+				                        <div class="radio-inline i-checks">				
+				                          <label>				
+				                            <input type="radio" name="email[kaiguan]" value="1" {if $pz['kaiguan']}checked="checked"{/if}>				
+				                            <i></i>开启				
+				                          </label>				
+				                        </div>				
+				                        <div class="radio-inline i-checks">
+				                        	<label>				
+				                            <input type="radio" name="email[kaiguan]" value="0" {if empty($pz['kaiguan'])}checked="checked"{/if}>				
+				                            <i></i> 关闭				
+				                          </label>				
+				                        </div>				
+				                        <span class="help-block">是否开启邮箱通知</span>   				
+				                      </div>				
+				                    </div>   
+				           
+									<div class="form-group">
+										<label class="col-sm-2 control-label">账号</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="email[zhanghao]" value="{$pz['zhanghao']}">
+											<span class="help-block">如:1599076351@qq.com</span>  
+										</div>
+									</div>							
+                                    <div class="form-group">
+										<label class="col-sm-2 control-label">密码</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="email[mima]" value="{$pz['mima']}">
+											<span class="help-block">IMAP/SMTP服务授权密码</span>  
+										</div>
+									</div>	
+									<div class="form-group">
+										<label class="col-sm-2 control-label">服务器SMTP</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="email[smtp]" value="{$pz['smtp']}">
+											 <span class="help-block">qq邮箱STMP:smtp.qq.com;暂只支持QQ邮箱</span>  
+										</div>
+										  				
+									</div>	
+									</div>
+									 <input  type="submit" value="提交" class="btn btn-danger">
+								</div>								 
+							</div>
+							
+						</form>
+					</section>
+				</section>
+			</section>
+			<!-- 内容结束 -->
+		</section>
+	</section>
+</section>
+
+{mb jiao}

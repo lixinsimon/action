@@ -1,0 +1,32 @@
+<header class="tou">图片</header>	
+
+<div class="form-group" style="margin-right:0px;">   
+    <div class="col-sm-10">   
+			<div class="input-group m-b" onclick="{$shu['ming']}ShangTu(this)">		
+				<input type="hidden" name="z[{$shu['ming']}][tu]" value="{$s['tu']}" idming="{$shu['ming']}" index='0' class="form-control st_img" readonly="readonly" autocomplete="off" >			
+				<span class="input-group-btn">
+					<img src="{php echo JueDuiUrl($s['tu'])}"  class="img-responsive img-thumbnail st_img" style="width: 35px;height: 35px;border: 0px;padding: 0px;border-radius:0px">
+					<button class="btn btn-default" type="button"  zujian="{$shu['ming']}">选择图片</button>
+				</span>
+			</div>
+			<div  class="input-group m-b">
+				 <span class="input-group-addon">图片跳转链接</span>
+				<input type="text" name="z[{$shu['ming']}][url]" class="form-control" placeholder="{$s['url']}" value="{$s['url']}">
+			</div>
+	</div>
+	
+</div>
+<script>
+	
+	function {$shu['ming']}ShangTu(e){
+		 var t=I("#{$shu['ming']} .tu");
+		$ShangTu(function(shu){			
+			 $(e).parent().find('.st_img').val(shu.url).attr('src',shu.url);
+			 $(t).find('img').attr('src',shu.url)
+			 
+		});
+	}
+</script>
+
+
+  

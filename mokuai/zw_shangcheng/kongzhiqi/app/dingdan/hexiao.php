@@ -1,0 +1,38 @@
+<?php
+DengLu();
+if($cao=='moren' && $_W['ispost']){
+	$hx=Qu('he_hexiaoyuan',array('hyid'=>$_W['huiyuan']['id']));
+	if(empty($hx)){
+		json('你不是核销员',0);
+	}
+	if(empty($_J['id'])){
+		json('缺少订单ID',0);
+	}
+	$shu['dianpu']=Qu('he_hexiao',array('id'=>$hx['hexiao']));
+	if(empty($shu['dianpu'])){
+		json('不存在此店铺',0);
+	}
+	$shu['dianpu']['logo']=JueDuiUrl($shu['dianpu']['logo']);
+	$shu['dingdan']=MX()->quDingDan($_J['id'],'erweishuzu');	
+	json($shu);
+	
+}elseif($cao=='hexiao'){
+	$hx=Qu('he_hexiaoyuan',array('hyid'=>$_W['huiyuan']['id'],'danyuan'=>$_W['danyuan']));
+	if(empty($hx)){
+		json('你不是核销员',0);
+	}
+	if(empty($_J['id'])){
+		json('缺少订单ID',0);
+	}
+	$dingdan=Qu('zw_shangcheng_dingdan',array('danyuan'=>$_W['danyuan'],'zhuangtai'=>10,'id'=>$_J['id']),'id,zhuangtai');
+	if(empty($dingdan)){
+	     json('核销失败',0);	
+	}
+	$tiaojian=array('id'=>$_J['id']);	
+	if(MX()->gaiDingDanZhuangTai(array('zhuangtai'=>'hexiao','hexiaoyuan'=>$_W['huiyuan']['id']),$tiaojian)){
+		json('核销成功');
+	}
+	json('核销失败',0);
+}
+MB('hexiao');
+?>

@@ -1,0 +1,53 @@
+<!-- 管理基本文字回复 -->
+  <form action="" method="get" class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="col-xs-12 col-sm-2 col-md-3 col-lg-1 control-label">状态</label>
+      <div class="col-sm-8 col-lg-9 col-xs-12">
+        <div class="btn-group">
+          <button type="button" class="btn btn-info">不限</button>
+          <button type="button" class="btn btn-default">启用</button>
+          <button type="button" class="btn btn-default">禁用</button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-12 col-sm-2 col-md-3 col-lg-1 control-label">用户名</label>
+      <div class="col-sm-8 col-lg-9 col-xs-12">
+        <div class="input-group">
+          <input type="text" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">搜索</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="line line-dashed b-b line-lg"></div>
+  </form>
+  <div class="table-responsive">
+    <table class="table table-striped b-light">
+      <thead>
+        <tr>
+          <!-- <th width="50"><label class="i-checks"><input type="checkbox"><i></i></label></th> -->
+          <th style="height:30px;line-height:30px;">标题(关键字)</th>
+          <th class="pull-right"><button class="btn btn-danger">操作</button></th>
+        </tr>
+      </thead>
+      <tbody>
+        {loop $huifu $hf}
+        <tr>
+          <!-- <td><label class="i-checks"><input type="checkbox" name="id[]" value="{$hf['id']}"><i></i></label></td> -->
+          <td>{$hf['ming']}<button class="btn btn-dark m-l-sm btn-xs">{$hf['ci']}</button></td>
+          <td>
+            <div class="btn-group pull-right">
+              <a href="#profile1-2" data-id="{$hf['id']}" data-toggle="tab" class="btn btn-primary m-r-sm wenzi_bianji">编辑</a>
+              <a href="{php echo US('jichu',array('id'=>$hf['id'],'c'=>'shanchu'))}" onclick="return confirm('确认删除')" class="btn btn-danger m-r-sm">删除</a>
+              <!-- <a href="#" class="btn btn-default m-r-sm">使用率走势图</a> -->
+            </div>
+          </td>
+        </tr>
+       {/loop}
+      </tbody>
+    </table>
+  </div>
+{$fenye}
+<!-- 管理基本文字回复 -->

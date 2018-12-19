@@ -1,0 +1,107 @@
+{mb 'tou'}
+<style type="text/css">
+	.ti{float: right;} 
+	.wqb_t{z-index: 99;}
+	.df_zhon{height: 65px;}
+	.wqb_zd {
+		    padding: 0.2rem;
+		    line-height: .4rem;
+		    font-size: .3rem;
+		    position: fixed;
+		    z-index: 99;
+		    background: #f5f5f5;
+		    overflow: hidden;		  
+		    width: 100%;
+		    top: 3.3rem;
+		    border-bottom: 1px solid #e8e8e8;
+		    margin: 0px;
+		    color: #757373;
+		}
+	.df_xian{left: 1.3rem;}
+     .df_xian h2{font-size: 0.2rem;height: .4rem; overflow: hidden;}
+	.df_xian h3,.df_xian h4{font-size: 0.3rem;0.5rem;top:0.5rem}	
+	.df_zhon img{width: 1rem;height: 1rem;}
+</style>
+
+	<div id="wqb" style="display: none;">
+	    
+		<div class="wqb_t" >
+			<header class="m-navbar" style="background-color:transparent !important;color: #fff;">
+			    <a onclick="$z.go()" class="navbar-item">
+			        <i class="back-ico"></i>
+			    </a>
+			    <div class="navbar-center" >核销记录</div>		    
+			</header>
+			<h2>核销金额</h2>
+			<h3><span>{{qian}}</span></h3>
+			
+		</div>
+		<div class="wqb_zd">
+			  <h4 style="font-weight:normal;">我的记录 <a class="ti">{{zongshu}}条</a></h4>
+		</div>	
+		
+		<section id="J_List" style="margin-top: 4.1rem;color: #333;">
+		    <div id="J_ListContent">	    	   	
+			        <div v-for="(L,i) in lie" style="margin-top:.1rem;background: #fff;overflow:hidden;">				        	
+						    <div class="dai_t">
+								<img src="../gongyong/images/icon-dianpu.png" /> 
+								<span>订单号：{{L.dingdanhao}}</span>
+								<div class="dai_t_r">{{L.zongjia}}</div>
+							</div>
+					        <div class="df_zhon" v-for="s in L.dingdan_shangpin">
+						        <img :src="s.tu" />
+						        <div class="df_xian">
+							        <h2>{{s.ming}}</h2>
+									<h3><span >￥</span>{{s.jiage}}</h3>															
+									<h4>x{{s.shuliang}}</h4>
+								</div>
+							</div>				        	
+				      		 <div class="heji" style="padding-right: .3rem;color: #949494;">
+				        		{{L.wanchengshijian}}
+				        	</div>      	
+		        	</div> 		        
+		       
+		    </div>
+		</section>
+	
+	</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+				el:"#wqb",
+				data:{					
+		  			qian:"0.00",
+		  			zongshu:0,
+		  			lie:[]
+				},
+				beforeCreate:function(){
+					$('#wqb').show();				
+				},
+				
+			})
+	
+    var page = 1, pageSize = 10;
+    $('#J_List').infiniteScroll({
+        pageSize: pageSize,
+        initLoad: true,
+        loadingHtml: '<strong>加载中...</strong>',
+        loadListFn: function () {
+            var def = $.Deferred();
+            $z.post("{$_W['url']}",{ye:page,jitiao:pageSize},function(ret){            	
+            	if(ret.shi==1){              		
+            		V.qian=ret.shu.zong_e;   
+            		V.zongshu=ret.shu.zongshu; 
+        		    for(var i in ret.shu.dingdan){
+        		    	V.$set(V.lie,V.lie.length++,ret.shu.dingdan[i]);            		    	
+        		    }            	   
+	            }            
+                def.resolve(ret.shu.dingdan);
+                ++page;
+            });
+            return def.promise();
+        }
+    });
+</script>
+{mb jiao}
+
+	

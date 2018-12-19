@@ -1,0 +1,51 @@
+<form action="" method="post" class="form-horizontal dengji_form" role="form" data-validate="parsley">
+	<input type="hidden" name="c" value="dengji_post" />
+	<input type="hidden" name="id" value="{$dengji['id']}"/>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">会员角色</label>
+    <div class="col-sm-10">
+        <select name="dengji" class="form-control tp_is_default" style="width:90px;">        	
+          <!--<option value="0" selected="">0</option>-->
+          {php for($i=0;$i<=10;$i++){ }
+          <option value="{$i}"  {if $i==$dengji['dengji']}selected=""{/if}>{$i}</option>
+          {php } }
+      </select>
+      <span class="help-block">会员角色，数字越大越高级</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"><span class="text-danger">*</span>角色名称</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="ming" value="{$dengji['ming']}"  data-required="true">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">升级条件</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon">满足金额</span>
+        <input type="text" class="form-control" name="tiaojian" value="{$dengji['tiaojian']}">
+        <span class="input-group-addon">元</span>
+      </div>
+      <span class="help-block">会员升级条件，不填写默认为不自动升级, 设置<a href="#"><font class="text-info">【会员升级依据】</font></a> </span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">折扣</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="zhekou" value="{$dengji['zhekou']}">
+      <span class="help-block">请输入0.1~10之间的数字,值为空代表不设置折扣</span>
+    </div>
+  </div>
+  <div class="form-group m-b-md m-t-md" style="overflow:hidden;">
+    <div class="col-sm-4 col-sm-offset-2">
+      <button type="submit" class="btn btn-danger padder-lg">提交</button>
+    </div>
+  </div>
+</form>
+<script>
+	$('.dengji_form').parsley();
+</script>

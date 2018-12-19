@@ -1,0 +1,170 @@
+{mb tou}
+
+<style type="text/css">
+	.toubu {
+		height: 12.5rem;
+		background: url({$_W['gongyou']}/images/dmfbg_02.png) no-repeat;
+		width: 100%;
+		background-size: cover;
+		position: relative;
+		position: fixed;
+		top: 0;
+		padding: 1rem;
+		box-sizing: border-box;
+	}
+	
+	.toubu span {
+		color: #fff;
+		font-size: 1.2rem;
+	}
+	
+	.biankuang {
+		width: 7rem;
+		height: 7rem;
+		background: url({$_W['gongyou']}/images/yuan.png) center;
+		background-size: cover;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -3.5rem;
+		margin-left: -3.5rem;
+		line-height: 7rem;
+		text-align: center;
+	}
+	
+	.shangcheng {
+		height: 3.5rem;
+		background: #fff;
+		padding: .8rem 0;
+		box-sizing: border-box;
+		position: fixed;
+		top: 12.5rem;
+		width: 100%;
+	}
+	
+	.shangcheng>div {
+		float: left;
+		width: 50%;
+		text-align: center;
+	}
+	
+	.shangcheng>div:first-child {
+		border-right: 1px solid #ccc;
+	}
+	
+	.shangcheng>div>a>img {
+		width: 1.9rem;
+		height: 1.9rem;
+		display: inline;
+		vertical-align: middle;
+		margin-right: 0.5rem;
+		margin-top: -3px;
+	}
+	
+	.shangcheng>div>a>span {
+		font-size: 1rem;
+	}
+	
+	.jilu {
+		height: 2.5rem;
+		line-height: 2.5rem;
+		padding: 0 1rem;
+		box-sizing: border-box;
+		border-bottom: 1px solid #E0E0E0;
+		font-size: 0.9rem;
+	}
+	.jifenneirong{
+		position: absolute;
+		top: 16rem;
+		z-index: -1;
+	}
+	
+	.jilu>div {
+		width: 25%;
+		float: left;
+		text-align: center;
+	}
+	
+	.jilu>div:first-child {
+		text-align: left;
+		width: 50%;
+	}
+</style>
+<div id="zhifuwancheng">
+	<div class="toubu">
+		<span>当前积分为:</span>
+		<div class="biankuang">
+			<span>{{jifen}}</span>
+		</div>
+	</div>
+	
+	<div class="shangcheng">
+		<div>
+			<a href="">
+				<img src="{$_W['gongyou']}/images/jifenjpg_03.jpg" alt="" />
+				<span>积分商城</span>
+			</a>
+		</div>
+		<div>
+			<a href="">
+				<img src="{$_W['gongyou']}/images/jifenmixi_03.jpg" alt="" />
+				<span>积分明细</span>
+			</a>
+		</div>
+	</div>
+	
+	<div class="jifenneirong" style="width: 100%;">
+		<ul>
+			<li v-for="(item,index) in shuju" class="jilu">
+				<div>
+					<span>消费金额:{{item.jine}}元</span>
+				</div>
+				<div>
+					<span style="color: #ff6600;">+{{item.zengsongjifen}}</span>
+				</div>
+				<div>
+					<span style="color: #666;">{{item.shijian}}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+{mb jss}
+<script>
+	var V = new Vue({
+		el: '#zhifuwancheng',
+		data: {
+			shuju: [],
+			jifen:''
+		},
+		beforeCreate: function() {
+			var that = this;
+			$z.post("{$_W['url']}",function(shu){
+				if(shu.shi==1){
+					that.shuju=shu.shu.shuju;
+					that.jifen=shu.shu.jifen;
+				}
+			});
+
+		},
+		methods: {
+
+		}
+	})
+	
+	 var flag = true,guanjianzhi = '';
+	$(window).scroll(function(){
+			if(document.body.scrollHeight-parseInt($(this).scrollTop())<=document.body.clientHeight && flag){
+				flag = false;		
+//				$z.post('{php echo $_W["url"]}',{page:shouye._data.page++},function(shu){
+//					if(shu.shi==1){
+//						shouye.jiazai(shu);
+//						flag = true;
+//					}
+//				});
+				alert(11);
+			}
+	});
+</script>
+{mb jiao}

@@ -1,0 +1,47 @@
+ {mb tou}
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+        <section class="hbox stretch">
+            {mb zuobu}
+            <!-- 内容开始 -->
+            <section id="content">
+                <section class="vbox">
+                    <section class="scrollable m-t padder-lg">
+                        <h2 class="font-thin m-b" style="font-size:20px;">区域管理</h2>
+                        <!-- right tab -->
+                        <section class="panel panel-default">
+                            <header class="panel-heading text-right bg-light">
+                                <ul class="nav nav-tabs">
+                                    <li  {if $cao=='moren'}class="active"{/if}><a href="{php echo UHK('ditu')}"  style="padding:9px 40px 10px;">区域管理</a></li>
+                                    <li {if $cao=='tianjia'}class="active"{/if}><a href="{php echo UHK('ditu',array('c'=>tianjia))}"  style="padding:9px 40px 10px;">添加区域</a></li>  
+                                    <li {if $cao=='xianlu'}class="active"{/if}><a href="{php echo UHK('ditu',array('c'=>xianlu))}"  style="padding:9px 40px 10px;">线路管理</a></li>     
+                                    {if $cao=='jiaxianlu'}
+                                    <li class="active"><a style="padding:9px 40px 10px;">添加线路</a></li>
+                                    {/if}
+                                </ul>
+                            </header>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in">
+                                        {if $cao=='moren'}
+                                        {mb "biaoqian/ditu_list"}
+                                        {elseif  $cao=='bianji_' || $cao=='tianjia'}
+                                        {mb "biaoqian/ditu_edit"}
+                                        {elseif  $cao=='xianlu'}
+                                        {mb "biaoqian/xianlu"}  
+                                        {elseif  $cao=='jiaxianlu'}
+                                        {mb "biaoqian/jiaxianlu"}  
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <!-- 内容结束 -->
+        </section>
+    </section>
+</section>
+{mb jiao}

@@ -1,0 +1,93 @@
+{mb tou}
+<header class="m-navbar">
+
+	<a onclick="$z.go()" class="navbar-item">
+		<i class="back-ico"></i>
+	</a>
+	<div class="navbar-center">确认付款</div>
+</header>
+	<div id="fukuan" style="display: none;">
+		<form @submit.prevent="submit">
+		<div class="m-cell" style="margin: .14rem 0px;">
+		    <div class="cell-item">
+		        <div class="cell-left">订单号</div>
+		        <div class="cell-right">{{dingdan.dingdanhao}}</div>
+		    </div>
+		    <div class="cell-item">
+		        <div class="cell-left">金额</div>
+		        <div class="cell-right" style="color: #F23030;">￥<span>{{dingdan.zongjia}}</span></div>
+		    </div>
+		</div>		
+		<div class="m-cell zfi">
+	
+		<label class="cell-item" v-if='zhifu.alipay.kaiguan==1'>
+	        <span class="cell-left"><i class="tubiao tb-zhifubaozhifu" ></i>支付宝支付</span>
+	        <label class="cell-right">
+	            <input type="radio" name="zhifuqudao" value="zhifubao" v-model="form.zhifuqudao"/>
+	            <i class="cell-checkbox-icon"></i>
+
+	        </label>
+	   </label>	   
+	    <label class="cell-item"  v-if='zhifu.wechat.kaiguan==1'>
+	        <span class="cell-left"><i class="tubiao tb-weixinzhifu" style="color: #04AB02;"></i>微信支付</span>
+	        <label class="cell-right">
+	            <input type="radio" name="zhifuqudao"  v-model="form.zhifuqudao" value="weixin"/>
+	             <i class="cell-checkbox-icon"></i>
+	        </label>
+	    </label>
+	    
+	    <label class="cell-item"  v-if='zhifu.yu_e.kaiguan==1'>
+	        <span class="cell-left"><i class="tubiao tb-jifen" style="color: #E6A200;"></i>余额支付({{yu_e}}元)</span>
+	        <label class="cell-right">
+	            <input type="radio" name="zhifuqudao" v-model="form.zhifuqudao" value="yu_e"/>
+	            <i class="cell-checkbox-icon"></i>
+	        </label>
+	    </label>
+	    </div>
+		<button type="submit" class="btn-block btn-danger" style="margin:.4rem 1%;width: 98%;">提交</button> 
+		</form>
+	</div>
+{mb js}
+<script type="text/javascript">
+			new Vue({
+				el:"#fukuan",
+				data:{
+					dingdan:{},
+					zhifu:{wechat:{},alipay:{},yu_e:{}},
+					yu_e:0.00,
+					form:{}
+				},
+				methods:{
+					submit:function(){ 
+						
+					   if(this.form.zhifuqudao=='yu_e' && Number(this.yu_e)<Number(this.dingdan.zongjia)){
+					   	   $z.toast('余额不足');
+					   	   return false;
+					   }
+					   if(this.form.zhifuqudao){					   	
+					       $z.dakai("{$_W['url']}&c=zhifu&zhifuqudao="+this.form.zhifuqudao);
+					   }else{
+					   	  $z.toast('请选择支付方式');
+					   }
+					}
+				},
+				beforeCreate:function(){
+					var that=this;
+					$z.post("{$_W['url']}",function(s){
+						if(s.shi==1){
+							that.dingdan=s.shu.dingdan;
+							that.zhifu=s.shu.zhifu;		
+							that.yu_e=s.shu.zong_yu_e.yu_e;
+							$("#fukuan").show();
+						}else{
+							$z.toast(s.shu);
+						}
+						
+					});
+				}
+				
+			})
+
+</script>
+
+{mb jiao}

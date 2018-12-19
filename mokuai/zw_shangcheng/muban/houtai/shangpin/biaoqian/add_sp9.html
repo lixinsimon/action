@@ -1,0 +1,168 @@
+<div class="form-group">
+  <label class="col-sm-2 control-label">是否参与创客</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="canyufenxiao" value="1" {if $shangpin['canyufenxiao']==1 || empty($shangpin['id'])}checked{/if}>
+        <i></i>参与创客
+      </label>
+    </div>
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="canyufenxiao" value="0" {if $shangpin['canyufenxiao']==0 && !empty($shangpin['id'])}checked{/if}>
+        <i></i>不参与创客
+      </label>
+    </div>
+    <span class="help-block m-b-none">如果不参与创客，则不产生创客余额</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">购此商品创客角色升为：</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="fenxiaodengji" value="0" {if empty($shangpin['fenxiaodengji'])}checked{/if}>
+        <i></i>不升级
+      </label>
+    </div>
+    {loop $fenxiaodengji $fx}
+    <div class="radio-inline i-checks m-l-lg">
+       <label>
+        <input type="radio" name="fenxiaodengji" value="{$fx['id']}" {if $shangpin['fenxiaodengji']==$fx['id']}checked{/if}>
+        <i></i>{$fx['ming']}
+      </label>      
+    </div>  
+    {/loop}
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">购此商品会员角色升为：</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="huiyuandengji" value="0" {if empty($shangpin['huiyuandengji'])}checked{/if}>
+        <i></i>不升级
+      </label>
+    </div>
+    {loop $huiyuandengji $hy}
+    <div class="radio-inline i-checks m-l-lg">
+       <label>
+        <input type="radio" name="huiyuandengji" value="{$hy['id']}" {if $shangpin['huiyuandengji']==$hy['id']}checked{/if}>
+        <i></i>{$hy['ming']}
+      </label>      
+    </div>  
+    {/loop} 
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">独立规则</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="dulifenyong" value="0" id="no_diff_hasc" {if empty($shangpin['dulifenyong'])}checked{/if}>
+        <i></i>不启动独立余额
+      </label>
+    </div>
+     <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="dulifenyong" value="1" id="duli" {if $shangpin['dulifenyong']==1}checked{/if}>
+        <i></i>启用独立余额比例
+      </label>
+    </div>
+    <!--<div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="gz" value="2" id="jicha">
+        <i></i>启用级差余额
+      </label>
+    </div>-->
+    <span class="help-block m-b-none">启用独立余额设置，此商品拥有独自的余额比例,不受创客角色比例及默认设置限制</span>
+  </div>
+</div>
+<div id="duli_div" {if $shangpin['dulifenyong']==1}style="display: block;"{/if}>
+  <div class="alert alert-danger">
+    如果比例为空，则使用固定规则，如果都为空则无创客余额
+  </div>
+  {php for($i=1;$i<=$jichupeizhi['cenji'];$i++){}
+  <div class="form-group">
+    <label class="col-sm-2 control-label">{$i}级创客</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input type="text" class="form-control" name="duli[bilie][{$i}]" value="{$shangpin['duliyongjin']['bilie'][$i]}">
+        <span class="input-group-addon">% 固定</span>
+        <input type="text" class="form-control" name="duli[guding][{$i}]" value="{$shangpin['duliyongjin']['guding'][$i]}">
+        <span class="input-group-addon">元</span>
+      </div>
+    </div>
+  </div>   
+  {php  } }
+                      
+</div>
+<div id="jicha_div" >
+  <div class="alert alert-danger">
+    大于零级差*比例 默认为100% 等于零级差余额为固定 小于零级差余额为固定
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">大于零 >0</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input type="text" class="form-control">
+        <span class="input-group-addon">元</span>
+      </div>
+    </div>
+  </div>   
+  <div class="form-group">
+    <label class="col-sm-2 control-label">等于零 =0</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input type="text" class="form-control">
+        <span class="input-group-addon">元</span>
+      </div>
+    </div>
+  </div>  
+  <div class="form-group">
+    <label class="col-sm-2 control-label">小于零 <0</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input type="text" class="form-control">
+        <span class="input-group-addon">元</span>
+      </div>
+    </div>
+  </div>                        
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <div class="col-sm-4 col-sm-offset-2">
+    <button type="submit" class="btn btn-danger padder-lg">提交</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+// 创客设置（独立规则）
+$(function() {
+  $("#duli").click(function() {
+    var obj = $(this);
+    if (obj.get(0).checked) {
+      $("#duli_div").show();
+      $("#jicha_div").hide();
+    }else {
+      $("#duli_div").hide();
+    }
+  });
+  $("#jicha").click(function() {
+    var obj = $(this);
+    if (obj.get(0).checked) {
+      $("#jicha_div").show();
+      $("#duli_div").hide();
+    }else {
+      $("#jicha_div").hide();
+    }
+  });
+  $('#no_diff_hasc').click(function(){
+    $("#jicha_div").hide();
+    $("#duli_div").hide();
+  })
+});
+</script>

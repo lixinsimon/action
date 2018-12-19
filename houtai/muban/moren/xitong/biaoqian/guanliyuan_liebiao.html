@@ -1,0 +1,90 @@
+<form action="" method="get" class="form-horizontal" role="form">
+	<!--<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-3 col-lg-1 control-label">状态</label>
+						<div class="col-sm-8 col-lg-9 col-xs-12">
+							<div class="btn-group">
+								<button type="button" class="btn btn-info">不限</button>
+								<button type="button" class="btn btn-default">启用</button>
+								<button type="button" class="btn btn-default">禁用</button>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-3 col-lg-1 control-label">有效期限</label>
+						<div class="col-sm-8 col-lg-9 col-xs-12">
+							<div class="btn-group">
+								<button type="button" class="btn btn-info">不限</button>
+								<button type="button" class="btn btn-default">已到期</button>
+								<button type="button" class="btn btn-default">三天内</button>
+								<button type="button" class="btn btn-default">半月内</button>
+								<button type="button" class="btn btn-default">一月内</button>
+								<button type="button" class="btn btn-default">三月内</button>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-3 col-lg-1 control-label">用户组</label>
+						<div class="col-sm-8 col-lg-9 col-xs-12">
+							<div class="btn-group">
+								<button type="button" class="btn btn-info">不限</button>
+								<button type="button" class="btn btn-default">体验用户组</button>
+								<button type="button" class="btn btn-default">随便写</button>
+								<button type="button" class="btn btn-default">测试测试</button>
+							</div>
+						</div>
+					</div>-->
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-3 col-lg-1 control-label">用户名</label>
+		<div class="col-sm-8 col-lg-9 col-xs-12">
+			<div class="input-group">
+				<input type="text" class="form-control" name="yonghuming">
+				<span class="input-group-btn">
+                    <button class="btn btn-default" type="button">搜索</button>
+                </span>
+			</div>
+		</div>
+	</div>
+</form>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="table-responsive">
+	<table class="table table-striped b-light">
+		<thead>
+			<tr>
+				<th width="10%">用户名</th>
+				<th width="10%">身份</th>
+				<th width="10%">用户组</th>
+				<th width="8%">状态</th>
+				<th width="20%">有效期限</th>
+				<th width="15%">注册时间</th>
+				<th width="30%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{loop $gl $g}
+			<tr>
+				<td>{$g['yonghuming']}</td>
+				<td><button class="btn btn-success">{php echo $shenfenming[$g['shenfen']]}</button></td>
+				<td>
+					{loop $zu_lie $z} {if $g['yonghuzu']==$z['id']} {$z['zuming']} {/if} {/loop}
+				</td>
+				<td>
+					{if $g['zhuangtai']}
+					<button class="btn btn-success">正常</button> {else}
+					<button class="btn btn-dark">禁止</button> {/if}
+				</td>
+				<td>{php echo date('Y-m-d H:i:s',$g['kaishishijian'])}<br/>{php echo date('Y-m-d H:i:s',$g['jieshushijian'])}</td>
+				<td>{php echo date('Y-m-d H:i:s',$g['zhuceshijian'])}</td>
+				<td>
+					<a href="{php echo UH('xitong/guanliyuan',array('c'=>'bianji','id'=>$g['id']))}"  class="btn btn-info m-r-sm">编辑</a>
+					<a href="{php echo UH('xitong/quanxian',array('id'=>$g['id']))}" class="btn btn-success m-r-sm">权限</a> 
+					{if $g['shenfen']>1}
+					<a href="{php echo UH('xitong/guanliyuan',array('c'=>'shanchu','id'=>$g['id']))}" class="btn btn-default m-r-sm">删除</a>
+					{/if}
+				</td>
+			</tr>
+			{/loop}
+
+		</tbody>
+	</table>
+</div>
+<a href="{php echo UH('xitong/guanliyuan',array('c'=>'tianjia'))}" class="btn btn-danger">添加用户</a>

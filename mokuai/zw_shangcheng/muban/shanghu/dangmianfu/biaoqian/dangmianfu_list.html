@@ -1,0 +1,68 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <a class="accordion-toggle" style="display:block;" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+      筛选
+    </a>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body text-sm">
+            <form class="form-horizontal" action="{php echo USK('weizhan', array('search'=>'wenzhang'))}" method="post">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">店铺昵称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="" name="nicheng" value="">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="table-responsive">
+        <table class="table table-striped b-light">
+            <thead>
+                <tr>
+                    <th width="10%">ID</th>
+                    <th width="15%">账号</th>
+                    <th width="35%">店铺昵称</th>                    
+                    <th width="25%">注册时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {loop $shanghulie $item}
+                <tr>
+                    <td>{$item[id]}</td>
+                      <td>{$item[ming]}</td>
+                    <td>{$item[nicheng]}</td>                  
+                    <td>{php echo date('Y-m-d H:i:s',$item[shijian])}</td>
+                    <td style="position:relative;">
+                        <a href="{php echo USK('dangmianfu/index', array('c'=>'tixian', 'dangmianfu_id'=>$item['id']))}" class="btn btn-sm btn-default" title="提取现金"><i class="fa fa-rmb"></i></a>
+                        <a href="{php echo USK('dangmianfu/index', array('c'=>'jifen', 'dangmianfu_id'=>$item['id']))}" class="btn btn-sm btn-default" title="积分转化"><i class="fa fa-gg"></i></a>
+                        <a {if !$item['erweima']} href="{php echo USK('dangmianfu/index', array('c'=>'chengerweima', 'dangmianfu_id'=>$item['id']))}" {else} href="{$item['erweima']}" download="二维码"{/if} class="btn btn-sm btn-default" title="生成二维码"><img width="10" src="{$item['erweima']}" alt="" /></a>
+                        <a href="{php echo USK('dangmianfu/index', array('c'=>'bianji_', 'dangmianfu_id'=>$item['id']))}" class="btn btn-sm btn-default" title="编辑"><i class="fa fa-pencil"></i></a>
+                        <a href="{php echo USK('dangmianfu/index', array('c'=>'shanchu', 'dangmianfu_id'=>$item['id']))}" onclick="return confirm('确认删除此商户？');return false;" class="btn btn-default  btn-sm" title="删除"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                {/loop}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-left">{$fenye}</div>
+</section>
+<script type="text/javascript">
+$(function() {    
+    require(['util'], function(util) {
+        $('.js-clip').each(function() {
+            util.clip(this, $(this).attr('data-url'));
+        });
+    });
+
+})
+</script>

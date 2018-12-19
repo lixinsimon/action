@@ -1,0 +1,168 @@
+@charset "utf-8";
+/* CSS Document */
+html,body{
+	height:100%;
+}
+*{margin:0;padding:0;font-family:'微软雅黑';}
+li{list-style:none;}
+img{border:none;}
+a{text-decoration:none;}
+input{border:none;}
+.clear{clear:both;}
+
+/*登录开始*/
+body{
+	width:100%;
+	height:auto;
+	background:url(../images/duoshanghu_bj.jpg) no-repeat center;
+	background-size:cover;
+}
+.d_inner{
+	width:1200px;
+	height:100%;
+	margin:0 auto;
+}
+.d_denglu{
+	width:590px;
+	height:auto;
+	margin:0 auto;
+	text-align: center;
+	padding:40px;
+	box-sizing:border-box;
+	-webkit-border-radius: 20px; 
+	-moz-border-radius: 20px; 
+	border-radius:16px;
+	border:4px solid;
+	border-image: -webkit-linear-gradient(135deg,#7e9ffd,#ae5bfd) 30 30;
+	border-image: -moz-linear-gradient(135deg,#7e9ffd,#ae5bfd) 30 30;
+	border-image: linear-gradient(135deg,#7e9ffd,#ae5bfd) 30 30;
+	background-color:rgba(11,30,35,0.7);
+	margin-top:22%;
+}
+.d_denglu p{
+	color:#fff;
+	font-size:30px;
+	margin-bottom:20px;
+}
+.d_input{
+	width:100%;
+	height:46px;
+	text-align: center;
+	color:#fff;
+	font-size:16px;
+	border-radius: 23px;
+	border:1px solid #b5b5b5;
+	background:transparent;
+	margin-top:20px;
+}
+.d_but{
+	width:100%;
+	height:46px;
+	text-align: center;
+	margin-top:20px;
+	border:none;
+	color:#fff;
+	font-size:16px;
+	border-radius: 23px;
+	background: -webkit-linear-gradient(left, #a63aff , #5aa5ff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #a63aff , #5aa5ff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #a63aff , #5aa5ff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #a63aff , #5aa5ff); /* 标准的语法 */;
+}
+.d_but:active,.d_but:enabled:active{
+	border:1px solid #5aa5ff;
+	border-radius:23px;
+}
+.d_but_zhuce{
+	width:100%;
+	height:46px;
+	text-align: center;
+	margin-top:20px;
+	color:#fff;
+	font-size:16px;
+	border-radius: 23px;
+	background: transparent;
+	border:1px solid #ae5bfd;
+	background:-webkit-linear-gradient(left,#a63aff,#a63aff 25%,#a63aff 40%,#5aa5ff 60%,#5aa5ff 70%,#5aa5ff);
+	-webkit-background-clip:text;/*只有webkit内核支持text的剪切模式*/
+	color:transparent;
+}
+.d_denglu span{
+	color:#cbcbcb;
+	font-size:16px;
+	display: block;
+	margin-top:25px;
+}
+/*登录结束*/
+
+/*框架开始*/
+.header.navbar.d_header_bj{
+	background: -webkit-linear-gradient(left, rgba(166,58,255,0.5) , rgba(90,165,255,0.5)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, rgba(166,58,255,0.5) , rgba(90,165,255,0.5)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, rgba(166,58,255,0.5) , rgba(90,165,255,0.5)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, rgba(166,58,255,0.5) , rgba(90,165,255,0.5)); /* 标准的语法 */;
+}
+.bg-info.dk.d_nav_bj{
+	background:transparent;
+}
+.header-md .navbar-form{
+	margin:0;
+	height:60px;
+	background-color: rgba(255,255,255,0.3);
+}
+.input-group.d_input_group{
+	height:60px;
+}
+.input-group-btn:first-child > .btn{
+	height: 60px;
+	border-radius: 0;
+	margin-right:0;
+	color:#fff;
+	background-color: rgba(255,255,255,0);
+}
+.form-control.d_input_bord{
+	height:60px;
+	border-radius:0;
+	color:#fff;
+	background-color: rgba(255,255,255,0);
+}
+.bg-black.dk.d_nav_left{
+	background:rgba(255,255,255,0.6);
+}
+.bg-black .nav > li > a{
+	color:#333;
+}
+.nav-primary li > a > i:before{
+	/*background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DEBB47), to(#248F24)); 
+	color: transparent;
+	-webkit-background-clip: text;*/
+	position: relative;
+    z-index: 2;
+	color: green;
+    background-image: -webkit-gradient(linear, 0 0, right 0, from(#7e9ffd), to(#ae5bfd));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.bg-black .nav > li:hover > a, .bg-black .nav > li:focus > a, .bg-black .nav > li:active > a, .bg-black .nav > li.active > a{
+	background-color: transparent;
+	color:#ae5bfd;
+}
+.bg-black .dk{
+	background: linear-gradient(to right, rgba(245,211,188,0.8) , rgba(178,102,248,0.8)); /* 标准的语法 */;
+}
+.fa.fa-indent.text,.icon-bell,a.dropdown-toggle.bg{
+	color:#fff;
+}
+.nav > li > a:hover,
+.nav > li > a:focus{
+	background: rgba(255,255,255,0.5); /* 标准的语法 */;
+	color:#7e9ffd;
+}
+.bg-black .nav > li > a:hover,
+.bg-black .nav > li > a:focus{
+	background: rgba(255,255,255,0.5); /* 标准的语法 */;
+	color:#7e9ffd;
+}
+.nav > li > a:hover,
+.nav > li > a:focus
+/*框架结束*/

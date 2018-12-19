@@ -1,0 +1,80 @@
+{mb 'tou'}
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left back"></a>
+		<h1 class="mui-title">公告列表</h1>
+	</header>
+	<!--下拉刷新容器-->
+	<div id="pullrefresh" class="mui-content mui-scroll-wrapper mui-fullscreen">
+		<div class="mui-scroll">
+			<!--数据列表-->
+			<ul class="mui-table-view wenti_ul" style="background:#fff;overflow: hidden;">
+				<li class="mui-table-view-cell">
+					<a href="#">
+						<div class="mui-table">
+			                <div class="mui-table-cell mui-col-xs-12">
+			                    <h5 style="color:#333;font-size:1em;">公告消息标题</h5>
+			                    <p class="mui-h6 mui-ellipsis" style="font-size:0.9em;margin-top:10px;">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
+			                </div>
+			                <div class="mui-table-cell mui-col-xs-4 mui-text-right">
+			                    <span class="mui-h5">2016/12/28</span>
+			                </div>
+			            </div>
+		            </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript" charset="utf-8">
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				down: {
+					callback: pulldownRefresh
+				},
+				up: {
+					contentrefresh: '正在加载...',
+					callback: pullupRefresh
+				}
+			}
+		});
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1500);
+		}
+		var count = 0;
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() {
+			setTimeout(function() {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				for (var i = cells.length, len = i + 5; i < len; i++) {
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell';
+					li.innerHTML = '<a href="#"><div class="mui-table"><div class="mui-table-cell mui-col-xs-12"><h5 style="color:#333;font-size:1em;">公告消息标题</h5><p class="mui-h6 mui-ellipsis" style="font-size:0.9em;margin-top:10px;">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p></div><div class="mui-table-cell mui-col-xs-4 mui-text-right"><span class="mui-h5">2016/12/28</span></div></div></a>';
+					table.appendChild(li);
+				}
+			}, 1500);
+		}
+		if (mui.os.plus) {
+			mui.plusReady(function() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				}, 1000);
+
+			});
+		} else {
+			mui.ready(function() {
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+			});
+		}
+	</script>
+{mb jiao}
+
+	 

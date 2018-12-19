@@ -1,0 +1,68 @@
+{mb 'tou'}
+<style type="text/css">
+#shangchuantouxiang [type=file] {
+    opacity: 0;
+    display: block;
+    width: 1000px;
+    height: 100px;
+}
+
+.webuploader-pick{
+	width: 100%;
+	height: 1rem;
+}
+
+
+</style>
+<header class="m-navbar">
+		    <a onclick="$z.go()" class="navbar-item">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		        <span class="navbar-title">设置</span>
+		    </div>
+		    
+		</header>
+		<div class="m-cell" style="margin-bottom: 0rem;">
+		    <a class="cell-item" id="shangchuantouxiang">
+		        <div class="cell-left" style="margin-top: .3rem;">修改头像</div>
+		        <div class="cell-right cell-arrow" style="margin-top: -.7rem;">
+		        	<img src="{$huiyuan['touxiang']}" style="width:.6rem;height:.6rem;border-radius:50%;border:1px solid #4CD864;float: right;">
+		        </div>
+		    </a>
+		</div>
+		<div class="m-cell" style="margin-bottom: 0rem;">
+		    <a class="cell-item" href="{php echo UXK('wode/xiugaimima')}" >
+		        <div class="cell-left">修改密码</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		</div>
+		<div class="m-cell" style="margin-bottom: 0rem;">
+		    <a class="cell-item"  href="{php echo UXK('wode/xiugaixinxi')}" >
+		        <div class="cell-left">修改信息</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		</div>
+
+<button type="submit" class="btn-block btn-danger dibu"  onClick="$z.dakai('{php echo UX('denglu/tuichu')}')" >退出登录</button>
+{mb js}	
+<script src="{$_W['yuming']}gongyong/js/webuploader/webuploader.min.js"></script>	
+<script type="text/javascript">
+	var uploader = WebUploader.create({
+		server:'{php echo UXK("wode/uploadfile")}',
+		pick:'#shangchuantouxiang',
+		resize:false,
+		auto:true,
+		accept:{
+			title:'Images',
+			extensions: 'gif,jpg,jpeg,png',
+			mineTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+		}
+	});
+	uploader.on('uploadSuccess', function(file, resp){
+		$('#shangchuantouxiang').find("img").attr('src', resp.result.path);
+	});
+
+</script>
+{mb jiao}
+	

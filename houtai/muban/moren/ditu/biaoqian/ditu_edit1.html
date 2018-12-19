@@ -1,0 +1,253 @@
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=pmqagAwvSRwE6sb66DGlDQraIXSPbsjh"></script>   
+ <style type="text/css">
+ 	  #allmap {height:800px; width: 100%;}  
+        #control{width:100%;}  
+ </style>
+ 
+<form action="{php echo UHK('ditu/index', array('c'=>'xiugai'))}" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+	<input type="hidden" value="{$ditu['id']}" name="id" />
+	<div class="line line-dashed b-b line-lg pull-in"></div>	
+	<!--<div class="form-group">
+		<label class="col-lg-2 control-label">绑定商户</label>
+		<div class="col-lg-10">
+			<div class="input-group">
+				<input type="hidden" name="shanghu" id="shanghu" value="{$ditu['shanghu']}" />
+				<input type="text"  value="{$ditu['shanghuming']}" maxlength="30" id="agent" class="form-control" readonly="">
+				<div class="input-group-btn">
+					<button class="btn btn-default" type="button" id="xuanshangji" data-toggle="modal" data-target="#shangji">商户</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="input-id-1">地区昵称</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="nicheng" value="{$ditu['nicheng']}">
+		</div>
+	</div>-->
+
+	
+	<!--<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group dianpu">
+		<label class="col-sm-2 control-label" for="input-id-1">地区</label>
+		<div class="col-sm-10">
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="sheng" name="sheng">
+					{if $ditu[sheng]}
+					<option>{$ditu[sheng]}</option>{/if}
+				</select>
+			</div>
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="shi" name="shi">
+					{if $ditu[shi]}
+					<option>{$ditu[shi]}</option>{/if}
+				</select>
+			</div>
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="xian" name="xian">
+					{if $ditu[xian]}
+					<option>{$ditu[xian]}</option>{/if}
+				</select>
+			</div>
+		</div>
+
+	</div>-->
+	<!--<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="input-id-1">详细地址</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="input-id-1" name="xiangxidizhi" value="{$ditu['xiangxidizhi']}">
+		</div>
+	</div>-->
+
+	
+	 <div id="allmap"></div>  
+    <div id="control">  
+        <!--<div onclick = "polyline.enableEditing();polygon.enableEditing();">开启线、面编辑功能</div>-->  
+        <div onclick = "polygon.enableEditing();">开启线、面编辑功能</div>  
+        <div onclick = "polygon.disableEditing();">关闭线、面编辑功能</div>  
+      
+      	<div id="r-result">请输入:<input type="text" id="suggestId" size="20" value="百度" style="width:150px;" /></div>
+		<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+    </div>  
+	
+
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group m-b-md" style="overflow:hidden;">
+		<div class="col-sm-4 col-sm-offset-2">
+			<button type="submit" class="btn btn-danger padder-lg">提交</button>
+		</div>
+	</div>
+</form>
+
+
+<script src="{$_W['yuming']}gongyong/js/diqu.js"></script>
+<script src="{$_W['yuming']}gongyong/js/GeoUtils.js"></script>
+
+
+
+
+<script>
+	 // 百度地图API功能  
+    var map = new BMap.Map("allmap");  
+    //初始位置
+    map.centerAndZoom(new BMap.Point(106.613922,29.53832), 15);  
+    map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+  
+    
+    var polygon = new BMap.Polygon([  
+        new BMap.Point(106.607477,29.544864),  
+        new BMap.Point(106.613572,29.548324),  
+        new BMap.Point(106.619357,29.537421),  
+        new BMap.Point(106.612988,29.537079),  
+        new BMap.Point(106.615359,29.541143)  
+    ], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});  //创建多边形  
+    map.addOverlay(polygon);   //增加多边形  
+  
+	  
+      var ppoint = new BMap.Point(106.613087,29.540485);  
+       
+        var marker = new BMap.Marker(ppoint);
+         marker.enableDragging();//标注可以拖动的
+         marker.addEventListener("dragend", function(e){   
+//                  alert(e.point.lng + ", " + e.point.lat);//打印拖动结束坐标  
+//                 var aa=BMapLib.GeoUtils.isPointInPolygon(ppoint, polygon);     
+//                  alert("数字图书馆是否在多边形范围内："+aa);     
+				//判断点是否在多边形内
+         }); 
+         map.addOverlay(marker);  
+      	//添加点标注
+
+  
+         var ppoint1 = new BMap.Point(106.614986,29.539876);  
+      
+  
+         var distance =map.getDistance(ppoint, ppoint1);  
+        //获取两点距离
+  
+	
+	function G(id) {
+		return document.getElementById(id);
+	}
+
+	var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+		{"input" : "suggestId"
+		,"location" : map
+	});
+
+	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+	var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+		
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		G("searchResultPanel").innerHTML = str;
+	});
+
+	var myValue;
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+	var _value = e.item.value;
+		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+		
+		setPlace();
+	});
+
+	function setPlace(){
+		map.clearOverlays();    //清除地图上所有覆盖物
+		function myFun(){
+			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+			map.centerAndZoom(pp, 18);
+			map.addOverlay(new BMap.Marker(pp));    //添加标注
+		}
+		var local = new BMap.LocalSearch(map, { //智能搜索
+		  onSearchComplete: myFun
+		});
+		local.search(myValue);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	$(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			$('#sheng').append("<option>" + citys[i].n + "</option>");
+		}
+		for(let a = 0, h = citys[0].c.length; a < h; a++) {
+			$('#shi').append("<option>" + citys[0].c[a].n + "</option>");
+		}
+		for(let p = 0, h = citys[0].c[0].a.length; p < h; p++) {
+			$('#xian').append("<option>" + citys[0].c[0].a[p] + "</option>");
+		}
+		$('#dizhi1').val($('#sheng').val());
+		$('#dizhi2').val($('#shi').val());
+		$('#dizhi3').val($('#xian').val());
+	});
+	$('#sheng').change(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			if($(this).val() == citys[i].n) {
+				$('#shi option').remove();
+				for(let a = 0, n = citys[i].c.length; a < n; a++) {
+					$('#shi').append("<option>" + citys[i].c[a].n + "</option>");
+				}
+				$('#dizhi1').val($('#sheng').val());
+				$('#dizhi2').val($('#shi').val());
+				$('#dizhi3').val($('#xian').val());
+			}
+		}
+		$('#xian option').remove();
+		$('#dizhi3').val('');
+	});
+	$('#shi').change(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			for(let a = 0, n = citys[i].c.length; a < n; a++) {
+				if($(this).val() == citys[i].c[a].n) {
+
+					$('#xian option').remove();
+					for(let b = 0, m = citys[i].c[a].a.length; b < m; b++) {
+						$('#xian').append("<option>" + citys[i].c[a].a[b] + "</option>");
+					}
+					$('#dizhi1').val($('#sheng').val());
+					$('#dizhi2').val($('#shi').val());
+					$('#dizhi3').val($('#xian').val());
+				}
+			}
+		}
+	});
+	$('#xian').change(function() {
+		$('#dizhi1').val($('#sheng').val());
+		$('#dizhi2').val($('#shi').val());
+		$('#dizhi3').val($('#xian').val());
+	});
+	
+</script>

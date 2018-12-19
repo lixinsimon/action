@@ -1,0 +1,25 @@
+<div class="m-slider" style="height:130px;overflow: hidden;"  >
+	<div class="slider-wrapper lunbo">
+		{if empty($s['lunbo'])}
+			{php $s['lunbo'][0]['tu']=''}		
+			{php $s['lunbo'][1]['tu']=''}		
+			{php $s['lunbo'][2]['tu']=''}		
+		{/if}
+		{loop $s['lunbo'] $k}
+		<div class="slider-item">
+            <a href="#">
+                <img height="130" src="{php echo JueDuiUrl($k['tu'])}">
+            </a>
+        </div>	
+        {/loop}
+	</div>
+	<div class="slider-pagination"></div>
+</div>
+<!--<script>
+	$(function(){
+		$("#{$shu['ming']}").slider({
+	       speed: 2000,      
+	       lazyLoad: true
+	    });
+	})
+</script>-->

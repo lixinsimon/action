@@ -1,0 +1,83 @@
+<form action="" method="post" class="form-horizontal" role="form">
+    <input type="hidden" value="xin" name="c" />
+    <input type="hidden" value="id" name="{$shu['id']}" />
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="input-id-1">标题</label>
+        <div class="col-sm-10">
+            <input type="text" name="biaoti" class="form-control" value="{$shu['biaoti']}">
+        </div>
+    </div>
+    <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">图片</label>
+        <div class="col-sm-10">
+            {php echo ShangTu('tu',$shu['tu'])}
+        </div>
+    </div>
+    <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">最低起投</label>
+        <div class="col-sm-10">
+            <input type="text" name="qitou" class="form-control" value="{$shu['qitou']}">
+            <span class="help-block">最低多少数量起投</span>
+        </div>
+    </div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">天数</label>
+		<div class="col-sm-10">
+			<input type="text" name="tian" class="form-control" value="{$shu['tian']}">
+			<span class="help-block">投资天数</span>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">每日收益（%）</label>
+		<div class="col-sm-10">
+	<!-- 		<input type="text" name="shouyi" class="form-control" value="{$shu['shouyi']}">
+			<span class="help-block">每日的投资收益（%）</span> -->
+			<div class="input-group">			
+				<span class="input-group-addon">A档满足(元)</span>				
+				<input type="text" name="shouyi[0][yuan]" class="form-control" value="{php echo $shu['shouyi'][0]?$shu['shouyi'][0]['yuan']:''}" >
+				<span class="input-group-addon">收益率（%）</span>
+				<input type="text" name="shouyi[0][bilie]" class="form-control" value="{php echo $shu['shouyi'][0]?$shu['shouyi'][0]['bilie']:''}">
+			</div>
+			<div class="input-group">			
+				<span class="input-group-addon">B档满足(元)</span>
+				<input type="text" name="shouyi[1][yuan]" class="form-control" value="{php echo $shu['shouyi'][1]?$shu['shouyi'][1]['yuan']:''}" >
+				<span class="input-group-addon">收益率（%）</span>
+				<input type="text" name="shouyi[1][bilie]" class="form-control" value="{php echo $shu['shouyi'][1]?$shu['shouyi'][1]['bilie']:''}">
+			</div>
+			<div class="input-group">			
+				<span class="input-group-addon">C档满足(元)</span>
+				<input type="text" name="shouyi[2][yuan]" class="form-control" value="{php echo $shu['shouyi'][2]?$shu['shouyi'][2]['yuan']:''}" >
+				<span class="input-group-addon">收益率（%）</span>
+				<input type="text" name="shouyi[2][bilie]" class="form-control" value="{php echo $shu['shouyi'][2]?$shu['shouyi'][2]['bilie']:''}">
+			</div>		
+		</div>
+	</div>
+   <!-- <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">使用时间限制</label>
+        <div class="col-sm-10">
+            <div style="display:inline-block;">
+                {php echo RiQi('kaishi',$juan['kaishi'])}
+            </div>
+            <div style="display:inline-block;">
+                至
+            </div>
+            <div style="display:inline-block;">
+                {php echo RiQi('jieshu',$juan['jieshu'])}
+            </div>
+            <span class="help-block">如2017-5-16至2017-06-01内使用有效。</span>
+        </div>
+    </div> -->
+     
+    <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <input type="submit" value="提交" class="btn btn-danger col-lg-1">
+        </div>
+    </div>
+</form>

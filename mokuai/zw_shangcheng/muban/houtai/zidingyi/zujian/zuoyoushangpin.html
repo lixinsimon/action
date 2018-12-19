@@ -1,0 +1,40 @@
+
+<style>
+	
+	.kuandu:last-child{
+		margin-right: 0 !important;
+	}
+	
+</style>
+
+<div class="z_img tu" style="padding: 2px;width: 100%;float: left;overflow: hidden;overflow-x: auto;">
+	{if empty($s['shangpin'])}
+		{php $s['shangpin'][0]['tu']=''}    
+		{php $s['shangpin'][0]['ming']='商城商品'}    
+		{php $s['shangpin'][0]['jiage']='1'}    
+		{php $s['shangpin'][1]['tu']=''}    
+		{php $s['shangpin'][1]['ming']='商城商品'}    
+		{php $s['shangpin'][1]['jiage']='1'}    
+		{php $s['shangpin'][2]['tu']=''}    
+		{php $s['shangpin'][2]['ming']='商城商品'}    
+		{php $s['shangpin'][2]['jiage']='1'} 
+	{/if}
+	
+	
+
+	<div style="width: 10000px;">
+		<div class="hezi" style="width: 399px;float: left;">
+			{loop $s['shangpin'] $l}
+				<div class="kuandu" style="float: left;width: 125px;margin-right: 12px;">
+					<img src="{php echo JueDuiUrl($l['tu'])}"  style="width: 100%;">
+					<p>{$l['ming']}</p><span>{$l['jiage']}元</span>
+				</div>
+			{/loop}
+		</div>
+	</div>
+
+    <input type="hidden" class="panduan" id="" value="0" />
+	
+</div> 
+
+

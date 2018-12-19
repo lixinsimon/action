@@ -1,0 +1,458 @@
+{mb 'tou'}
+<style type="text/css">
+	body{
+		background: #fff;
+	}
+	.tu{
+		width: .5rem;height: .5rem;float: left;margin: .2rem .35rem 0px .1rem;
+	}
+	.pinglun{
+		width: 1.2rem;
+		height: .6rem;
+		border: 1px solid #B2B2B2;
+		position: absolute;
+		right: .3rem;
+		top: .4rem;
+		line-height: .6rem;
+		border-radius: .1rem;
+		text-align: center;
+		font-size: .25rem;
+	}
+	.an{
+		border-radius: 0px;
+		width: 1.5rem;
+		border: 1px solid #8C8C8C;
+		border-left: 0px;
+		border-radius:0px .1rem .1rem 0px;
+		box-sizing: border-box;
+		
+	}
+	.an0{
+		background: #FF5500;
+		color: #fff;
+		border-radius: 0px;
+		width: 1.5rem;
+		margin-right: -.1rem;
+		border: 1px solid transparent;
+	}
+	.m-confirm{width: 60%;}
+	.m-confirm img{width: 100%;border-radius:2px;}
+	
+	.dingdan-tz{
+		text-align: right;
+		line-height: .68rem;
+		border-bottom: 1px solid #eee;
+		font-size: .3rem;
+		padding-right: .2rem;
+	}
+	.qrdd-t{
+		padding: 0;
+	}
+	.cell-item{
+	height: .8rem;
+	line-height: .8rem;
+}
+.cell-right{
+	min-height: .6rem !important;
+}
+.zw-xq{
+	width: 100%;
+
+	text-align: center;
+	font-size: .3rem;
+	line-height: .8rem;
+}
+.zw-xq1{
+	width: 100%;
+	text-align: left;
+	color: #afafaf;
+	line-height: .4rem;
+	font-size:.24rem ;
+	box-sizing: border-box;
+	padding-left:.2rem ;
+}
+.df_di{
+	position: fixed;
+	bottom: .1rem;
+	right: .1rem;
+}
+.btn{
+		height: .5rem;
+		line-height: .5rem;
+		border-radius:.25rem !important ;
+		width: 1.7rem;
+	}
+	.btn-hollow:after{
+			border-radius:.5rem !important ;
+	}
+	.zw-zhekuai{
+		width: 80%;
+		position: fixed;
+		top: 20%;
+		left: 10%;
+		z-index: 999;
+		font-size: .28rem;
+	}
+	.zw-zhekuai-t{
+		text-align: center;
+		background: #000;
+		line-height: .7rem;
+		height: .7rem;
+		color: #fff;
+	}
+	.zw-zhekuai-x{
+		text-align: left;
+		background: #fff;
+		line-height: .7rem;
+		height: .7rem;
+		color: #000;
+		padding: 0 .2rem ;
+	}
+	.zw-zhekuai-x img{
+		float: right;
+		width: .4rem;
+		margin-top: .1rem;
+	}
+	.zw-zhekuai-b{
+		width: 100%;
+		height: .8rem;
+		border-top: .1rem solid #E0E0E0;
+		background: #fff;
+	}
+	.zw-zhekuai-b div{
+		width: 50%;
+		line-height: .7rem;
+		text-align: center;
+		float: left;
+	}
+	.zw-zhekuai-b div:nth-child(1){
+		border-right: 1px solid #003366 ;
+	}
+	
+	.zw-zhezhao{
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: rgba(0,0,0,.2);
+		z-index: 10;
+	}
+	.wenti{
+		border: 0px ;
+		border-bottom: 1px solid #5a5a5a;
+		line-height: .5rem;
+		width: 80%;
+	}
+	.df_xian{
+		width: 70%;
+	}
+	.df_zhon{
+		border-bottom: 1px solid #eee;
+	}
+	.df_di{
+		height: 70px;
+	}
+	.dikou{
+	color: #000000 !important;
+	width: 5rem;
+	position: relative;
+	margin-top: .2rem;
+}
+.dikou span{
+	position: absolute;
+	left: 0;
+	top: -.3rem;
+}
+.btn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>
+<div id="ddxq" style="display: none;">
+		<header class="m-navbar">
+			<a href="{php echo UAK('dingdan/dingdan',array('zhuangtai'=>'quanbu'))}" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				订单详情
+			</div>
+			<a class="navbar-item" href="{php echo UAK('index')}">
+				<i style="font-size: .4rem;" class="icon-home-outline"></i>
+			</a>
+		</header>
+		<!--默认地址-->		
+		<div class="qrdd-t" >	
+			<div class="dingdan-tz">
+				{{dingdan.zhuangtai_wenzi}}
+			</div>
+			 <!-- 商品列表-->  
+			<div class="df_zhon" style="background: #fff;margin: .1rem 0px;position: relative;" v-for="(dingdan,i) in dingdan.dingdan_shangpin">
+				<a :href="'{php echo UAK('xiangqing')}&id='+dingdan.shangpin" >
+				<img :src="dingdan.tu" />
+				<div class="df_xian" style="width: 70%;">
+						<h2 class="zw-shenglue2">{{dingdan.ming}}</h3>
+						<!--<h3><span >￥{{dingdan.jiage}}</span></h3>		-->													
+						<h4>x{{dingdan.shuliang}}</h4>
+				</div>
+				</a>
+				<!--<div v-if="dingdan.zhuangtai==30" class="pinglun" @click="pan('{php echo UAK('xiangqing/pingjia')}&shangpin='+dingdan.shangpin+'&dingdan='+dingdan.id)" >去评论</div>-->
+			</div>	
+			
+			<div class="m-cell" style="margin-bottom: 0rem;">
+			    <div class="cell-item" >
+			        <div class="cell-left">配送方式</div>
+			        <div class="cell-right">{{dingdan.peisong==1? '到店自提':'物流配送' }} {{dingdan.yunfei>0?dingdan.yunfei+'元':''}}  </div>
+			    </div>
+			</div>
+			<div class="m-cell" style="margin-bottom: 0rem;">
+			    <div class="cell-item" >
+			        <div class="cell-left">收货人：{{dingdan.shouhuoren}} &nbsp; {{dingdan.shouhuodianhua}}</div>
+			      
+			    </div>
+			</div>
+			<div class="m-cell" style="margin-bottom: 0rem;">
+			    <div class="cell-item" >
+			        <div class="cell-left zw-shenglue" style="width: 96%;">收货地址：{{dingdan.shouhuoshengshiqu}} {{dingdan.shouhuodizhi}}</div>
+			    </div>
+			</div>
+			<div class="m-cell" style="margin-bottom: 0rem;">
+			    <div class="cell-item" >
+			        <div class="cell-left">小计(包含快递)：</div>
+			        <div class="cell-right" style="color:#ff0200 ;">￥{{dingdan.zongjia}}</div>
+			    </div>
+			</div>
+			<div class="zw-xq">
+				快递.支付详情
+			</div>
+			<div class="zw-xq1" >订单编号：{{dingdan.dingdanhao}}</div>
+			<div class="zw-xq1" v-if="dingdan.kuaidihao"  >{{dingdan.kuaidiming?dingdan.kuaidiming:'其他快递'}}：{{dingdan.kuaidihao}}</div>
+			<div class="zw-xq1" >创建时间：{{dingdan.xiadanshijian}}</div>
+			<div class="zw-xq1" >支付时间：{{dingdan.zhifushijian}}</div>
+		</div> 	
+		<div class="df_di">
+				        	
+
+    		<div v-if='dingdan.zhuangtai==5 || dingdan.zhuangtai==40'>
+        		<div class="btn btn-danger" style="float: right;" onclick="$z.dakai('{php echo UAK('index')}')">再次购买</div>	
+    		</div>
+    		<div v-else-if='dingdan.zhuangtai==6'>					        			        		
+        		<div class="btn btn-danger" style="float: right;">退款中</div>		
+    		</div>
+    		<div v-else-if='dingdan.zhuangtai==7' >					        			        		
+        		<div class="btn btn-danger" style="float: right;" >已退款</div>		
+    		</div>
+    		<div v-else-if='dingdan.zhuangtai==10'>	
+    			<div class="btn btn-danger" style="float: right;"  @click="Cao('tixing',dingdan.id)" >提醒发货</div>
+    			<a  @click="kaiqi(1,dingdan.id)"  class="btn btn-hollow" style="float: right;margin-right: 15px;" >退款</a>
+        		<!--<div class="btn btn-danger" style="float: right;" @click="Cao(i,'hexiao',dingdan.id)">核销二维码</div>-->						        	
+    		</div>
+    		<div v-else-if='dingdan.zhuangtai==15'>			        			
+        		<div class="btn btn-danger" style="float: right;">退换货中</div>		
+    		</div>
+    		<div v-else-if='dingdan.zhuangtai==20'>				        		  
+    			<!--<div class="btn btn-hollow" style="float: right;margin-left: 15px;" @click="Cao(i,'wuliu',dingdan.id)">查看物流</div>-->
+        		<div class="btn btn-danger" style="float: right;" @click="Cao('shouhuo',dingdan.id)">确认收货</div>	
+        		<a  @click="kaiqi(1,dingdan.id)"  class="btn btn-hollow" style="float: right;margin-right: 15px;" >退款</a>
+        		<a :href="'{php echo UAK('dingdan/kuaidixiangqing')}&dingdanid='+dingdan.id" class="btn btn-hollow" style="float: right;margin-right: 15px;" >查看物流</a>
+    		</div>
+    		<div v-else-if='dingdan.zhuangtai==25'>			        			
+        		<div class="btn btn-danger" style="float: right;">退换货中</div>		
+    		</div>
+    		<div v-else-if='dingdan.zhuangtai==30'>		
+    			<!--<div class="btn btn-hollow" style="float: right;margin-left: 15px;"  @click="Cao(dingdan.dingdan_shangpin[0].shangpin,'pingjia',dingdan.id)">评论</div>-->
+    			<div class="btn btn-danger" style="float: right;"><a :href="'{php echo UAK('xiangqing/index')}&id='+dingdan.dingdan_shangpin[0]['shangpin']">再来一单</a></div>
+    			<a  :href="'{php echo UAK('dingdan/kuaidixiangqing')}&dingdanid='+dingdan.id" class="btn btn-hollow" style="float: right;margin-right: 15px;" >查看物流</a>
+    			<a  v-if="dingdan.leixing!=2  && dingdan.ketuihuo"  @click="kaiqi(2,dingdan.id)" class="btn btn-hollow" style="float: right;margin-right: 15px;" >退换货</a>
+        		
+    		</div>				        		
+    		<div v-else>
+        		<div class="btn btn-danger" style="float: right;" @click="Cao('fukuan',dingdan.id)">付款</div>		
+        		<!--<a :href="'{php echo UAK('dingdan/dingdanxiangqing')}&id='+dingdan.id" class="btn btn-hollow" style="float: right;margin-right: 15px;" >查看详情</a>-->
+        		<div class="btn btn-hollow" style="float: right;margin-right: 15px;" @click="Cao('quxiao',dingdan.id)">取消订单</div>			        		
+    		</div>
+    	</div>
+    	
+			<div class="zw-zhezhao" v-if="kaiguan==1" >
+			<div class="zw-zhekuai">
+				<div class="zw-zhekuai-t">请选择退换货的理由</div>
+				<div class="zw-zhekuai-x" v-for="(wt,i) in wentilie"  @click="xuanwt(i,wt)" >
+					{{wt}}
+					<img v-if="xuan==i" src="{$_W['gongyou']}/images/选择.png"/><img v-else src="{$_W['gongyou']}/images/未选择.png"/>
+				</div>
+				
+				<div class="zw-zhekuai-x"  @click="xuanwt(-1)">
+					其他
+					<img v-if="xuan==-1" src="{$_W['gongyou']}/images/选择.png"/><img v-else src="{$_W['gongyou']}/images/未选择.png"/>
+				</div>
+				<div class="zw-zhekuai-x"  v-if="xuan==-1">
+					理由： <input type="text" class="wenti" v-model="wenti" />
+				</div>
+				<div class="zw-zhekuai-b" >
+					<div @click="kaiqi(0)" >取消</div>
+					<div  @click="Cao('tuikuan',tuiid)" >确定</div>
+				</div>
+			</div>
+		</div>
+		<div class="zw-zhezhao" v-if="kaiguan==2" >
+			<div class="zw-zhekuai">
+				<div class="zw-zhekuai-t">请选择退换货的理由</div>
+				<div class="zw-zhekuai-x" v-for="(wt,i) in wentilie"  @click="xuanwt(i,wt)" >
+					{{wt}}
+					<img v-if="xuan==i" src="{$_W['gongyou']}/images/选择.png"/><img v-else src="{$_W['gongyou']}/images/未选择.png"/>
+				</div>
+				
+				<div class="zw-zhekuai-x"  @click="xuanwt(-1)">
+					其他
+					<img v-if="xuan==-1" src="{$_W['gongyou']}/images/选择.png"/><img v-else src="{$_W['gongyou']}/images/未选择.png"/>
+				</div>
+				<div class="zw-zhekuai-x"  v-if="xuan==-1">
+					理由： <input type="text" class="wenti" v-model="wenti" />
+				</div>
+				<div class="zw-zhekuai-b" >
+					<div @click="kaiqi(0)" >取消</div>
+					<div  @click="Cao('tuihuo',tuiid)" >确定</div>
+				</div>
+			</div>
+		</div>
+</div>		
+
+
+{mb js}
+<script type="text/javascript">
+			new Vue({
+				el:"#ddxq",
+				data:{
+					wuliu:true,			
+					dingdan:[],
+					kuaidi:[],
+					maijiahaoma:'',
+					erweima:'',
+					tankuang:false,
+					xuan:0,wenti:'尺码拍错/不喜欢/效果差',kaiguan:0,tuiid:'',tuiindex:'',
+ 					wentilie:['尺码拍错/不喜欢/效果差','质量问题','实际商品与产品描述不符','订单不能按预期时间送达','重复下单/误下单']
+				},
+				methods:{
+//					Cao:function(c){
+//		 				var url="{php echo UAK('dingdan/dingdan')}";
+//		 				var that=this;	
+//		 				if(c=='hexiao'){
+//		 					 YDUI.dialog.loading.open('正在生成二维码');		 					 
+//		 					$z.post('{$_W["url"]}',{c:c},function(s){
+//			 			    	  YDUI.dialog.loading.close(); 		 			    	
+//			 			    	  if(s.shi==1){			 			    	  	 
+//			 			    	  	   that.erweima=s.shu;
+//			 			    	  	   that.tankuang=true;
+//			 			    	  }else{
+//			 			    	  	  $z.toast('生成失败');
+//			 			    	  }
+//			 			    });	
+//		 				}else{		 					
+//		 					var z={quxiao:5,shouhuo:30,tuikuan:6};
+//			 			    $z.post(url,{c:c,dingdanid:this.dingdan.id},function(s){
+//			 			    	$z.toast(s.shu);
+//			 			    	that.$set(that.dingdan,'zhuangtai',z[c]);
+//			 			    });	 								
+//			 			} 
+//			 		},
+					xuanwt:function(e,wt){
+		 				this.xuan=e;
+		 				this.wenti=wt;
+		 			},
+		 			kaiqi:function(e,id){
+		 				this.kaiguan=e;
+		 				if(e==1||e==2){
+		 					this.tuiid=id;
+		 				}
+		 			},
+			 		Cao:function(c,dingdanid){
+		 				var url;
+		 				var that=this;
+		 				if(c=='wuliu'){
+		 					url="{php echo UAK('dingdan/kuaidixiangqing')}&dingdanid="+dingdanid;
+		 					$z.dakai(url);
+		 				}else if(c=='fukuan'){
+		 					url="{php echo UAK('dingdan/zhifu')}&dingdanid="+dingdanid;
+		 					$z.dakai(url);
+		 				}else if(c=='hexiao'){
+		 					url="{php echo UAK('dingdan/dingdanxiangqing')}&hexiao=1&id="+dingdanid;
+		 					$z.dakai(url);
+		 				}else if(c=='pingjia'){
+		 					url="{php echo UAK('xiangqing/pingjia')}&dingdan="+dingdanid+'&shangpin='+i;
+		 					$z.post(url,{c:'pan'},function(shu){
+		 						if(shu.shi){
+		 							$z.dakai(url);
+		 						}else{
+		 							$z.toast(shu.shu);
+		 						}
+				 			});
+		 				}else if(c=='tixing'){
+		 					url="{php echo UAK('dingdan/dingdan')}&dingdanid="+dingdanid;
+		 					$z.post(url,{c:'tixing'},function(shu){
+		 							$z.toast(shu.shu);
+				 			});
+		 				}else if(c=='tuikuan'){
+		 					url="{php echo UAK('dingdan/dingdan')}"; 		
+		 					if(that.wenti==''){
+		 						$z.toast('理由不能为空');
+		 					}
+			 			    $z.post(url,{c:c,dingdanid:dingdanid,liyou:that.wenti},function(s){
+			 			    	$z.toast(s.shu);
+			 			    	that.kaiguan=0;
+			 			    });
+		 				}else if(c=='tuihuo'){
+		 					url="{php echo UAK('dingdan/dingdan')}"; 		
+		 					if(that.wenti==''){
+		 						$z.toast('理由不能为空');
+		 					}
+			 			    $z.post(url,{c:c,dingdanid:dingdanid,liyou:that.wenti},function(s){
+			 			    	$z.toast(s.shu);
+			 			    	that.kaiguan=0;
+			 			    });
+		 				}else{
+		 					url="{php echo UAK('dingdan/dingdan')}"; 			    
+			 			    $z.post(url,{c:c,dingdanid:dingdanid},function(s){
+			 			    	$z.toast(s.shu);
+			 			    	that.kaiguan=0;
+			 			    });
+		 				}
+		 				$z.post("{$_W['url']}",function(s){
+							if(s.shi==1){
+								that.dingdan=s.shu.dingdan;
+							}
+						});
+		 			},
+		 			pan:function(e){
+		 				$z.post(e,{c:'pan'},function(shu){
+		 						if(shu.shi){
+		 							$z.dakai(e);
+		 						}else{
+		 							$z.toast(shu.shu);
+		 						}
+		 				
+		 				});
+		 			},
+			 		guanbi:function(){			 		
+			 			this.tankuang=false;
+			 		}
+		 		},
+				beforeCreate:function(){
+					var that=this;					
+					$z.post("{$_W['url']}",function(s){
+						if(s.shi==1){
+							that.dingdan=s.shu.dingdan;
+							//that.kuaidi=s.shu.kuaidi;
+						}
+						$('#ddxq').show();
+					});
+				}
+			})
+			
+</script>
+
+		
+		
+{mb jiao}
+
+	

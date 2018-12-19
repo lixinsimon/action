@@ -1,0 +1,163 @@
+{mb tou}
+<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />
+<style type="text/css">
+	body{
+		background: #eee;
+	}
+
+</style>
+<div class="touhang">
+		<a onclick="$z.go()"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+		<div > 优惠券</div>
+</div>
+
+
+<div id="app" style="display: none;">
+<div class="m-tab zw-zuo zw-w100"  data-ydui-tab>
+	<ul class="tab-nav">
+		<li :class="[(active==0)?'tab-active':'','tab-nav-item']"  @click="tab('weiyong')">
+			<a href="javascript:;">未使用</a>
+		</li>
+		<li :class="[(active==1)?'tab-active':'','tab-nav-item']"  @click="tab('yiyong')">
+			<a href="javascript:;">使用记录</a>
+		</li>
+		<li :class="[(active==2)?'tab-active':'','tab-nav-item']" @click="tab('guoqi')">
+			<a href="javascript:;">已过期</a>
+		</li>
+	</ul>
+	
+	<div class="tab-panel" style="background: #eee;">
+		    <div :class="(active==index)?'tab-panel-item tab-active':'tab-panel-item'" v-for="(A,index) in ALL" >
+		        	<a class="zw-kuai1 zw-size26" href="{php echo UAK('wode/lingquan')}"  v-if="index==0">
+		        		<i class="zw-zuo   tubiao tb-goupiao zw-margin-r20"></i>您有<span>{{zong}}</span>张待领取的优惠券哦
+		        		<i class="zw-you zw-h0  tubiao tb-yduiqianjin"></i>
+		        	</a>
+		        	
+		        	
+		        	<div v-for="(L,i) in A"  :class="[youhui,'zw-youhui'] " @click="dakai(index)">
+					        <div class="zw-youhui-z">
+								<div class="zw-youhui-qian">
+									<div class="zw-youhui-qian-k"><span>￥</span>{{L.e}}</div>
+								</div>
+								<div class="zw-youhui-man">满{{L.tiaojian}}元可用</div>
+							</div>
+							<div class="zw-youhui-y">
+								<div class="zw-youhui-biaoti">
+									<span :class="index==0 ? 'zw-bg-huang':''">微券</span>
+								 	<div>{{L.biaoti}}</div> 
+								</div>
+								<div class="zw-youhui-shijian">{{L.kaishi_shijian}}-{{L.jieshu_shijian}}</div>
+								<div class="zw-youhui-di" >官方<span v-if="index==0" class="zw-anniu-xiao zw-you zw-zi-huang"  style="border: 1px solid #e4b16b;">点击使用</span></div>
+								
+							</div>
+			        	
+		        	</div>		                	
+		    </div>	    
+		    <!--<div class="zw-w100 zw-h100 zw-zuo" style="background: #f5f5f5;"></div>-->
+		</div>
+</div>
+
+
+</div>
+
+{mb js}
+<script type="text/javascript">
+	var V=new Vue({
+		el:"#app",
+		data:{		
+			zong:0,
+			youhui:'zw-youhui-bg3',
+	  		shangpin:{},	  			
+	  		Show:0,
+            shoucang:false,
+ 			shiping:'',
+           	ALL:[{},{},{},{}],
+ 			active:0,
+ 			ye:1,
+ 			y:[],
+ 			z:[true,true,true,true],
+ 			zhuangtai:0,
+		},
+		methods:{			
+			JiaZai:function(shu,zhuangtai){	 			
+ 				if(zhuangtai=='weiyong'){
+ 				  this.active=0;
+ 				}else if(zhuangtai=='yiyong'){
+ 				   this.active=1; 		
+ 				}else if(zhuangtai=='guoqi'){
+ 				   this.active=2; 	
+ 				}
+ 				var u=this.ye*100;
+ 				for(var i=0;i<shu.length;i++){
+ 					u=Number(u)+Number(i);
+ 					this.$set(this.ALL[this.active],u,shu[i]);
+ 				}
+ 			},
+ 			dakai:function(i){
+ 				if(i==0){
+ 					$z.dakai('{php echo UAK("liebiao/lie")}');
+ 				}
+ 				
+ 			},
+ 			tab:function(zhuangtai){  
+ 				this.zhuangtai=zhuangtai;		
+ 				if(zhuangtai=='weiyong'){
+ 				  this.active=0;
+ 				   this.youhui='zw-youhui-bg3';	
+ 				}else if(zhuangtai=='yiyong'){
+ 				   this.active=1; 		
+ 				   this.youhui='zw-youhui-bg2';	
+ 				}else if(zhuangtai=='guoqi'){
+ 				   this.active=2; 	
+ 				   this.youhui='zw-youhui-bg1';	
+ 				}
+ 				if(!this.y[zhuangtai]){
+ 					this.ye=1;
+ 					$z.jiazai_mei(true);
+ 					$z.jiazai_chushihua();
+ 				}else{ 					
+ 					$z.jiazai_mei(this.z[zhuangtai]);
+ 				}
+ 				
+ 			},
+			
+		},
+		beforeCreate:function(){
+			var that=this;
+			$z.post('{php echo UAK("wode/lingquan")}',function(shu){
+			   if(shu.shi){
+			   		that.zong=shu.shu.zong;
+			   }
+			    $("#app").show();
+			});		
+		},
+		created:function(){
+ 			var z=[];
+ 			z['weiyong']=[0,'weiyong'];
+ 			z['yiyong']=[1,'yiyong'];
+ 			z['guoqi']=[2,'guoqi'];
+ 		    var zt=z['{php echo $_J["zhuangtai"]?$_J["zhuangtai"]:"weiyong"}']; 		 
+   			this.active=zt[0];
+   			this.zhuangtai=zt[1];
+ 		},	
+	});
+	$z.jiazai('',function(){
+	    var zhuangtai=V.zhuangtai;
+	    var that=this;
+		var ye=V.ye;
+		$z.post('{$_W["url"]}',{cha:zhuangtai,ye:ye,jitiao:10,k:'wode',x:'quan'},function(ret){
+			if(ret.shi){
+				V.JiaZai(ret.shu,zhuangtai);	
+			}else{
+				V.z[zhuangtai]=false;
+				$z.jiazai_mei(false);
+			}
+	        V.ye++;
+			V.y[zhuangtai]=V.ye;
+			$('#VUE').show();
+	    });
+	},1);
+			 
+</script>		
+
+{mb jiao}

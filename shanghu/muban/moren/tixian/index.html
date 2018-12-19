@@ -1,0 +1,42 @@
+ {mb tou}
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+        <section class="hbox stretch">
+            {mb zuobu}
+            <!-- 内容开始 -->
+            <section id="content">
+                <section class="vbox">
+                    <section class="scrollable m-t padder-lg">
+                        <h2 class="font-thin m-b" style="font-size:20px;">提现管理</h2>
+                        <!-- right tab -->
+                        <section class="panel panel-default">
+                            <header class="panel-heading text-right bg-light">
+                                <ul class="nav nav-tabs">
+                                    <li  {if $cao=='moren'}class="active" {/if}><a href="#"  style="padding:9px 40px 10px;">提现列表</a></li>
+                                    {if $cao=='chakan'}
+                                    <li class="active"><a style="padding:9px 40px 10px;">详情</a></li>
+                                    {/if}
+                                </ul>
+                            </header>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in">
+                                    	{if $cao=='moren'}
+                                        {mb "biaoqian/tixian_list"}
+                                        {elseif $cao=='xq'}
+                                        {mb "biaoqian/tixian_xq"}
+                                        {/if}
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <!-- 内容结束 -->
+        </section>
+    </section>
+</section>
+{mb jiao}

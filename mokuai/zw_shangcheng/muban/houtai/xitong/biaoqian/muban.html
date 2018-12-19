@@ -1,0 +1,47 @@
+<form action="" method="post" class="form-horizontal" role="form">
+	<input type="hidden" name="c"  value="muban" />
+  <div class="form-group">
+    <label class="col-sm-2 control-label">模板选择</label>
+    <div class="col-sm-10">
+      <select name="muban" class="form-control m-b">
+          <option value="moren" {if $muban=='moren' || empty($muban)}selected="selected"{/if}>默认模板</option>         
+      </select>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+   <div class="form-group">
+    <label class="col-sm-2 control-label">商城入口</label>
+    <div class="col-sm-10">
+        {php echo UAK('index')}
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+   <div class="form-group">
+    <label class="col-sm-2 control-label">会员中心入口</label>
+    <div class="col-sm-10">
+       {php echo UAK('wode')}
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+   <div class="form-group">
+    <label class="col-sm-2 control-label">创客中心入口</label>
+    <div class="col-sm-10">
+       {php echo UAK('fenxiao')}
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">定时任务：</label>
+    <div class="col-sm-10">
+    	<a>{$_W['yuming']}mokuai/{$_W['mo']}/dingshirenwu.php?d={$_W['danyuan']}&m={$_W['mo']}</a>
+         <p>清理半小时以上未付款订单链接,可以在服务器计划任务加入；</p>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-danger padder-lg">提交</button>
+    </div>
+  </div>
+</form>

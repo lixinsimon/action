@@ -1,0 +1,459 @@
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>{php echo $shu['biaoti']}</title>
+		<!--<link rel="stylesheet" type="text/css" href="http://tg.0731jiaju.com/gongyong/css/app.css" />-->
+		<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/ydui.css?v={SHIJIAN}" />
+		<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/zhiwei.css?v={SHIJIAN}" />
+		<link rel="stylesheet" href="{$_W['yuming']}gongyong/css/kuangjia.css?v={SHIJIAN}" type="text/css" />
+		<script src="{$_W['yuming']}gongyong/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<style>
+		.icon-location {
+			color: white;
+			font-size: 20px;
+			position: relative;
+			right: -0.1rem;
+			top: 0.05rem;
+		}
+		
+		.inp {
+			border: none;
+			background-color: white;
+			height: 0.6rem;
+			width: 4.4rem;
+			border-radius: 0.3rem;
+			padding-left: 0.25rem;
+			position: relative;
+			top: 0.03rem;
+		}
+		
+		.sou {
+			position: absolute;
+			right: 0.75rem;
+			top: 0.05rem;
+			font-size: 20px;
+			color: #989898;
+		}
+		
+		.list-mes {
+			background-color: white;
+			width: 100%;
+			float: left;
+			height: auto;
+			padding: 0.1rem 0.05rem;
+			box-sizing: border-box;
+		}
+		
+		.list-del-price {
+			font-weight: bold;
+			color: #78A564;
+		}
+		
+		.list-img {
+			height: auto;
+			padding: 0;
+		}
+		
+		.list-mes {
+			height: auto;
+		}
+		
+		.list-img img {
+			margin: 0;
+			height: 3rem;
+		}
+		
+		.mmp {
+			width: 49%;
+			margin-top: 0.2rem;
+			box-sizing: border-box;
+		}
+		/*.mmp:nth-of-type(odd){
+			float: left;
+		}
+		.mmp:nth-of-type(even){
+			float: right;
+		}*/
+		
+		.list-mes-item {
+			text-align: left;
+		}
+		
+		#J_ListContent>a:nth-child(2n+1) .mmp {
+			float: left;
+		}
+		
+		#J_ListContent>a:nth-child(2n+2) .mmp {
+			float: right;
+		}
+		
+		.list-del-price:after {
+			display: none;
+		}
+		
+		.list-title {
+			font-size: 12px !important;
+			font-weight: 500 !important;
+			color: #000000 !important;
+		}
+		
+		.list-del-price {
+			padding: 0 !important;
+		}
+		
+		#caidan {
+			margin-top: .2rem;
+			width: 100%;
+			height: auto;
+			float: left;
+		}
+		
+		.caidan_img {
+			width: 100% !important;
+		}
+		
+		#candai .zw-fenlei-k {
+			padding-bottom: 0.15rem;
+			line-height: .6rem !important;
+		}
+		
+		#candan .candan_i {
+			width: 100% !important;
+			padding-top: 50%;
+			overflow: hidden;
+			position: relative;
+		}
+		
+		#caidan .zw-fenlei-zi {
+			font-size: 0.3rem;
+			font-weight: bold;
+		}
+		
+		.icon-kanjiahuodong::before {
+			font-size: 24px !important;
+		}
+		
+		.zujian::-webkit-scrollbar {
+			display: none
+		}
+		
+		;
+		.clearfixlw:before,
+		.clearfixlw:after {
+			content: ".";
+			display: block;
+			height: 0;
+			line-height: 0;
+			visibility: hidden;
+			clear: both;
+		}
+		
+		.huibg {
+			background: rgba(0, 0, 0, .4);
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			left: 0;
+			top: 0;
+			z-index: 999999;
+		}
+		
+		.huibg img {
+			width: 70%;
+			position: absolute;
+			top: 2.4rem;
+			left: 15%;
+		}
+		
+		.guan {
+			position: absolute;
+			right: 10%;
+			color: #fff;
+			top: 1.7rem;
+			font-size: .4rem;
+		}
+	</style>
+
+	<body>
+		<div id="app" style="background-color: #EEEEEE;box-sizing: border-box;display: none;width: 100%;height: auto;float: left;">
+			{loop $z $k $s}
+			<div class="zujian" id="{$k}">{mb 'web/'.$s['zujian']}</div>
+			{/loop}
+
+			<section v-if="shangla" id="J_List">
+				<div id="J_ListContent"></div>
+			</section>
+			<div style="height: 1.2rem;width: 100%;float: left;background: #eee;"></div>
+
+			<div class="huibg" v-if="guanzhu!=1">
+				<img src="{php echo JueDuiUrl($_W['shezhi']['shezhi']['guanzhu'])}" />
+			</div>
+		
+		<div id="allmap"></div>
+
+		<footer class="m-tabbar dibu" >			
+			<a v-for='(t,i) in caidan'  :href="t.href" :class="i==0?'tabbar-item tabbar-active':'tabbar-item'">
+				<span class="tabbar-icon">
+				   <img :src="i==0?t.dangqian:t.tu" style="height: .5rem;"/>	             
+	            </span>
+				<span class="tabbar-txt">{{t.ming}}</span>
+			</a>
+           
+		</footer>
+		</div>
+		<script src="{$_W['yuming']}gongyong/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="{$_W['yuming']}gongyong/js/ydui.flexible.js" type="text/javascript" charset="utf-8"></script>
+		<script src="{$_W['yuming']}gongyong/js/ydui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+		<script src="{$_W['yuming']}gongyong/js/zhiwei.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://static.ydcss.com/uploads/ydui/ydui.citys.js"></script>
+		<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bWVVbvF9vAzBKLA1bsNEX5agMu0jv9kd"></script>-->
+
+		<script type="text/javascript">
+			$('.guan').click(function() {
+				$('.huibg').hide();
+			})
+			var jingdu = sessionStorage.getItem('jingdu');
+			var weidu = sessionStorage.getItem('weidu');
+			var diqu = sessionStorage.getItem('diqu');
+			var V = new Vue({
+				el: '#app',
+				data: {
+					shu: [],
+					jingdu: 0,
+					weidu: 0,
+					qu: '',
+					daili: '',
+					caidan: '',
+					huadongfenlei: true,
+					guanzhu: 1,
+					t:''
+				},
+				beforeCreate: function() {
+					var that = this;
+					setTimeout(function() {
+						$z.post("{$shu['post_url']}", {
+							qu: that.qu
+						}, function(s) {
+							if(s.shi == 1) {
+								that.shu = s.shu.shuju;
+								that.shangla = parseInt(s.shu.jiazaishangpin);
+								that.daili = s.shu.daili;
+								that.caidan = s.shu.caidan;
+								that.t=s.shu.t;
+
+								$(document).attr("title", s.shu.biaoti);
+
+								var fx = {php echo json_encode($_W['shezhi']['fenxiang'])};
+							
+								$z.FenXiang(fx, function(shu) {}); //jia
+
+								chadenglu();
+
+							} else {
+								$z.toast(s.shu);
+							}
+						});
+					}, 500);
+
+					$("#app").show();
+				},
+				updated: function() {
+					var that = this;
+					$('.m-slider').slider({
+						speed: 200,
+						autoplay: 2000,
+						lazyLoad: true
+					});
+					var jige = $('#fenlei').children().length;
+
+					if(jige == 3 || jige == 6) {
+						$('.zw-fenlei-k').css('width', '33.333%');
+					}
+					if(jige == 4 || jige == 8) {
+						// $( '.zw-fenlei-k' ).css( 'margin-left', '4%' );
+						$('.zw-fenlei-k').css('width', '25%');
+					}
+					if(jige == 5 || jige == 10) {
+						// $( '.zw-fenlei-k' ).css( 'margin-left', '4%' );
+						$('.zw-fenlei-k').css('width', '20%');
+					}
+					if($('.ooppoopp').length > 10) {
+						that.huadongfenlei = false;
+					}
+					if(jige > 10) {
+						$('.zujian').eq(1).css({
+							'width': '100%',
+							'overflow': 'hidden',
+							'overflow-x': 'scroll'
+						});
+						$('#fenlei').css('width', jige * 1.5 + 'rem');
+						$('#fenlei .zw-fenlei-k').css('width', '1.5rem');
+					}
+					$('.zujian').eq(3).css({
+						'height': '0.3rem',
+						'margin-top': '0.1rem'
+					});
+					//								console.log($('#shangping3:last'));
+					$('.shangping3:last').css({
+
+						'margin-bottom': '0.1rem'
+					});
+					//							
+					$("#fenlei").css("height", $(".wrap-height").height() + "px");
+
+				},
+				methods: {
+					sosuo: function() {
+						//             
+						$z.dakai('{php echo UAK("liebiao/lie")}');
+					},
+					 DaKai:function(e){
+					 
+	                	 $z.dakai(e+ '&t='+this.t );
+	                },
+				}
+			});
+
+			function chadenglu() {
+				$z.post('{php echo UA("gongyou/guanzhu")}', function(shu) {
+					if(shu.shi) {
+						V.guanzhu = shu.shu.guanzhu;
+					} else {
+						$z.toast(shu.shu, 2000);
+					}
+				});
+			}
+
+			//				if(jingdu=='' || jingdu == null){
+			////					huoqujingweidu();
+			//				}else{
+			setTimeout(function() {
+				$('#J_Address').val(diqu);
+			}, 1000);
+			//				}
+
+			setTimeout(function() {
+				var $address = $('#J_Address');
+				$address.citySelect();
+				$address.on('click', function() {
+					$address.citySelect('open');
+				});
+				$address.on('done.ydui.cityselect', function(ret) {
+					$(this).val(ret.area);
+				});
+			}, 1000);
+
+			/*上拉加载*/
+			setTimeout(function() {
+				var page = 1,
+					pageSize = 4;
+				$('#J_List').infiniteScroll({
+					pageSize: pageSize,
+					initLoad: true,
+					loadingHtml: '<strong>加载中...</strong>',
+					/* 当然也可以<img src="../img/loading.gif" /> */
+					loadListFn: function() {
+						var def = $.Deferred();
+						$z.post("{$shu['post_url']}", {
+							ye: page,
+							jiazaishu: pageSize,
+							c: 'jiazaishangpin'
+						}, function(ret) {
+							if(ret.shi == 1) {
+								var html = '';
+								for(var i = 0; i < ret.shu.length; i++) {
+									html += '<a href="' + ret.shu[i].href + '" class="list-item J_Link" data-page="' + page + '"> ';
+									html += '<div class="mmp"><div class="list-img"><span><img src="' + ret.shu[i].tu + '"></span></div>';
+									html += '<div class="list-mes"><h3 class="list-title">' + ret.shu[i].ming + '</h3>';
+									html += '<div class="list-mes-item">';
+									html += '<span class="list-del-price">' + ret.shu[i].yuanjia + '</span></div>';
+									html += '</div></div></a>';
+								}
+								$('#J_ListContent').append(html);
+							}
+
+							/* 获取数据，并插入页面后，调用resole，并传入当前获取的记录列表集合 */
+							def.resolve(ret.shu);
+							/* 页码自增1 */
+							++page;
+						});
+						return def.promise();
+					}
+				});
+			}, 1000)
+		</script>
+
+		<script>
+			setTimeout(function() {
+				var a = 0,
+					b = 0,
+					c = 0;
+				var p = 0;
+				var kuandu = $(window).width();
+				$('#huadong').css('width', kuandu * 2);
+				$('.aaa').css('width', kuandu);
+				$('#huadong').on('touchstart', function(e) {
+					a = e.originalEvent.targetTouches[0].pageX;
+					var pullDeltaX = 0;
+					if(p == 1) {
+						a = a + kuandu;
+					}
+				});
+				$('#huadong').on('touchend', function(e) {
+					var jieshu = e.originalEvent.changedTouches[0].pageX;
+					if(c == 0) {
+						return true;
+					}
+					if(p == 0) {
+						if(c > 0) {
+							$('#huadong').stop(true).animate({
+								'left': '0px'
+							}, 500);
+							p = 0;
+							return true;
+						}
+						$('#huadong').stop(true).animate({
+							'left': -kuandu + 'px'
+						}, 500)
+						p = 1;
+					} else {
+						if(c < -kuandu) {
+							$('#huadong').stop(true).animate({
+								'left': -kuandu + 'px'
+							}, 500)
+							p = 1;
+							return true;
+						}
+						$('#huadong').stop(true).animate({
+							'left': '0px'
+						}, 500);
+						p = 0;
+					}
+				});
+				$('#huadong').on('touchmove', function(e) {
+					var _touch = e.originalEvent.targetTouches[0].pageX;
+					c = _touch - a;
+					// 			if(Math.abs(c)<kuandu){
+					// 				$('#huadong').css('left',c/2+'px');	
+					// 			}
+
+					if(p == 1) {
+						$('#huadong').css('left', c + 'px');
+					} else {
+						$('#huadong').css('left', c / 2 + 'px');
+					}
+
+				})
+
+			}, 1000);
+		</script>
+
+	</body>
+
+</html>

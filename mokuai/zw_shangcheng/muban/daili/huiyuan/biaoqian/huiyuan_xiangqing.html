@@ -1,0 +1,359 @@
+<form action="" method="get" class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="col-xs-12 col-sm-3 col-md-2 control-label">粉丝</label>
+    <div class="col-sm-9 col-xs-12">
+        <img src="{$_W['yuming']}/gongyong/images/yami.png" class="img-responsive img-thumbnail" width="150">
+             花儿                
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">OPENID</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">oknBouHTiYqeCqDXux21Hm1YKXAk</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">会员角色</label>
+    <div class="col-sm-10">
+      <select name="data[level]" class="form-control">
+        <option value="">普通会员</option>
+        <option value="1">一级会员</option>
+        <option value="2">二级会员</option>
+        <option value="3">三级会员</option>
+      </select>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">会员分组</label>
+    <div class="col-sm-10">
+      <select name="data[groupid]" class="form-control">
+        <option value="">无分组</option>
+      </select>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">真实姓名</label>
+    <div class="col-sm-10">
+      <input type="text" name="data[realname]" class="form-control" value="李华">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">手机号码</label>
+    <div class="col-sm-10">
+      <input type="text" name="data[mobile]" class="form-control" value="13991380099">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">微信号</label>
+    <div class="col-sm-10">
+      <input type="text" name="data[weixin]" class="form-control" value="">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">积分</label>
+    <div class="col-sm-10">
+      <input type="file" class="filestyle" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s" id="filestyle-0" style="position: fixed; left: -500px;">
+      <div class="bootstrap-filestyle" style="display: inline;">
+        <input type="text" class="form-control inline v-middle input-s" disabled="" placeholder="0"> 
+        <button type="button" class="btn btn-info padder-lg" data-toggle="modal" data-target="#jifen">充值</button>
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">余额</label>
+    <div class="col-sm-10">
+      <input type="file" class="filestyle" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s" id="filestyle-0" style="position: fixed; left: -500px;">
+      <div class="bootstrap-filestyle" style="display: inline;">
+        <input type="text" class="form-control inline v-middle input-s" disabled="" placeholder="0.0">
+        <button type="button" class="btn btn-info padder-lg"  data-toggle="modal" data-target="#yue">充值</button>
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">成交订单数</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">0</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">成交金额</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">元</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">注册时间</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">2016-12-16 12:25:54</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">关注状态</label>
+    <div class="form-control-static"><label class="label label-default padder m-l-md" style="vertical-align:middle">未支付</label></div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">黑名单</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="a" value="option1">
+          <i></i>
+          是
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="a" value="option2" checked="">
+          <i></i>
+          否
+        </label>
+      </div>
+      <span class="help-block">设置黑名单后，此会员无法访问商城</span>   
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">备注</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" name="description" rows="5"></textarea>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+</form>
+<div class="alert alert-info">
+  设置创客 注意: 创客设置后，无法再此进行修改，如果要修改，请联系系统管理员
+</div>
+<form action="" method="get" class="form-horizontal" role="form">
+
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">上级创客</label>
+    <div class="col-sm-10">
+      {php echo ShangTu('fenxiaoshang')}
+      <span class="help-block">修改后， 只有关系链改变, 以往的订单余额都不会改变,新的订单才按新关系计算余额 ,请谨慎选择</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">是否固定上级</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="b" value="option1">
+          <i></i>
+          是
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="b" value="option2" checked="">
+          <i></i>
+          否
+        </label>
+      </div>
+      <span class="help-block">固定上级后，任何条件也无法改变其上级，如果不选择上级创客，且固定上级，则上级永远为总店（是创客）或无上线（非创客）</span>   
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">创客角色</label>
+    <div class="col-sm-10">
+      <select name="adata[agentlevel]" class="form-control">
+        <option value="0">尚未获得代理资格</option>
+        <option value="1">一级代理</option>
+        <option value="2">二级代理</option>
+        <option value="3">三级代理</option>
+      </select>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">余额累积</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">0</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">已打款余额</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">0</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">创客权限</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="c" value="option1">
+          <i></i>
+          是
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="c" value="option2" checked="">
+          <i></i>
+          否
+        </label>
+      </div>  
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">审核通过</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="d" value="option1">
+          <i></i>
+          是
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="d" value="option2" checked="">
+          <i></i>
+          否
+        </label>
+      </div> 
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">强制不自动升级</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="e" value="option1">
+          <i></i>
+          允许自动升级
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="e" value="option2" checked="">
+          <i></i>
+          强制不自动升级
+        </label>
+      </div>
+      <span class="help-block">如果强制不自动升级，满足任何条件，此创客的级别也不会改变</span>   
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">自选商品</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="f" value="option1">
+          <i></i>
+          系统设置
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="f" value="option2" checked="">
+          <i></i>
+          强制禁止
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="f" value="option2" checked="">
+          <i></i>
+          强制开启
+        </label>
+      </div>
+      <span class="help-block">
+        <font style="line-height:30px;">系统设置： 跟随系统设置，系统关闭自选则为禁止，系统开启自选则为允许</font><br>
+        <font style="line-height:30px;">强制禁止： 无论系统自选商品是否关闭或开启，此创客永不能自选商品</font><br>
+        <font style="line-height:30px;">强制禁止： 无论系统自选商品是否关闭或开启，此创客永不能自选商品</font>
+      </span>   
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+      <button class="btn btn-danger padder-lg">提交</button>
+    </div>
+  </div>
+</form>
+
+<!-- 积分充值 -->
+<div class="modal fade" id="jifen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">积分充值</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">当前积分</label>
+            <div class="col-sm-10">
+              1250.00
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">充值积分</label>
+            <div class="col-sm-10">
+              <input type="password" name="password" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">充值</button>
+        <button type="button" class="btn btn-default">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 余额充值 -->
+<div class="modal fade" id="yue">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">余额充值</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">当前积分</label>
+            <div class="col-sm-10">
+              1250.00
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">充值积分</label>
+            <div class="col-sm-10">
+              <input type="password" name="password" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">充值</button>
+        <button type="button" class="btn btn-default">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

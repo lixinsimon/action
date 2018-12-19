@@ -1,0 +1,175 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <a class="accordion-toggle"  data-toggle="collapse" data-parent="#accordion2" href="#collapseOne3">
+            筛选
+        </a>
+    </div>
+    <div id="collapseOne3" class="panel-collapse collapse">
+        <div class="panel-body text-sm">
+            <form id="frm" class="form-horizontal" method="get">
+                <input type="hidden" name="m" value="{$_W['mo']}"/>
+                <input type="hidden" name="k" value="tongji"/>
+                <input type="hidden" name="d" value="{$_W['danyuan']}"/>
+                <input type="hidden" id="c" name="c" value="diqu"/>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商品名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="ming" placeholder="商品名称" value="{$_J['ming']}">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">支付时间</label>
+                    <div class="col-sm-10">
+                        <div class="radio-inline i-checks">
+                            <label>
+                                <input type="radio" name="sousuo" value="0" {if $_J['sousuo']==0}checked="checked"{/if}>
+                                <i></i>不搜索
+                            </label>
+                        </div>
+
+                        <div class="radio-inline i-checks m-l-lg">
+                            <label>
+                                <input type="radio" name="sousuo" value="1" {if $_J['sousuo']==1}checked="checked"{/if}>
+                                <i></i>搜索
+                            </label>
+                        </div>
+                        <div style="display:inline-block;">
+                            {php echo RiQi('kaishi')}
+                        </div>
+                        <div style="display:inline-block;">
+                            至
+                        </div>
+                        <div style="display:inline-block;">
+                            {php echo RiQi('jieshu')}
+                        </div>
+                    </div>
+                    <script>
+                        var kaishi = "{$_J['kaishi']}";
+                        var jieshu = "{$_J['jieshu']}";
+                        if (kaishi !== "" && jieshu !== "") {
+                            $('[name="kaishi"]').attr('value', kaishi);
+                            $('[name="jieshu"]').attr('value', jieshu);
+                        }
+                    </script>
+                </div>
+
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">排序方式</label>
+                    <div class="col-sm-10">
+                        <div class="radio-inline i-checks">
+                            <label>
+                                <input type="radio" name="xuanze" value="0" {if $_J['xuanze']==0}checked="checked"{/if}>
+                                <i></i>按销售量
+                            </label>
+                        </div>
+
+                        <div class="radio-inline i-checks m-l-lg">
+                            <label>
+                                <input type="radio" name="xuanze" value="1" {if $_J['xuanze']==1}checked="checked"{/if}>
+                                <i></i>按销售额
+                            </label>
+                        </div>                    
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="button" class="btn btn-primary padder-lg" onclick="sousuo1()">搜索</button>
+                        <button type="button" class="btn btn-primary padder-lg" onclick="daochu()">导出 Excel</button>
+                    </div>
+                </div>
+            </form>
+            <script>
+                function sousuo1() {
+                    $('#c').val('paihang');
+                    document.getElementById("frm").submit();
+                }
+                function daochu() {
+                    $('#c').val('daochupaihang');
+                    document.getElementById("frm").submit();
+                }
+            </script>
+        </div>
+    </div>
+</section>
+<!--<div style="height: 40px;">
+    <button type="button" class="btn btn-primary padder-lg" onclick="location='/houtai/index.php?d=14&k=tongji&m=gf_shangcheng&c=daochupaihang'">导出 Excel</button>
+</div>-->
+<div class="table-responsive">
+    <table class="table table-striped b-t b-light">
+        <thead>
+        <tr>
+            <th>排行</th>
+            <th>商品名称</th>
+            <th>销售量</th>
+            <th>销售额</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <script>
+
+        </script>
+        {loop $res $k=>$lie}
+
+        <tr>
+            <td style="vertical-align:middle;">{$lie['id']}</td>
+            <td style="vertical-align:middle;">{$lie['商品名']}</td>
+            <td style="vertical-align:middle;">
+                {$lie['销售量']}
+            </td>
+            <td class="btn-shuxing" style="vertical-align:middle;">
+                {$lie['销售额']}
+            </td>
+
+
+        </tr>
+        {/loop}
+        </tbody>
+    </table>
+</div>
+{$FenYe}
+
+<script>
+
+    $('[data-zhuangtai]').click(function () {
+        var t = $(this);
+        var current = t.attr("data-zhuangtai");
+        var id = t.attr("data-id");
+        var column = t.attr("data-column");
+        var show = t.attr('data-show');
+        eval("show = " + show);
+        if (current === "1") {
+            $.post("{php echo USK('shangpin/index', array('c'=>'zhuangtai'))}", {
+                zhuangtai: 0,
+                id: id,
+                column: column
+            }, function (shu) {
+                if (shu.shi == 1) {
+                    t.attr("data-zhuangtai", 0);
+                    t.removeClass("btn-success");
+                    t.addClass("btn-dark");
+                    t.text(show['k0']);
+                }
+            }, 'json');
+
+        } else if (current === "0") {
+            $.post("{php echo USK('shangpin/index', array('c'=>'zhuangtai'))}", {
+                zhuangtai: 1,
+                id: id,
+                column: column
+            }, function (shu) {
+                if (shu.shi == 1) {
+                    t.attr("data-zhuangtai", 1);
+                    t.removeClass("btn-dark");
+                    t.addClass("btn-success");
+                    t.text(show['k1']);
+                }
+            }, 'json');
+        }
+    });
+</script>

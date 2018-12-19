@@ -1,0 +1,101 @@
+{mb 'tou'}
+<style type="text/css">
+	.tu{
+		width: .5rem;height: .5rem;float: left;margin: .2rem .35rem 0px .1rem;
+	}
+	.pinglun{
+		width: 1.2rem;
+		height: .6rem;
+		border: 1px solid #B2B2B2;
+		position: absolute;
+		right: .3rem;
+		top: .4rem;
+		line-height: .6rem;
+		border-radius: .1rem;
+		text-align: center;
+		font-size: .25rem;
+	}
+	.tou{width: 98%;overflow: hidden;background:#f05050;text-align:center;padding:0.5rem 0;color: #fff;font-size: .4rem;}
+	.tou .logo{width: 2rem;margin: 10px auto;border-radius: 2rem; border: 1px solid #FFF;padding: 4px;}
+	.cell-icon:before{color: #f05050;}
+</style>
+<div id="ddxq" style="display: none;">	
+	    <div class="tou">
+	    	<img :src="dianpu.logo" class="logo"/>
+	    	<p>{{dianpu.nicheng}}</p>
+	    </div>
+	    <div class="m-cell">
+		    <a class="cell-item" href="javascript:;">
+		        <div class="cell-left"><i class="cell-icon icon-ucenter"></i>{{dingdan.shouhuoren}}</div>
+		        <div class="cell-right cell-arrow">{{dingdan.shouhuodianhua}}</div>
+		    </a>		
+		   <a class="cell-item" href="javascript:;">
+		        <div class="cell-left"><i class="cell-icon icon-shopcart-outline"></i>订单号</div>
+		        <div class="cell-right cell-arrow">{{dingdan.dingdanhao}}</div>
+		    </a>
+            <a class="cell-item" href="javascript:;">
+		        <div class="cell-left"><i class="cell-icon icon-discount"></i>金额</div>
+		        <div class="cell-right cell-arrow">{{dingdan.shijia}}</div>
+		    </a>
+		    
+	    </div> 	
+	    
+	     <button type="button" @click="hexiao" class="btn-block btn-danger" v-if='dingdan.zhuangtai==10'>确认核销</button>
+	     <button type="button"  class="btn-block btn-disabled" v-else>已核销</button>
+         <!-- 商品列表-->  
+		<div class="df_zhon" style="background: #fff;margin: .1rem 0px;position: relative;" v-for="(L,i) in dingdan.dingdan_shangpin">
+			<a :href="'{php echo UXK('xiangqing')}&id='+L.shangpin" >
+			<img :src="L.tu" />
+			<div class="df_xian" style="width: 70%;">
+			<h2>{{L.ming}}</h3>
+					<h3><span >￥{{L.jiage}}</span></h3>															
+					<h4>x{{L.shuliang}}</h4>
+			</div>
+			</a>
+
+		</div>		
+        
+         <!-- 留言-->
+		<div class="cell-item" style="background: #fff;">
+	        <div class="cell-left">买家留言：</div>
+	        <div class="cell-right">{{dingdan.liuyan}}</div>
+	 </div>
+</div>		
+{mb js}
+<script type="text/javascript">
+			new Vue({
+				el:"#ddxq",
+				data:{				
+					dingdan:[],
+					dianpu:[],	
+					
+				},
+				methods:{
+					hexiao:function(){
+						var that=this;
+						YDUI.dialog.confirm('提示',  '确认核销吗？',  function () {
+						     $z.post("{$_W['url']}",{c:'hexiao'},function(s){	
+						     	$z.toast(s.shu);
+						     	if(s.shi){
+						     		that.$set(that.dingdan,'zhuangtai',0);							     		
+						     	}
+							});
+						});
+					}
+				},
+				beforeCreate:function(){
+					var that=this;					
+					$z.post("{$_W['url']}",function(s){
+						if(s.shi==1){
+							that.dingdan=s.shu.dingdan;						
+							that.dianpu=s.shu.dianpu;
+						}
+						$('#ddxq').show();
+					});
+				}
+			})
+			
+</script>	
+{mb jiao}
+
+	

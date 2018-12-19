@@ -1,0 +1,63 @@
+{mb tou}
+<header class="m-navbar">		    
+		    <div class="navbar-center">
+		        <span class="navbar-title">密保问题</span>
+		    </div>
+		</header>
+		<div id="den">
+		
+		<div style="margin-top: .3rem;">
+			<div class="cell-item" style="background: #fff;">
+		        <div class="cell-left" style="width: 20%;">密保问题</div>
+		        <div class="cell-right"><input type="text" v-model="wen" id="wen" class="cell-input" placeholder="请输入密保问题" /></div>
+		    </div>
+		   <div class="cell-item" style="background: #fff;">
+		        <div class="cell-left" style="width: 20%;">密保答案</div>
+		        <div class="cell-right"><input type="text" v-model="da" id="da" class="cell-input" placeholder="请输入密保答案"  /></div>
+		    </div>
+		   <button type="submit" class="btn-block btn-danger" @click="quedin" id="yan2" style="margin:.4rem 1%;width: 98%;">保存</button>    
+		</div>
+		
+		</div>
+		{mb js}
+		<script type="text/javascript">			
+			new Vue({
+				el:"#den",
+				data:{
+					wen:'',da:''
+				},
+				methods:{					
+                    quedin:function(){
+						var that=this;
+						if(that.wen==""){
+			    			$z.toast('请输入问题');
+			    		}else if(that.da==""){
+			    			$z.toast('请输入答案');
+			    		}else{
+					    	$z.post("{php echo UA('denglu/mibao')}",{
+								wen:that.wen,
+								da:that.da,
+								c:'gai'
+							},function(shu){			
+								if(shu.shi==1){
+									$z.toast('设置成功');				
+								}else{     
+								    $z.toast(shu.shu);	
+								}
+							},'json')
+					    }
+						
+					}				
+				},
+				beforeCreate:function(){
+					var that=this;
+					$z.post("{php echo UA('denglu/mibao')}",function(shu){
+						if(shu.shi==1){
+							that.wen=shu.shu.wen;
+							that.da=shu.shu.da;
+						}
+					},'json')
+				}
+			})
+		</script>
+{mb jiao}

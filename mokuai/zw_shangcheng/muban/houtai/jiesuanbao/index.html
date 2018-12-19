@@ -1,0 +1,41 @@
+ {mb tou}
+<section class="vbox">
+    {mb dingbu_caidan}
+    <section>
+        <section class="hbox stretch">
+            {mb zuobu}
+            <!-- 内容开始 -->
+            <section id="content">
+                <section class="vbox">
+                    <section class="scrollable m-t padder-lg">
+                        <!-- right tab -->
+                        <section class="panel panel-default">
+                            <header class="panel-heading text-right bg-light ">
+                                <ul class="nav nav-tabs liebiao">
+                                    <li {if $cao=='moren' }class="active" {/if}><a href="{php echo UHK('jiesuanbao')}" style="padding:9px 40px 10px;">结算宝</a></li>
+                                    <li {if $cao=='tianjia' }class="active" {/if}><a href="{php echo UHK('jiesuanbao',array('c'=>'tianjia'))}" style="padding:9px 40px 10px; ">新增</a></li>
+                                   {if $cao=='bianji' }
+                                    <li class="active"><a style="padding:9px 40px 10px; ">编辑</a></li>
+                                    {/if}
+                                </ul>
+                            </header>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in">
+                                        {if $cao=='tianjia' || $cao=='bianji'} 
+                                          {mb "biaoqian/tianjia"} 
+                                        {else} 
+                                          {mb "biaoqian/lie"} 
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- right tab -->
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+</section>
+{mb jiao}

@@ -1,0 +1,22 @@
+
+
+<div class="you_iframe">
+	<iframe scrolling="no" width="100%" height="1000" marginheight="0" marginwidth="0" id="test" name="iframepage" onload="this.height=100" src="">
+		
+	</iframe>
+</div>
+<script type="text/javascript">
+	function reinitIframe(){
+		var iframe = document.getElementById("test");
+			try{
+			var bHeight = iframe.contentWindow.document.body.scrollHeight;
+			var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+			var height = Math.max(bHeight, dHeight);
+			iframe.height = height;
+			}catch (ex){}
+		}
+	window.setInterval("reinitIframe()", 200);
+</script>
+<div style="clear: both;"></div>
+
+

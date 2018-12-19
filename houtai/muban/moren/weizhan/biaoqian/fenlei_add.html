@@ -1,0 +1,47 @@
+ <form class="form-horizontal" action='{php echo UHK("weizhan/fenlei", array("c"=>"tianjia"))}' method="post"  onsubmit="">
+  <section class="panel panel-default">
+    <header class="panel-heading text-left bg-light">
+    分类详细设置
+    </header>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">排序</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="" name="shuxu" value="">
+            </div>
+            </div>
+            <div class="line line-dashed b-b line-lg"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分类名称</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="" name="ming" value="">
+            </div>
+        </div>
+    </div>
+  </section>
+  <div class="panel-body">
+    <div class="form-group col-sm-12">
+      <input name="do-submit" type="submit" value="提交" class="btn btn-danger col-lg-1">
+      <input type="hidden" name="token" value="aa7ccb8a">
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+$(function() {
+    $("#input_box_add").find('[type=submit]').click(function(){
+        var form = $("#input_box_add");
+        var data = form.serializeArray();
+        console.log(data);
+        $.ajax({
+            type:'POST',
+            data: data,
+            dataType:'json',
+            url:'{php echo UHK("weizhan/fenlei", array("c"=>"tianjia"))}',
+            success: function(shu){
+                console.log(JSON.stringify(shu))
+            }
+        });
+        return false;
+    });
+});
+</script>

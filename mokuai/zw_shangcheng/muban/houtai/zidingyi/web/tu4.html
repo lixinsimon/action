@@ -1,0 +1,52 @@
+<style>
+	/*.tu img {
+		display: inline-block;
+	}
+	.tu_left {
+		display: block;
+		float: left;
+		width: 33.3%;
+		padding: 0 0 0 0;
+		margin: 0 0 0 0;*/
+	/*}
+	.tu_right {
+		float: left;
+		width: 66%;
+		padding: 0 0 0 0;
+		margin-left: 0.02rem;
+	}
+	.tu_right_top {
+		display: block;
+		width: 100%;
+	}
+	.tu_right_bottom {
+		width: 100%;
+		margin-top:0.02rem ;
+		overflow: hidden;
+		
+	}
+	.tu_right_bottom img {
+		float: left;
+	}
+	.tu_right_bottom img:nth-child(1) {
+		margin-right: 0.02rem;		
+	}*/
+</style>
+
+<div class="z_img tu" style="width: 100%;  background-color:#ffffff; padding: 0.2rem; margin-top: 1.62rem;">
+	<div style=" background-color:#ffffff; height: 4.65rem;" >
+		<a  @click="DaKai(shu.{$k}['tu4'][0]['url'])"  style="display: block; float: left; width: 33.3%;">
+			<img src="{php echo JueDuiUrl($s['tu4'][0][tu])}" style="width: 100%; height: 4.63rem; display: inline-block;">
+		</a>
+		<div class="tu_right" style="float: left; width: 66%; margin-left: 0.02rem;">
+			<a  @click="DaKai(shu.{$k}['tu4'][1]['url'])"  class="tu_right_top" style="display: block; width: 100%;">
+				<img src="{php echo JueDuiUrl($s['tu4'][1][tu])}"  style="width: 100%; height: 2.3rem; display: inline-block;">
+			</a>
+			<div class="tu_right_bottom" style="width: 100%; margin-top:0.02rem ; overflow: hidden;">
+				<a  @click="DaKai(shu.{$k}['tu4'][2]['url'])" ><img src="{php echo JueDuiUrl($s['tu4'][2][tu])}"  style="width: 49.75%; height: 2.31rem;display: inline-block;margin-right: 0.02rem; float: left;;"></a>
+				<a  @click="DaKai(shu.{$k}['tu4'][3]['url'])" ><img src="{php echo JueDuiUrl($s['tu4'][3][tu])}"  style="width: 49.75%; height: 2.31rem;display: inline-block;float: left;;"></a>
+			</div>
+		</div>
+	</div>
+	
+</div>

@@ -1,0 +1,92 @@
+<form action="" method="post" class="form-horizontal form" data-validate="parsley" enctype="multipart/form-data" > 
+    <input type="hidden" name="id" value="{$kd['id']}">
+    <input type="hidden" name="c" value="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            快递模板
+        </div>
+        <div class="panel-body">            
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>模板名称</label>
+                <div class="col-sm-9 col-xs-12">
+                    <input type="text" id="ming" name="ming" class="form-control" value="{$kd['ming']}" data-required="true">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">模板类型</label>
+                <div class="col-sm-9 col-xs-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="leixing" value="0" {if empty($kd['leixing'])}checked=""{/if}> 先付款后发货
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="leixing" value="1" {if $kd['leixing']==1}checked=""{/if}> 货到付款
+                    </label>
+                     <label class="radio-inline">
+                        <input type="radio" name="leixing" value="2" {if $kd['leixing']==2}checked=""{/if}> 自提
+                    </label> 
+                </div>
+            </div>-->
+            <!-- <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">单位</label>
+                <div class="col-sm-9 col-xs-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="danwei" value="0" {if empty($kd['danwei'])}checked=""{/if}> 重量
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="danwei" value="1" {if $kd['danwei']==1}checked=""{/if}> 件
+                    </label>
+                   
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">重量设置</label>
+                <div class="col-sm-9 col-xs-12">
+                    <div class="input-group input-medium">
+                        <span class="input-group-addon">首重</span>
+                        <input type="text"  name="shouzhong" class="form-control input-medium parsley-validated" value="{$kd['shouzhong']}"  data-type="number" data-required="true">
+                        <span class="input-group-addon">克</span>
+                    </div>
+                    <br>
+                    <div class="input-group  input-medium">
+                        <span class="input-group-addon">续重</span>
+                          <input type="text"  name="xuzhong" class="form-control input-medium parsley-validated" value="{$kd['xuzhong']}"  data-type="number" data-required="true"> 
+                          <span class="input-group-addon">克</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">价格设置</label>
+                <div class="col-sm-9 col-xs-12">
+                    <div class="input-group  input-medium">
+                        <span class="input-group-addon">首重价格</span>
+                        <input type="text"  name="shoujia" class="form-control input-medium parsley-validated" value="{$kd['shoujia']}"  data-type="number" data-required="true">
+                        <span class="input-group-addon">元</span>
+                    </div>
+                    <br>
+                    <div class="input-group  input-medium">
+                        <span class="input-group-addon">续重价格</span>
+                        <input type="text" name="xujia" class="form-control input-medium parsley-validated" value="{$kd['xujia']}"  data-type="number" data-required="true">
+                        <span class="input-group-addon">元</span>
+                    </div>
+                    <span class="help-block">根据重量来计算运费，当物品不足《首重重量》时，按照《首重费用》计算，超过部分按照《续重重量》和《续重费用》乘积来计算</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否显示</label>
+                <div class="col-sm-9 col-xs-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="zhuangtai" value="1'" {if $kd['zhuangtai']}checked=""{/if}> 是
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="zhuangtai" value="0'" {if empty($kd['zhuangtai'])}checked=""{/if}> 否
+                    </label>
+                </div>
+            </div>           
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <input type="submit"  value="提交" class="btn btn-primary col-lg-1">
+        
+    </div>
+</form>
+

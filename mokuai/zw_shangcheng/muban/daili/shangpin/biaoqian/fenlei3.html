@@ -1,0 +1,79 @@
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <a class="accordion-toggle" style="display:block;" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+      添加商户
+    </a>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body text-sm">
+      <form class="form-horizontal" action="{php echo UDK('shangpin/fenlei/zw_shangcheng',array('c'=>'oopp'))}" method="post">
+      	<input type="hidden" name="id" value="{$_J['id']}"/>
+			<div class="line line-dashed b-b line-lg"></div>
+			<div class="form-group">
+			  <label class="col-sm-2 control-label"><span style="color:red">*</span>添加店铺</label>
+			  <div class="col-sm-5">
+			  	<select id="abc" name="dianpuId" class="form-control">
+			  		<option value="">请选择一家店铺</option>
+					{loop $shanghu $lie}
+					<option value="{$lie[id]}" {if $lie['id']==$shangpin['shanghu']}selected="selected"{/if}>{$lie[ming]}</option>
+					{/loop}
+				</select>	
+			  </div>	
+			</div>	 
+			  <div class="line line-dashed b-b line-lg"></div>
+			  <div class="form-group">
+			    <div class="col-sm-4 col-sm-offset-2">
+			      <button type="submit" class="btn btn-primary padder-lg">添加</button>
+			    </div>
+			  </div>
+			</form>
+    </div>
+  </div>
+</section>
+
+<div class="table-responsive">
+  <table class="table table-striped b-t b-light">
+    <thead>
+      <tr>
+        <th width="10%">ID</th>
+        <th width="10%">排序</th>
+        <th width="50%">商户</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{loop $shanghulie $k=>$lie}
+      <tr>
+        <td style="vertical-align:middle;">{$lie['id']}</td>
+        <td style="vertical-align:middle;"><input type="text" class="form-control" value="{$lie['shunxu']}"></td>
+        <td style="vertical-align:middle;">{$lie['ming']}</td>
+        </td>
+        <td style="position:relative;vertical-align:middle;">        
+          <a href="{php echo UDK('shangpin/fenlei/zw_shangcheng',array('c'=>'yichu','id'=>$lie['id']))}" class="btn btn-default  btn-sm" title="移除" onclick="return confirm('确认删除')"><i class="fa fa-times"></i></a>
+        </td>
+      </tr>
+      {/loop}
+    </tbody>
+  </table>
+</div>
+{$FenYe}
+<script>
+//	$('.shangping_edit').click(function(){
+//		   $('.liebiao li').removeClass('active');
+//		   $('.liebiao li:last').show().addClass('active');
+//		   $('#tianjia form').html('');	
+//		    $('#bianji form').html('');	
+//		   $.post("{php echo UDK('shangpin')}",{id:$(this).attr('data-id'),c:'bianji'},function(data){
+//		   	    $('#bianji form').html(data);
+//		   });
+//	});
+	
+$(function() {    
+    require(['util'],function(util){
+       $('.js-clip').each(function(){   
+        util.clip(this, $(this).attr('data-url')); 
+    });
+});
+
+})
+</script>

@@ -1,0 +1,112 @@
+{mb 'tou'}
+	<style type="text/css">
+			.m-navbar:after{
+				border: 0px;
+			}
+			.kuai-tu{
+				width: 30%;
+				margin: 0 auto;
+				margin-bottom: .3rem;
+			}
+			#fenxiao{
+				display: none;
+			}
+		</style>
+		<div id="fenxiao">		
+		<div class="fenxiao-top">
+			<header class="m-navbar" style="background: transparent;">			   
+			    <div class="navbar-center">创客中心</div>		    
+			</header>
+			<h2>{{shu.ketixian}}</h2>
+			<p>可提现余额（元）</p>
+			<div class="fenxiao-t">
+				{{shu.nicheng}}({{shu.dengjiming}})
+			</div>
+			<div class="fenxiao-t-b">
+				<div class="fenxiao-t-left">
+					<div>余额总额（元）</div>
+					<h2>{{shu.zong_e}}</h2>
+				</div>
+				<a href="{php echo UXK('fenxiao/tixian')}" class="fenxiao-t-right">提现</a>
+			</div>
+		</div> 
+		<div class="gongao" style="margin-top:3px;background: #fff;height: 50px;">
+			<div class="gongao_z">
+				<img style="height: 25px;margin-top: 5px;" src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_04.png'}" />
+			</div>
+			<div class="gongao_y">
+				<ul class="goggao_ul" id="goggao_ul">
+					<li v-for="(g,index) in shu.gonggao" class="mui-ellipsis gonggao-p">
+						<a :href="g.url">{{g.biaoti}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>	
+		
+		<div class="m-grids-3" id="wode">
+		    <a href="{php echo UXK('fenxiao/yongjinmingxi')}" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_08.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>余额明细</span></div>
+		    </a>
+		    <a href="{php echo UXK('fenxiao/tixianmingxi')}" class="grids-item">
+		       <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_10.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>提现明细</span></div>
+		    </a>
+		    <a href="{php echo UXK('fenxiao/wanshanxinxi')}" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_19.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>收款方式</span></div>
+		    </a>
+		    <a href="{php echo UXK('fenxiao/wodetuandui')}" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_17.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>我的团队</span></div>
+		    </a>
+		    <a href="{php echo UXK('fenxiao/wodekehu')}" class="grids-item">
+		       <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_18.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>我的客户</span></div>
+		    </a>		  		
+		    <a href="{php echo UXK('fenxiao/yindaogoumai')}" class="grids-item">
+		      	<img src="{php echo $_W['yuming'].'gongyong/images/piao.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>我要升级</span></div>
+		    </a>	
+		</div>
+		
+		</div>	
+	{mb daohang}
+	{mb js}
+	<script type="text/javascript">
+			new Vue({
+				el:"#fenxiao",
+				data:{
+					shu:[]
+					
+				},
+				beforeCreate:function(){					
+					var that=this;
+					$z.post('{$_W["url"]}',function(shu){
+						if(shu.shi==1){							  
+							that.shu=shu.shu;	
+							$('#fenxiao').show();
+						}
+					});
+					 
+				}
+				
+			});
+			
+			function autoScroll(obj) {
+				$(obj).find(".goggao_ul").animate({
+					marginTop: "-40px"
+				}, 500, function() {
+					$(this).css({
+						marginTop: "0px"
+					}).find(".gonggao-p:first").appendTo(this);
+				})
+			}
+			$(function() {
+				setInterval('autoScroll(".gongao_y")', 3000);
+			});
+		</script>
+{mb jiao}
+
+
+	 

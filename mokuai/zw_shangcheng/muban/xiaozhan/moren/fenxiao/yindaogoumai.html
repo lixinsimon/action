@@ -1,0 +1,161 @@
+{mb 'tou'}
+<style>
+	.m-cell{margin-bottom: 0;}
+	.g-view:before{height: 0.1rem;}
+	.m-celltitle{position:inherit;}
+	.m-grids-4{width: 96%;margin: 0px auto;}
+	.m-grids-4:before,.m-grids-4:before,.grids-item:after,.m-grids-4 .grids-item:not(:nth-child(4n)):before{border: 0;}
+	.m-grids-4 .grids-item{width: 23%;margin: 1%;border: 1px solid #f0611b;border-radius: .1rem;}	
+	
+	.grids-txt{color:#f0611b;}
+	.zhifu{width: 96%;margin: 5px auto;display: block;overflow: hidden;}
+	.zhifu .cell-right{float: left;width: auto;padding: 0rem .2rem;border: 0.01rem solid #C2CCD1;border-radius: 0.1rem;margin: 0.1rem;}
+
+     .m-grids-4 .disabled{border: 1px solid #929292}
+     .disabled .grids-txt{color: #929292;}
+</style>
+	<header class="m-navbar">
+		    <div class="navbar-center">
+		        <span class="navbar-title">购买VIP资格</span>
+		    </div>
+	</header>
+	
+	<div id='app' style="display: none;">
+		<img :src="shu.fenxiao.fenxiaoyindao" style="width:100%;">	
+		<div class="m-cell">
+		    <div class="cell-item" >       
+		        <div class="cell-left"><span class="cell-icon"><img :src="shu.huiyuan.touxiang" /></span>{{shu.huiyuan.nicheng}}</div>
+		       <label class="cell-right">
+		            <input type="checkbox" name="checkbox" value="1"  v-model="mai.tongyi"/>
+		            <i class="cell-checkbox-icon"></i>
+		                       同意<a href="" style="color: #c17a22;">[查看协议]</a>
+		        </label>
+		    </div>	  
+	 </div>	    
+	    <div class="g-view" style="background: #FFF;">   
+	    	<div class="m-celltitle">支付方式</div>
+	    	<div class="zhifu">
+	    		 <label class="cell-right">
+		            <input type="radio" name="zhifuqudao" value="weixin" v-model="mai.zhifuqudao" checked="checked"/>
+		            <i class="cell-checkbox-icon"></i> 微信支付
+		        </label>
+		        <label class="cell-right">
+		            <input type="radio" name="zhifuqudao" value="zhifubao" v-model="mai.zhifuqudao"/>
+		            <i class="cell-checkbox-icon"></i> 支付宝
+		        </label>
+		        <label class="cell-right">
+		            <input type="radio" name="zhifuqudao" value="yu_e" v-model="mai.zhifuqudao"/>
+		            <i class="cell-checkbox-icon"></i> 余额({{shu.huiyuan.yu_e}}元)
+		        </label>
+	        </div>
+	    	
+	    	<div class="m-celltitle">购买角色</div>
+	    	<div class="m-grids-4">
+	    		<div v-for='(L,i) in shu.dengji'>    		
+			    <a  class="grids-item disabled"  v-if='L.id==shu.huiyuan.fenxiaodengji'>
+			        <div class="grids-txt"  >
+			        	<p>{{L.ming}}</p>
+			        	<p>{{L.tiaojian}}元</p>
+			        </div>			      
+			    </a>
+			    <a  class="grids-item"  @click="Mai(i)" v-else >
+			        <div class="grids-txt"  >
+			        	<p>{{L.ming}}</p>
+			        	<p>{{L.tiaojian}}元</p>
+			        </div>
+			       
+			    </a>
+			   </div>
+			</div>
+	    </div>
+	    
+	</div>
+	
+{mb daohang}
+{mb js}
+
+<script type="text/javascript">
+			new Vue({
+				el:"#app",
+				data:{
+					shu:{huiyuan:'',fenxiao:''},
+					mai:{zhifuqudao:'weixin'}
+				},
+				beforeCreate:function(){
+					var that=this;
+		            $z.post("{$_W['url']}",function(shu){
+		                 if(shu.shi==1){
+		                      that.shu=shu.shu;                
+		                 }else{
+		                      $z.toast(shu.shu);
+		                 }
+		            });
+					$z.dendai();
+					$('#app').show();
+				},
+				mounted:function(){					
+					$z.gb_dendai(); 
+					
+				},
+				
+				methods:{
+					Mai:function(e){
+						var that=this;						
+						if(that.mai.tongyi==1){							
+							that.mai.dengji=that.shu.dengji[e].id;
+							that.mai.c='zhifu';
+							$z.post('{$_W["url"]}',that.mai,function(shu){
+								if(shu.shi==0){
+									 $z.toast(shu.shu.xin);
+								}else if(that.mai.zhifuqudao=='yu_e'){
+									 $z.toast('支付成功');
+									 setTimeout(function(){
+									 	$z.dakai('{php echo UXK("fenxiao")}');
+									 },500);
+								}else if(that.mai.zhifuqudao=='weixin'){
+									WeiXin(shu.shu);
+								}
+								
+							})
+						}else{
+							$z.toast('请点击上面  同意协议');							
+						}
+						
+					}
+				}
+				
+			});
+			
+			
+	    function WeiXin(zhifu){	    
+			WeixinJSBridge.invoke(
+				'getBrandWCPayRequest', 
+				{
+					"appId":zhifu['appId'],     
+					"timeStamp":zhifu['timeStamp'],   
+					"nonceStr":	zhifu['nonceStr'],
+					"package":zhifu['package'],
+					"signType":zhifu['signType'],
+					"paySign":zhifu['paySign'] 
+				},
+				function(res) {				
+					if(res.err_msg == "get_brand_wcpay_request:ok") {
+						$z.toast('支付成功');					
+						setTimeout(function(){
+						   $z.dakai('{php echo UXK("fenxiao")}');
+						},1500);
+						
+					}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+						$z.toast('取消支付');
+					}else{
+						$z.toast('支付失败'+res.err_msg);
+					}
+				}
+			);
+		}
+
+		</script>
+		
+{mb jiao}
+
+	 

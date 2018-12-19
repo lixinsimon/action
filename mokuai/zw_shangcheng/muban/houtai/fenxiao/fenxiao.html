@@ -1,0 +1,95 @@
+ {mb tou}
+  <style type="text/css">
+    li{list-style:none;}
+    .liebiao .fenxiao_xq,.liebiao .fenxiao_add,.liebiao .fenxiao_fxs,.liebiao .fenxiao_xiaxian{display:none;}
+  </style>
+  <section class="vbox">
+    {mb dingbu_caidan}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <!-- right tab -->
+              <section class="panel panel-default">
+                <header class="panel-heading text-right bg-light">
+                  <ul class="nav nav-tabs liebiao">
+                    <li {if $cao=='moren'}class="active"{/if}><a href="{php echo UHK('fenxiao')}" style="padding:9px 40px 10px;">创客管理</a></li>
+                    <li {if $cao=='tixian'}class="active"{/if}><a href="{php echo UHK('fenxiao',array('c'=>'tixian'))}" style="padding:9px 40px 10px;">余额提现</a></li>
+                    <!--<li {if $cao=='tongzhi'}class="active"{/if}><a href="{php echo UHK('fenxiao',array('c'=>'tongzhi'))}" style="padding:9px 40px 10px;">通知设置</a></li>-->
+                    <!--<li {if $cao=='rukou'}class="active"{/if}><a href="{php echo UHK('fenxiao',array('c'=>'rukou'))}" style="padding:9px 40px 10px;">入口设置</a></li>-->
+                    <li {if $cao=='dengji'}class="active"{/if}><a href="{php echo UHK('fenxiao',array('c'=>'dengji'))}" style="padding:9px 40px 10px;">创客角色</a></li>
+                    <li {if $cao=='jichu'}class="active"{/if}><a href="{php echo UHK('fenxiao',array('c'=>'jichu'))}" style="padding:9px 40px 10px;">基础设置</a></li>
+
+                    {if $cao=='xiangq'}
+                    <li class="active"><a style="padding:9px 40px 10px;">详情</a></li>
+                    {/if}
+                    {if $cao=='fenxiaoshang'}
+                    <li class="active"><a style="padding:9px 40px 10px;">创客详情</a></li>
+                    {/if}
+                    <li class="fenxiao_add"><a style="padding:9px 40px 10px;">添加新角色</a></li>   
+                    {if $cao=='xiaxian'}
+                    <li class="active"><a style="padding:9px 40px 10px;">推广下线</a></li>
+                    {/if}
+                     {if $cao=='jifen' }
+                     <li class="active"><a style="padding:9px 40px 10px;">会员日志</a></li>
+                     {/if}
+                  </ul>
+                </header>
+                <div class="panel-body">
+                  <div class="tab-content">     
+                    <!-- 创客管理 -->
+                    <div class="tab-pane fade active in" id="gong1">
+                    	{if $cao=='moren'}
+                           {mb "biaoqian/fenxiao_guanli"}
+                        {elseif $cao=='tixian'}
+                           {mb "biaoqian/fenxiao_yongjin"} 
+                        {elseif $cao=='tongzhi'}
+                           {mb "biaoqian/fenxiao_tongzhi"}
+                        {elseif $cao=='rukou'}
+                           {mb "biaoqian/fenxiao_rukou"}
+                        {elseif $cao=='dengji'}
+                           {mb "biaoqian/fenxiao_dengji"}
+                        {elseif $cao=='jichu'}
+                           {mb "biaoqian/fenxiao_jichu"}
+                        {elseif $cao=='xiangq'}   
+                           {mb "biaoqian/fenxiao_xiangqing"}
+                        {elseif $cao=='fenxiaoshang'}
+                           {mb "biaoqian/fenxiao_shang"}
+                        {elseif $cao=='xiaxian'}
+                           {mb "biaoqian/fenxiao_xiaxian"}
+                        {elseif $cao=='gonggao'}
+                           {mb "biaoqian/fenxiao_gonggao"}    
+                        {elseif $cao=='jifen'}
+                           {mb "biaoqian/huiyuan_3"}    
+                        {/if}
+                    </div>
+                 
+                    <!-- 详情 -->
+                    <!-- 添加新角色 -->
+                    <div class="tab-pane fade" id="gong8"></div>
+                    <!-- 添加新角色 -->        
+                   
+                  </div>
+                </div>
+              </section>
+              <!-- right tab -->
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+   
+  <script type="text/javascript">    
+    $(".add_dengji,.edit_dengji").click(function(){
+      $(".liebiao li").removeClass("active");
+      $(".liebiao .fenxiao_add").show().addClass("active");
+      $.post('{php echo UHK("fenxiao",array("c"=>"add"))}',{'id':$(this).attr('data_id')},function(data){
+        $("#gong8").html(data);
+      });
+    });
+  </script>
+ {mb jiao}

@@ -1,0 +1,54 @@
+<div class="alert alert-info">
+  <p>每日9:00前完成数据更新，当前数据更新至 2016-12-21</p>
+  <p>微信在次日9点启动生成前一天的对账单，建议商户10点后再获取；</p>
+  <p>对账单中涉及金额的字段单位为“元”。</p>
+  <p>下载账单接口为单日期接口，请尽量保持账单时间段不要过长。</p>
+</div>
+<form action="" method="get" class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">账单类型</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="u" value="option1">
+          <i></i>
+          所有账单
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="u" value="option2" checked="">
+          <i></i>
+          支付账单
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="u" value="option2" checked="">
+          <i></i>
+          退款账单
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="u" value="option2" checked="">
+          <i></i>
+          撤销账单
+        </label>
+      </div>  
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">账单时间</label>
+    <div class="col-sm-10">
+      <input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="12-02-2013" data-date-format="dd-mm-yyyy">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-sm padder-lg btn-danger">下载对账单</button>
+    </div>
+  </div>
+</form>

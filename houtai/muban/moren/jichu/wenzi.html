@@ -1,0 +1,77 @@
+ {mb tou}
+ <style type="text/css">
+    .nav-tabs .bj{display: none;}
+    #xiang_q{display:none;}
+    #hide_block{display:none;}
+ </style>
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <h2 class="font-thin m-b" style="font-size:20px;">文字回复</h2>
+              <!-- right tab -->
+              <section class="panel panel-default">
+                <header class="panel-heading text-right bg-light">
+                  <ul class="nav nav-tabs liebiao">
+                    <li class="active"><a href="#messages-2" data-toggle="tab" style="padding:9px 40px 10px;">管理基本文字回复</a></li>
+                    <li><a href="#profile-2" data-toggle="tab" style="padding:9px 40px 10px;">添加基本文字回复</a></li>
+                    <li class="bj"><a style="padding:9px 40px 10px;">编辑基本文字回复</a></li>
+                  </ul>
+                </header>
+                <div class="panel-body">
+                  <div class="tab-content">     
+          					<!-- 管理基本文字回复 -->
+          					<div class="tab-pane fade active in" id="messages-2">
+          						{mb "biaoqian/wenzi_1"}
+          					</div>
+                    <!-- 添加基本文字回复 -->
+                    <div class="tab-pane fade" id="profile-2">
+                      	{mb "biaoqian/wenzi_2"}
+                    </div>
+                    <!-- 添加基本文字回复 -->
+                    <!-- 编辑基本文字回复 -->
+                    <div class="tab-pane fade" id="profile1-2">
+                        
+                    </div>
+                    <!-- 编辑基本文字回复 -->
+                  </div>
+                </div>
+              </section>
+			        <!-- right tab -->
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+  <script type="text/javascript">
+  $(".wenzi_bianji").click(function(){
+  	$(".liebiao li").removeClass("active");
+  	$(".liebiao .bj").show().addClass("active");
+	$.post('{php echo UH("jichu",array("c"=>"bianji"))}',{'id':$(this).attr('data-id')},function(data){
+		$("#profile1-2").html(data);
+	})
+  })
+  $(".liebiao li:lt(2)").click(function(){
+  	$(".liebiao .bj").removeClass("active").hide();
+  })
+  </script>
+  <script type="text/javascript">
+  var xiang_q = document.getElementById("xiang_q");
+  var hide_block = document.getElementById("hide_block");
+  var ch = document.getElementById("ch");
+  var gaoji = document.getElementById("gaoji");
+  function check(){
+    if(gaoji.checked==true){
+      hide_block.style.display = 'block';
+    }else{
+      hide_block.style.display = 'none';
+    }
+  }
+  </script>
+ {mb jiao}

@@ -1,0 +1,56 @@
+{mb tou} 
+<header class="m-navbar">		    
+		    <div class="navbar-center">
+		       	在线支付
+		    </div>   
+		</header>
+<div style="padding-top:32px;width: 100%;">
+	<div class="" style="text-align:center;margin-top:30%;">
+		<img src="{$_W['yuming']}./gongyong/images/zhifu.jpg" style="width:30%;margin: 0 auto 20px;">
+		<p style="font-size:.5rem;">{$xinxi}</p>
+	</div>
+</div> 
+{mb js}
+{if $_J['zhifuqudao']=='weixin'}
+<script>	
+	function onBridgeReady(){
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest', 
+			{
+				"appId":"{$zhifu['appId']}",     
+				"timeStamp":"{$zhifu['timeStamp']}",   
+				"nonceStr":	"{$zhifu['nonceStr']}",
+				"package":"{$zhifu['package']}",
+				"signType":"{$zhifu['signType']}",
+				"paySign":"{$zhifu['paySign']}" 
+			},
+			function(res) {				
+				if(res.err_msg == "get_brand_wcpay_request:ok") {
+					$z.toast('支付成功');
+					{if !empty($tiaozhuan)}
+						setTimeout(function(){
+						var url='{$tiaozhuan}';
+						window.location.href=url;
+						},1500);
+					{/if}
+				}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+					$z.toast('取消支付');
+				}else{
+					$z.toast('支付失败'+res.err_msg);
+				}
+			}
+		);
+	}
+	if(typeof WeixinJSBridge == "undefined") {		
+		if(document.addEventListener) {
+			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		} else if(document.attachEvent) {
+			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		}
+	} else {		
+		onBridgeReady();
+	}
+</script>
+{/if} 
+{mb jiao}

@@ -1,0 +1,52 @@
+ {mb tou}
+<style type="text/css">
+  #duli_div,#jicha_div,#hidden-block,.hidden_table{display:none;}
+  .panel .table_xiang tbody tr td,.panel .table_xiang thead tr th{vertical-align:middle;text-align:center;border-right:1px solid #ddd;}
+  .panel .table_xiang,.panel .table_xiang tr,.panel .table_xiang thead > tr > th,.panel .table_xiang tbody > tr > td{border-color:#ddd;}
+  .guige_box{background:#fefefe;}
+</style>
+<section class="vbox">
+    {mb dingbu_caidan}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <!-- right tab -->
+              <section class="panel panel-default">
+                <header class="panel-heading text-right bg-light">
+                  <ul class="nav nav-tabs liebiao">
+                    <li {if $cao=='moren'} class="active"{/if}><a href="{php echo UHK('shangpin')}"  style="padding:9px 40px 10px;">商品管理</a></li>
+                    <li {if $cao=='tianjia'} class="active"{/if}><a href="{php echo UHK('shangpin',array('c'=>tianjia))}" style="padding:9px 40px 10px;">添加商品</a></li>
+                    {if $cao=='bianji'}
+                    <li  class="active"><a style="padding:9px 40px 10px;">编辑商品</a></li>
+                   {/if}
+                  </ul>
+                </header>
+                <div class="panel-body">
+                  <div class="tab-content">     
+                    <!-- 商品管理开始 -->
+                    <div class="tab-pane fade active in " id="tab1">
+                      {if $cao=='moren'}
+                      {mb "biaoqian/shangpin_1"}
+                      {elseif  $cao=='tianjia' || $cao=='bianji'}
+                      <form data-validate="parsley" method="post" class="form-horizontal" role="form">
+                      {mb "biaoqian/shangpin_2"}
+                      </form>
+                      {/if}
+                    </div>
+                    <!-- 商品管理结束 -->
+                 
+                  </div>
+                </div>
+              </section>
+              <!-- right tab -->
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+</section>
+{mb jiao}

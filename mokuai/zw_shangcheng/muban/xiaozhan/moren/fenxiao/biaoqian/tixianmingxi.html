@@ -1,0 +1,14 @@
+{loop $lie $l}
+<li class="mui-table-view-cell mui-collapse mingxi_list">
+		<div class="mui-media-body">
+			{$l['dingdanhao']}
+			<p class='mui-ellipsis' style="font-size:0.8em;margin-top:3px;">
+				<font style="margin-left:15px;">{php echo date('Y-m-d H:i:s')}</font>
+			</p>
+		</div>
+		<div class="mui-media-right">
+			<span style="display:block;font-size:0.9em;">+{$l['jin_e']}</span>
+			<span style="display:block;color:#eb5449;font-size:0.9em;">{php echo $zhuangtai_text[$l['zhuangtai']]}</span>
+		</div>
+</li>
+{/loop}

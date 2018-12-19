@@ -1,0 +1,12 @@
+
+
+<div class="z_img tu" style="padding: 2px;">
+	<div class="kuang" style="float: left;width: 49%;margin-right: 1%;" v-for="(item,index) in shu.{$k}.shangpin">
+		<a  @click="DaKai('{php echo UAK('xiangqing/index')}&id='+item.id)">
+			<img :src="item.tu" :height="shu.{$k}.gaodu" style="width: 100%;">
+			<p>{{item.ming}}</p><span>{{item.jiage}}</span>
+		</a>
+	</div>
+</div>
+
+

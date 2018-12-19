@@ -1,0 +1,47 @@
+<style>
+	.tu img {
+		display: inline-block;
+	}
+	.tu_left {
+		float: left;
+		width: 33.3%;
+		padding: 0 0 0 0;
+		margin: 0 0 0 0;
+	}
+	.tu_right {
+		float: left;
+		width: 66%;
+		padding: 0 0 0 0;
+		margin-left: 0.02rem;
+	}
+	.tu_right_top {
+		width: 100%;
+	}
+	.tu_right_bottom {
+		width: 100%;
+		margin-top:0.02rem ;
+		overflow: hidden;
+		
+	}
+	.tu_right_bottom img {
+		float: left;
+	}
+	.tu_right_bottom img:nth-child(1) {
+		margin-right: 0.02rem;		
+	}
+</style>
+
+<div class="z_img tu">
+	<div class="tu_left">
+		<img src="{php echo JueDuiUrl($s['tu4'][0]['tu'])}" class="tu4" style="width: 100%; height: 4.63rem;">
+	</div>
+	<div class="tu_right">
+		<div class="tu_right_top">
+			<img src="{php echo JueDuiUrl($s['tu4'][1]['tu'])}" class="tu4" style="width: 100%; height: 2.31rem;">
+		</div>
+		<div class="tu_right_bottom">	
+				<img src="{php echo JueDuiUrl($s['tu4'][2]['tu'])}" class="tu4" style="width: 49.5%; height: 2.31rem;;">
+				<img src="{php echo JueDuiUrl($s['tu4'][3]['tu'])}" class="tu4" style="width: 49.5%; height: 2.31rem;;">
+		</div>
+	</div>
+</div>

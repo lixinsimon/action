@@ -1,0 +1,191 @@
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <a class="accordion-toggle" style="display:block;" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+      筛选
+    </a>
+  </div>
+  <div id="collapseTwo" class="panel-collapse collapse">
+    <div class="panel-body text-sm">
+      <form action="" method="get" class="form-horizontal" role="form">
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label" for="input-id-1">会员信息</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="input-id-1" placeholder="可搜索昵称/姓名/手机号">
+			    </div>
+			  </div>
+			  <div class="line line-dashed b-b line-lg"></div>
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label" for="input-id-1">充值单号</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="input-id-1" placeholder="可搜索充值单号">
+			    </div>
+			  </div>
+			  <div class="line line-dashed b-b line-lg"></div>
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label" for="input-id-1">会员角色</label>
+			    <div class="col-sm-10">
+			      <select data-required="true" class="form-control parsley-validated">
+			          <option value="">一级会员</option>
+			          <option value="foo">二级会员</option>
+			          <option value="bar">三级会员</option>
+			      </select>
+			    </div>
+			  </div>
+			  <div class="line line-dashed b-b line-lg"></div>
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label">充值时间</label>
+			    <div class="col-sm-10">
+			      <div class="radio-inline i-checks">
+			        <label>
+			          <input type="radio" name="a" value="option1" checked="">
+			          <i></i>
+			          不搜索
+			        </label>
+			      </div>
+			      
+			      <div class="radio-inline i-checks m-l-lg">
+			        <label>
+			          <input type="radio" name="a" value="option2">
+			          <i></i>
+			          搜索
+			        </label>
+			      </div>
+			      <div style="display:inline-block;">
+			          <input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="12-02-2013" data-date-format="dd-mm-yyyy">
+			      </div>
+			    </div>
+			  </div>
+			  <div class="line line-dashed b-b line-lg"></div>
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label" for="input-id-1">状态</label>
+			    <div class="col-sm-10">
+			      <select data-required="true" class="form-control parsley-validated">
+			          <option value="">完成</option>
+			          <option value="foo">申请中</option>
+			          <option value="bar">失败</option>
+			      </select>
+			    </div>
+			  </div>
+			  <div class="line line-dashed b-b line-lg"></div>
+			  <div class="form-group">
+			    <div class="col-lg-offset-2 col-lg-10">
+			      <button type="button" class="btn btn-sm padder-lg btn-dark">搜索</button>
+			      <button type="button" class="btn btn-info btn-sm padder-lg" data-toggle="modal" data-target="#myModal">导出Excel</button>
+			    </div>
+			  </div>
+			</form>
+    </div>
+  </div>
+</section>
+<div class="line line-dashed b-b line-lg"></div>
+
+<div class="table-responsive m-t-md">
+  <header class="panel-heading font-bold">
+    总数：1528
+  </header>
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="16%">充值单号</th>
+        <th width="12%">粉丝</th>
+        <th width="12%">会员信息</th>
+        <th width="12%">会员角色</th>
+        <th width="12%">提现金额</th>
+        <th width="12%">充值时间</th>
+        <th width="12%">状态</th>
+        <th width="12%">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="vertical-align:middle;">
+          RC20161209241258222464
+        </td>
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{$_W['yuming']}/gongyong/images/a0.png" class="dker" alt="...">
+          </span>
+          <font class="m-l-xs" style="line-height:40px;">孔方网络</font>
+        </td>
+        <td style="vertical-align:middle;">
+          <ul style="padding-left:0;">
+            <li>某某</li>
+            <li>15246894562</li>
+          </ul>
+        </td>
+        <td style="vertical-align:middle;">
+         普通会员
+        </td>
+        <td style="vertical-align:middle;">
+          -12458.00
+        </td>
+        <td style="vertical-align:middle;">
+          2016-12-01 16:42:16
+        </td>
+        <td style="vertical-align:middle;">
+          <label class="label label-danger padder">申请中</label>
+        </td>
+        <td style="vertical-align:middle;">
+          <div class="btn-group">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">用户信息 <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-left" role="menu" style="z-index: 9999">
+              <li><a href="#">微信提现</a></li>                        
+              <li><a href="#">手动提现</a></li>                        
+              <li ><a href="#">拒绝</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle;">
+          RC20161209241258222464
+        </td>
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{$_W['yuming']}/gongyong/images/a0.png" class="dker" alt="...">
+          </span>
+          <font class="m-l-xs" style="line-height:40px;">孔方网络</font>
+        </td>
+        <td style="vertical-align:middle;">
+          <ul style="padding-left:0;">
+            <li>某某</li>
+            <li>15246894562</li>
+          </ul>
+        </td>
+        <td style="vertical-align:middle;">
+         普通会员
+        </td>
+        <td style="vertical-align:middle;">
+          -12458.00
+        </td>
+        <td style="vertical-align:middle;">
+          2016-12-01 16:42:16
+        </td>
+        <td style="vertical-align:middle;">
+          <label class="label label-danger padder">申请中</label>
+        </td>
+        <td style="vertical-align:middle;">
+          <div class="btn-group">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">用户信息 <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-left" role="menu" style="z-index: 9999">
+              <li><a href="#">微信提现</a></li>                        
+              <li><a href="#">手动提现</a></li>                        
+              <li ><a href="#">拒绝</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="text-left">
+  <ul class="pagination pagination-sm">
+    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+  </ul>
+</div>

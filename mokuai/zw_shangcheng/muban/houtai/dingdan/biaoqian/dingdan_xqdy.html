@@ -1,0 +1,96 @@
+<script language="javascript" src="{$_W['yuming']}gongyong/js/jquery-1.4.4.min.js"></script>
+<script language="javascript" src="{$_W['yuming']}gongyong/js/jquery.jqprint-0.3.js"></script>
+<!--
+如果您使用的是高版本jQuery调用下面jQuery迁移辅助插件即可
+<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+-->
+<script language="javascript">
+
+    function aa() {
+        $("#ddd").jqprint();
+    }
+</script>
+<style>
+    .cent {
+        font-size:10px;
+        text-align: center
+    }
+
+    .spa {
+        float: left;
+        width: 22%;
+        display: block;
+    }
+</style>
+
+<div id="ddd" class="cent">
+    <h2 style="text-align: center">{$_W['shezhi']["shezhi"]["ming"]}</h2>
+    <h4 style="text-align: center">物流配送单据</h4>
+    <table style="width: 80%;margin:auto;margin-top: 20px;font-size:10px" cellspacing="0"  border="1" >
+
+        <tr>
+            <td>订单日期</td>
+            <td style="width:20%">{$res[0]['xiadanshijian']}</td>
+            <td>订单号</td>
+            <td colspan="4">{$res[0]['dingdanhao']}</td>
+        </tr>
+        <tr>
+            <td>序号</td>
+            <td>物料名称</td>
+            <td>数量</td>
+            <td>规格(约)</td>
+            <td>单价</td>
+            <td>金额</td>
+            <td>备注</td>
+        </tr>
+
+        {loop $res $k=>$val}
+        <tr>
+            <td>{$val['xuhao']}</td>
+            <td>{$val['wuliaoming']}</td>
+            <td>{$val['shuliang']}</td>
+            <td>{$val['guigeyue']}</td>
+            <td>{$val['jiage']}</td>
+            <td>{$val['jine']}</td>
+            <td>{$val['liuyan']}</td>
+        </tr>
+        {/loop}
+    </table>
+    <div style="width: 90%;margin-top: 20px">
+        <span style="float: right;font-size:10px">总金额：￥{$res[0]['zongjia']}元</span>
+    </div>
+
+    <table  style="width: 80%;margin:auto;margin-top: 50px;font-size:10px">
+        <tr >
+            <td style="height: 30px" align="left" style="width:25%">库管：</td>
+            <td align="left" style="width:25%">核单：</td>
+            <td align="left" style="width:25%">配送人：</td>
+            <td align="left" style="width:25%">收货人签字：</td>
+        </tr>
+        <tr>
+            <td style="height: 30px"  align="left"  colspan="4">送货地址：{$res[0]['shouhuoshengshiqu']}{$res[0]['shouhuodizhi']}</td>
+        </tr>
+        <tr>
+            <td style="height: 30px" align="left"  colspan="2">电话：{$res[0]['shouhuodianhua']}</td>
+            <td align="left" >姓名：{$res[0]['shouhuoren']}</td>
+            <td>付款方式：
+
+            {if $res[0]['zhifuqudao']=='weixin'}微信支付
+            {elseif $res[0]['zhifuqudao']=='zifubao'}支付宝
+            {elseif $res[0]['zhifuqudao']=='yu_e'}余额支付
+            {elseif $res[0]['zhifuqudao']=='houtai'}后台支付
+            {elseif $res[0]['zhifuqudao']=='yinlian'}银联支付
+            {elseif $res[0]['zhifuqudao']=='daofu'}货到付款
+            {else}未支付
+            {/if}
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 30px" align="left" colspan="4">如有异常请致客服： {$_W['shezhi']["shezhi"]["dianhua"]}</td>
+        </tr>
+    </table>
+
+</div>
+<div style="width: 95%;text-align: center">
+<button style="float: right;margin-right: 50px;" class="btn btn-primary padder-lg" onclick="aa()">打印</button>
+    <div>

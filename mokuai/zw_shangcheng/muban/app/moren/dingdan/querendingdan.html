@@ -1,0 +1,578 @@
+{mb 'tou'}
+<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />
+<style>
+	.peisong{    
+		width: 98%;
+	    border: 1px solid #000;
+	    margin: .2rem auto;
+	    border-radius: 2px;
+	    overflow: hidden;
+	    text-align: center;
+	    }
+	.peisong p{width: 50%;float: left;padding: .15rem;}
+	.xuanzhong{background: #000;color: #FFF;}
+	.hidden{display: none;}
+	.m-cell {margin-bottom: .1rem;}
+	.zw-shu{
+		position: absolute;
+		right: 10%;
+		bottom: .34rem;
+	}
+	body{
+		background: #f7f7f7;
+	}
+	.qu{
+		border: 1px solid #B1B1B1;border-radius: 50%;
+		width: .5rem;height: .5rem;
+		line-height: .5rem;
+		text-align: center;
+	}
+	.xuanzhong{
+		border: none;
+	}
+	.cell-arrow:after{
+		color: #000;
+	}
+	.btn{
+		height: 100%;
+		width: 2rem;
+		line-height: 1rem;
+		border-radius: 0;
+		font-size: .34rem;
+	}
+	.qrdd-b div{
+		margin: 0 0 0 .2rem;
+	}
+	.dztu{
+		float: left;
+		width: .4rem;
+		margin-top: .16rem;
+		margin-right: .2rem;
+	}
+	.scrolltab-nav{
+		background: #F7F7F7;
+	}
+	.df_xian h3 span{
+		text-decoration: line-through;
+	    color: #b7b7b7;
+	    font-size: .26rem;
+	}
+
+.qrdd-tu{
+	margin-top: .1rem;
+}
+.cell-item:not(:last-child):after{
+	border-bottom: none;
+}
+.heji{
+	font-size: .3rem;
+}
+
+.xianzi{
+		font-size: .4rem;
+		font-weight: bold;
+		float: left;
+		width: 100%;
+		line-height: .4rem;
+		height: .6rem;
+		line-height: .6rem;
+		background: #fff;
+	}
+.duianniu{
+	width: 80%;
+	height: .9rem;
+	line-height: .9rem !important;
+	text-align: center;
+	background: #000000;
+	color: #fff;
+	margin-left: 10%;
+	float: left;
+	margin-top: 1rem;
+}
+.dikou{
+	color: #000000 !important;
+	width: 5rem;
+	position: relative;
+	margin-top: .2rem;
+}
+.dikou span{
+	position: absolute;
+	left: 0;
+	top: -.3rem;
+}
+</style>
+<div id="qrdd" style="display: none;">
+	<div id="qrdd0" v-if="!show">
+	
+		<div class="touhang">
+			<a onclick="$z.go()"><img style="width: auto !important; " src="{$_W['gongyou']}/images/左箭头.png" /></a>
+			<div >确认订单</div>
+		</div>
+		
+		
+		<!--<div class="peisong">
+			<p v-bind:class="peisongfangshi?'xuanzhong': 'zw-bg-fff'"  @click="PeiSong(true)">物流配送</p>
+			<p v-bind:class="peisongfangshi?'zw-bg-fff': 'xuanzhong'"  @click="PeiSong(false)">到店自提</p>
+		</div>-->
+		
+		<!--默认地址-->
+		<div v-bind:class="peisongfangshi?'qrdd-t': 'hidden'" v-if='!dizhi' style="text-align: center;"  dizhi_id="0" ref='dizhi_id'>
+			<a @click="TianJiaDiZhi" class="btn btn-warning" style="width: 80%;line-height: .8rem; background: #CCCCCC;">填写收货地址</a>
+		</div>
+		<div v-bind:class="peisongfangshi?'qrdd-t': 'hidden'"  @click="GaiDiZhi" v-else :dizhi_id="dizhi.id" ref='dizhi_id'>			
+			<img class="dztu" src="{$_W['gongyou']}/images/地址.png" />
+			<div class="sz-dizhi">
+				<div class="shouhuo">
+					<h3>收货人：{{dizhi.ming}}</h3>
+					<h4>{{dizhi.dianhua}}</h4>
+				</div>
+				<div class="sz-dizhi-x zw-shenglue">
+					地址：{{dizhi.shengshiqu+' '+dizhi.dizhi}}
+				</div>
+			</div>
+			<i style="color: #b2b2b2;" class="tubiao tb-yduiqianjin qrdd-tu"></i>			
+		</div>  
+		<!--到店自提-->
+		<div v-bind:class="peisongfangshi?'hidden': 'm-cell'" >
+			<div class="cell-item">
+		        <div class="cell-left">姓  名：</div>
+		        <div class="cell-right"><input type="text" class="cell-input" placeholder="请输入姓名"  v-model="form.ziti_xingming"/></div>
+		    </div>
+		    <div class="cell-item">
+		        <div class="cell-left">手 机：</div>
+		        <div class="cell-right"><input type="number" pattern="[0-9]*" class="cell-input" placeholder="请输入手机号"  v-model="form.ziti_dianhua" /></div>
+		    </div>
+		 	 <div class="cell-item" @click="ZiTi" >
+		        <div class="cell-left" style="font-size:0.26rem"><i class="icon-location"></i>&nbsp;&nbsp; {{xuandianpu.dizhi}}</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </div>	    
+		</div>
+	
+         <!-- 商品列表-->
+         <div v-for="(A,ind) in lie" style="margin: .1rem 0px;" >  
+         	<!--<div class="zw-w100 zw-bg-fff zw-h80 zw-margin-b4 zw-hanggao80"><i class="icon-home zw-margin-l20"></i>{{A.shanghuming}}</div>-->
+         	<!--<div class="zw-w100 zw-bg-fff zw-h80 zw-margin-b4 zw-hanggao80" v-if="zhekou.zhekou" ><i class="icon-home zw-margin-l20"></i>{{zhekou.ming}}</div>-->
+			<div class="df_zhon zw-bg-fff zw-margin-b4" v-for="(L,index) in A.shangpin" >		
+				<img :src="L.tu" />
+				<div class="df_xian">
+					<h2 class="zw-shenglue2">{{L.ming}}</h2>
+					<h3  v-if="L.cuxiao!=2">￥{{huiyuandengji>11?L.chengben:L.jiage}} <span >￥{{L.yuanjia}}</span></h3>	
+					<h3 class="dikou" v-else><span >￥{{L.yuanjia}}</span>	
+						{{L.liquan>0?'礼券'+L.liquan:''}}&nbsp;{{L.jifenkou>0?'积分'+L.jifenkou:''}}&nbsp;{{L.xunzhang>0?'勋章'+L.xunzhang:''}} 
+					</h3>
+				</div>
+				<h4  v-if="L.cuxiao!=2" class="zw-shu">x{{L.shuliang}}</h4>
+				
+			</div>
+		</div>
+         <!-- 留言-->
+		<div class="cell-item" style="background: #fff;">
+	        <div class="cell-left">买家留言：</div>
+	        <div class="cell-right"><input type="text" class="cell-input" placeholder="请填写对本次交易的说明" v-model="form.liuyan" /></div>
+	    </div>
+	    
+	    <!--<div class="item-title" v-if='jifendikou>0 || keyong>0' >订单优惠</div>
+	    <label class="cell-item zw-bg-fff"  v-if='keyong>0' >
+	        <span class="cell-left" v-if='kaiguan' @click='kaizhe'>优惠减免{{xuanquan.e}}元</span>
+	         <span class="cell-left" v-else  @click='kaizhe'>点击选择优惠券,{{keyong}}张可用</span>
+	        <label class="cell-right">
+	         	<div v-if="xuanquan" class='zw-you zw-anniu zw-margin-r20 zw-margin-t20  zw-bg-huang zw-zi-fff' @click="quxiao" >取消</div>
+	        </label>
+	    </label>
+	    <label @click="jifendi" class="cell-item zw-bg-fff zw-hanggao100" style="position: relative;" v-if='jifendikou>0'>
+	        <span class="cell-left">积分可抵扣{{jifendikou}}元</span>
+	        <div class="qu" style="position: absolute;right: .3rem;top: .25rem;">
+		       	 <i v-if="dk" class="icon-checkoff"></i>
+		    </div>
+	    </label>-->
+	   
+	      <!-- 优惠券  -->
+	    <div class='zw-zhezhao'>
+ 			<div @click="guanzhe" class="zw-zheguan"></div>
+            <div class='zw-xuanzhe'style="background: #F0F0EE;">
+                <div class='zw-xuanzhe-t zw-bg-fff'>
+                    <div class='zw-you zw-anniu zw-margin-r20 zw-margin-t20  zw-bg-huang zw-zi-fff' @click='guanzhe'>关闭</div>
+                </div>
+            	<div class=" zw-youhui-bg3 zw-youhui"   v-for="(A,index) in quan" @click="xquan(index)">
+						<div class="zw-youhui-z">
+							<div class="zw-youhui-qian">
+								<div class="zw-youhui-qian-k"><span>￥</span>{{A.e}}</div>
+							</div>
+							<div class="zw-youhui-man">满{{A.tiaojian}}元可用</div>
+						</div>
+						<div class="zw-youhui-y">
+							<div class="zw-youhui-biaoti">
+								<span class="zw-bg-huang">微券</span>
+							 	<div>{{A.biaoti}}</div> 
+							</div>
+							<div class="zw-youhui-shijian">{{A.kaishi}}-{{A.jieshu}}</div>
+							<div class="zw-youhui-di">官方<span class="zw-anniu-xiao zw-you zw-zi-huang" style="border: 1px solid #e4b16b;">点击领取</span></div>
+						</div>
+				</div>
+            </div>
+		</div>
+		<div  @click="XiaDingDan" ref='tijiao' class="duianniu" v-if="quyu==2" >
+			确认兑换	
+		</div>
+		<div class="heji dibu qrdd-b" v-else >
+			合计：￥<span style="color: #EB5211;">{{zongjia>0?zongjia:0 }}</span>（含运费：{{yunfei}}元）
+			<div class="btn btn-danger" style="float: right;" @click="XiaDingDan" ref='tijiao'>去付款</div>		
+		</div>
+		</div>
+		<!--选择收货地址----------------------------------------------------------------------------------------------------------->
+		<div id="qudd1"  v-if="show=='lie'">
+			<header class="m-navbar">
+			    <a class="navbar-item" @click="FanHui">
+			        <i class="back-ico"></i>
+			    </a>
+			    <div class="navbar-center">地址管理</div>
+			    <a class="navbar-item" @click="TianJiaDiZhi">添加</a>
+			</header>
+			<div class="xzdz" v-for="(d,index) in dizhilie"  @click="XuanDiZhi(index)">			  
+				<div class="shouhuo">
+					<h3>收货人：{{d.ming}}</h3>
+					<h4>{{d.dianhua}}</h4>
+				</div>
+				<div class="sz-dizhi-x zw-shenglue">
+					地址：{{d.shengshiqu+' '+d.dizhi}}
+				</div>
+			</div>		
+		</div>
+		<!--新建地址------------------------------------------------------------------------------------------------------------>
+		<div id="qudd2"  v-if="show=='jia'">
+			<header class="m-navbar">
+			    <a  class="navbar-item" @click="FanHui">
+			        <i class="back-ico"></i>
+			    </a>
+			    <div class="navbar-center">
+			   		   增加新地址	
+			    </div>
+			</header>			
+				<div class="m-cell dz-lie"  >
+					<div class="cell-item" > 
+				        <div class="cell-left">收货人</div>
+				        <div class="cell-right">
+				        	<input type="text" class="cell-input ming" placeholder="请输入收货人姓名" /></div>
+				    </div>
+					<div class="cell-item">
+				        <div class="cell-left">联系电话</div>
+				        <div class="cell-right"><input   type="text" class="cell-input dianhua" placeholder="请输入联系电话" /></div>
+				    </div>
+				    <a class="cell-item">
+				        <div class="cell-left">所在地区</div>
+				       	<div class="cell-right">
+				       		<input  class="cell-input shengshiqu" @click="diqu" type="text" readonly id="J_Address2" placeholder="请选择收货地址">
+				       	</div>
+				    </a>		    
+					<div class="cell-item" >
+				        <div class="cell-left">详细地址</div>
+				        <div class="cell-right"><input  type="text" class="cell-input dizhi" placeholder="请输入详细地址" /></div>
+				    </div>
+			    </div>
+			    <div  class="btn-block btn-danger" @click="jiadizhi"  >保存</div>		  
+		</div>	
+		
+		<!--选择自提地址----------------------------------------------------------------------------------------------------------->
+		<div id="qudd1"  v-if="show=='ziti'">
+			<header class="m-navbar">
+			    <a class="navbar-item" @click="FanHui">
+			        <i class="back-ico"></i>
+			    </a>
+			    <div class="navbar-center">自提地址</div>			   
+			</header>
+			<div class="xzdz" v-for="(d,index) in dianpu"  @click="XuanDianPu(index)">			  
+				<div class="shouhuo">
+					<h3>{{d.nicheng}}</h3>
+					<h4>{{d.dianhua}}</h4>
+				</div>
+				<div class="sz-dizhi-x">
+					<i class="icon-location"></i>{{d.dizhi}}
+				</div>
+			</div>		
+		</div>
+		 <div style="width: 100%;height: 2rem;float: left;"></div>
+</div>
+ {mb js}
+ 	<script src="{$_W['yuming']}gongyong/js/ydui.citys.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el:'#qrdd',
+		data:{
+			dizhi:[],
+			lie:[],
+			dizhilie:[],
+			zongjia:0.00,
+			yunfei:0.00,
+			show:'',
+			peisongfangshi:true,
+			dianpu:[],
+			xuandianpu:{dizhi:'选择自提地址'},
+			form:[],
+			keyong:0,
+			quan:[],
+			kaiguan:false,xuanquan:'',jifendikou:'',dk:false,jia:0,zhekou:[],huiyuandengji:0,quyu:0
+		},
+		methods:{
+			geshu:function(index,jia_jian,ind){	
+				var that=this;
+				var yuanzhi=that.lie[ind].shangpin[index].shuliang;
+				
+				var zhi=that.lie[ind].shangpin[index].shuliang;
+				var id=that.lie[ind].shangpin[index].shangpin;
+				var kucun=that.lie[ind].shangpin[index].kucun;
+				
+				
+				if(jia_jian=='jia'){
+					zhi++;	
+					if(zhi<kucun){
+						$z.toast('库存不足');
+						return false;
+					}
+					that.lie[ind].shangpin[index].shuliang=zhi;
+					
+				}else if(jia_jian=='jian'){
+					zhi--;	
+					if(zhi<1){
+					   $z.toast('不能为负！');	
+					   return false;
+					}
+					that.lie[ind].shangpin[index].shuliang=zhi;
+				}					
+				$z.post("{php echo UAK('liebiao/kuaigou')}",{kucun:zhi,id:id,c:'jian'},function(shu){
+				    if(!shu.shi){
+				    	that.lie[ind].shangpin[index].shuliang=yuanzhi;
+				    	$z.toast(shu.shu);
+				    }
+				   	$z.post("{$_W['url']}",function(shu){
+						if(shu.shi==1){
+							that.zongjia=shu.shu.zongjia.toFixed(2);
+							that.jia=shu.shu.zongjia.toFixed(2);
+//							that.lie=shu.shu.gouwuchelie;
+						}
+					});
+				});	
+				
+			},
+			
+			XiaDingDan:function(){
+				var tijiao=this.$refs.tijiao;
+				var is=tijiao.getAttribute('jinzhi');
+				if(is){
+					return false;
+				};
+			    tijiao.setAttribute('jinzhi',1);
+				tijiao.innerText='正在执行..';
+				if(this.peisongfangshi){
+					this.form.dizhi_id=this.$refs.dizhi_id.getAttribute('dizhi_id');
+					this.form.peisongfangshi=0;
+				}else{
+					this.form.ziti_id=this.xuandianpu.id;					
+					this.form.ziti_shengshixian=this.xuandianpu.shengshixian;
+					this.form.ziti_dizhi=this.xuandianpu.xiangxidizhi;
+					this.form.peisongfangshi=1;
+				}			
+				this.form.jifendikou=this.dk;
+				
+				if(this.xuanquan){
+					this.form.quan=this.xuanquan.id;
+				}
+				this.form.c='shengchengdingdan';	
+				$z.post('{php echo UAK("dingdan/querendingdan")}',this.form,function(s){
+					tijiao.removeAttribute('jinzhi');
+				    tijiao.innerText='提交订单';
+				    
+					if(s.shi){
+						$z.dakai('{php echo UAK("dingdan/zhifu")}&dingdanid='+s.shu.dingdanid);
+					}else{
+						$z.toast(s.shu);
+					}
+				});
+			},
+			GaiDiZhi:function(){
+				this.show='lie';
+				var that=this;
+				$z.post("{php echo UAK('dingdan/querendingdan')}",{c:'xuanzedizhi'},function(shu){
+					if(shu.shi){
+						that.dizhilie=shu.shu;
+					}else{
+						$z.toast(shu.shu);
+					}
+				});
+			},
+			TianJiaDiZhi:function(){
+				this.show='jia';
+			},
+			FanHui:function(){
+				this.show='';
+			},			
+			jiadizhi:function(){
+               var dz={};       
+               var that=this;
+                dz['ming']=$('.ming').val();
+                dz['dianhua']=$('.dianhua').val();
+                dz['shengshiqu']=$('.shengshiqu').val();
+                dz['dizhi']=$('.dizhi').val();
+                $z.post("{php echo UAK('wode/dizhi',array('c'=>'post'))}",dz,function(shu){
+                	if(shu.shi){  
+                		dz['id']=shu.shu;                		
+                		that.dizhi=dz;
+                		that.show='';    
+                		that.shua(shu.shu);
+                	}else{
+                		$z.toast(shu.shu);  
+                	}
+                                   	
+                }); 
+			},
+			shua:function(id){
+				var that=this;
+				$z.post("{$_W['url']}",{dizhiid:id},function(shu){
+					if(shu.shi==1){
+						that.lie=shu.shu.gouwuchelie;
+						that.dizhi=shu.shu.dizhi;
+						that.zongjia=shu.shu.zongjia.toFixed(2);
+						that.jia=shu.shu.zongjia.toFixed(2);
+						that.yunfei=shu.shu.yunfei;
+						that.zhekou=shu.shu.zhekou;
+						that.huiyuandengji=shu.shu.huiyuandengji;
+						that.form={
+							   ids:shu.shu.ids,
+							   guigeid:shu.shu.guigeid,
+							   shuliang:shu.shu.shuliang
+						 };
+						  that.keyong=shu.shu.keyongquan;
+						 that.quan=shu.shu.quan;
+						  that.quyu=shu.shu.quyu;
+						 that.jifendikou=shu.shu.jifendikou;
+					}else if(shu.shi==-2){
+						$z.go(-1);
+						$z.toast(shu.shu);
+					}else{
+						$z.toast(shu.shu);
+					}
+					$("#qrdd").show();
+				});
+			},
+			XuanDiZhi:function(i){
+				var that=this;
+				that.dizhi=that.dizhilie[i];
+				that.show='';
+				that.shua(that.dizhilie[i].id);
+			},
+			diqu:function(){
+				var $target = $('#J_Address2');
+				$target.citySelect({
+				        provance: '',
+				        city: '',
+				        area: ''
+				});						    
+				$target.citySelect('open');  
+				$target.on('done.ydui.cityselect', function (ret) {
+			        $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+			    });
+			},
+			PeiSong:function(i){
+				this.peisongfangshi=i;
+			},
+			ZiTi:function(){
+				var that=this;
+				this.show='ziti';
+                  $z.post("{php echo UAK('dingdan/querendingdan',array('c'=>'dianpu'))}",function(shu){
+                	if(shu.shi==1){
+                		that.dianpu=shu.shu;
+                	}
+                }); 	
+			},
+			XuanDianPu:function(i){
+				this.xuandianpu=this.dianpu[i];
+				this.show='';
+			},
+			guanzhe:function(){
+				xiaoshi();
+			},
+			kaizhe:function(){
+				chuxian();
+			},
+			quxiao:function(){
+				var that = this;
+				var zhi=parseFloat(that.jia);
+				if(that.dk){
+					zhi =zhi-that.jifendikou;
+				}
+				this.xuanquan='';
+				this.zongjia= zhi.toFixed(2);
+				this.kaiguan=false;
+			},
+			xquan:function(index){
+				var that = this;		  
+			    var zhi = that.jia - that.quan[index].e;
+			    if(that.dk){
+					  zhi =zhi-that.jifendikou;
+				}
+			    
+			    that.zongjia=zhi.toFixed(2);
+			    that.xuanquan=that.quan[index];
+			    that.kaiguan=true;
+			    xiaoshi();
+			},
+			jifendi:function(){
+				var that = this;	
+				that.dk=!that.dk;
+				var zhi=parseFloat(that.jia);
+				if(that.dk){
+					zhi =zhi-that.jifendikou;
+				}
+				if(that.kaiguan){
+					  zhi =zhi-that.xuanquan.e;
+				}
+			   	that.zongjia=zhi.toFixed(2);
+			},
+
+		},
+		beforeCreate:function(){		
+			var that=this;
+			$z.post("{$_W['url']}",function(shu){
+				if(shu.shi==1){
+					that.lie=shu.shu.gouwuchelie;
+					that.dizhi=shu.shu.dizhi;
+					that.zongjia=shu.shu.zongjia.toFixed(2);
+					that.jia=shu.shu.zongjia.toFixed(2);
+					that.yunfei=shu.shu.yunfei;
+					that.zhekou=shu.shu.zhekou;
+					that.huiyuandengji=shu.shu.huiyuandengji;
+					that.form={
+						   ids:shu.shu.ids,
+						   guigeid:shu.shu.guigeid,
+						   shuliang:shu.shu.shuliang
+					 };
+					  that.keyong=shu.shu.keyongquan;
+					 that.quan=shu.shu.quan;
+					  that.quyu=shu.shu.quyu;
+					 that.jifendikou=shu.shu.jifendikou;
+				}else if(shu.shi==-2){
+					$z.go(-1);
+					$z.toast(shu.shu);
+				}else{
+					$z.toast(shu.shu);
+				}
+				$("#qrdd").show();
+			});
+		},
+		
+	})
+	function chuxian() {
+        $(".zw-zhezhao").css("display", "block");
+        $(".zw-xuanzhe").animate({
+            height: '7rem'
+        });
+    }
+
+    function xiaoshi() {
+        $(".zw-xuanzhe").animate({
+            height: '0rem'
+        }, function() {
+            $(".zw-zhezhao").css("display", "none");
+        });
+    }
+</script>
+{mb jiao}

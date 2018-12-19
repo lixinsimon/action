@@ -1,0 +1,141 @@
+<form action="" method="post" class="form-horizontal" role="form">
+	<input type="hidden" name="c" value="fenxiaoshangpost" />
+	<input type="hidden" name="id" value="{$fenxiaoshang['id']}" />
+	<input type="hidden" name="fenxiaoshijian" value="{$fenxiaoshang['fenxiaoshijian']}" />
+  <div class="form-group">
+    <label class="col-xs-12 col-sm-3 col-md-2 control-label">粉丝</label>
+    <div class="col-sm-9 col-xs-12">
+        <img src="{php echo JueDuiUrl($fenxiaoshang['touxiang'])}" class="img-responsive img-thumbnail" width="150">
+             {$fenxiaoshang['nicheng']}             
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">账号</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{$fenxiaoshang['zhanghao']}</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">手机号码</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{$fenxiaoshang['shouji']}</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">开户名</label>
+    <div class="col-sm-10">
+      <input type="text" name="kaihuming" class="form-control" value="{$fenxiaoshang['kaihuming']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">卡号</label>
+    <div class="col-sm-10">
+      <input type="text" name="kahao" class="form-control" value="{$fenxiaoshang['kahao']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">银行</label>
+    <div class="col-sm-10">
+      <select name="yinhang" class="form-control">
+        <option value="">选择银行</option>
+        <option value="中国银行" {if $fenxiaoshang['yinhang']=='中国银行'}selected{/if}>中国银行</option>
+        <option value="中国邮政储蓄银行" {if $fenxiaoshang['yinhang']=='中国邮政储蓄银行'}selected{/if}>中国邮政储蓄银行</option>
+        <option value="中国工商银行" {if $fenxiaoshang['yinhang']=='中国工商银行'}selected{/if}>中国工商银行</option>
+        <option value="中国建设银行" {if $fenxiaoshang['yinhang']=='中国建设银行'}selected{/if}>中国建设银行</option>
+        <option value="中国农业银行" {if $fenxiaoshang['yinhang']=='中国农业银行'}selected{/if}>中国农业银行</option>
+        <option value="招商银行" {if $fenxiaoshang['yinhang']=='招商银行'}selected{/if}>招商银行</option>
+        <option value="华夏银行" {if $fenxiaoshang['yinhang']=='华夏银行'}selected{/if}>华夏银行</option>
+        <option value="其它银行" {if $fenxiaoshang['yinhang']=='其它银行'}selected{/if}>其它银行</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">开户行</label>
+    <div class="col-sm-10">
+      <input type="text" name="kaihuhang" class="form-control" value="{$fenxiaoshang['kaihuhang']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">创客角色</label>
+    <div class="col-sm-10">
+      <select name="fenxiaodengji" class="form-control">
+        <option value="0">尚未获得代理资格</option>
+        {loop $dengjilie $dj}
+        <option value="{$dj['id']}" {if $fenxiaoshang['fenxiaodengji']==$dj['id']}selected{/if}>{$dj['ming']}</option>
+        {/loop}
+      </select>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">余额累积</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{$fenxiaoshang['yongjin']['zong_e']}元</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">可提现余额</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{$fenxiaoshang['yongjin']['ketixian']}元</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">已打款余额</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{$fenxiaoshang['yongjin']['tixian']}元</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">申请提现余额</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{php echo $fenxiaoshang['yongjin']['zong_e']-$fenxiaoshang['yongjin']['ketixian']-$fenxiaoshang['yongjin']['tixian']}元</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">注册时间</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{php echo date('Y-m-d H:i:s',$fenxiaoshang['shijian'])}</div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">成为代理时间</label>
+    <div class="col-sm-10">
+        <div class="form-control-static">{php echo date('Y-m-d H:i:s',$fenxiaoshang['fenxiaoshijian'])}</div>
+    </div>
+  </div>
+
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">审核通过</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="fenxiaozhuangtai" value="1" {if $fenxiaoshang['fenxiaozhuangtai']==1}checked="checked"{/if}>
+          <i></i>是
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="fenxiaozhuangtai" value="0" {if empty($fenxiaoshang['fenxiaozhuangtai'])}checked="checked"{/if}>
+          <i></i>否
+        </label>
+      </div>   
+    </div>
+  </div>  
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-sm padder-lg btn-danger">提交</button>
+      <a href="{php echo UH('fensi/huiyuan',array('bianji'=>'bianji','id'=>$fenxiaoshang['id']))}" class="btn btn-sm padder-lg btn-danger">编辑会员信息</a>
+    </div>
+  </div>
+</form>

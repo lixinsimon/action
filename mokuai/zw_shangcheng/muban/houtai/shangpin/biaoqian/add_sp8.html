@@ -1,0 +1,228 @@
+<style>
+#qu_lie li{ list-style: none;margin-left: -40px;margin-right: 50px; border: 1px solid #003366; color: #FFF;background: #003399; padding: 5px 10px; float: left; margin-bottom: 10px;border-radius: 5px;}
+   #qu_lie li i{ cursor: pointer;}
+</style>
+<!--<div class="form-group">
+  <label class="col-sm-2 control-label">积分抵扣</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <span class="input-group-addon">最多抵扣</span>
+      <input type="text" class="form-control" name="yingxiao[jifen]" value="{$shangpin['yingxiao']['jifen']}">
+      <span class="input-group-addon">积分</span>
+    </div>
+    <label class="checkbox i-checks" style="margin-left:20px;">
+      <input type="checkbox" name="yingxiao['jifen']" ><i></i>允许多件累计抵扣    
+    </label>
+    <span class="help-block m-b-none">如果设置0，则支持全额抵扣。</span>
+  </div>
+</div>-->
+
+<!--<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">单品满件包邮</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <span class="input-group-addon">满</span>
+      <input type="text" class="form-control" name="yingxiao[danpinmanjian]" value="{$shangpin['yingxiao']['danpinmanjian']}">
+      <span class="input-group-addon">件</span>
+    </div>
+    <span class="help-block m-b-none">如果设置0或空，则不支持满件包邮</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">单品满额包邮</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <span class="input-group-addon">满</span>
+      <input type="text" class="form-control" name="yingxiao[danpinman_e]" value="{$shangpin['yingxiao']['danpinman_e']}">
+      <span class="input-group-addon">元</span>
+    </div>
+    <span class="help-block m-b-none">如果设置0或空，则不支持满额包邮</span>
+  </div>
+</div>-->
+<!--<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">配送区域：</label>
+  <div class="col-sm-10">
+  	<ul class="help-block m-b-none" id='qu_lie'>
+  		{if $shangpin['xianzhidiqu_zu']}
+	  		{loop $shangpin['xianzhidiqu_zu']  $zu}
+	  		     {if $zu}
+	  		    <li><span>{$zu}</span> <i onclick="shanchu(this)">x</i></li>
+	  		    {/if}
+	  		{/loop}
+	  	{/if}
+    </ul>
+    <input type="hidden" name="xianzhidiqu" id="xianzhidiqu"  value="{$shangpin['xianzhidiqu']}" />
+    <div class="help-block m-b-none" style="clear: both; margin-top: 10px;">
+    	{php echo DiQu('diqu')}     	
+    </div>
+    <span class="help-block m-b-none"><button type="button" class="btn btn-info padder-lg" id='tianjiadiqu'>添加地区</button></span>
+  </div>
+</div>-->
+
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">满额包邮</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <span class="input-group-addon">满</span>
+      <input type="text" class="form-control" name="yingxiao[danpinman_e]" value="{$shangpin['yingxiao']['danpinman_e']}">
+      <span class="input-group-addon">元</span>
+    </div>
+    <span class="help-block m-b-none">如果设置0或空，则不支持满额包邮</span>
+  </div>
+</div>
+
+
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">运费设置</label>
+  <div class="col-sm-10">
+    <div class="radio-inline" style="float:left;">
+      <label>
+        <i></i>偏远区运费模板
+      </label>
+    </div>
+    {php  $kuaidi=MX()->KuaiDiLei();}
+    <div style="width:auto;float:left;margin-left:10px;">
+      <select name="yingxiao[pianyuan]" class="form-control">      
+        <option value="0">默认包邮</option> 
+        {loop $kuaidi $k} 
+        <option value="{$k['id']}" {if $k['id']==$shangpin['yingxiao']['pianyuan']}selected="selected"{/if} >{$k['ming']}</option>
+        {/loop}  
+      </select>
+    </div>
+     <div class="radio-inline" style="float:left;">
+      <label>
+        <i></i>常规区运费模板
+      </label>
+    </div>
+    <div style="width:auto;float:left;margin-left:10px;">
+      <select name="yingxiao[changgui]" class="form-control">      
+        <option value="0">默认包邮</option> 
+        {loop $kuaidi $k} 
+        <option value="{$k['id']}" {if $k['id']==$shangpin['yingxiao']['changgui']}selected="selected"{/if} >{$k['ming']}</option>
+        {/loop}  
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+	<label class="col-xs-12 col-sm-3 col-md-2 control-label">选定偏远区</label>
+	<div class="col-sm-9 col-xs-12" id='quyu'>
+	
+	
+	</div>
+</div>
+
+
+
+<div class="form-group">
+  <div class="col-sm-4 col-sm-offset-2">
+    <button type="submit" class="btn btn-danger padder-lg">提交</button>
+  </div>
+</div>
+<!--<script>
+	$('#tianjiadiqu').click(function(){
+		  var sheng=$('.tpl-province').val();
+		  var shi=$('.tpl-city').val();
+		  var qu=$('.tpl-district').val();
+		  
+		  if(!sheng){
+		  	 alert('请选择省');	
+		  	 return false;
+		  }
+		  if(!shi){
+		  	 alert('请选择市');	
+		  	 return false;
+		  }
+		  if(!qu){
+		  	 alert('区/县不能为空');	
+		  	 return false;
+		  }
+		  var l=$('#qu_lie li').length;
+		  var c=false;
+		  var v='';
+		  for(var i=0;i<l;i++){
+		  	 var t=$('#qu_lie li span').eq(i).text();
+		  	 if(t==(shi+qu)){		  	 	  
+		  	 	  c=true;
+		  	 	  break;
+		  	 }
+		  	 v+='|'+t;
+		  }
+		  if(c){
+		  	 alert(qu+'已存在');
+		  	 return false;
+		  }else{	
+		  	v+='|'+shi+qu;
+		  	$('#xianzhidiqu').val(v);
+		  	var html='<li><span>'+shi+qu+'</span> <i onclick="shanchu(this)">x</i></li>';
+		    $('#qu_lie').append(html);
+		  }
+		  
+		
+	});
+	function shanchu(e){			
+		   $(e).parent().remove();
+		 	 var l=$('#qu_lie li').length;			
+			  var v='';
+			  for(var i=0;i<l;i++){			   	
+			  	 v+='|'+$('#qu_lie li span').eq(i).text();
+			  }
+			  $('#xianzhidiqu').val(v);
+	}
+
+	
+</script>-->
+<script src="{$_W['yuming']}gongyong/js/diqu.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+		for(let i = 0, l = citys.length; i < l; i++) {
+//			$('#quyu').append('<div class="radio-inline  col-sm-12" style="float:left;font-weight:bold"><label><i></i>'+citys[i].n+'</label></div>');
+			
+			var h='<label style="float:left;font-size:20px;margin-left:0"  class="checkbox-inline  col-sm-12" ><input type="checkbox" style="margin-top:8px" class="xuanqu"  name="'+citys[i].n+'"/>'+ citys[i].n+'</label>'
+			$('#quyu').append(h);
+			
+			
+			for(let a = 0, h = citys[i].c.length; a < h; a++) {
+				var html='<label style="float:left;font-size:15px"  class="checkbox-inline"><input data="'+citys[i].n+'"  type="checkbox" id="hasoption" value="'+citys[i].n+' '+citys[i].c[a].n+'" name="yingxiao[diqu][]" />'+ citys[i].c[a].n+'</label>';
+				$('#quyu').append(html);
+			}
+		}
+		
+		 $.post('{php echo UHK("shangpin",array("c"=>"diqu"))}',{'id':'{$shangpin["id"]}'},function(data){
+   			 data=$.parseJSON(data);
+   			 
+   			var dd=data.shu.diqu;
+   			for(var a=0;a<dd.length;a++){
+				$('input[value="'+dd[a]+'"]').attr('checked','checked');
+			}
+    })
+		
+		$('.xuanqu').change(function(){
+			var sheng=$(this).attr('name');
+		
+			if($(this).is(':checked')){
+				$('input[data="'+sheng+'"]').each(function(){
+                    $(this).prop({"checked":true});
+                });
+//				$('input[data-sheng="'+sheng+'"]').attr('checked','checked');
+			}else{
+				$('input[data="'+sheng+'"]').each(function(){
+                    $(this).prop({"checked":false});
+                });
+//				$('input[data-sheng="'+sheng+'"]').removeAttr("checked");
+			}
+			
+		})
+		
+		 
+		 
+		
+	});
+</script>

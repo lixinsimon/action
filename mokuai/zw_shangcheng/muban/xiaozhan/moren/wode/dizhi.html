@@ -1,0 +1,152 @@
+{mb 'tou'}
+<style type="text/css">
+	.caozhuo{
+		width: 5%;
+		float: left;
+		margin: 0px 5%;
+		line-height: 1rem;
+		
+	}
+	
+</style>
+<div id="shoudi" style="display: none;">
+
+	<div id="shoudi1" v-if="!show">
+		<header class="m-navbar">
+			<a onclick="$z.go()" class="navbar-item" ><i class="back-ico"></i></a>
+			<div class="navbar-center">收货地址</div>
+		</header>
+		<div class="xzdz" v-for="(d,index) in lie" style="padding-bottom: 0px;">
+			<div class="shouhuo">
+				<h3>收货人：{{d.ming}}</h3>
+				<h4>{{d.dianhua}}</h4>
+			</div>
+			<div class="sz-dizhi-x" style="height: .6rem;border-bottom:1px solid #E6E6E6 ;">
+				地址：{{d.shengshiqu}}{{d.dizhi}}
+			</div>
+			<span class="cell-left caozhuo" style="font-size: .26rem;" @click="TianJia(index)" >编辑</span>
+		    <span class="cell-left caozhuo" style="margin-left: .3rem;font-size: .26rem;" @click="ShanChu(d.id)">删除</span>
+			<label class="cell-item" >
+		       
+		        <span class="cell-right" v-if='d.moren'>设置默认
+		        	<input type="radio"  ref='input' name="uu"  v-if='d.moren==1' checked="checked"/>
+		        	<input type="radio"  ref='input' name="uu"  @click="SheZhiMoRen(d.id)" v-else/>		
+		        	<i class="cell-radio-icon"></i>
+		        </span>
+		        
+			</label>
+		</div>
+		<button type="submit" class="btn-block btn-danger" @click="TianJia">添加新地址</button>
+	</div>
+
+	<div id="shoudi2" v-if="show">
+		<header class="m-navbar">
+			<a class="navbar-item" @click="FanHui"><i class="back-ico"></i></a>
+			<div class="navbar-center">增加新地址</div>
+		</header>
+		<div class="m-cell dz-lie">
+			<div class="cell-item">
+				<div class="cell-left">收货人</div>
+				<div class="cell-right"><input type="text" :value="shu.ming" ref='ming'  class="cell-input" placeholder="请输入收货人姓名" /></div>
+			</div>
+			<div class="cell-item">
+				<div class="cell-left">联系电话</div>
+				<div class="cell-right"><input type="text" :value="shu.dianhua" ref='dianhua' class="cell-input" placeholder="请输入联系电话" /></div>
+			</div>
+			<a class="cell-item">
+				<div class="cell-left">所在地区</div>
+				<div class="cell-right"><input class="cell-input" :value="shu.shengshiqu" ref='shengshiqu' type="text" @click="diqu" readonly id="J_Address2" placeholder="请选择收货地址" value="湖南 长沙市 天心区"></div>
+			</a>
+			<div class="cell-item">
+				<div class="cell-left">详细地址</div>
+				<div class="cell-right"><input type="text" :value="shu.dizhi" ref='dizhi' class="cell-input" placeholder="请输入详细地址" /></div>
+			</div>
+		</div>
+		<button type="button" class="btn-block btn-danger" @click="TiJiao(shu.index)"  :value="shu.id" ref='id'>保存</button>
+	</div>
+
+</div>
+{mb js}
+<script src="http://static.ydcss.com/uploads/ydui/ydui.citys.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el: "#shoudi",
+		data: {
+			show: '',
+			lie: [],		
+			shu: "",
+		},
+		methods: {
+			FanHui: function() {
+				this.show='';
+			},
+			TiJiao: function(index) {
+				var that=this;
+				this.form={};
+				this.form.ming=this.$refs.ming.value;
+				this.form.dianhua=this.$refs.dianhua.value;
+				this.form.shengshiqu=this.$refs.shengshiqu.value;
+				this.form.dizhi=this.$refs.dizhi.value;
+				this.form.id=this.$refs.id.value;				
+				 $z.post("{php echo UXK('wode/dizhi',array('c'=>'post'))}",this.form,function(shu){
+				 	if(shu.shi==1){
+				 	    that.ShuaXin();							 	
+				 		that.show='';
+				 	}else{
+				 		$z.toast(shu.shu);
+				 	}
+				 });
+			},
+			TianJia: function(index) {
+				 if(index>=0){
+				 	this.shu=this.lie[index];				 	
+				 }else{
+				 	this.shu=[];
+				 }
+			     this.show=true;
+			    
+			},
+			diqu: function() {
+				var $target = $('#J_Address2');
+				$target.citySelect({
+					provance: '湖南',
+					city: '长沙市',
+					area: '天心区'
+				});
+				$target.citySelect('open');
+				$target.on('done.ydui.cityselect', function(ret) {
+					$(this).val(ret.provance + ' ' + ret.city + '' + ret.area);
+				});
+			},		
+			ShuaXin:function(){
+				var that=this;
+				$z.post('{$_W["url"]}',function(s){
+					that.lie=s.shu;				
+				});
+			},
+			
+			ShanChu:function(index){
+				var that=this;
+				$z.post('{$_W["url"]}',{id:index,c:'shanchu'},function(s){
+					 that.ShuaXin();
+				});
+			},
+			SheZhiMoRen:function(id){
+				var that=this;
+				$z.post('{$_W["url"]}',{id:id,c:'shezhimoren'},function(s){
+					 that.ShuaXin();
+				});
+			}
+		},
+		beforeCreate:function(){
+			var that=this;
+			$z.post('{$_W["url"]}',function(s){
+				that.lie=s.shu;
+				$("#shoudi").show();
+			});
+		},
+		
+		
+	})
+</script>
+{mb jiao}

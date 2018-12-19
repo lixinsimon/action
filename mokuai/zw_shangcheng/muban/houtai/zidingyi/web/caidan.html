@@ -1,0 +1,36 @@
+
+<div id="caidan"  :class="[shu.{$k}.lie>0 ? 'zw-fenlei'+shu.{$k}.lie : 'zw-fenlei5' ]" >
+	<div v-for="(item,index) in shu.{$k}.fenlei" class="zw-fenlei-k" > 
+		<a @click="DaKai(item.url)" >
+			<div class="zw-fenlei-zi zw-shenglue">{{item.ming}}</div>
+			<div class="candan_i">
+				<img class="caidan_img"  :src="item.tu" />
+			</div> 
+		</a>
+	</div>	
+</div>
+
+
+
+
+
+
+
+
+<script>
+	
+	var changdu = $('.zw-fenlei-k').length;
+	
+	if(changdu>10){
+		
+		$('.zw-fenlei-k').on('');
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+</script>

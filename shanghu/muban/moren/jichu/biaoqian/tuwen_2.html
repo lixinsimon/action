@@ -1,0 +1,317 @@
+<style type="text/css">
+.paner-hidden {
+    display: none;
+}
+/*.reply .panel-group .panel+.panel {
+    border-radius: 0;
+    margin-top: 0;
+    border-top: 0;
+}*/
+</style>
+<!-- 添加基本混合图文回复 -->
+<form  method="post">
+<input type='hidden' name='id' value="{$tw['id']}">
+<input type='hidden' name='c' value='post'>
+<section class="panel panel-default">
+    <header class="panel-heading">
+        添加回复规则
+    </header>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">回复规则名称</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input" name="ming" value="{$tw['ming']}" placeholder="请输入回复规则的名称" data-required="true">
+                <span class="help-block m-b-sm">您可以给这条规则起一个名字, 方便下次修改和查看.</span>
+                <div class="alert alert-danger m-b-none inline wrapper-xs padder">
+                    选择高级设置: 将会提供一系列的高级选项供专业用户使用.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <div class="checkbox i-checks">
+                    <label>
+                        <input type="checkbox" id="gaoji" name="" onClick="check()"><i></i> 高级设置
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="hide_block">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10">
+                    <div class="radio-inline i-checks">
+                        <label>
+                            <input type="radio" name="zhuangtai" value="1" checked="checked">
+                            <i></i>启用
+                        </label>
+                    </div>
+                    <div class="radio-inline i-checks">
+                        <label>
+                            <input type="radio" name="zhuangtai" value="0">
+                            <i></i>禁用
+                        </label>
+                    </div>
+                    <span class="help-block m-b-sm">您可以临时禁用这条回复.</span>
+                </div>
+            </div>          
+            <div class="line line-dashed b-b line-lg"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">触发关键字</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="ci" placeholder="请输入触发关键字" value="{$tw['ci']}" data-required="true">
+                <span class="help-block m-b-sm">您可以给这条规则起一个名字, 方便下次修改和查看. </span>
+                <div class="alert alert-danger m-b-none inline wrapper-xs padder">
+                    选择高级触发: 将会提供一系列的高级触发方式供专业用户使用(注意: 如果你不了解, 请不要使用).
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="panel panel-default">
+    <header class="panel-heading">
+        回复内容
+    </header>
+    <div class="panel-body  c-wechat-reply">      
+            <div class="row clearfix reply">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 panel-group c-wechat-reply-left">
+                    {if $wz}
+                    {loop $wz $k $w}
+                    {if empty($k)}
+                    <div class="panel panel-default border-11a068 c-wechat-meti">                 
+                        <div class="panel-body">
+                            <div class="img">
+                                <i class="default">封面图片</i>
+                                <img src="{php echo JueDuiUrl($w['suoluetu'])}">
+                                <span class="text-left c-wechat-biaoti">{$w['biaoti']}</span>
+                                <input type="hidden" name='ids[]'  class='ids' value='{$w["id"]}'/>
+                                <div class="mask">
+                                    <a href="javascript:void(0)" class="item-import"><i class="fa fa-book"></i>导入文章</a>
+                                   
+                                    <a href="javascript:void(0)" class="item-delete"><i class="fa fa-times"></i>删除</a>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     {else}
+                     <div class="panel panel-default border-11a068 c-wechat-meti">         
+                        <div class="panel-body">
+                            <div class="text">
+                                <h4 class="c-wechat-biaoti">{$w['biaoti']}</h4>
+                                <input type="hidden" name='ids[]'  class='ids' value='{$w["id"]}'/>
+                            </div>
+                            <div class="img">
+                                <img src="{php echo JueDuiUrl($w['suoluetu'])}">
+                                <i class="default">缩略图</i>
+                            </div>
+                            <div class="mask">
+                                <a href="javascript:void(0)" class="item-import"><i class="fa fa-book"></i>导入文章</a>
+                             
+                                <a href="javascript:void(0)" class="item-delete"><i class="fa fa-times"></i>删除</a>
+                            </div>
+                        </div>
+                    </div>
+                     {/if}
+                     {/loop} 
+                     {else}   
+                     <div class="panel panel-default border-11a068 c-wechat-meti">
+                        <div class="panel-body">
+                            <div class="img">
+                                <i class="default">封面图片</i>
+                                <img src="">
+                                <span class="text-left c-wechat-biaoti"></span>
+                                <input type="hidden" name='ids[]'  class='ids'/>
+                                <div class="mask">
+                                    <a href="javascript:void(0)" class="item-import"><i class="fa fa-book"></i>导入文章</a>
+                
+                                    <a href="javascript:void(0)" class="item-delete"><i class="fa fa-times"></i>删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/if}                     
+                   
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="add"><span><i class="fa fa-plus"></i> 添加</span></div>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+       
+    </div>
+</section>
+<div class="form-group">
+    <div class="col-sm-4">
+        <button type="submit" class="btn btn-danger">提交</button>
+    </div>
+</div>
+</form>
+<style type="text/css">
+    .reply .panel-group .c-wechat-meti.panel:first-child .img span{ border-color: rgba(0,0,0,0.7); }
+    .reply .panel-group .panel+.panel.border-11a068{ border-top: 1px solid; border-radius: 0; margin-top: -1px; }
+    
+    .reply .panel-group .panel-body .mask a.item-import:hover,
+    .reply .panel-group .panel-body .mask a.item-edit:hover,
+    .reply .panel-group .panel-body .mask a.item-delete:hover{ color: #11a068; }
+    .c-wechat-item:nth-child(2){margin-top:192px;}
+    .c-wechat-item:nth-child(3){margin-top:296px;}
+    .c-wechat-item:nth-child(4){margin-top:401px;}
+    .c-wechat-item:nth-child(5){margin-top:506px;}
+    .c-wechat-item:nth-child(6){margin-top:611px;}
+    .c-wechat-item:nth-child(7){margin-top:716px;}
+    .c-wechat-item:nth-child(8){margin-top:821px;}
+    .c-wechat-item:nth-child(9){margin-top:926px;}
+    .c-wechat-item:nth-child(10){margin-top:1031px;}
+    .reply .arrow-left,
+    .reply .arrow-left:after {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 10px 8px 0;
+        border-color: transparent #11a068 transparent transparent;
+        position: absolute;
+        left: -10px;
+        top: 15px;
+    }
+    .reply .arrow-left:after {
+        content: "";
+        border-right-color: #fff;
+        left: 1px;
+        top: -8px;
+    }
+</style>
+<code id="wechat-reply-dom" style="display: none;">
+    <section target="left">
+        <!-- 布局左侧块儿 -->
+        <div class="panel panel-default border-11a068 c-wechat-meti">         
+            <div class="panel-body">
+                <div class="text">
+                    <h4 class="c-wechat-biaoti"></h4>
+                    <input type="hidden" name='ids[]'  class='ids'/>
+                </div>
+                <div class="img">
+                    <img src="">
+                    <i class="default">缩略图</i>
+                </div>
+                <div class="mask">
+                    <a href="javascript:void(0)" class="item-import"><i class="fa fa-book"></i>导入文章</a>
+                   
+                    <a href="javascript:void(0)" class="item-delete"><i class="fa fa-times"></i>删除</a>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+</code>
+
+<script type="text/javascript">
+ var _this;
+function xuanze(id,e){
+       var img=$(e).eq(0).prevAll().find('img').attr('src');
+       var biaoti=$(e).prevAll().eq(1).html();      
+       $(_this).find('img').attr('src',img);
+       $(_this).find('.c-wechat-biaoti').text(biaoti);
+       $(_this).find('.ids').val(id);
+    }
+(function($){
+
+    $.fn.cWechatReply = function(){
+        var dom = $("#wechat-reply-dom");
+        var itemNum = 8; //可以添加的个数，结构样式: ".c-wechat-item:nth-child(2){margin-top:192px;}"
+        return this.each(function(){
+            var left = $(this).find(".c-wechat-reply-left"),              
+                right = $(this).find(".c-wechat-reply-right");
+            // 添加
+            left.on("click", ".add", function(){
+                left.children("div").removeClass("border-11a068");
+                left.children("div:last-child").before(dom.children("[target=left]").html());     
+                if(left.children(".c-wechat-meti").length == itemNum){
+                    left.children("div:last-child").hide();
+                }
+            });
+            // 删除
+            left.on("click", ".item-delete", function(){
+                var $this = $(this);
+                if($this.closest(".c-wechat-reply-left").children(".c-wechat-meti").length == 1){
+                    alert("最少保留一项");
+                    return false;
+                }
+                var $closest = $this.closest(".c-wechat-meti");
+                var i = $closest.index();               
+                $this.closest(".c-wechat-meti").remove();
+                left.children(".c-wechat-meti").removeClass("border-11a068");
+                left.children(".c-wechat-meti").eq(0).addClass("border-11a068");
+                if(left.children("div:last-child").is(":hidden")){
+                    left.children("div:last-child").show();
+                }
+            });          
+           
+            //导入文章
+            left.on("click", ".item-import", function(){ 
+                _this=$(this).parent().parent();
+                wenzhanglie('?d={$_W["danyuan"]}&k=jichu&x=tuwen&c=daoru');
+                $("#import-art").modal("show");
+            });     
+
+        });
+         
+    };   
+    $(".c-wechat-reply").cWechatReply();
+    var z=0;
+    function wenzhanglie(url){ 
+        if(z){
+            return false;
+        }
+        z=1;     
+        $.post("{$_W['yuming']}houtai/index.php"+url,function(shu){
+              z=0;
+              if(shu.shi==1){                       
+                  $('#wenzhanglie').html(shu.shu.lie);
+                  $('#fenye').html(shu.shu.fenye);
+                  $('#fenye').on('click','a',function(){                               
+                    wenzhanglie($(this).attr('href'));
+                    return false;
+                 });
+              }
+        },'json');
+    }   
+})(jQuery);
+</script>
+
+<link rel="stylesheet" href="{$_W['yuming']}gongyong/js/datatables/datatables.1.10.13.css" type="text/css"/>
+<script src="{$_W['yuming']}gongyong/js/datatables/jquery.dataTables.1.10.13.js"></script>
+
+<div class="modal fade " id="import-art">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                <h4 class="modal-title">文章列表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped m-b-none" data-ride="datatables">
+                        <thead>
+                            <tr>
+                                <th style="width:7%">封面</th>
+                                <th>标题</th>
+                                <th style="width:25%">时间</th>
+                                <th style="width:15%">操作</th>                               
+                            </tr>
+                        </thead>
+                        <tbody id='wenzhanglie'></tbody>
+                    </table>
+                    <div id='fenye'></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>        
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+

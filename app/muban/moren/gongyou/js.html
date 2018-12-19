@@ -1,0 +1,30 @@
+<script src="https://banma.zhiwi.cn/gongyong/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://banma.zhiwi.cn/gongyong/js/ydui.flexible.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://banma.zhiwi.cn/gongyong/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://banma.zhiwi.cn/gongyong/js/ydui.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script src="https://banma.zhiwi.cn/gongyong/js/zhiwei.js" type="text/javascript" charset="utf-8"></script>
+<script>	
+	 $z.post('{php echo UA("gongyou/fenxiang")}',{fxurl:'{$_W["url"]}'},function(shu){    	
+    	if(shu.shi==1){    		
+    		wx.config({
+		        debug: false,
+		        appId: shu.shu.appId,
+		        timestamp: shu.shu.timestamp,
+		        nonceStr: shu.shu.nonceStr,
+		        signature: shu.shu.signature,
+		        jsApiList: [
+		            // 所有要调用的 API 都要加到这个列表中
+		            'checkJsApi',
+		            'openLocation',
+		            'getLocation',
+		            'onMenuShareTimeline',
+		            'onMenuShareAppMessage'
+		          ]
+		    });
+    	}
+    	
+    	
+    })
+    
+</script>

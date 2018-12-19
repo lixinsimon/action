@@ -1,0 +1,289 @@
+<style>
+	.shuxing{position:relative;}
+	.shuxing input{width:100%;position:absolute;top:0px;left:0px;opacity:0;height: 100%;margin: 0px;}
+</style>
+<div class="form-group">
+  <label class="col-sm-2 control-label">排序</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" name="shunxu" value="{$shangpin['shunxu']}">
+    <span class="help-block m-b-none">数字越大，排名越靠前,如果为空，默认排序方式为创建时间</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"><span style="color:red">*</span>商品名称</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" name="ming" value="{$shangpin['ming']}">
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"><span style="color:red">*</span>分类</label>
+  {php echo FenLeiXiaLaLieBiao($feileilie,$shangpin['fenlei_yiji'],$shangpin['fenlei_erji'])}
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">商品类型</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="leixing" value="1" {if $shangpin['leixing']==1}checked{/if}>
+        <i></i>实体商品 
+      </label>
+    </div>
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="leixing" value="2" {if $shangpin['leixing']==2}checked{/if}>
+        <i></i>虚拟商品
+      </label>
+    </div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">商品单位</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" name="danwei" value="{$shangpin['danwei']}">
+        <span class="input-group-addon">个</span>
+    </div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">商品属性</label>
+  <div class="col-sm-10">    
+  	<a class="btn shuxing btn-sm m-b-xs {if $shangpin['xinpin']}btn-success active{else}btn-dark{/if}">
+    	<input type="checkbox" name="xinpin"  value="1" {if $shangpin['xinpin']}checked="checked"{/if}>新品
+     </a>      
+    <a class="btn shuxing btn-sm m-b-xs {if $shangpin['remai']}btn-success active{else}btn-dark{/if}">
+    	 <input type="checkbox" name="remai"   value="1" {if $shangpin['remai']}checked="checked"{/if}>热卖
+    </a>
+    <a class="btn shuxing btn-sm m-b-xs {if $shangpin['tuijian']}btn-success active{else}btn-dark{/if}">
+    	<input type="checkbox" name="tuijian" value="1"  {if $shangpin['tuijian']}checked="checked"{/if}>推荐
+    </a>
+    <a class="btn shuxing btn-sm m-b-xs {if $shangpin['cuxiao']}btn-success active{else}btn-dark{/if}" >
+    	<input type="checkbox" name="cuxiao"  value="1" {if $shangpin['cuxiao']}checked="checked"{/if}>促销
+    </a>
+    <a class="btn shuxing btn-sm m-b-xs {if $shangpin['baoyou']}btn-success active{else}btn-dark{/if}">
+    	<input type="checkbox" name="baoyou"  value="1" {if $shangpin['baoyou']}checked="checked"{/if}>包邮
+    </a>
+    <a class="btn shuxing btn-sm m-b-xs {if $shangpin['miaosha']}btn-success active{else}btn-dark{/if}" >
+    	<input type="checkbox" name="miaosha" value="1" {if $shangpin['miaosha']}checked="checked"{/if}>秒杀
+    </a>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">秒杀时间</label>
+   <div class="col-sm-5">
+     {php echo RiQi('kaishi',$shangpin['kaishishijian'],1)}
+  </div>
+  <div class="col-sm-5">
+     {php echo RiQi('jieshu',$shangpin['jieshushijian'],1)}
+  </div> 
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">商品图片</label>
+  <div class="col-sm-10">
+    {php echo ShangTu('tu',$shangpin['tu'])}
+    <span class="help-block m-b-none">建议尺寸: 640 * 640 ，或正方型图片</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">细节图片</label>
+  <div class="col-sm-10">
+    {php echo ShangDuoTu('xijietu',$shangpin['xijietu'])}
+    <span class="help-block m-b-none">建议尺寸: 640 * 640 ，或正方型图片</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">商品价格</label>
+  <div class="col-sm-10">
+    <div class="input-group m-b">
+      <span class="input-group-addon">现价</span>
+      <input type="text" class="form-control" name="jiage" value="{$shangpin['jiage']}">
+      <span class="input-group-addon">元</span>
+    </div>
+    <div class="input-group m-b">
+      <span class="input-group-addon">原价</span>
+      <input type="text" class="form-control" name="yuanjia" value="{$shangpin['yuanjia']}">
+      <span class="input-group-addon">元</span>
+    </div>
+    <div class="input-group m-b">
+      <span class="input-group-addon">VIP价</span>
+      <input type="text" class="form-control" name="chengben" value="{$shangpin['chengben']}">
+      <span class="input-group-addon">元</span>
+    </div>
+    <span class="help-block m-b-none">尽量填写完整，有助于于商品销售的数据分析</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">重量</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" name="zhongliang" value="{$shangpin['zhongliang']}">
+      <span class="input-group-addon">克</span>
+    </div>
+    <span class="help-block m-b-none">商品重量设置空或0，则为包邮，如启用多规格，多规格内也需进行设置</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">库存</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" name="kucun" value="{$shangpin['kucun']}">
+      <span class="input-group-addon">件</span>
+    </div>
+    <span class="help-block m-b-none">商品的剩余数量, 如启用多规格或为虚拟卡密产品，则此处设置无效，请移至“商品规格”或“虚拟物品插件”中设置</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">减库存方式</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="jiankucun" value="1" {if $shangpin['jiankucun']==1}checked{/if}>
+        <i></i>拍下减库存  
+      </label>
+    </div>
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="jiankucun" value="2" {if $shangpin['jiankucun']==2}checked{/if}>
+        <i></i>付款减库存
+      </label>
+    </div>
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="jiankucun" value="3" {if $shangpin['jiankucun']==3}checked{/if}>
+        <i></i>永不减库存
+      </label>
+    </div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">单次最多购买量</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" name="yicizuiduomai" value="{$shangpin['yicizuiduomai']}">
+      <span class="input-group-addon">件</span>
+    </div>
+    <span class="help-block m-b-none">用户单次购买此商品数量限制</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">用户最多购买量</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" name="zuiduomai" value="{$shangpin['zuiduomai']}">
+      <span class="input-group-addon">件</span>
+    </div>
+    <span class="help-block m-b-none">用户购买过的此商品数量限制</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">已出售数</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control"  name="chushoushu" value="{$shangpin['chushoushu']}">
+      <span class="input-group-addon">件</span>
+    </div>
+    <span class="help-block m-b-none">物品虚拟出售数，会员下单此数据就增加, 无论是否支付</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">赠送积分</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" name="jifen" value="{$shangpin['jifen']}">
+      <span class="input-group-addon">分</span>
+    </div>
+    <span class="help-block m-b-none">会员购物赠送的积分, 如果不填写或填写0，则默认为不赠送积分。</span>
+  </div>
+</div><div class="line line-dashed b-b line-lg"></div><div class="form-group">  <label class="col-sm-2 control-label">赠送余额</label>  <div class="col-sm-10">    <div class="input-group">      <input type="text" class="form-control" name="yu_e" value="{$shangpin['yu_e']}">      <span class="input-group-addon">元</span>    </div>    <span class="help-block m-b-none">购买商品送余额，默认为0或空不送</span>  </div></div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">运费设置</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks" style="float:left;">
+      <label>
+        <input type="radio" name="yunfeishezhi" value="0" {if empty($shangpin['yunfeishezhi'])}checked{/if}>
+        <i></i>统一邮费  
+      </label>
+    </div>
+    <div style="display:inline-block;width:180px;float:left;margin:0px 20px 0px 10px;">
+      <div class="input-group">
+        <input type="text" class="form-control" name="kuaidifei"  value="{$shangpin['kuaidifei']}">
+        <span class="input-group-addon">元</span>
+      </div>
+    </div>
+    <div class="radio-inline i-checks m-l-lg" style="float:left;">
+      <label>
+        <input type="radio" name="yunfeishezhi" value="1" {if $shangpin['yunfeishezhi']>0}checked{/if}>
+        <i></i>运费模板
+      </label>
+    </div>
+    {php  $kuaidi=MX()->KuaiDiLei();}
+    <div style="width:auto;float:left;margin-left:10px;">
+      <select name="kuaidi" class="form-control">      
+        <option value="0">默认模板</option> 
+        {loop $kuaidi $k} 
+        <option value="{$k['id']}" {if $k['id']==$shangpin['kuaidi']}selected="selected"{/if} >{$k['ming']}</option>
+        {/loop}  
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-sm-2 control-label">是否余额支付</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="yu_e_zhifu" value="0" {if empty($shangpin['yu_e_zhifu'])}checked{/if}>
+        <i></i>支持  
+      </label>
+    </div>
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="yu_e_zhifu" value="1" {if !empty($shangpin['yu_e_zhifu'])}checked{/if}>
+        <i></i>不支持
+      </label>
+    </div>
+  </div>
+</div>
+<!--<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">是否上架</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="zhuangtai" value="1" {if !empty($shangpin['zhuangtai'])}checked{/if}>
+        <i></i>是  
+      </label>
+    </div>
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="zhuangtai" value="0" {if empty($shangpin['zhuangtai'])}checked{/if}>
+        <i></i>否
+      </label>
+    </div>
+  </div>
+</div>-->
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <div class="col-sm-4 col-sm-offset-2">
+    <button type="submit" class="btn btn-danger padder-lg">提交</button>
+  </div>
+</div>
+

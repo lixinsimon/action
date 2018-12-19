@@ -1,0 +1,37 @@
+<div class="table-responsive m-t-md" style="overflow:visible;">
+    <table class="table table-striped b-light">
+        <thead>
+            <tr>
+                <th width="4%">ID</th>
+                <th width="15%">标题</th>
+                <th width="10%">最低起投(元)</th>
+				<th width="10%">期限（天）</th>
+			 
+                <th width="10%">总资金(元)</th>                
+                <th width="20%">创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop $lie $l}
+            <tr>
+                <td style="vertical-align:middle;">{$l['id']}</td>
+                <td style="vertical-align:middle;">{$l['biaoti']}</td>				
+                 <td style="vertical-align:middle;">{$l['qitou']}</td>
+				 <td style="vertical-align:middle;">{$l['tian']}</td>
+				 
+                <td style="vertical-align:middle;">{$l['zonge']}</td>
+               
+                <td style="vertical-align:middle;">{php echo date('Y-m-d H:i:s',$l['shijian'])}</td>
+                <td style="vertical-align:middle;overflow:visible;">                   
+                    <a class="btn btn-default btn-sm" href="{php echo UHK('jiesuanbao',array('c'=>'bianji','id'=>$l['id']))}" title="编辑"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-default  btn-sm" href="{php echo UHK('jiesuanbao',array('c'=>'shanchu','id'=>$l['id']))}" title="删除" onclick="return confirm('确认删除？');"><i class="fa fa-remove"></i></a>
+                </td>
+            </tr>
+            {/loop}
+        </tbody>
+    </table>
+</div>
+<div class="text-left">
+    {$fenye}
+</div>

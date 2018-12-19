@@ -1,0 +1,63 @@
+<ul class="nav nav-tabs nav-tabs-two m-t-sm">
+  <li class="active"><a href="#shezhi1" data-toggle="tab" style="padding:0 40px;margin-bottom:15px;">积分日志</a></li>
+  <!--<li><a href="#shezhi2" data-toggle="tab" id="yu_e_click" style="padding:0px 40px;margin-bottom:15px;">余额日志</a></li>-->
+  <li><a href="#shezhi3" data-toggle="tab" id="denglu_click" style="padding:0px 40px;margin-bottom:15px;">登录记录</a></li>
+  <li><a href="#shezhi4" data-toggle="tab" id="yongjin_click" style="padding:0px 40px;margin-bottom:15px;">余额日志</a></li>
+  <li><a href="#shezhi5" data-toggle="tab" id="xunzhang_click" style="padding:0px 40px;margin-bottom:15px;">勋章日志</a></li>
+  <li><a href="#shezhi6" data-toggle="tab" id="liquan_click" style="padding:0px 40px;margin-bottom:15px;">礼券日志</a></li>
+</ul>
+<div class="panel-body" style="padding:15px 0px;">
+  <div class="tab-content">              
+    <div class="tab-pane fade active in" id="shezhi1">
+      {mb "biaoqian/rizhi_jifen"}
+    </div>
+    <div class="tab-pane fade" id="shezhi2">
+      
+    </div>
+    <div class="tab-pane fade" id="shezhi3">
+      
+    </div>
+     <div class="tab-pane fade" id="shezhi4">
+      
+    </div>
+     <div class="tab-pane fade" id="shezhi5">
+      
+    </div>
+     <div class="tab-pane fade" id="shezhi6">
+      
+    </div>
+  </div>
+</div>
+<script>
+	$('#yu_e_click').click(function(){
+		  var url2='{php echo UH("fensi/rizhi",array("c"=>"yu_e","id"=>$_J["id"]))}';		 
+		  $.post(url2,{},function(data){
+         $("#shezhi2").html(data);
+      })
+	});
+	$('#denglu_click').click(function(){
+		  var url2='{php echo UH("fensi/rizhi",array("c"=>"denglu","id"=>$_J["id"]))}';		 
+		  $.post(url2,{},function(data){
+         $("#shezhi3").html(data);
+      })
+	});
+		$('#yongjin_click').click(function(){
+		  var url2='{php echo UH("fensi/rizhi",array("c"=>"yongjin","id"=>$_J["id"]))}';		 
+		  $.post(url2,{},function(data){
+         $("#shezhi4").html(data);
+      })
+	});
+	
+		$('#xunzhang_click').click(function(){
+		  var url2='{php echo UH("fensi/rizhi",array("c"=>"xunzhang","id"=>$_J["id"]))}';		 
+		  $.post(url2,{},function(data){
+         $("#shezhi5").html(data);
+      })
+	});
+		$('#liquan_click').click(function(){
+		  var url2='{php echo UH("fensi/rizhi",array("c"=>"liquan","id"=>$_J["id"]))}';		 
+		  $.post(url2,{},function(data){
+         $("#shezhi6").html(data);
+      })
+	});
+</script>

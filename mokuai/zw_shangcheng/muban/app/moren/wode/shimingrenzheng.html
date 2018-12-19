@@ -1,0 +1,130 @@
+{mb tou}
+<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />
+<style type="text/css">
+	/*修改提示文字的颜色*/
+	input::-webkit-input-placeholder { /* WebKit browsers */ 
+		color: #999999; 
+	} 
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+		color: #999999; 
+	} 
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+		color: #999999; 
+	} 
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+		color: #999999; 
+	} 
+	body{
+		background: #fff;
+	}
+	.input-kuai{
+		width: 100%;
+		float: left;
+		height: 1rem;
+		line-height: 1rem;
+		color: #010101;
+		border-bottom:1px solid #999999 ;
+	}
+	.input-kuai div{
+		width: 1.7rem;
+		float: left;
+		text-align: center;
+		margin-right: .5rem;
+	}
+	.input-kuai input{
+		border: 0;
+		float: left;
+		line-height: 1rem;
+		color: #010101;
+		width: 68%;
+	}
+	.tijiao{
+		float: left;
+		width: 76%;
+		margin-left: 12%;
+		background: #000000;
+		color: #fff;
+		text-align: center;
+		height: .8rem;
+		line-height: .8rem;
+		margin-top: .8rem;
+		margin-bottom: .9rem;
+	}
+	.tixing{
+		color: #999999 !important;
+		font-size: .24rem;
+		width: 76%;
+		margin-left:12% ;
+		float: left;
+		text-align: center;
+	}
+</style>
+<header class="m-navbar">
+	<a onclick="$z.go()" class="navbar-item"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div style="margin-right: -60% !important;margin-left: 0 !important;width: 35% !important;" class="navbar-center">实名认证</div>
+</header>
+<div id="app">
+	<div class="input-kuai">
+		<div>真实姓名</div>
+		<input type="text" :disabled="xiugai==1" v-model="xingming" placeholder="请输入真实姓名" />
+	</div>
+		<div class="input-kuai">
+		<div>身份证号</div>
+		<input type="text" :disabled="xiugai==1"  v-model="shenfenzheng"  placeholder="请输入身份证号" />
+	</div>
+	<div @click="tijiao" class="tijiao">
+		{{you==1?'认证完成':'立即认证'}}
+	</div>
+	<div class="tixing">声明：实名认证需1至3个工作日完成审核。</div>
+</div>
+
+
+{mb js}
+<script type="text/javascript">
+	var V=new Vue({
+		el: "#app",
+		data: {
+			xingming:'',shenfenzheng:'',xiugai:0,you:0
+		},
+		beforeCreate: function() {
+			var that = this;
+			$z.post('{$_W["url"]}', function(shu) {
+				if(shu.shi) {
+					that.xingming = shu.shu.xingming;
+					if(shu.shu.xingming){
+						that.you=1;
+					}
+					that.shenfenzheng = shu.shu.shenfenzheng;	
+					that.xiugai=shu.shu.xiugai;
+				}
+			})
+		},
+		methods: {
+			tijiao:function(e){
+				var that=this;		
+				if(that.xiugai==1){
+					$z.toast('您没有修改权限');
+					return false;
+				}
+				
+				$z.post('{php echo UAK("wode/shimingrenzheng",array("c"=>"renzheng"))}',{
+					xingming:that.xingming,
+					shenfenzheng:that.shenfenzheng,
+				},function(s){
+					$z.toast(s.shu);
+					if(s.shi==1){
+						setTimeout(function(){
+//							history.go(0) 
+							$z.dakai('{php echo UAK("wode/tixianxinxi",array("ye"=>1))}');
+						},1000);					 
+					}					
+				});			
+			}
+		},
+
+	});
+
+
+</script>
+
+{mb jiao}

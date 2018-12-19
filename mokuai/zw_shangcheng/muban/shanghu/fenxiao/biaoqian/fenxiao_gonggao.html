@@ -1,0 +1,27 @@
+<form action="" method="post" class="form-horizontal" role="form">
+	<input type="hidden" value="gonggao" name="c" />
+  {php for($i=1;$i<=3;$i++){ }
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">公告{$i}</label>
+    <div class="col-sm-10">
+    	{if $gonggao}
+    	<input type="text" class="form-control"  placeholder="公告标题"  name="gonggao[{$i}][biaoti]" value="{$gonggao[$i]['biaoti']}"/>
+        <input type="text" class="form-control"  placeholder="http://"  name="gonggao[{$i}][url]" value="{$gonggao[$i]['url']}" />       
+        {else}
+        <input type="text" class="form-control"  placeholder="公告标题"  name="gonggao[{$i}][biaoti]" value=""/>
+        <input type="text" class="form-control"  placeholder="http://"  name="gonggao[{$i}][url]" value="" />
+        {/if}
+    </div>
+  </div>
+  {php } }
+
+
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+        <input type="submit" name="submit" value="提交" class="btn btn-danger col-lg-1">
+    </div>
+  </div>
+</form>

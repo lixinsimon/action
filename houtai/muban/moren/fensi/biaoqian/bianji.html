@@ -1,0 +1,283 @@
+<form action=""   method="post" enctype="multipart/form-data" class="form-horizontal xiugai_post" style="width: 50%;">
+	<input type="hidden" name="c"  value="bianji"/>
+	<input type="hidden" name="k"  value="fensi"/>
+	<input type="hidden" name="x"  value="huiyuan"/>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">新密码</label>
+    <div class="col-sm-10">
+      <input type="password" name="mima" class="form-control" placeholder="">
+    </div>
+  </div>
+  <!--<div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">重复新密码</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" placeholder="">
+    </div>
+  </div>-->
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-sm padder-lg btn-dark">修改密码</button>
+    </div>
+  </div>
+  
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <input type="text" style="display: none;" name="shangjiId" id="shangjiId" value="{$huiyuan['fuji_id']}" />
+  <div class="form-group">
+    <label class="col-lg-2 control-label">选择上级</label>
+    <div class="col-lg-10">
+        <div class="input-group">
+          <input type="text" value="{$huiyuan['fuji_nicheng']}" maxlength="30" id="agent" class="form-control" readonly="">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="button" id="xuanshangji" data-toggle="modal" data-target="#shangji" >选择上级</button>
+            <button class="btn btn-danger" type="button" onclick="" data-original-title="" title="">清除上级</button>
+          </div> 
+        </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-lg-2 control-label">账号</label>
+    <div class="col-lg-10">
+      <input class="form-control" type="text" name="zhanghao" value="{$huiyuan['zhanghao']}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-lg-2 control-label">用户UID</label>
+    <div class="col-lg-10">
+      <input class="form-control" type="text" name="id" value="{$huiyuan['id']}" readonly="readonly">
+    </div>
+  </div>
+  
+  
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">昵称</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="nicheng" value="{$huiyuan['nicheng']}">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">性别</label>
+    <div class="col-sm-10">
+      <select name="xingbie" class="form-control m-b">      
+        <option value="男" {php echo ($huiyuan['xingbie']=='男')?'selected':''}>男</option>
+        <option value="女" {php echo ($huiyuan['xingbie']=='女')?'selected':''}>女</option>
+      </select>
+    </div>
+  </div>
+ 
+  <!--<div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">户籍</label>
+    {php echo DiQu('diqu',array('sheng'=>$huiyuan['shengfen'],'shi'=>$huiyuan['chengshi'],'qu'=>$huiyuan['quxian']))}
+  </div>-->
+  
+  
+  
+   <div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group dianpu">
+		<label class="col-sm-2 control-label" for="input-id-1">户籍</label>
+		<div class="col-sm-10">
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="sheng" name="sheng">
+					{if $huiyuan['shengfen']}
+					<option>{$huiyuan['shengfen']}</option>{/if}
+				</select>
+			</div>
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="shi" name="shi">
+					{if $huiyuan['chengshi']}
+					<option>{$huiyuan['chengshi']}</option>{/if}
+				</select>
+			</div>
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="xian" name="xian">
+					{if $huiyuan['quxian']}
+					<option>{$huiyuan['quxian']}</option>{/if}
+				</select>
+			</div>
+		</div>
+
+	</div>
+  
+  
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">详细地址</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="dizhi" value="{$huiyuan['dizhi']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">手机</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="shouji" value="{$huiyuan['shouji']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">QQ</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="qq" value="{$huiyuan['qq']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">Email</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="email" value="{$huiyuan['email']}">
+    </div>
+  </div>
+  
+    <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">关注</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="guanzhu" value="0" {if empty($huiyuan['guanzhu'])}checked="checked"{/if}  >
+          <i></i>
+          	未关注
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="guanzhu" value="1" {if $huiyuan['guanzhu']==1}checked="checked"{/if}>
+          <i></i>
+          	已关注
+        </label>
+      </div> 
+    </div>
+  </div>
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+		  <div class="form-group" style="margin-right:0px;">
+		    <label class="col-sm-2 control-label">头像</label>
+		    <div class="col-sm-10">
+		      {php echo ShangTu('touxiang',$huiyuan['touxiang'])}
+		    </div>
+		  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group m-b-md" style="overflow:hidden;">
+    <div class="col-sm-4 col-sm-offset-2">
+      <button type="submit" class="btn btn-danger padder-lg tijiao">提交</button>
+    </div>
+  </div>
+</form>
+
+<!-- 选择上级弹出层 -->
+<div class="modal fade" id="shangji">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <h4 class="modal-title" id="myModalLabel">选择上级</h4>
+	    </div>
+	    <div class="modal-body">
+	      <form class="form-horizontal" role="form">
+	        <div class="form-group">
+	          <div class="col-sm-6">
+	            <div class="input-group">
+	              <input type="text" id="sousuo" class="form-control" placeholder="请输入会员昵称/姓名/手机号">
+	              <span class="input-group-btn">
+	                <button class="btn btn-default" id="chashangji" type="button">搜索</button>
+	              </span>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="table-responsive">
+	        <table class="table table-striped b-light">
+	          <tbody id="tianjiahang">
+	          	
+	          </tbody>
+	        </table>
+	      </div>  
+	      </form>
+	    </div>
+	  
+	    <div class="modal-footer m-t-none">
+	      <div class="pull-right">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<script src="{$_W['yuming']}gongyong/js/diqu.js"></script>
+<script type="text/javascript">
+	$(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			$('#sheng').append("<option>" + citys[i].n + "</option>");
+		}
+		for(let a = 0, h = citys[0].c.length; a < h; a++) {
+			$('#shi').append("<option>" + citys[0].c[a].n + "</option>");
+		}
+		for(let p = 0, h = citys[0].c[0].a.length; p < h; p++) {
+			$('#xian').append("<option>" + citys[0].c[0].a[p] + "</option>");
+		}
+	});
+	$('#sheng').change(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			if($(this).val() == citys[i].n) {
+				$('#shi option').remove();
+				for(let a = 0, n = citys[i].c.length; a < n; a++) {
+					$('#shi').append("<option>" + citys[i].c[a].n + "</option>");
+				}
+				
+			}
+		}
+		$('#xian option').remove();
+		$('#dizhi3').val('');
+	});
+	$('#shi').change(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			for(let a = 0, n = citys[i].c.length; a < n; a++) {
+				if($(this).val() == citys[i].c[a].n) {
+
+					$('#xian option').remove();
+					for(let b = 0, m = citys[i].c[a].a.length; b < m; b++) {
+						$('#xian').append("<option>" + citys[i].c[a].a[b] + "</option>");
+					}
+					
+				}
+			}
+		}
+	});
+	
+	var b=0;
+	$("#xuanshangji").click(function(){
+		b=0;
+		$('#tianjiahang').empty();
+			$.post('{php echo UH("fensi/huiyuan",array("c"=>"xuanshangji"))}',function(data){
+					var shangji = JSON.parse(data);
+					for (let i = 0,a=shangji.shu.length;i<a;i++) {
+						$('#tianjiahang').prepend('<tr><td style="vertical-align:middle;"><span class="thumb-sm pull-left m-l-xs"><img src="'+shangji.shu[i].touxiang+'" class="dker" alt="..."></span></td><td>"'+shangji.shu[i].nicheng+'"</td><td style="vertical-align:middle;"><a href="#" onclick="huoqudata(this)" data-dismiss="modal" data-nicheng="'+shangji.shu[i].nicheng+'" data-cname="'+shangji.shu[i].id+'" class="btn btn-primary pull-right">选择</a></td></tr>');
+					}
+			});
+	});
+	
+	function huoqudata(e){
+		$('#agent').val(e.dataset.nicheng);
+		$('#shangjiId').val(e.dataset.cname);
+	}
+	
+	$("#chashangji").click(function(){
+		txt=$("#sousuo").val();
+		if(txt.length==0){
+		}else{
+			$('#tianjiahang').empty();
+			$.post('{php echo UH("fensi/huiyuan",array("c"=>"sousuo"))}',{'txt':txt},function(data){
+					var shangji1 = JSON.parse(data);
+					for (let i = 0,a=shangji1.shu.length;i<a;i++) {
+						$('#tianjiahang').prepend('<tr><td style="vertical-align:middle;"><span class="thumb-sm pull-left m-l-xs"><img src="'+shangji1.shu[i].touxiang+'" class="dker"></span></td><td>'+shangji1.shu[i].nicheng+'</td><td style="vertical-align:middle;"><a href="#" onclick="huoqudata(this)" data-cname="'+shangji1.shu[i].id+'" data-nicheng="'+shangji1.shu[i].nicheng+'" data-dismiss="modal" class="btn btn-primary pull-right">选择</a></td></tr>');
+					}
+			});
+		}
+	});	
+	$('.tijiao').click(function(){
+		 $('.xiugai_post').submit();
+	});
+</script>

@@ -1,0 +1,46 @@
+ {mb tou}
+
+   <link rel="stylesheet" href="{$_W['yuming']}gongyong/css/kuangjia.css" type="text/css" />  
+   <link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/colpick.css"  />  
+   <script src="{$_W['yuming']}gongyong/js/colpick.js" type="text/javascript" charset="utf-8"></script>	   
+<section class="vbox">
+    {mb dingbu_caidan}
+    <section>
+        <section class="hbox stretch">
+            {mb zuobu}
+            <!-- 内容开始 -->
+            <section id="content">
+                <section class="vbox">
+                    <section class="scrollable m-t padder-lg">
+                        <!-- right tab -->
+                        <section class="panel panel-default">
+                            <header class="panel-heading text-right bg-light ">
+                                <ul class="nav nav-tabs liebiao">
+                                    <li {if $cao=='moren' }class="active" {/if}><a href="{php echo UHK('zidingyi')}" style="padding:9px 40px 10px;">页面模板</a></li>
+                                    <li {if $cao=='tianjia' }class="active" {/if}><a href="{php echo UHK('zidingyi',array('c'=>'tianjia'))}" style="padding:9px 40px 10px; ">添加页面模板</a></li>
+                                   {if $cao=='bianji' }
+                                    <li class="active"><a style="padding:9px 40px 10px; ">编辑</a></li>
+                                    {/if}
+                                </ul>
+                            </header>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in">
+                                        {if $cao=='tianjia' || $cao=='bianji'} 
+                                          {mb "biaoqian/tianjia"} 
+                                        {else} 
+                                          {mb "biaoqian/lie"} 
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- right tab -->
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+</section>
+
+{mb jiao}

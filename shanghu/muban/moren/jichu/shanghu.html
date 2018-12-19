@@ -1,0 +1,56 @@
+ {mb tou}
+ <style type="text/css">
+.nav-tabs .bj{display: none;}
+#xiang_q{display:none;}
+  #hide_block{display:none;}
+ </style>
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <h2 class="font-thin m-b" style="font-size:20px;">商户配置</h2>
+              <!-- right tab -->
+              <section class="panel panel-default">
+                <header class="panel-heading text-right bg-light">
+                  <ul class="nav nav-tabs liebiao">
+                    <li {if $cao=='moren'}class="active"{/if}><a href="{php echo US('jichu/shanghu')}" style="padding:9px 40px 10px;">商户资料</a></li>
+                    <li  {if $cao=='weixin'}class="active"{/if}><a href="{php echo US('jichu/shanghu',array('c'=>weixin))}"  style="padding:9px 40px 10px;">公众号配置</a></li>
+                    <li  {if $cao=='xiaochengxu'}class="active"{/if}><a href="{php echo US('jichu/shanghu',array('c'=>xiaochengxu))}"  style="padding:9px 40px 10px;">小程序配置</a></li>
+                    <li  {if $cao=='zhifu'}class="active"{/if}><a href="{php echo US('jichu/shanghu',array('c'=>zhifu))}"  style="padding:9px 40px 10px;">支付参数</a></li>
+                    <li  {if $cao=='xinxi'}class="active"{/if}><a href="{php echo US('jichu/shanghu',array('c'=>xinxi))}"  style="padding:9px 40px 10px;">店铺banner图</a></li>
+                </ul>
+                </header>
+                <div class="panel-body">
+                  <div class="tab-content">          		
+  					<div class="tab-pane fade active in" id="messages-2">
+	                      {if $cao=='moren'}
+	          			     {mb "biaoqian/shanghu"}
+	                      {elseif $cao=='weixin'}
+	                        {mb "biaoqian/weixin"}
+	                      {elseif $cao=='xiaochengxu'}
+	                        {mb "biaoqian/xiaochengxu"}
+	                      {elseif $cao=='zhifu'}
+	                        {mb "biaoqian/zhifu"}
+	                        {elseif $cao=='xinxi'}
+	                        {mb "biaoqian/shanghu_xinxi"}
+	                      {/if}
+  					</div>
+                  </div>
+                </div>
+              </section>
+			        <!-- right tab -->
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+  <script type="text/javascript">
+
+  </script>
+ {mb jiao}

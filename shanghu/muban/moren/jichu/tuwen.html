@@ -1,0 +1,74 @@
+ {mb tou}
+ <style type="text/css">
+.nav-tabs .bj{display: none;}
+#xiang_q{display:none;}
+  #hide_block{display:none;}
+ </style>
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <h2 class="font-thin m-b" style="font-size:20px;">图文回复</h2>
+              <!-- right tab -->
+              <section class="panel panel-default">
+                <header class="panel-heading text-right bg-light">
+                  <ul class="nav nav-tabs liebiao">
+                    <li {if $cao=='moren'}class="active"{/if}><a href="{php echo US('jichu/tuwen')}" style="padding:9px 40px 10px;">管理基本混合图文回复</a></li>
+                    <li  {if $cao=='tianjia'}class="active"{/if}><a href="{php echo US('jichu/tuwen',array('c'=>tianjia))}"  style="padding:9px 40px 10px;">添加基本混合图文回复</a></li>
+                    <li class="bj"><a style="padding:9px 40px 10px;">编辑基本混合图文回复</a></li>
+                  </ul>
+                </header>
+                <div class="panel-body">
+                  <div class="tab-content">          		
+          					<div class="tab-pane fade active in" id="messages-2">
+                      {if $cao=='moren'}
+          					  	{mb "biaoqian/tuwen_1"}
+                      {elseif $cao=='tianjia'}
+                        {mb "biaoqian/tuwen_2"}
+                      {/if}
+          					</div>
+                 
+                    <div class="tab-pane fade" id="profile1-2">
+                        
+                    </div>
+                 
+                  </div>
+                </div>
+              </section>
+			        <!-- right tab -->
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+  <script type="text/javascript">
+  $(".wenzi_bianji").click(function(){
+  	$(".liebiao li").removeClass("active");
+  	$(".liebiao .bj").show().addClass("active");
+	$.post('{php echo US("jichu/tuwen",array("c"=>"bianji"))}',{'id':$(this).attr('data-id')},function(data){
+		$("#profile1-2").html(data);
+	})
+  })
+  $(".liebiao li:lt(2)").click(function(){
+  	$(".liebiao .bj").removeClass("active").hide();
+  })
+
+  var xiang_q = document.getElementById("xiang_q");
+  var hide_block = document.getElementById("hide_block");
+  var ch = document.getElementById("ch");
+  var gaoji = document.getElementById("gaoji");
+  function check(){
+    if(gaoji.checked==true){
+      hide_block.style.display = 'block';
+    }else{
+      hide_block.style.display = 'none';
+    }
+  }
+  </script>
+ {mb jiao}

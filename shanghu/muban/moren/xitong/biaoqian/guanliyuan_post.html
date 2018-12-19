@@ -1,0 +1,116 @@
+<form class="form-horizontal" method="post">
+	<input type="hidden" name="c" value="guanliyuan_bianji" />
+	<input type="hidden" name="id" value="{$gl['id']}" />
+	<div class="form-group">
+		<label class="col-sm-2 control-label">用户名</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value="{$gl['nicheng']}">
+			<span class="help-block m-b-none">当前编辑的用户名</span>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">新密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" name="mima">
+			<span class="help-block m-b-none">请填写密码，最小长度为 8 个字符。如果不更改密码此处请留空</span>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">确认新密码</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" name="querenmima">
+			<span class="help-block m-b-none">重复输入密码，确认正确输入。如果不更改密码此处请留空</span>
+		</div>
+	</div>
+	{if $gl['shenfen']>1}
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">服务时间</label>
+		<div class="col-lg-10">
+			<p class="form-control-static text-danger">开始时间：{php echo date('Y-m-d',$gl['kaishishijian'])} ~~ 到期时间：{php echo date('Y-m-d',$gl['jieshushijian'])}</p>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">设置到期时间</label>
+		<div class="col-sm-10">			
+			<div style="display:inline-block;">
+				{php echo RiQi('jieshushijian',$gl['jieshushijian'])}
+			</div>			
+			<span class="help-block m-b-none">设置到期时间</span>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">管理员用户组</label>
+		<div class="col-sm-10">
+			<select name="yonghuzu" class="form-control m-b">
+				<option value="">用户组</option>
+				{loop $zu_lie $z}
+				<option value="{$z['id']}" {if $gl['yonghuzu']==$z['id']}selected='selected'{/if}>{$z['zuming']}</option>
+				{/loop}
+			</select>
+		</div>
+	</div>	
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">管理员身份</label>
+		<div class="col-sm-10">
+			<select name="shenfen" class="form-control m-b">
+				<option value="3" {if $gl['shenfen']==3}selected='selected'{/if}>管理员</option>			
+				<option value="4" {if $gl['shenfen']==4}selected='selected'{/if}>操作员</option>				
+			</select>
+		</div>
+	</div>	
+	<div class="line line-dashed b-b line-lg"></div>
+	{if $_W['shanghu']['shenfen']==1}
+	<div class="form-group">
+		<label class="col-sm-2 control-label">绑定公众号</label>
+		<div class="col-sm-10">
+			<select name="danyuanid" class="form-control m-b">
+				<option value="">选择公众号</option>
+				{loop $danyuan_lie $z}
+				<option value="{$z['id']}" {if $z['id']==$danyuanid}selected="selected"{/if}>{$z['mingcheng']}</option>
+				{/loop}				
+			</select>
+			<input type="hidden" name="jiudanyuanid" value="{$danyuanid}"/>
+			<span class="help-block m-b-xs">分配用户所属用户组后，该用户会自动拥有此用户组内的模块操作权限</span>
+			<!-- <span class="help-block m-b-none font-normal text-danger">设置用户组后，系统会根据对应用户组的服务期限对用户的服务开始时间和结束时间进行初始化</span> -->
+			<div class="alert alert-danger m-b-none inline">
+				设置用户组后，系统会根据对应用户组的服务期限对用户的服务开始时间和结束时间进行初始化
+			</div>
+		</div>
+	</div>
+	{/if}
+	<div class="form-group">
+		<label class="col-sm-2 control-label">备注</label>
+		<div class="col-sm-10">
+			<textarea style="height: 80px;" class="form-control" name="miaoshu">{$gl['miaoshu']}</textarea>
+			<span class="help-block m-b-none">方便注明此用户的身份</span>
+		</div>
+	</div>
+	{/if}
+	
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">上次登录时间</label>
+		<div class="col-lg-10">
+			<input class="form-control" type="text" placeholder="{php echo date('Y-m-d H:i:s',$gl['denglushijian'])}" readonly="readonly">
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<label class="col-lg-2 control-label">上次登录IP</label>
+		<div class="col-lg-10">
+			<input class="form-control" type="text" placeholder="{$gl['denglu_ip']}" readonly="readonly">
+		</div>
+	</div>
+
+	<div class="form-group m-b-md" style="overflow:hidden;">
+		<div class="col-sm-4 col-sm-offset-2">
+			<button type="submit" class="btn btn-danger">保存用户资料</button>
+		</div>
+	</div>
+</form>

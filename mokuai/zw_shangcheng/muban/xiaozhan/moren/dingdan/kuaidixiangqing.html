@@ -1,0 +1,43 @@
+{mb 'tou'}
+<style type="text/css">
+			.kuai{
+				width: 100%;
+				height: 1rem;
+				float: left;
+				font-size: .25rem;
+				line-height: 1rem;
+				padding-left: .3rem;
+				background: #fff;
+			}
+		</style>
+		<header class="m-navbar">
+		    <a onclick="$z.go()" class="navbar-item">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		      	快递详情
+		    </div>
+		    
+		</header>
+		<div id="dan">
+			<div class="kuai">
+				快递单号：{{dan.danhao}}
+			</div>
+			<div class="kuai">
+				快递公司：{{dan.gonsi}}
+			</div>
+		</div>
+{mb js}
+<script type="text/javascript">
+			new Vue({
+				el:"#dan",
+				data:{
+					dan:{
+						"danhao":"sddf54654646","gonsi":"顺丰快递"
+					}
+				},
+			})
+			
+			
+		</script>
+{mb jiao}

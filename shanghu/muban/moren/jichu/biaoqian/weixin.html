@@ -1,0 +1,143 @@
+<form id="wizardform" class="form-horizontal" method="post"  data-validate="parsley">
+     
+	<div class="form-group">
+		<label class="col-sm-2 control-label">公众号名称</label>
+		<div class="col-sm-10">
+			<input type="text" name="weixin[mingcheng]" class="form-control" data-required="true" value="{$pz['weixin']['mingcheng']}">
+			<span class="help-block m-b-none">请输入你的公众号名称</span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">微信号</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="weixin[zhanghao]" value="{$pz['weixin']['zhanghao']}">
+			<span class="help-block m-b-none">填写微信号，一般为英文帐号</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">原始ID</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="weixin[yuanshiid]" value="{$pz['weixin']['yuanshiid']}">
+			<span class="help-block m-b-none">在给粉丝发送客服消息时,原始ID不能为空。建议您完善该选项</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">公众号类型</label>
+		<div class="col-sm-10">
+			<div class="radio col-sm-2" style="width: 120px;">
+				<label><input type="radio" name="weixin[leixing]" id="leixing" value="4" checked="checked" >认证服务号</label>
+			</div>
+			<div class="radio col-sm-2" style="width: 120px;">
+				<label><input type="radio" name="weixin[leixing]" id="leixing" value="3">认证订阅号</label>
+			</div>
+			<div class="radio col-sm-2" style="width: 120px;">
+				<label><input type="radio" name="weixin[leixing]" id="leixing" value="2" >普通服务号 </label>
+			</div>
+			<div class="radio col-sm-2" style="width: 120px;">
+				<label><input type="radio" name="weixin[leixing]" id="leixing" value="1" >普通订阅号</label>
+			</div>
+
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">AppId</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="weixin[appid]" value="{$pz['weixin']['appid']}">
+			<span class="help-block m-b-none">请填写微信公众平台后台的AppId</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">AppSecret</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="weixin[appsecret]" value="{$pz['weixin']['appsecret']}">
+			<span class="help-block m-b-none">请填写微信公众平台后台的AppSecret, 只有填写这两项才能管理自定义菜单</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">请求链接入口</label>
+		<div class="col-sm-10">
+			<div class="input-group ">
+				<input type="text"  value="{php echo $_W['yuming'].'shanghu/wxapi.php?sh='.$_W['shanghu']['id']}" class="form-control token" readonly="readonly" autocomplete="off">		
+			   <span class="input-group-btn">
+			      <button class="btn btn-default" type="button">复制链接</button>
+		       </span>
+			</div>
+			
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Token</label>
+		<div class="col-sm-10">
+			<div class="input-group ">
+				<input type="text" name="weixin[token]" value="{$pz['weixin']['token']}" class="form-control token" readonly="readonly" autocomplete="off">
+				<span class="input-group-btn">
+																	   <button class="btn btn-default" type="button" onclick="tokenGen();">一键生成</button>
+																  </span>
+			</div>
+			<span class="help-block m-b-none">与公众平台接入设置值一致，必须为英文或者数字，长度为3到32个字符.</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">EncodingAESKey</label>
+		<div class="col-sm-10">
+			<div class="input-group ">
+				<input type="text" name="weixin[encodingaeskey]" value="{$pz['weixin']['encodingaeskey']}" class="form-control encodingaeskey" readonly="readonly" autocomplete="off">
+				<span class="input-group-btn">
+																	   <button class="btn btn-default" type="button" onclick="EncodingAESKeyGen();">一键生成</button>
+																  </span>
+			</div>
+			<span class="help-block m-b-none">与公众平台接入设置值一致，必须为英文或者数字，长度为43个字符. 请妥善保管.</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">二维码</label>
+		<div class="col-sm-10">
+			{php echo ShangTu('weixin[erweima]',$pz['weixin']['erweima'])}
+			<span class="help-block m-b-none">只支持JPG图片</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">头像</label>
+		<div class="col-sm-10 bootstrap-filestyle">
+			{php echo ShangTu('weixin[touxiang]',$pz['weixin']['touxiang'])}
+			<span class="help-block m-b-none">只支持JPG图片</span>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+
+	<div class="form-group m-b-md" style="overflow:hidden;">
+		<div class="col-sm-4 col-sm-offset-2">
+			<button type="submit" class="btn btn-danger ">提交</button>
+		</div>
+	</div>
+
+</form>
+<script>
+	if($('.token').val() == '') {
+		tokenGen();
+	};
+	if($('.encodingaeskey').val() == '') {
+		EncodingAESKeyGen();
+	};
+
+	function tokenGen() {
+		var letters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		var token = '';
+		for(var i = 0; i < 32; i++) {
+			var j = parseInt(Math.random() * (31 + 1));
+			token += letters[j];
+		}
+		$('.token').val(token);
+	}
+
+	function EncodingAESKeyGen() {
+		var letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		var token = '';
+		for(var i = 0; i < 43; i++) {
+			var j = parseInt(Math.random() * 61 + 1);
+			token += letters[j];
+		}
+		$('.encodingaeskey').val(token);
+	}
+</script>

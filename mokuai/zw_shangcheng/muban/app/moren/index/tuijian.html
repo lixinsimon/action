@@ -1,0 +1,407 @@
+{mb 'tou'}
+<!--<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />-->
+<style type="text/css">
+	.list-title{
+		display: -webkit-box !important;
+		-webkit-line-clamp: 2 !important;
+		line-height: .35rem !important;
+		height: .7rem !important;
+		-webkit-box-orient: vertical !important;
+		white-space:pre-wrap !important;
+	}
+	.list-item {
+		width: 33.33% !important;
+	}
+	.slider-pagination-item{
+		height: 3px !important;
+		border-radius: 0% !important;
+		width: 10px !important;
+		opacity: .3;
+	}
+	.slider-pagination-item-active{
+		background: #fff !important;
+			opacity: 1 !important;
+	}
+	.hengkuai{
+		width: 100%;
+		float: left;
+		line-height: 1rem;
+		height: 1rem;
+		text-align: center;
+		background: #fff;
+		color: #000000;
+		font-size: .34rem;
+	}
+	.m_top_z{
+	    padding: .26rem 0px 0px .3rem;
+	}
+	.liquan-wrap{
+		padding:.2rem .2rem;
+		display: -webkit-flex; /* Safari */
+  		display: flex;
+  		justify-content:space-between;
+  		 flex-wrap:wrap ;
+  		 width: 100%;
+	}
+	.liquan-wrap .liquan-item{
+		margin-bottom: .142rem;
+		display: block;
+		width: 100%;
+		height: 2.5rem;
+		padding:.1rem;
+		background: #fff;
+	}
+
+	
+	
+	.liquan-wrap .liquan-item img{
+		display: block;
+		width: 100%;
+	}
+	.liquan-wrap .liquan-item p{
+		font-size: .28rem;
+		padding:0 .1rem;
+		height: .7rem;
+		line-height: .37rem;
+		overflow: hidden;
+	}
+	.liquan-wrap .liquan-item p span{
+		color: #000;
+		margin-left: .3rem;
+	}
+	.liquan-wrap .liquan-item p img{
+	 	width: .25rem;
+		display: inline-block !important;
+	}
+	
+	
+	
+	.liquan-wrap .liquan-ite .liquan--b{
+		padding:0 .05rem;
+	}
+	.liquan--b{
+		line-height: .4rem;
+		font-size: .2rem;
+		color: #000;
+		height: .8rem;
+		padding-left: .1rem;
+	}
+	
+	.liquan--b-r{
+		line-height: .4rem;
+		color: #000;
+		display: inline-block;
+		color: #fff;
+		font-size: .28rem;
+		text-align: center;
+		float: right;
+		width: 1.3rem;
+		height: .4rem;
+		position: absolute;
+		bottom: 0.1rem;
+		right: 0.1rem;
+	}
+	
+	
+	.baibeijing{
+		height: 2.2rem;
+		background: #000;
+		margin-top: .9rem;
+	}
+	.huangguan{
+		height:2.1rem;
+		width: 100%;
+		padding-top: .1rem;
+	}
+	
+	.cell-arrow{
+		position: absolute;
+		right: .1rem;
+		top: -.1rem;
+	}
+	.yushou-z{
+		float: left;
+		font-size: .28rem;
+		line-height: .4rem !important;
+		height: .4rem;
+		
+		position: absolute;
+		left: 0.1rem;
+		bottom: 0.1rem;
+		
+	}
+	.yushou-z span{
+		text-decoration: line-through;
+		font-size: .22rem !important;
+		color: #646464 !important;
+	}
+	
+	
+
+	.liquan-item-tu{
+		width: 2.3rem;
+		height: 100%;
+		overflow: hidden;
+		position: relative;
+		float: left;
+	}
+	.liquan-item-tu img{
+		height: 100% !important;
+		width: auto !important;
+	}
+	.liquan-zhu{
+		background: #fff;
+		float: left;
+		width: 4.5rem;
+		height: 100%;
+		padding: .1rem;
+		position: relative;
+	}
+	
+	.han{
+		line-height: .38rem;
+		text-align: right !important;
+		margin-right:.7rem;
+	}
+	.han1{
+		line-height: .38rem;
+		text-align: right !important;
+		margin-right:.7rem;
+	
+	}
+	.han1 .user-id{
+		margin: .1rem 0;
+	}
+	.shenglue{
+		max-width: 1.8rem;
+		overflow: hidden;
+		text-overflow:clip;
+		white-space: nowrap;
+	}
+	.liquan-item-tu .shouqing{
+		position: absolute;
+		right:0rem;
+		bottom: 0rem;
+		width: .9rem !important;
+		height: .9rem !important;
+		margin-top: 0rem !important;
+		background: none !important;
+	}
+	.zw-juzhong{
+		text-align: center;
+	}
+	.toutu{
+		float: left;
+		width: 100%;
+	}
+	.honzi{
+		color: #fe0000;
+	}
+	.honbg{
+		background: #fe0000;
+	}
+	.yushou-z{
+		float: left;
+		width: 60%;
+		line-height: .3rem;
+		margin-left: .1rem;
+	}
+	.yushou-y{
+		width: 60% !important;
+		float: right !important;
+	}
+	.jie{
+		float: right;
+		width: 100%;
+		text-align: right;
+		font-size: .2rem;
+	}
+
+	body{
+		background: #000000 ;
+	}
+	.lq{
+		position: absolute;
+		bottom: .86rem;
+		left: .2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.lq span {
+		float:right;
+		color: #000000;
+		text-align: left;
+		margin-right: .15rem;
+		margin-top: .02rem;
+		
+	}
+	.lq img{
+		display: inline-block;
+		/*position: relative;
+		bottom: -.07rem;*/
+		float: left;
+	}
+	.lq em{
+		margin-left: .04rem;
+	}
+	
+	
+	.ku{
+		width: 100%;
+		float: left;
+		height: .4rem;
+		position: absolute;
+		bottom: .46rem;
+		left: .2rem;
+		display: flex;
+		align-items: center;
+		
+	}
+	.ku img{
+		height: 100%;
+		width: auto !important;
+	}
+	.vipjia{
+		color:#c49f51;
+		background: #fff;
+		border: 1px solid #c49f51 ;
+		font-size: .24rem;
+		height: .26rem;
+		float: left;
+		padding: 0 !important;
+		box-sizing: content-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.vipjia span{
+		background: #c49f51;
+		color: #fff;
+		font-size: .2rem;
+		padding: 0 .1rem;
+		height: 100%;
+		float: left;
+		box-sizing: border-box;
+	}
+</style>
+<div id="app">
+<div class="m-slider" id="J_Slider" >
+        <div class="slider-wrapper" style="height: auto;">
+            <div class="slider-item" v-for="(lunboo,index) in lunbo" style="height: auto;">
+                <a  @click="dakai(lunboo.url)">
+                    <img :src="lunboo.tu">
+                </a>
+            </div>
+        </div>
+        <div class="slider-pagination"></div>
+        <!-- 分页标识 -->
+</div>
+
+
+
+ <div  id="J_List">
+    	<ul class="liquan-wrap" id="J_ListContent"> 
+			<li @click="dakai(item.id)"  class="liquan-item" v-for="(item,index) in shuju">
+				<div class="liquan-item-tu" >
+					<img  :src="item.tu"/>
+					<img v-if="item.kucun<=0 || item.kucun<='' " class="shouqing"  src="{$_W['gongyou']}/images/shouqing.png" />
+				</div>
+				<div class="liquan-zhu">
+					<p  class="zw-shenglue2">{{item.ming}}</p>
+					<div class="ku"  >
+						<div class="vipjia" v-if="item.cuxiao!=1">
+							<span>VIP价</span>￥{{item.chengben}}&nbsp;
+						</div>
+						<img style="height: .32rem;" v-else src="{$_W['gongyou']}/images/VIP专区.png" />
+					</div>
+					<div class="yushou-z honzi" >
+						<font style="width: 1rem;display: inline-block;">￥{{item.jiage}}</font>   <span>￥{{item.yuanjia}}</span>
+					</div>
+					<div class="lq" v-if="item.songliquan>0"><img style="width: .25rem;" src="{$_W['gongyou']}/images/li.png" /> <em>x</em> {{item.songliquan?item.songliquan:0}}</div>
+					<div class="yushou-y">
+						<div style="width: 100%;float: left;">
+							<div   class="liquan--b-r honbg ">立即购买</div>
+						</div>
+					</div>
+				
+				</div>
+			</li>
+		</ul>
+    </div>
+    <div style="width: 100%;height: 2rem;"></div>
+</div>    
+{mb daohang}	
+	{mb js}
+<script type="text/javascript">
+	var V=new Vue({
+		  		el:'#app',
+		  		data:{
+		  			shuju:[],
+		  			lunbo:[]
+		  		},		  		
+		  		beforeCreate:function(){		  			
+		  			var that=this;
+		  			$z.post('{$_W["url"]}',{c:'tu'},function(s){
+		  				that.lunbo=s.shu.tuijian;
+		  				
+		  					$('#app').show();
+		  				var fx={php echo json_encode($_W['shezhi']['fenxiang'])};
+		  				  fx.url='{$_W["url"]}'+'&t='+'{$_W["huiyuan"]["id"]}';
+						$z.FenXiang(fx,function(shu){});
+					
+		  			});
+		  			
+				},
+				updated:function(){
+					  $('#J_Slider').slider({
+	                   speed: 200,
+	                   autoplay: 2000,
+	                   lazyLoad: true
+	                 });
+				},
+				methods:{
+					dakai:function(id){
+						$z.dakai("{php echo UAK('xiangqing')}&id="+id);
+					}
+				}
+		});
+		/*上拉加载*/ 
+		var page = 1, pageSize = 8;
+	    $('#J_List').infiniteScroll({
+	        pageSize: pageSize,
+	        initLoad: true,
+	        loadingHtml: '<strong>加载中...</strong>', /* 当然也可以<img src="../img/loading.gif" /> */
+	        loadListFn: function () {
+	            var def = $.Deferred();
+	            $z.post('{$_W["url"]}',{ye: page, jiazaishu: pageSize},function(ret){
+	            	if(ret.shi==1){	
+					    var i=V.shuju.length;
+					    for(l in ret.shu){
+					   		V.$set(V.shuju,i++,ret.shu[l]);
+					    }
+	            	} 
+                    def.resolve(ret.shu);
+                    /* 页码自增1 */
+                    ++page;
+	            });	           
+	            return def.promise();
+	        }
+	    });
+		
+</script>
+<div class="huibg" style="display: none;" >
+	<img src="{php echo JueDuiUrl($_W['shezhi']['shezhi']['guanzhu'])}" />
+</div>
+<script type="text/javascript">
+	$z.post('{php echo  UA("gongyou/guanzhu")}', function(shu) {
+		if(shu.shi) {
+			if(shu.shu.guanzhu!=1){
+				$(".huibg").show();
+			}
+		} 
+	});
+</script>
+{mb jiao}
+
+	

@@ -1,0 +1,343 @@
+{mb 'tou'}
+<style type="text/css">
+	.hon {
+		color: red;
+	}
+	.show{display: block;}
+	.hide{display: none;}
+	#app{
+		display: none;
+	}
+	.m_shou{
+		width: 70%;
+	}
+	body{
+		background: #fff;
+	}
+	.list-mes{
+		background: #eee;
+	}
+	.vipjia{
+		color:#c49f51;
+		background: #fff;
+		border: 1px solid #c49f51 ;
+		font-size: .26rem;
+		height: .31rem;
+		float: left;
+		padding: 0 !important;
+		box-sizing: content-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.vipjia span{
+		background: #c49f51;
+		color: #fff;
+		font-size: .24rem;
+		padding: 0 .1rem;
+		height: 100%;
+		float: left;
+		box-sizing: border-box;
+	}
+	
+
+	.ku{
+		width: 100%;
+		height: .4rem;
+	}
+	.ku img{
+		height: .35rem;
+	}
+	.sou-z{
+		
+		height: 100%;
+		width: 13%;
+		float: left;
+		margin-left:2% ;
+		
+	}
+	.sou-z img{
+		margin-top:.25rem ;
+		height: .4rem;
+	}
+	.bian{
+		font-weight: bold !important;
+		color: #000 !important;
+	}
+	.m_shou{
+		margin-top: .15rem !important;
+		height: .6rem !important;
+		border-radius:.1rem  !important;
+		background: #fff !important;
+	}
+	.m_shou input{
+		height: .6rem !important;
+		width: 75% !important;
+	}
+	.fenkai{
+		border-bottom: none;
+	}
+	.fenkai a{
+		border-bottom: 1px solid #c5c5c5 !important;
+		border-right:1px solid #c5c5c5 !important;
+	}
+	.fenkai a:nth-child(3){
+		border-right:none !important ;
+	}
+	.fenkai{
+		margin-top: .9rem;
+	}
+	.list-theme1 .list-item{
+		margin-bottom: .1rem;
+		margin-top: 0;
+	}
+	.list-title{
+		height: .68rem !important;
+		line-height: .35rem !important;
+		display: -webkit-box !important;
+		-webkit-box-orient: vertical !important;
+		-webkit-line-clamp: 2 !important;
+		overflow: hidden !important;
+		white-space:initial !important;
+		font-size: .3rem !important;
+		font-weight:100  !important;
+	}
+	
+	.list-item{
+		position: relative;
+	}
+	.shouqing{
+		position: absolute;
+		right:0rem;
+		bottom: 0rem;
+		width: .9rem !important;
+		height: .9rem !important;
+		margin-top: 0rem !important;
+		background: none !important;
+	}
+	.list-img{
+		position: relative;
+	}
+	
+	.lq{
+		position: absolute;
+		bottom: .15rem;
+		right: .1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.lq {
+		float:right;
+		color: #000000;
+		text-align: left;
+		margin-right: .15rem;
+		margin-top: .02rem;
+		
+	}
+	.lq img{
+		display: inline-block;
+		/*position: relative;
+		bottom: -.07rem;*/
+		float: left;
+	}
+	.lq em{
+		margin-left: .04rem;
+	}
+	
+</style>
+<div id="app">
+<div class="m_top" style="background: #000;">
+	<a onclick="$z.go()" class="sou-z">
+				<img src="{$_W['gongyou']}/images/左箭头.png" />
+	</a>
+	<div class="m_shou">
+		<i class="icon-search" style="line-height: .4rem;"></i>		
+		<input type="text" class="cell-input"  placeholder="请输入您要搜索的商品" ref='so' @keyup.enter="So" />
+	</div>
+	<a class="m_top_y"  style="width: 15%;"></a>
+</div>
+
+<div id="shoushuo">
+	<div class="fenkai">
+		<a :class="[dian==1? 'bian' :'']" @click="PaiXuLeiXing(1)">
+			<div class="fenkai_txt">综合</div>
+		</a>
+		<a :class="[dian==2? 'bian' :'']" @click="PaiXuLeiXing(2,'chushoushu DESC')">
+			<div class="fenkai_txt">销量</div>
+		</a>
+		<a :class="[dian==3? 'bian' :'']" @click="PaiXuLeiXing(3,'jiage')">
+			<div class="fenkai_txt" style="position: relative;">
+				价格
+				<div :class="[shangjiao==1? 'gaibian' :'']" class="jia_shan"></div>
+				<div :class="[shangjiao==2? 'gaibian2' :'']" class="jia_xia"></div>
+			</div>
+		</a>
+		<!--<a   @click="SaiXuan">
+			<div class="fenkai_txt">筛选<i class="icon-feedback"></i></div>
+		</a>-->
+	</div>
+
+	<div style="background: #fff;" :class="kai?'show':'hide'">
+		<div class="fenkai3">
+			<a v-for="(ShaiXuan,index) in shaixuan" @click="Xuan(index)">{{ShaiXuan.txt}}<i ref="xuan"></i></a>
+		</div>
+		<div class="shaixuang">
+			<div style="float: left;" @click="QuXiao">
+				取消筛选
+			</div>
+			<div style="float: right;" @click="QueRen">
+				确认
+			</div>
+		</div>
+
+	</div>
+	<section id="J_List" style="margin-bottom: 80px;">
+		<div id="J_ListContent" class="m-list list-theme1" style="padding:  .1rem !important;" >
+			    <a  class="list-item J_Link" :data-page="ye" v-for='(L,i) in lie'  @click="dakai(L.href)">
+					<div class="list-img"><img :src="L.tu">
+					<img v-if="L.kucun<=0 || L.kucun<=''" class="shouqing"  src="{$_W['gongyou']}/images/shouqing.png" />
+					</div>
+					<div class="list-mes">
+						<h3 class="list-title">{{L.ming}}</h3>
+						<div class="list-mes-item">
+							<div>
+								<span class="list-price"><em>¥</em>{{L.jiage}}</span>
+								<span class="list-del-price">￥{{L.yuanjia}}</span>
+							</div>
+						</div>
+						<div class="ku"  >
+							<div class="vipjia" v-if="L.cuxiao!=1">
+								<span>VIP价</span>￥{{L.chengben}}&nbsp;
+							</div>
+							<img v-else src="{$_W['gongyou']}/images/VIP专区.png" />
+						</div>
+						<!--<div class="lq" v-if="L.songliquan>0"><img style="width: .3rem;" src="{$_W['gongyou']}/images/li.png" /> <em>x</em> {{L.songliquan?L.songliquan:0}}</div>-->
+			
+					</div>
+				</a>
+			</div>
+	</section>
+</div>
+</div>
+{mb js}
+<script type="text/javascript">
+var V=new Vue({
+		el: "#app",
+		data: {
+			kai: false,
+			dian: 1,
+			shangjiao: "",
+			shaixuan: [{txt: "推荐商品",biaoqian:'tuijian'}, {txt: "新品上市",biaoqian:'xinpin'}, {txt: "热卖商品",biaoqian:'remai'}, {txt: "卖家包邮",biaoqian:'baoyou'}, {txt: "限时抢购",biaoqian:'miaosha'}, {txt: "促销商品",biaoqian:'cuxiao'}],
+			activeColor: "transparent transparent #FF0005 transparent",
+			activeColor2: "#eee transparent transparent  transparent",
+			lie:[],
+			paixu:'',
+			ye:1,
+			biaoqian:[]
+		},
+		methods: {
+		    PaiXuLeiXing:function(i,paixu){	
+		    	if(this.dian==i && paixu!='jiage'){
+		    		return false;
+		    	}
+		    	this.lie=[];
+		    	this.dian = i;
+		    	this.paixu=paixu;
+		    	if(paixu=='jiage'){
+		    		this.shangjiao=(this.shangjiao == 1)?2:1;
+		    		this.paixu=(this.shangjiao == 1)?'jiage DESC':'jiage ASC';
+		    	}		    	
+		    	this.ye=1;
+		    	$z.jiazai_mei(true);
+ 				$z.jiazai_chushihua();
+ 				this.kai = false;
+		    },
+			SaiXuan: function() {				
+				this.kai = !this.kai;
+			},
+			QuXiao: function() {
+				this.kai = false;
+				for(var i in this.$refs.xuan){
+					this.$delete(this.biaoqian,this.shaixuan[i]['biaoqian']);					
+				}
+				this.ye=1;
+		    	$z.jiazai_mei(true);
+ 				$z.jiazai_chushihua();				
+			},
+			QueRen: function() {
+				this.kai = false;
+				for(var i in this.$refs.xuan){
+					if(this.$refs.xuan[i].className == "icon-checkoff hon") {
+					    this.biaoqian[this.shaixuan[i]['biaoqian']]=1;
+					}else{
+						this.$delete(this.biaoqian,this.shaixuan[i]['biaoqian']);
+					}
+				}			
+				this.ye=1;
+		    	$z.jiazai_mei(true);
+ 				$z.jiazai_chushihua();
+			},
+			Xuan: function(index) {
+				if(this.$refs.xuan[index].className == "icon-checkoff hon") {
+					this.$refs.xuan[index].removeAttribute("class");
+				} else {
+					this.$refs.xuan[index].className = "icon-checkoff hon";
+				}
+			},
+            JiaZai:function(shu){              
+                var l1=this.lie.length;              
+            	for(var i=0;i<shu.length;i++){
+            		this.$set(this.lie,l1++,shu[i]);
+            	}      
+            	var fx={php echo json_encode($_W['shezhi']['fenxiang'])};
+				$z.FenXiang(fx,function(shu){});//jia
+            },
+            So:function(){
+            	this.lie=[];
+            	this.sosuo=this.$refs.so.value;   
+            	this.ye=1;
+		    	$z.jiazai_mei(true);
+ 				$z.jiazai_chushihua();
+            },
+            dakai:function(href){
+            	$z.dakai(href);
+            }
+		},
+	});
+	
+$z.jiazai('',function(){ 
+	var shu={paixu:V.paixu,ye:V.ye};
+	if(V.biaoqian){
+		for(var i in V.biaoqian){
+			shu[i]=1;
+		}
+	}
+	if(V.sosuo){
+		shu['so']=V.sosuo;
+	}
+	$z.post('{$_W["url"]}',shu,function(ret){
+		if(ret.shi){
+			V.JiaZai(ret.shu.shangpinlie);				
+		}else{			
+			$z.jiazai_mei(false);
+		}
+        V.ye++;
+		$("#app").show();
+    });
+},1);
+		
+</script>
+<div class="huibg" style="display: none;" >
+	<img src="{php echo JueDuiUrl($_W['shezhi']['shezhi']['guanzhu'])}" />
+</div>
+<script type="text/javascript">
+	$z.post('{php echo  UA("gongyou/guanzhu")}', function(shu) {
+		if(shu.shi) {
+			if(shu.shu.guanzhu!=1){
+				$(".huibg").show();
+			}
+		} 
+	});
+</script>
+{mb jiao}

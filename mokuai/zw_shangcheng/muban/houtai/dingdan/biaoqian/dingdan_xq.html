@@ -1,0 +1,124 @@
+<font>订单信息</font>
+<div class="alert alert-info m-t-xs">
+	  <i class="fa fa-info-sign"></i>
+	  <span class="m-r-lg">订单编号: {$dingdan['dingdanhao']}</span>
+	  <span class="m-r-lg"><label class="label label-primary padder">{$dingdan['zhuangtai_wenzi']}</label></span>	  
+	  <span class="m-r-lg">下单时间: {php echo empty($dingdan['xiadanshijian'])?'':$dingdan['xiadanshijian']}</span>
+	  {if $dingdan['zhuangtai_wenzi']!='待付款' }
+	  <span class="m-r-lg">付款时间: {php echo empty($dingdan['zhifushijian'])?'':$dingdan['zhifushijian']}</span>
+	  <span class="m-r-lg">付款方式:  <label class="label label-success padder">{php echo $zhifuqudao[$dingdan['zhifuqudao']]}</label></span>
+	  {/if}
+    <!--<button type="button" class="btn btn-primary padder-lg" onclick="location='index.php?d=14&k=dingdan&m=gf_shangcheng&c=daochudingdan&ddid='+{$dingdan['id']}">打印</button>-->
+		<a class="btn" href="{php echo UHK('dingdan',array('c'=>'daochudingdan','ddid'=>$dingdan['id']))}"  style="background: #ff8533;color: #FFF;">打印订单</a>
+</div>
+<font>收益成员</font>
+<div class="alert alert-info m-t-xs">
+	  <i class="fa fa-info-sign"></i>
+	  {loop $dingdan['yongjin'] $yj}
+	  <span class="m-r-lg">余额收益： {$yj['nicheng']}{$yj['huiyuan_id']}{$yj['shuoming']}  <font color="red">{$yj['zhi']}</font>元</span>	  
+    {/loop}
+    {loop $dingdan['liquan'] $yj}
+	  <span class="m-r-lg">礼券收益： {$yj['nicheng']}{$yj['huiyuan_id']}{$yj['shuoming']}  <font color="red">{$yj['zhi']}</font></span>	  
+    {/loop}
+</div>
+<font>购买人</font>
+<a href='{php echo UH("fensi/huiyuan",array("id"=>$dingdan["huiyuanzhi"]["id"]))}'>
+<div class="alert alert-info m-t-xs">
+	  <i class="fa fa-info-sign"></i>
+	  <span class="m-r-lg">昵称：{$dingdan['huiyuanzhi']['nicheng']}&nbsp;&nbsp; ID:{$dingdan['huiyuanzhi']['id']} &nbsp;&nbsp;账号： {$dingdan['huiyuanzhi']['zhanghao']}</span>	  
+  
+</div>
+</a>
+<div class="table-responsive m-t-md">
+    <table class="table table-striped b-light">
+      <thead>
+        <tr>
+          <th >商品信息 {if $dingdan['liyou'] }<span style="color: #F02907;">退款理由：{$dingdan['liyou']}</span>{/if} </th>          
+          <th width="100px" style="vertical-align:middle;text-align:center">单价/数量</th>
+          <th width="100px" style="vertical-align:middle;text-align:center">折扣</th>
+          <th width="120px" style="vertical-align:middle;text-align:center">总价</th>
+        </tr>
+      </thead>
+      <tbody>
+      	{loop $dingdan['dingdan_shangpin'] $ds}
+        <tr>
+          <td>
+            <span class="thumb-sm pull-left m-l-xs">                        
+              <img src="{php echo JueDuiUrl($ds['tu'])}" class="dker" alt="...">
+            </span>
+            <font class="m-l-xs" style="line-height:40px;">{$ds['ming']}</font>
+          </td>
+          
+          <td style="vertical-align:middle;text-align:center">
+                                  ￥{$ds['jiage']} x {$ds['shuliang']}
+          </td>
+          <td style="vertical-align:middle;text-align:center">
+            -￥{$ds['zhekou']}
+          </td>
+          <td style="vertical-align:middle;text-align:center">
+            <ul style="padding-left:0;">
+              <li><span class="text-danger">￥{php echo $ds['jiage']*$ds['shuliang']}</span></li>
+              <li>（运费：￥{$ds['yunfei']}）</li>
+            </ul>
+          </td>
+        </tr>
+        {/loop}
+      </tbody>
+    </table>
+    <font class="pull-right">
+    	共{$dingdan['shuliang']}件, 实收款：
+    	<span class="text-danger" style="font-size:24px;">￥{$dingdan['zongjia']}</span>元
+    </font>
+    {if empty($dingdan['zhuangtai'])}
+		<a href="{php echo UHK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'quxiao','id'=>$dingdan['id']))}" class="btn" style="background: #ff6633;color: #FFF;">关闭订单</a>
+		<a href="{php echo UHK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'fukuan','id'=>$dingdan['id']))}" class="btn padder-xs" style="background: #ff0033;color: #FFF;">确认付款</a>
+		{elseif $dingdan['zhuangtai']==5}
+		<a href="{php echo UHK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'daifu','id'=>$dingdan['id']))}" class="btn padder-xs" style="background: #ff0033;color: #FFF;">恢复订单</a>
+		{elseif $dingdan['zhuangtai']==6}
+		<a href="{php echo UHK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'fukuan','id'=>$dingdan['id']))}" class="btn padder-xs" style="background: #ff0033;color: #FFF;">拒绝退款</a>
+		<a href="{php echo UHK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'yituikuan','id'=>$dingdan['id']))}" class="btn" style="background: #ff6633;color: #FFF;">接受退款</a>
+		{elseif $dingdan['zhuangtai']==10}
+		<a href="{php echo UHK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'yituikuan','id'=>$dingdan['id']))}" class="btn" style="background: #ff6633;color: #FFF;">给他退款</a>
+		<a data-toggle="modal" data-target="#querenfahuo" onclick="QueRenFaHuo('{$dingdan['id']}','{$dingdan['shouhuoren']}','{$dingdan['shouhuoshengshiqu']} {$dingdan['shouhuodizhi']}')" class="btn padder-xs" style="background: #ff0033;color: #FFF;">确认发货</a>
+		{elseif $dingdan['zhuangtai']==20}
+		<a class="btn" data-toggle="modal" data-target="#kuaidi" onclick="ChaKuaiDi('{$dingdan['kuaidiid']}','{$dingdan['kuaidihao']}')" style="background: #ff6633;color: #FFF;">快递物流</a>
+		<a  href="{php echo UHK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'shouhuo','id'=>$dingdan['id']))}"  class="btn padder-xs" style="background: #ff0033;color: #FFF;">确认收货</a>
+		{elseif $dingdan['zhuangtai']==30}
+		<a class="btn" data-toggle="modal" data-target="#kuaidi" onclick="ChaKuaiDi('{$dingdan['kuaidiid']}','{$dingdan['kuaidihao']}')" style="background: #ff6633;color: #FFF;">快递物流</a>
+		<!--<a href="#" class="btn padder-xs" style="background: #ff0033;color: #FFF;">晒晒账单</a>-->
+		{/if}
+  </div>
+  
+<form action="" method="get" class="form-horizontal" role="form">
+  <!--<div class="form-group">
+    <div class="col-sm-12  m-t-md">
+      <textarea class="form-control" name="description" rows="3" placeholder="备注"></textarea>
+    </div>
+  </div>-->
+  
+  <!--<div class="form-group">
+    <div class="col-sm-12">
+      <button class="btn btn-default padder-xs">保存备注</button>
+    </div>
+  </div>-->
+  <div class="alert alert-default m-t-xs" style="border-color: #cbd5dd;border-radius: 2px;line-height:40px;">
+      <i class="fa fa-info-sign"></i>
+        
+      <span style="margin-right:100px;">姓名: {$dingdan['shouhuoren']}</span>
+      <span style="margin-right:100px;">手机: {$dingdan['shouhuodianhua']}</span>
+      <span style="margin-right:100px;">地址: {$dingdan['shouhuoshengshiqu']} {$dingdan['shouhuodizhi']}</span> 
+        <span style="margin-right:100px;">留言: {$dingdan['liuyan']}</span>
+  </div>
+  <!--<div class="form-group">
+    <div class="col-sm-12">
+      <button class="btn btn-default padder-xs">编辑信息</button>
+    </div>
+  </div>-->
+  <div class="alert alert-default m-t-xs" style="border-color: #cbd5dd;border-radius: 2px;line-height:40px;">
+    <i class="fa fa-info-sign"></i>
+    <span style="margin-right:100px;">快递公司: {$dingdan['kuaidiming']}</span>
+    <span style="margin-right:100px;">快递单号: {$dingdan['kuaidihao']}</span>
+    <span style="margin-right:100px;">发货时间: {php echo empty($dingdan['fahuoshijian'])?'':date('Y-m-d H:i:s',$dingdan['fahuoshijian']);}</span> 
+  </div>
+  
+</form>

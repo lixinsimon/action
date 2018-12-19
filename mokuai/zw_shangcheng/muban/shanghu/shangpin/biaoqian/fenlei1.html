@@ -1,0 +1,52 @@
+<div class="dd" id="nestable1" style="max-width:1920px;">
+  <ol class="dd-list">
+  	{loop $feileilie $fl}
+    <li class="dd-item" data-id="2">
+      <div class="dd-handle-self">【ID:{$fl['id']}】{$fl['ming']}
+        <span class="hidden-sm">
+        	<a href="{php echo USK('shangpin/fenlei',array('id'=>$fl['id'],'c'=>'shanchu'))}" class="btn btn-default pull-right m-t-xs">删除</a>
+        	<button class="btn btn-success pull-right m-t-xs m-r-xs edit_fenlei" href="#gong2" data_id="{$fl['id']}" data-toggle="tab">编辑</button>
+        	<a class="btn btn-primary pull-right m-t-xs m-r-xs add_fenlei" href="#gong2" data_id="{$fl['id']}" data-toggle="tab">添加子分类</a>
+       <!-- 	<a class="btn btn-danger pull-right m-t-xs m-r-xs add_shanghu"  data_id="{$fl['id']}" href="#gong4" data-toggle="tab" class="btn btn-danger pull-right m-t-xs">添加商户</a>-->
+        </span>
+      </div>
+      
+        <ol class="dd-list"> 
+        	{if $fl['haizi']}
+      	{loop $fl['haizi'] $flhz}
+            <li class="dd-item" data-id="3" style="list-style-type:none">
+              <div class="no-padder">
+                <div class="table-responsive">
+                  <table class="table table-striped m-b-none">
+                    <tbody>                    
+                      <tr>
+                        <td width="40%">
+                          <span class="thumb-sm pull-left m-l-xs">
+                          	{if $flhz['tu']}
+                          	<img src="{php echo JueDuiURL($flhz['tu'])}" class="dker">                          
+                          	{/if}
+                            
+                          </span>
+                          <font class="m-l-xs" style="line-height:40px;">【ID:{$flhz['id']}】{$flhz['ming']}</font>
+                        </td>
+                        <td width="60%">
+                        	<a href="{php echo USK('shangpin/fenlei',array('id'=>$flhz['id'],'c'=>'shanchu'))}" class="btn btn-default pull-right m-t-xs">删除</a>
+                        	<a class="btn btn-success pull-right m-t-xs m-r-xs edit_fenlei" href="#gong2" data_id="{$flhz['id']}" data-toggle="tab">编辑</a>
+                        </td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </li> 
+              {/loop}
+        {/if}
+        </ol>
+        
+    </li>
+   {/loop}
+  </ol>
+</div>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<a class="btn btn-danger padder-lg add_fenlei"  href="#gong2" data-toggle="tab">添加新分类</a>

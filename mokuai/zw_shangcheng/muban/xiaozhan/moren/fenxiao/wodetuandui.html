@@ -1,0 +1,43 @@
+{mb 'tou'}
+	<header class="m-navbar">
+			<a onclick="$z.go()" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				我的团队
+			</div>
+	</header>	
+		<section id="J_List" style="background: #FFFFFF;">
+		    <div id="J_ListContent">
+		    	   	
+		    </div>
+		</section>
+	{mb js}	
+		
+	<script type="text/javascript">
+			var ye = 1, pageSize = 10;
+		    $('#J_List').infiniteScroll({
+		        pageSize: pageSize,
+		        initLoad: true,
+		        loadingHtml: '<strong>加载中..</strong>',
+		        loadListFn: function () {
+		            var def = $.Deferred();
+		            $z.post("{$_W['url']}",{ye:ye++,jitiao:pageSize},function(ret){
+		            	if(ret.shi==1){	            		
+			            	  var html = '';             	
+			            	  for(var i=0;i<ret.shu.lie.length;i++){	
+			            	  	html+='<div class="kehu"><img src="'+ret.shu.lie[i].touxiang+'"/><div class="kehu-zhu">';
+							    html+='<div class="kehu-t">'+ret.shu.lie[i].nicheng+'</div><p>'+ret.shu.lie[i].shijian+'</p></div></div>';
+			            	  } 	            	 
+							   $('#J_ListContent').append(html);					   
+							   def.resolve(ret.shu.lie);							   
+			            }
+		               
+		            });
+		            return def.promise();
+		        }
+		    });
+		</script>
+{mb jiao}
+
+	 

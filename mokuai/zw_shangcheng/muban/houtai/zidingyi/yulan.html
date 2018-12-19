@@ -1,0 +1,96 @@
+
+<html >
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>自定义页面</title>
+		
+		<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/app.css"  />  
+	
+		<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/ydui.css" />		
+		<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/zhiwei.css" />
+		<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/kuangjia.css" />
+		
+		
+		<script src="{$_W['yuming']}gongyong/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="{$_W['yuming']}gongyong/js/ydui.js" type="text/javascript" charset="utf-8"></script>
+         <style>
+         	html,body{background: #FFF;}
+         	.click_zujian{border: 1px dashed #b9ae27; position: relative;overflow: hidden;width: 100%;}
+         	.click_zujian .shanchu{position: absolute;right: 0px;top: -5px;font-size: .5rem;z-index:9999}   
+         	
+         	.feilei_tu{margin: .1rem auto;width: 1rem;height: 1rem;}	
+         	#fenlei a{padding: .1rem 0;}
+         	.grids-item:after{border: 0;}
+         </style>
+
+	</head>
+	<body>
+<div id="app" >
+	
+	<ul class="list-group gutter list-group-lg list-group-sp sortable" id="sortable" >
+		{loop $z $k $s}
+		 {php $shu['ming']=$k}
+		 <li class="zujian" id="{$k}" draggable="true" onclick="click_zujian(this)">{mb 'zujian/'.$s['zujian']}</li>
+		{/loop}
+	</ul>
+   
+</div>
+	
+
+
+
+<script src="{$_W['yuming']}gongyong/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="{$_W['yuming']}gongyong/js/ydui.flexible.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="{$_W['yuming']}gongyong/js/zhiwei.js" type="text/javascript" charset="utf-8"></script>	
+
+
+
+
+<script src="{$_W['yuming']}gongyong/js/sortable/jquery.sortable.js"></script>
+<script src="{$_W['yuming']}gongyong/js/app.plugin.js"></script>
+<script type="text/javascript">	    
+	
+    function Append(html){
+     	$('#sortable').append(html).sortable();
+     	$('#sortable .shanchu').remove();  
+     	$('#sortable li').removeClass('click_zujian');
+     	
+     	var i='<i class="icon-error-outline shanchu" onclick="ShanChu(this)"></i>';
+    	$('#sortable li:last').addClass('click_zujian').append(i);
+    } 
+    var  shuangji=0;
+    function click_zujian(e){
+    	shuangji++;  
+    	$('#sortable li').removeClass('click_zujian');   
+        $('#sortable .shanchu').remove(); 
+    	if(shuangji<2){
+    		var i='<i class="icon-error-outline shanchu" onclick="ShanChu(this)"></i>';
+    	    $(e).addClass('click_zujian').append(i);
+    	}
+    		
+    	setTimeout(function(){
+    		shuangji=0;    		
+    	},500);
+    	
+    	 $('#bianjihe .bianji',parent.document).hide();    	 
+    	 var id =$(e).attr('id');    	
+    	 $('#'+id,parent.document).show();	
+         
+    }
+    function ShanChu(e){
+    	var id =$(e).parent().attr('id');    	
+    	$(e).parent().remove();    	
+    	$('#'+id,parent.document).remove();
+    	
+    }   
+
+
+
+</script>
+
+	
+</body>
+</html>

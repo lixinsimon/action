@@ -1,0 +1,55 @@
+<form action="{php echo UHK('dangmianfu/index', array('c'=>'jiajifen'))}" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+  	<input type="hidden" value="{$_J[dangmianfu_id]}" name="id"/>
+	
+	<div id="tianjia">
+		{if empty($shuju)}
+		<div class="line line-dashed b-b line-lg pull-in"></div>	
+		<div class="form-group">
+	      <label class="col-sm-2 control-label">赠送积分</label>
+	      <div class="col-sm-10" >
+	        <div class="input-group" >
+	          <span class="input-group-addon">满多少（元）</span>
+	          <input type="text" name="jifen[0][jin_e]" class="form-control" value="" >
+	          <span class="input-group-addon">送多少积分</span>
+	          <input type="text" name="jifen[0][jifen]" class="form-control" value="">
+	        </div>
+	      </div>
+	    </div> 
+	    {else}
+	    	{loop ZiFuChuan_Zhuan_ShuZu($shuju['zhuanhua']) $k=>$l}
+	    <div class="line line-dashed b-b line-lg pull-in"></div>	
+		<div class="form-group">
+	      <label class="col-sm-2 control-label">赠送积分</label>
+	      <div class="col-sm-10" >
+	        <div class="input-group" >
+	          <span class="input-group-addon">满多少（元）</span>
+	          <input type="text" name="jifen[{$k}][jin_e]" class="form-control" value="{$l['jin_e']}" >
+	          <span class="input-group-addon">送多少积分</span>
+	          <input type="text" name="jifen[{$k}][jifen]" class="form-control" value="{$l['jifen']}">
+	        </div>
+	      </div>
+	    </div> 
+	    {/loop}
+	    {/if}
+	</div>
+	 
+	<div class="line line-dashed b-b line-lg pull-in"></div>	
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <button type="button" class="btn btn-sm padder-lg btn-default">添加积分选项</button>
+        <button type="submit" class="btn btn-sm padder-lg btn-danger">提交</button>
+      </div>
+    </div>
+</form>
+<script>
+	{if empty($shuju)}
+	var i = 1;
+	{else}
+	var i = {php echo count(ZiFuChuan_Zhuan_ShuZu($shuju['zhuanhua']))};
+	{/if}
+	$('.btn-default').click(function(){
+		$('#tianjia').append('<div class="line line-dashed b-b line-lg pull-in"></div><div class="form-group"><label class="col-sm-2 control-label">赠送积分</label><div class="col-sm-10" ><div class="input-group" ><span class="input-group-addon">满多少（元）</span><input type="text" name="jifen['+i+'][jin_e]" class="form-control" value="" ><span class="input-group-addon">送多少积分</span><input type="text" name="jifen['+i+'][jifen]" class="form-control" value=""></div></div></div> ')
+		i++;
+	});
+</script>
+

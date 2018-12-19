@@ -1,0 +1,125 @@
+<div class="alert alert-info">
+默认为全部开启，用户在会员中心可自行设置是否开启, 模板消息自动替换变量
+</div>
+<form action="" method="get" class="form-horizontal" role="form">
+<div class="form-group">
+  <label class="col-sm-2 control-label">任务处理通知</label>
+  <div class="col-sm-10">
+      <input type="text" name="tm[templateid]" class="form-control" value="">
+      <div class="help-block">公众平台模板消息编号: OPENTM200605630 </div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">成为创客通知</label>
+  <div class="col-sm-10">
+        <input type="text" name="tm[commission_becometitle]" class="form-control" value="">
+      <div class="help-block">标题，默认"成为创客通知"</div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+      <textarea name="tm[commission_become]" class="form-control"></textarea>
+       模板变量: [昵称] [时间]
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">新增下级通知</label>
+  <div class="col-sm-10">
+       <input type="text" name="tm[commission_agent_newtitle]" class="form-control" value="">
+       <div class="help-block">标题，默认"新增下线通知"</div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10"> 
+      <textarea name="tm[commission_agent_new]" class="form-control"></textarea>
+      <div class="help-block">模板变量: [昵称] [时间]</div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">下级付款通知</label>
+  <div class="col-sm-10">
+        <input type="text" name="tm[commission_order_paytitle]" class="form-control" value="">
+      <div class="help-block">标题，默认"下级付款通知"</div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+      <textarea name="tm[commission_order_pay]" class="form-control"></textarea>
+        <div class="help-block">模板变量 [昵称] [订单编号] [订单金额] [商品详情] [余额金额] [时间]</div>
+      <div class="help-block">注意: 此 [余额金额] ，不代表上级用户会立即获得，为可能获得的余额金额</div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">提现申请提交通知</label>
+  <div class="col-sm-10">
+      <input type="text" name="tm[commission_applytitle]" class="form-control" value="">
+      <div class="help-block">标题，默认"提现申请提交通知"</div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+      <textarea name="tm[commission_apply]" class="form-control"></textarea>
+      模板变量 [昵称] [时间] [金额] [提现方式]
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">提现申请审核完成通知</label>
+  <div class="col-sm-10">
+      <input type="text" name="tm[commission_checktitle]" class="form-control" value="">
+      <div class="help-block">标题，默认"提现申请审核完成通知"</div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+      <textarea name="tm[commission_check]" class="form-control"></textarea>
+      模板变量 [昵称] [提现方式]  [金额] [时间] 
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">余额打款通知</label>
+  <div class="col-sm-10">
+        <input type="text" name="tm[commission_paytitle]" class="form-control" value="">
+      <div class="help-block">标题，默认"余额打款通知"</div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+      <textarea name="tm[commission_pay]" class="form-control"></textarea>
+      模板变量 [昵称] [提现方式] [金额] [时间] 
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">创客角色升级通知</label>
+  <div class="col-sm-10">
+        <input type="text" name="tm[commission_upgradetitle]" class="form-control" value="">
+       <div class="help-block">标题，默认"创客角色升级通知"</div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+      <textarea name="tm[commission_upgrade]" class="form-control"></textarea>
+       模板变量: [昵称] [旧角色]  [旧一级创客比例] [旧二级创客比例] [旧三级创客比例] [新角色] [新一级创客比例] [新二级创客比例] [新三级创客比例]  [时间]
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+  <div class="col-sm-10">
+      <input type="submit" name="submit" value="提交" class="btn btn-danger col-lg-1">
+  </div>
+</div>
+</form>

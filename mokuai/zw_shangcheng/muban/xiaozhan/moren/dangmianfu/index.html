@@ -1,0 +1,66 @@
+
+{mb tou}
+<div id="saoma">
+	<div style="padding: 1.5rem 1.3rem;" class="left_w100">
+		<div class="left_w100 wenzi_juzhong" style="height:7rem;background: #FBFBFB;padding-top: 1rem;">
+			<img width="50" height="50" class="div_juzhong" style="margin-bottom: .8rem;" :src="shuju.logo"/>
+			<span style="font-size: 1rem;">{{shuju.ming}}</span>
+		</div>
+		<div class="left_w100 wenzi_left"  style="height: 15rem;background: #fff;padding:0 1.5rem;padding-top: 1rem;">
+			<span style="font-size: .9rem;margin-bottom: 1rem;">转账金额</span><br />
+			<div style="position: relative;width: 100%;" class="left">
+				<span style="font-size: 1.8rem;font-weight: 300;position: absolute;top: 0;left: 0;" >￥</span>
+				<form style="float: left;width: 100%;" id="biaodan" action="{php echo UXK('dangmianfu/index',array('c'=>'zhifu'))}" method="post">
+					<input name="zhifuqudao" type="hidden" value="yu_e" />
+					<!--<input name="zhifuqudao" type="hidden" value="weixin" />-->
+					<input name="shid" type="hidden" v-model="shuju.shid" />
+					
+					<input name="yiyou" type="hidden" value="1" />
+					<input autofocus="autofocus" name="jin_e" id="je" oninput="if(value.length>7)value=value.slice(0,7)" class="left" type="number" style="height: 3rem;border: 0;border-bottom: 1px solid #ccc;width: 100%;font-size: 2.4rem;text-indent: 2rem;-webkit-user-select:auto;z-index: 10;" maxlength="7"  onkeyup="if( !/^[0-9]{1,}(?:.[0-9]{0,2})?$/.test(this.value)){this.value=''}"/>
+				</form>
+			</div>
+			<button id="zhifu" disabled="disabled" style="border: 1px solid #178512;background: #A3DFA3;width: 100%;color: #FFFFFF;height: 3rem;border-radius: 5px;font-size: 1.3rem;line-height: 3rem;margin-top: 2.8rem;">转账</button>
+		</div>  
+	</div>
+</div>
+	{mb jss}
+	<script>
+		
+		var V = new Vue({
+			el:'#saoma',
+			data:{
+				shuju:[]
+			},
+			beforeCreate:function(){
+				var that = this;
+				$z.post("{$_W['url']}",function(shu){
+					if(shu.shi==1){
+						that.shuju=shu.shu;
+					}else if(shu.shi==2){
+						setTimeout(function(){parent.WeixinJSBridge.call('closeWindow');},100);
+					}
+				});
+					
+			},
+			methods:{
+			}
+		})
+		
+		$(function(){
+			$('#je').focus();
+			$('#je').bind('input propertychange',function(){
+				if($(this).val().length>0){
+					$('#zhifu').css('background','#1AAC19');
+					$('#zhifu').attr('disabled',false);
+				}else{
+					$('#zhifu').css('background','#A3DFA3');
+					$('#zhifu').attr('disabled','disabled');
+				}
+			});
+			$('#zhifu').click(function(){
+				$('#biaodan').submit();
+
+			});
+		})
+	</script>
+{mb 'jiao'}

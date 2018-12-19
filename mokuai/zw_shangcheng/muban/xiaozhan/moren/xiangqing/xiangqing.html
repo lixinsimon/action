@@ -1,0 +1,261 @@
+{mb 'tou'}
+<style>
+	.slider-wrapper,
+	.slider-wrapper .slider-item {
+		height: auto;
+	}
+	
+	.xiangqing_box {
+		padding: 0.11rem;
+	}
+	.checked{background: red;border: 1px solid red; color: #FFF;}
+	.show{display: block;}
+	.hide{display: none;}
+	.shulian-y{margin-top: 0.15rem;}
+	#app1{
+		display: none;
+	}
+
+    .slider-item img{height: 100%;}
+</style>
+<div id="app1">
+	<header class="m_top">
+		<a onclick="$z.go()" class="m_top_z">
+			<i class="back-ico"></i>
+		</a>
+		<a class="m_top_y" @click="DaoHang"><i class="icon-more"></i></a>
+
+	</header>
+
+	<div class="yinchan" v-if="DaoHang_kuang">
+		<ul>
+			<li>
+				<a href="{php echo UXK('wode/xiaoxi')}"><i class="icon-ucenter-outline"></i>消息</a>
+			</li>
+			<li>
+				<a href="{php echo UXK('index')}"><i class="icon-home-outline"></i>首页</a>
+			</li>
+			<li>
+				<a href="{php echo UXK('wode/shoucang')}"><i class="icon-star-outline"></i>我的收藏</a>
+			</li>
+			<li>
+				<a><i class="icon-share1"></i>分享</a>
+			</li>
+		</ul>
+	</div>
+	<div class="m-slider" id="J_Slider">
+		<div class="slider-wrapper">
+			<div class="slider-item" v-for="(lunboo,index) in shangpin.xijietu" >
+				<img :src="lunboo">
+			</div>
+		</div>
+		<div class="slider-pagination"></div>
+		<!-- 分页标识 -->
+	</div>
+
+	<div class="spin">
+		<h2>{{shangpin.ming}}</h3>
+		<div class="spin_lian">
+			<h3><span >￥</span>						
+			{{shangpin.jiage}}</h3>
+			<h4><span>销量：{{shangpin.chushoushu}}</span><span>库存：{{shangpin.kucun}}</span></h4>
+		</div>
+	</div>
+	<div class="m-tab" data-ydui-tab>
+	    <ul class="tab-nav">
+	        <li class="tab-nav-item tab-active"><a href="javascript:;">详情</a></li>
+	        <!--<li class="tab-nav-item"><a href="javascript:;">参数</a></li>
+	        <li class="tab-nav-item"><a href="javascript:;">评价(<span>0</span>)</a></li>-->
+	       
+	    </ul>
+	    <div class="tab-panel xiangqing_box">
+	        <div class="tab-panel-item tab-active" v-html="shangpin.xiangqing" style="padding-bottom: .6rem;"></div>
+	        <!--<div class="tab-panel-item" ></div>
+	        <div class="tab-panel-item" ></div>			      -->
+	    </div>
+	</div>
+	
+    <div  class="guige" :class="TanKuang?'show':'hide'">
+			<div style="height: 20%;width: 100%;float: left;background: rgba(0,0,0,.3);" @click="GuiGeKai(false)"></div>
+			<div style="height: 80%;width: 100%;float: left;background: #fff;padding-left: .3rem;">
+				<div class="guige-top">
+					<img :src="shangping_guige.tu"/>
+					<div class="guige-top-t">
+						￥{{shangping_guige.jiage}}
+					</div>
+					<p>存库：{{shangping_guige.kucun}}{{shangping_guige.danwei}}</p>
+					<span class="tubiao tb-close" style="position: absolute;right: .3rem;top: .3rem;font-size: .35rem;" @click="GuiGeKai(false)"></span>
+				</div>			
+				<div style="height: 70%;width: 100%;overflow: auto;">
+					<div class="guige-fen"  v-for="(zu,index) in guige">
+						<h3>{{zu.guigezu_ming}}</h3>
+						<div class="guige-fen2" :ref='zu.guigezu_id' :value="g.guige_id" :tu="g.guige_tu"  v-for="(g,d) in zu.haizi" @click="Xuan(d,zu.guigezu_id)">							
+							{{g.guige_ming}}
+						</div>
+					</div>
+					<div class="guige-fen" style="clear: both;border-top: 1px solid #f7f7f7;">
+						<h3 style="width: 40%;float: left;">数量</h3>					
+						<span class="m-spinner shulian-y" style="margin-right: .3rem;" data-ydui-spinner="{input: '.J_Input', add: '.J_Add', minus: '.J_Del'}">
+						    <a  class="J_Del" @click="ShuLiang(0)"></a>
+						    <input type="text" class="J_Input" :value="shuliang"/>
+						    <a  class="J_Add" @click="ShuLiang(1)"></a>
+						</span>				
+					</div>
+				</div>				
+				
+				<div class="guige-di dibu" style="margin-left: -.3rem;" @click="Mai()">确定</div>
+			</div>			
+	</div>	
+	<div class="dibu shan_wu" v-if="Show==-1"><a href="{php echo UX('denglu')}">未登录</a></div>
+	<div class="dibu shan_wu" v-else-if="Show==-2">库存不足</div>
+	<div class="dibu shan_wu" v-else-if="Show==-3">购买权限角色不够</div>
+	<div class="dibu shan_wu" v-else-if="Show==-4">超过购买数量</div>
+	<div class="dibu shang_di" v-else-if="Show==1">
+		<a class="dibu_x"><i class="icon-star" v-bind:class="{active:shoucang}"  @click="ShouCang"></i>收藏</a>
+		<a class="dibu_x" href="{php echo UXK('dingdan/gouwuche')}"><i class="icon-shopcart-outline" ></i>购物袋</a>
+		
+		<a class="dibu_d" style="background: #f88a1e;" @click="GuiGeKai(true,false)" v-if='shangpin.kaiqiguige==1'>加入购物袋</a>
+		<a class="dibu_d" style="background: #f88a1e;" @click="Mai(false)" v-else>加入购物袋</a>
+		
+		<a class="dibu_d" style="background:#ff3918;width: 38%;"  @click="GuiGeKai(true,true)" v-if='shangpin.kaiqiguige==1'>立即购买</a>
+		<a class="dibu_d" style="background:#ff3918;width: 38%;"  @click="Mai(true)" v-else>立即购买</a>		
+	</div>
+</div>
+{mb js}
+<script type="text/javascript">
+	new Vue({
+		el:"#app1",
+		data:{			
+	  		shangpin:{},	  		
+	  		bianhao:"EW32654412315541",	  		
+	  		guige:[],
+	  		Show:0,
+	  		shangping_guige:[],
+	  		TanKuang:false,
+	  		DaoHang_kuang:false,
+            shoucang:false,
+            shuliang:1
+		},
+		methods:{			
+			GuiGeKai:function(v,g){
+				this.TanKuang=v;
+				this.lijimai=g;				
+			},		
+		    DaoHang:function(){
+				this.DaoHang_kuang=true;
+			},
+			ShouCang:function(){
+				var that=this;
+				if(that.shoucang){
+				 	that.shoucang=false;
+				 }else{
+				 	that.shoucang=true;
+				 }
+				$z.post('{php echo UXK("wode/shoucang")}',{shangpin:this.shangpin.id,c:'shoucang'},function(s){});
+			},
+			Mai:function(li){
+				//@ li(true|false)  true:立即购买 ; false:加入购物袋;
+				if(!li){
+					li=this.lijimai;					
+				}
+				if(this.shangpin.kaiqiguige==1 && !this.shangping_guige.guigeid){					
+					$z.toast('选择规格');
+					return false;
+				}
+//				var canshu={c:'tianjia',id:this.shangpin.id,guigeid:this.shangping_guige.guigeid,shuliang:this.shuliang};
+				var canshu='&ids='+this.shangpin.id+'&guigeid='+this.shangping_guige.guigeid+'&shuliang='+this.shuliang;
+				if(li){
+					$z.dakai("{php echo UXK('dingdan/querendingdan')}"+canshu);
+					return false;
+				}else{
+					$z.post("{php echo UXK('dingdan/gouwuche',array('c'=>'tianjia'))}"+canshu,function(s){					
+						$z.toast(s.shu);								
+					})
+					
+				}				
+				this.TanKuang=false;
+			},
+			Xuan:function(index,ref){			
+				for(i in this.$refs[ref]){
+					this.$refs[ref][i].removeAttribute('checked');
+				    this.$refs[ref][i].setAttribute('class','guige-fen2');									
+				}
+				this.$refs[ref][index].setAttribute('checked','checked');
+				this.$refs[ref][index].setAttribute('class','guige-fen2 checked');
+				this.XuanZhong();
+				this.shuliang;
+			},
+			XuanZhong:function(){
+				var bianma='';
+				for(i in this.$refs){					
+					if(typeof this.$refs[i]=='object'){
+						for(b in this.$refs[i]){							
+						  if(this.$refs[i][b].getAttribute('checked')){
+						  	if(this.$refs[i][b].getAttribute('tu')){
+						  		this.shangping_guige.tu=this.$refs[i][b].getAttribute('tu');
+						  	}
+						  	 bianma+='_'+this.$refs[i][b].getAttribute('value');
+						  }
+					    }
+					
+					}
+										
+				}
+				
+				bianma=bianma.slice(1,bianma.length);
+				var xz=this.guige_xuanze[bianma];				
+				if(typeof xz=='object'){
+					this.shangping_guige.guigeid=xz['id'];
+					this.shangping_guige.zhongliang=xz['guige_xuanze_zhongliang'];
+					this.shangping_guige.jiage=xz['guige_xuanze_jiage'];
+					this.shangping_guige.kucun=xz['guige_xuanze_kucun'];					
+					this.shangping_guige.ming=xz['guige_xuanze_ming'];
+					this.shangping_guige.yuanjia=xz['guige_xuanze_yuanjia'];					
+				}
+				
+			},
+			ShuLiang:function(c){
+				if(c){
+					this.shuliang++;
+				}else{
+					this.shuliang--;
+				}
+				if(this.shuliang<1){
+					this.shuliang=1;
+					$z.toast('至少买一件');
+				}
+				if(this.shuliang>this.shangping_guige.kucun){
+					this.shuliang=this.shangping_guige.kucun;	
+					$z.toast('库存不足');
+				}
+				
+			}
+			
+		},
+		beforeCreate:function(){
+			var that=this;
+			$z.post('{$_W["url"]}',function(shu){			
+				that.shangpin=shu.shu.shangpin;
+			    that.guige=shu.shu.guige;
+			    that.Show=shu.shi;
+			    that.shangping_guige=shu.shu.shangpin; 
+			    that.guige_xuanze=shu.shu.guige_xuanze;
+			    if(shu.shu.shoucang){
+			    	that.shoucang=true;
+			    }
+			    $("#app1").show();
+			});
+		},
+		updated:function(){			
+			$('#J_Slider').slider({
+		        speed: 200,
+		        autoplay: 2000,
+		        lazyLoad: true
+	        });
+	        $('.slider-item img').height($('.slider-item img').width());
+		}
+			
+	});
+			 
+</script>		
+{mb jiao}

@@ -1,0 +1,841 @@
+{mb 'tou'}
+<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />
+<style>
+.checkbox +.checkbox_icon:after {
+    font-family: 'YDUI-INLAY';
+    font-size: .44rem;
+    content: '\e604';
+    color: #D9D9D9;
+}
+
+.checked +.checkbox_icon:after{
+	content: '\e601';
+	color: #ff8300;
+}
+#shouchan{
+	display: none;
+}
+.zw-w100{
+	width: 100%;
+}
+.zw-w80{
+	width: 80%;
+}
+.zw-w15{
+	width: 15%;
+}
+.zw-w20{
+	width: 20%;
+}
+.zw-w30{
+	width: 30%;
+}
+.zw-w33{
+	width: 33%;
+}
+
+.zw-w40{
+	width: 40%;
+}
+.zw-w50{
+	width: 50%;
+}
+.zw-w70{
+	width: 70%;
+}
+.zw-zuo{
+	float: left;
+}
+.zw-h80{
+	height: .8rem;
+}
+.zw-margin-l20{
+	margin-left: .2rem;
+}
+.zw-margin-t20{
+	margin-top: .2rem;
+}
+.zw-sousuo{
+	width: 80%;
+	height: .8rem;
+	border:1px solid #E0E0DD;
+	border-radius:.2rem;	
+	float: left;
+}
+.zw-sou{
+	font-size: .45rem;
+	float: left;
+	text-align: center;
+	line-height: .8rem;
+}
+.zw-zuokuai{
+	float: left;
+	width: 100%;
+	height: .8rem;
+	text-align: center;
+	line-height: .8rem;
+	background: #f8f8f8;
+}
+.zw-xuan{
+	background: #fff;
+	border-top:1px solid #dfdfdf;
+	border-bottom:1px solid #dfdfdf;
+	position: relative;
+	z-index: 4;
+	
+}
+.zw-xuan:after{
+	content: '';
+	position: absolute;
+	left: 0;
+	width: .1rem;
+	height: 100%;
+	background: #F02907;
+}
+.zw-pfzuo{
+	float: left;
+	width: 30%;
+	overflow:auto
+	height: 100%;
+	position: relative;
+}
+.zw-pfzuo:after{
+	content: '';
+	position: absolute;
+	right: 0;
+	height:100%;
+	width: 1px;
+	background: #E0E0DD;
+	margin-bottom: 1rem;
+	
+}
+.zw-pfdi{
+	float: left;
+	width: 100%;
+	height: 10%;
+	text-align: center;
+}
+.shouchan{
+	border: 1px solid #E0E0DD;
+	border-radius:.2rem ;
+	width: 96%;
+	margin-left: 2%;
+	margin-top: 4px;
+	position: relative;
+}
+.shou_name{
+  height: .4rem;
+  line-height: .4rem;
+  margin-top:0; 
+  width: 65%;
+}
+.zw-size20{
+	font-size: .2rem;
+}
+.zw-shenglue{
+ 	overflow: hidden; /*自动隐藏文字*/
+    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+    white-space: nowrap;/*强制不换行*/
+}
+.zw-pfdi{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 1.1rem;
+  background: #47464b;
+  color: #fff;
+  z-index: 999
+}
+.zw-pfdi-z{
+  float: left;
+}
+.zw-pfdi-zi{
+  height: 100%;
+  line-height: .55rem;
+  font-size: .3rem;
+  display: block;
+  margin-left: 1.3rem;
+}
+.zw-pfdi-zi div{
+  margin-left: .16rem;
+  text-align: left;
+}
+
+.zw-pfdi-yuan{
+  width: 1.04rem;
+  height: 1.04rem;
+  border: .1rem solid #4d4d4d;
+  border-radius: 50%;
+  background: #ff5553;
+  color: #fff;
+  position: absolute;
+  bottom: .20rem;
+  left: .30rem;
+  text-align: center;
+  box-shadow: 0px 0px .04rem #000;
+}
+.zw-pfdi-yuan div{
+  width: .84rem;
+  height: .84rem;
+  display: block;
+  font-size: .40rem;
+  line-height: .84rem;
+}
+.zw-pfdi-yuan i{
+  position: absolute;
+  top: -.2rem;
+  right: -.2rem;
+  display: block;
+  width: .40rem;
+  height: .40rem;
+  line-height: .4rem;
+  background: #f90000;
+  border-radius: 50%;
+
+}
+.zw-pfdi-y{
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  width: 30%;
+  text-align: center;
+  background: #fe9d56;
+  line-height: 1.1rem;
+  font-size: .40rem;
+}
+#box{
+	position: relative;
+	overflow: hidden;
+}
+#hua{
+	position: absolute;
+	top: 0;
+}
+#box1{
+	overflow: hidden;
+	position: relative;
+}
+#hua1{
+	position: absolute;
+	top: 0;
+}
+#box2{
+	position: relative;
+	overflow: hidden;
+}
+#hua2{
+	position: absolute;
+	top: 0;
+	float: left;
+	width: 100%;
+}
+.wan{
+	text-align: center;
+	width: 100%;
+	height:.8rem;
+	line-height: .8rem;
+	float: left;
+}
+.zw-zi-hui{
+	color: #999;
+}
+.zw-pftu{
+	float: left;
+	overflow: hidden;
+}
+
+.jia1{
+  margin-top: .10rem;
+  width: .50rem;
+  height: .50rem;
+   text-align: center;
+   float: right;
+   margin-right: 10%;
+   line-height: .54rem;
+  position: absolute;
+  overflow: initial;
+  border: 0px ;
+  right: 0.2rem;
+  bottom: .2rem;
+}
+.J_Del1{
+  float: left;
+  position: absolute;
+   left: -90%; 
+  width: .5rem;
+  background:#eee;
+  height: .50rem;
+  line-height: .54rem;
+  font-size: .40rem;
+  border-radius: 50%;
+  color: #e57c83;
+  border:1px solid #e57c83;
+}
+.jia1 input{
+  height: .50rem;
+   border: 0px solid #eee; 
+  box-sizing: border-box;
+  position: absolute;
+  width: .45rem !important;
+  float: left;
+  left: 0;
+  line-height: .54rem;
+}
+.J_Add1{
+  line-height: .54rem;
+  float: left;
+  width: .5rem;
+  height: .50rem;
+  position: absolute;
+   right: -84%; 
+  font-size: .40rem;
+  background: #ff5553 !important;
+  border-radius: 50%;
+  color: #fff !important;
+  border:1px solid #ff5553;
+}
+.J_Add1:after{
+	color: #fff !important;
+}
+.m-spinner > a{
+	width: .5rem;
+	height: .5rem;
+	line-height: .5rem;
+}
+
+.zw-pfgwc{
+  background: #fff;
+  height: .70rem;
+  float: left;
+  width: 100%;
+  line-height: .7rem;
+  margin-top: .04rem;
+  position: relative;
+  width: 100%;
+}
+.zuoxian{
+  position: relative;
+      padding-left: .20rem;
+}
+.zuoxian::after{
+    content: '';
+    height: 60%;
+    width:.08rem;
+    background: #ff5553;
+    position: absolute;
+    left: 0;
+    top: 20%;
+
+}
+.gwc{
+	width: 100%;
+	height: 5rem;
+	float: left;
+	background: #eee;
+	overflow: hidden;
+	 /*overflow-y: scroll;显示y轴滚动条*/
+}
+</style>
+	<div id="shouchan" >
+		<header class="m-navbar" >
+		    <a  class="navbar-item" href="{php echo UAK('wode')}">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		   		   商品大全	
+		    </div>
+		    <!--<a  class="navbar-item" @click="bianji" v-text="bian.txt"></a>-->
+		</header>
+			<div class="zw-w100 zw-margin-t20">
+				<div class="zw-sousuo zw-margin-l20">
+					<input type="text"  v-model="sou" class="cell-input zw-w80 zw-h80 zw-margin-l20" placeholder="请输入要搜索的商品" />
+				</div>
+				<i class="icon-search zw-sou zw-w15" @click="sousuo"></i>
+			</div>
+		<div class="zw-w100 zw-zuo zw-margin-t20 scroll">
+				<div class="zw-pfzuo gaodu" id="box">
+					<div id="hua">
+						<div @click="huan(i)" v-for="(fl,i) in fenlei" :class="[xuan==i?'zw-xuan':'','zw-zuokuai']">{{fl.ming}}</div>
+					</div>
+				</div>
+				<div class="zw-w70 zw-zuo gaodu" id="box1" style="border-top:1px solid #E0E0DD;">
+					<div id="hua1" class="zw-w100">
+						<label class="cell-item shouchan"  v-for="(L,index) in lie" >				
+					        <span class="cell-left shou_z">
+					        	<div class="zw-pftu">
+					        		<img :src="L.tu" @click="dakai(L.href)" />
+					        	</div>
+					        	<div class="shou_name zw-shenglue " @click="dakai(L.href)" >
+					        		{{L.ming}}
+					        	</div>
+					        	<div class="shou_name  zw-zi-hui zw-shenglue zw-size20" style="top: .55rem;" @click="dakai(L.href)" >
+					        		  库存:{{L.kucun}} 销量:{{L.chushoushu>0?L.chushoushu:0}}
+					        	</div>
+					        	<div class="shou_jia zw-shenglue zw-w32" style="bottom: .2rem;" @click="dakai(L.href)" >
+					        		￥<span :jiage='L.jiage' ref="jiage">{{L.jiage}}</span>
+					        	</div>
+					        </span>		
+					        <span class="m-spinner jia1" data-ydui-spinner="{input: '.J_Input', add: '.J_Add', minus: '.J_Del'}" style="margin-top: 1rem;margin-left: 2rem;">
+							    <a v-show="L.shuliang>0" class="J_Del J_Del1" @click="geshu(index,'jian')"></a>
+							    <input v-show="L.shuliang>0" type="text" disabled="disabled"  class="J_Input" :value="L.shuliang" ref='SL' :gid='L.id' />
+							    <a  class="J_Add J_Add1"  @click="geshu(index,'jia')" ></a>
+							</span>
+					    </label>
+					    <div class="wan">没有更多了</div>
+					</div>
+				</div>
+				<div class='zw-zhezhao'>
+						<div @click="guanzhe" class="zw-zheguan"></div>
+			            <div class='zw-xuanzhe'>
+			                <div class='zw-xuanzhe-t zw-hanggao80 zw-padding-l20 zw-padding-r20'>
+			                	<div class="zw-zuo zuoxian">购物袋</div>
+			                    <div class='zw-you zw-hanggao70' @click='qingkong'><i class="icon-delete"></i>清空</div>
+			                </div>
+			                <div class="gwc" id="box2">
+			                	<div id="hua2">
+					            	<div class="zw-pfgwc"  v-for="(item,index) in gwc" >
+											<div class='zw-zuo zw-shenglue zw-juzuo zw-w50 zw-margin-l20'>{{item.ming}}</div>
+							               	<span class="m-spinner jia1" style="bottom: .1rem;" data-ydui-spinner="{input: '.J_Input', add: '.J_Add', minus: '.J_Del'}" >
+											    <a  class="J_Del J_Del1" @click="geshu(index,'jian',1)"></a>
+											    <input type="text" disabled="disabled"  class="J_Input" :value="item.shuliang" ref='SL1' :gid='item.shangpin' />
+											    <a  class="J_Add J_Add1" style="right: -90%;"  @click="geshu(index,'jia',1)" ></a>
+											</span>
+							                <div class='zw-zuo zw-zi-huang'>￥{{item.jiage*item.shuliang}}</div>	
+									</div>
+								</div>
+							</div>
+			            </div>
+			   	</div>
+		</div>	
+	    
+		    
+		<div class='zw-pfdi'>
+		    <div class='zw-pfdi-z '>
+		      <div :class='["zw-pfdi-yuan",gwc[0] ? "":"zw-bg-hui2"]' @click="gaizhe">
+		       	<div class="icon-shopcart"></div>
+		        <i>{{zongshu}}</i>
+		      </div>
+		      <div class='zw-pfdi-zi'>
+		        <div class='zw-size40'>￥{{zongjia}}</div>
+		        <div >{{gwc[0] ? '优惠信息请至结算页查看':'当前购物袋为空'}}</div>
+		      </div>
+		    </div>
+		    <div  :class='["zw-pfdi-y", gwc[0] ? "":"zw-bg-hui2"]' @click="JieSuan">结算</div>
+		</div>    
+		</div>
+{mb js}
+<script type="text/javascript">
+
+var V=new Vue({
+	el:"#shouchan",
+	data:{
+		lie:[],
+  		bian:{"jie":false,"txt":"编辑"},zhe:false,
+  		zongjia:0,ming:'',fenlei:[],xuan:'',gwc:[],sou:'',fenleiid:'',ye:1,zongshu:0,pan:true,suo:true
+	},
+	methods:{
+		huan:function(i){
+			var that=this;
+			that.xuan=i;
+			that.fenleiid=that.fenlei[i]['id'];
+			$z.post("{php echo UAK('liebiao/kuaigou')}",{id:that.fenlei[i]['id'],c:'shangpin'},function(shu){
+			    if(shu.shi==1){						    
+			    	that.lie=shu.shu;
+			    }
+			});	
+			that.ye=1;
+			that.pan=true;
+			that.suo=true;
+			$('#hua1').css('top',0);
+			kuandu1();
+		},
+		dakai:function(e){
+			$z.dakai(e);
+		},
+		geshu:function(index,jia_jian,z){	
+			var that=this;
+			var yuanzhi=zhi;
+			if(z==1){
+				var zhi=that.$refs.SL1[index].value;
+				var id=that.$refs.SL1[index].getAttribute('gid');
+			}else{
+				var zhi=that.$refs.SL[index].value;
+				var id=that.$refs.SL[index].getAttribute('gid');
+			}
+			
+			if(jia_jian=='jia'){
+				zhi++;	
+				
+				
+				if(z==1){
+					that.gwc[index].shuliang=zhi;
+				}else{
+					if(that.lie[index].kucun<1){
+						$z.toast('库存不足');
+						return false;
+					}
+					that.lie[index].shuliang=zhi;
+				}
+			}else if(jia_jian=='jian'){
+				zhi--;	
+				if(zhi<0){
+				   $z.toast('不能小于1！');	
+				   return false;
+				}
+				if(z==1){
+					that.gwc[index].shuliang=zhi;
+				}else{
+					that.lie[index].shuliang=zhi;
+				}
+			}					
+			$z.post("{php echo UAK('liebiao/kuaigou')}",{kucun:zhi,id:id,c:'jian'},function(shu){
+			    if(!shu.shi){
+			    	if(z==1){
+			    		that.gwc[index].shuliang=yuanzhi;
+			    	}else{
+			    		that.lie[index].shuliang=yuanzhi;
+			    	}
+			    	$z.toast(shu.shu);
+			    }
+			    that.zongji();
+			});	
+			
+		},
+		zongji:function(){
+			var that=this;
+			var zong=0;
+			$z.post("{php echo UAK('dingdan/gouwuche')}",function(shu){	
+				if(shu.shi==1){			
+					that.gwc=shu.shu.lie;
+					var shuliang=0;
+					for(var a=0;a<that.gwc.length;a++){
+					 	zong=zong+(that.gwc[a].jiage*parseInt(that.gwc[a].shuliang));
+					 	shuliang+=parseInt(that.gwc[a].shuliang);
+					}
+					that.zongshu=shuliang;
+					that.zongjia=zong;
+				}else{				
+					$z.toast(shu.shu);
+				}
+				 var sp=that.lie;
+			     var gwc=that.gwc;
+			  
+			    for (var a = 0; a < sp.length; a++) {
+			        that.lie[a].shuliang=0;
+			        if (gwc.length>0){
+			          for (var b = 0; b < gwc.length; b++) {
+			            if (gwc[b].shangpin == sp[a].id) {
+			            	that.lie[a].shuliang=gwc[b].shuliang
+			            } 
+			          }
+			        }else{
+			         	that.lie[a].shuliang=0;
+			        }
+			    }
+			});	
+		},
+		ShanChu:function(){
+			if(!this.ids){			 
+			   return false;
+			}
+			var sp=[];
+			var lie=this.lie;
+			var a=0;
+			for(i in this.ids_No){					
+			      sp[a++]=lie[i];	
+			}		
+			this.lie=sp;
+			$z.post("{php echo UAK('dingdan/gouwuche')}",{c:'shanchu',ids:this.ids},function(s){
+				 $z.toast(s.shu);
+			});
+		},
+		JieSuan:function(){
+			var ids='&ids=';
+			if(this.gwc.length<1){
+				$z.toast('请添加商品');
+				return false;
+			}
+			for(i in this.gwc){					
+			      ids+='_'+this.gwc[i].id;	
+			}	
+		    $z.dakai('{php echo UAK("dingdan/querendingdan")}'+ids);
+		},
+		sousuo:function(e){
+			var that=this;
+			$z.post("{php echo UAK('liebiao/kuaigou')}",{shou:that.sou,c:'shangpin'},function(shu){
+			    if(shu.shi==1){						    
+			    	that.lie=shu.shu;
+			    	that.sou='';
+			    }
+			});	
+		},
+		gaizhe:function(){
+			var that=this;
+			that.zhe=!that.zhe;
+			if(that.zhe){
+				chuxian();
+			}else{
+				xiaoshi();
+			}
+		},
+		guanzhe:function(){
+			xiaoshi();
+		},
+		qingkong:function(){
+			var that=this;
+			YDUI.dialog.confirm('提示','清空购物袋？',function () {
+			  	$z.post("{php echo UAK('liebiao/kuaigou')}",{c:'qingkong'},function(shu){
+				    if(shu.shi==1){						    
+				    	$z.toast(shu.shu);
+				    }
+				    that.zongji();
+				});	
+			});
+		}
+		
+	},
+	beforeCreate:function(){
+		var that=this;
+		$z.post("{$_W['url']}",function(shu){	
+			if(shu.shi==1){			
+//				that.lie=shu.shu.shangpin;		
+				that.fenlei=shu.shu.fenlei;
+				that.fenleiid=shu.shu.fenlei[0].id;
+				$z.post("{php echo UAK('liebiao/kuaigou')}",{id:that.fenleiid,c:'shangpin'},function(shu){
+				    if(shu.shi==1){						    
+				    	that.lie=shu.shu;
+				    }
+				});	
+			}else{				
+				$z.toast(shu.shu);
+			}
+			that.zongji();	
+			$("#shouchan").show();
+		});	
+	},	
+	updated:function(){
+		kuandu();
+		kuandu1();
+		kuandu2();
+	}
+});
+var page = 1;
+    $('#J_List').infiniteScroll({
+        pageSize: 6,
+        initLoad: true,
+        loadingHtml: '<strong>加载中...</strong>',
+        loadListFn: function () {
+            var def = $.Deferred();
+            $z.post("{$_W['url']}",{c:'shangpin',ye:V.ye,id:V.fenleiid},function(ret){            	
+            	if(ret.shi==1){	            		
+	            	for(var i in ret.shu){
+        		    	V.$set(V.lie,V.lie.length++,ret.shu[i]);            		    	
+        		    }  
+        		    V.ye+=1;
+	            }              	
+                def.resolve(ret.shu);               
+            });
+            return def.promise();
+        }
+    });
+    $(function(){  
+	   var a=0;
+	   a=$(window).height()- $(window).width()/ 750 * 310;
+	   $('.gaodu').css('height',a);
+	}); 
+  function chuxian() {
+        $(".zw-zhezhao").css("display", "block");
+        $(".zw-xuanzhe").animate({
+            height: '7rem'
+        });
+    }
+
+    function xiaoshi() {
+        $(".zw-xuanzhe").animate({
+            height: '0rem'
+        }, function() {
+            $(".zw-zhezhao").css("display", "none");
+        });
+    }   
+ 	function kuandu(){
+		var k=0;
+		for(var a=0; a<$('.zw-zuokuai').length;a++){
+			k+=parseInt($('.zw-zuokuai').eq(a).css('height'));
+		}
+		$('#hua').css('height',k);
+		 _touch();
+	}
+	function _touch(){
+              var startx;//让startx在touch事件函数里是全局性变量。
+              var donx;
+              var yuan;
+               var el=document.getElementById('box');
+               var kuan= parseInt($('#hua').css('height'));
+                var kuan1= parseInt($('#box').css('height'));
+              function cons(){   //独立封装这个事件可以保证执行顺序，从而能够访问得到应该访问的数据。
+              	if(kuan>kuan1){
+              			var zhi= parseFloat(yuan.substring(0,yuan.length-2));
+              			var bian=zhi+donx-startx;
+              			if(bian>0){
+              				bian=0;
+              			}else if(bian<kuan1-kuan){
+              				bian=kuan1-kuan;
+              			}
+              	}else{
+              		bian=0
+              	}
+              			$('#hua').css('top',bian);
+             }
+            el.addEventListener('touchstart',function(e){
+                       var touch=e.changedTouches;
+                     startx=touch[0].clientY;
+                      yuan= $('#hua').css('top');
+                    
+           	});
+            el.addEventListener('touchmove',function(e){
+            	 var touch=e.changedTouches;
+            	 donx=touch[0].clientY;
+            	 cons();
+            })    
+     } 
+     function kuandu1(){
+		var k=0;
+		for(var a=0; a<$('.shouchan').length;a++){
+			k+=parseInt($('.shouchan').eq(a).css('height'))+6;
+		}
+		$('#hua1').css('height',k);
+		_touch1();
+	}
+	
+	function _touch1(){
+              var startx;//让startx在touch事件函数里是全局性变量。
+              var donx;
+              var yuan;
+               var el=document.getElementById('box1');
+               var kuan= parseInt($('#hua1').css('height'));
+                var kuan1= parseInt($('#box1').css('height'));
+              function cons(){   //独立封装这个事件可以保证执行顺序，从而能够访问得到应该访问的数据。
+          			var zhi= parseFloat(yuan.substring(0,yuan.length-2));
+          			var bian=zhi+donx-startx;
+          			
+          			if(kuan>kuan1){
+          				if(bian>0){
+	          				bian=0;
+	          			}else if(bian<kuan1-kuan){
+	          				bian=kuan1-kuan;
+	          				if(V.suo){
+	          					 V.suo=false;
+	          					if(V.pan){
+		          					$z.post("{$_W['url']}",{c:'shangpin',ye:V.ye+1,id:V.fenleiid},function(ret){            	
+						            	if(ret.shi==1){	
+							            	for(var i in ret.shu){
+						        		    	V.$set(V.lie,V.lie.length++,ret.shu[i]);            		    	
+						        		    }  
+						        		    V.ye+=1;
+						        		    if(ret.shu.length==0){
+						        		    	V.pan=false;
+						        		    }
+							            }  
+							            setTimeout(function(){
+							            	V.suo=true
+							            },1000);
+						            });
+		          				}
+	          				}
+	          			}
+          			}else{
+          				bian=0
+          			}
+          			$('#hua1').css('top',bian);
+             }
+            el.addEventListener('touchstart',function(e){
+                    var touch=e.changedTouches;
+                    startx=touch[0].clientY;
+                    yuan= $('#hua1').css('top');
+           	});
+            el.addEventListener('touchmove',function(e){
+            	 var touch=e.changedTouches;
+            	 donx=touch[0].clientY;
+            	 cons();
+            })    
+     } 
+     function kuandu2(){
+		var k=0;
+		for(var a=0; a<$('.zw-pfgwc').length;a++){
+			k+=parseInt($('.zw-pfgwc').eq(a).css('height'))+4;
+		}
+		$('#hua2').css('height',k);
+		 _touch2();
+	}
+	function _touch2(){
+              var startx;//让startx在touch事件函数里是全局性变量。
+              var donx;
+              var yuan;
+               var el=document.getElementById('box2');
+               var kuan= parseInt($('#hua2').css('height'));
+                var kuan1= parseInt($('#box2').css('height'));
+              function cons(){   //独立封装这个事件可以保证执行顺序，从而能够访问得到应该访问的数据。
+              	if(kuan>kuan1){
+              			var zhi= parseFloat(yuan.substring(0,yuan.length-2));
+              			var bian=zhi+donx-startx;
+              			
+              			if(bian>0){
+              				bian=0;
+              			}else if(bian<kuan1-kuan){
+              				bian=kuan1-kuan;
+              			}
+              	}else{
+              		bian=0;
+              	}
+              	$('#hua2').css('top',bian);
+             }
+            el.addEventListener('touchstart',function(e){
+                       var touch=e.changedTouches;
+                     startx=touch[0].clientY;
+                      yuan= $('#hua2').css('top');
+                    
+           	});
+            el.addEventListener('touchmove',function(e){
+            	 var touch=e.changedTouches;
+            	 donx=touch[0].clientY;
+            	 cons();
+            })    
+     } 
+    	var overscroll = function(el) {
+		  el.addEventListener('touchstart', function() {
+		    var top = el.scrollTop
+		      , totalScroll = el.scrollHeight
+		      , currentScroll = top + el.offsetHeight;
+		    //If we're at the top or the bottom of the containers
+		    //scroll, push up or down one pixel.
+		    //
+		    //this prevents the scroll from "passing through" to
+		    //the body.
+		    if(top === 0) {
+		      el.scrollTop = 1;
+		    } else if(currentScroll === totalScroll) {
+		      el.scrollTop = top - 1;
+		    }
+		  });
+		  el.addEventListener('touchmove', function(evt) {
+		    //if the content is actually scrollable, i.e. the content is long enough
+		    //that scrolling can occur
+		    if(el.offsetHeight < el.scrollHeight)
+		      evt._isScroller = true;
+		  });
+		}
+		overscroll(document.querySelector('.scroll'));
+		document.body.addEventListener('touchmove', function(evt) {
+		  //In this case, the default behavior is scrolling the body, which
+		  //would result in an overflow.  Since we don't want that, we preventDefault.
+		  if(!evt._isScroller) {
+		    evt.preventDefault();
+		  }
+		});
+
+
+</script>
+
+{mb jiao}
+
+	

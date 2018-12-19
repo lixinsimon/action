@@ -1,0 +1,129 @@
+{mb 'tou'}
+<style type="text/css">
+	#wode1{
+		display: none;
+	}
+	
+	.tb-hexiaochuli:before{color: #EACF02;}
+	.cell-left .tb-ai-wallet:before{color: #d87049;}
+	.tb-youhuiquan:before{color: #ABC327;}
+	.tb-jifen:before{color: #DFB5B7;}
+	.tb-shoucang:before{color: #7F1874;}
+	.tb-dizhi:before{color: #DB9019;}
+	.cell-left .tb-tixian1:before{color: #943e3e;}
+	.tb-kefu1:before{color: #FF6E97;}
+</style>
+
+<div id="wode1">
+	
+
+<div class="baibeijing">
+			<img src="{$_W['yuming']}gongyong/images/jianbian-yuan_01.jpg" width="100%">
+			  <a href="{php echo UXK('wode/shezhi')}"> <i class="icon-setting she"></i></a> 
+			<div class="huangguan">
+				<img :src="shu.touxiang" style="width:80px;height:80px;border-radius:50%;border:4px solid #f6310e;margin: 0 auto;">
+				<div class="huiyuan">
+					<img src="{$_W['yuming']}gongyong/images/huangguan_06.png" >
+					<h5 >{{shu.dengjiming}}</h5>
+				</div>
+			</div>
+		</div>
+		<div class="yue">
+			<h2 class="">我的余额</h2>
+			<h3 class="">￥{{shu.yu_e}}</h3>
+		</div>
+		
+		<div class="m-grids-5 dai" >
+		    <a href="{php echo UXK('dingdan/dingdan',array('zhuangtai'=>'daifu'))}" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/wode-icon_03.png'}">
+		        <div class="grids-txt">待付款</div>
+		    </a>
+		    <a href="{php echo UXK('dingdan/dingdan',array('zhuangtai'=>'daifa'))}" class="grids-item">
+		       	<img src="{php echo $_W['yuming'].'gongyong/images/wode-icon_10.png'}">
+		        <div class="grids-txt">待发货</div>
+		    </a>
+		    <a href="{php echo UXK('dingdan/dingdan',array('zhuangtai'=>'daishou'))}" class="grids-item">
+		       <img src="{php echo $_W['yuming'].'gongyong/images/wode-icon_12.png'}">
+		        <div class="grids-txt">待收货</div>
+		    </a>
+		    <a href="{php echo UXK('dingdan/dingdan',array('zhuangtai'=>'wangcheng'))}" class="grids-item">
+		       <img src="{php echo $_W['yuming'].'gongyong/images/wode-icon_05.png'}">
+		        <div class="grids-txt">已完成</div>
+		    </a>
+		    <a href="tel" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/wode-icon_07.png'}">
+		        <div class="grids-txt">退换货</div>
+		    </a>		    
+		</div>
+		<div class="m-cell">
+			<a class="cell-item" href="{php echo UXK('dingdan/hexiao_jilu')}" v-if='shu.hexiao'>
+		        <div class="cell-left"><i class="cell-icon tb-hexiaochuli"></i>核销员</div>
+		        <div class="cell-right cell-arrow">我核销的记录</div>
+		    </a>
+		    <a class="cell-item" href="{php echo UXK('wode/qianbao')}">
+		        <div class="cell-left"><i class="cell-icon tb-ai-wallet"></i>我的钱包</div>
+		        <div class="cell-right cell-arrow">{{shu.yu_e}}元</div>
+		    </a>
+		    <a class="cell-item" href="{php echo UXK('wode/quan',array('c'=>'wode'))}">
+		        <div class="cell-left"><i class="cell-icon tb-youhuiquan"></i>优惠券</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		    <a class="cell-item" href="{php echo UXK('wode/jifen')}">
+		        <div class="cell-left"><i class="cell-icon tb-jifen"></i>我的积分</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		    <a class="cell-item" href="{php echo UXK('wode/shoucang')}">
+		        <div class="cell-left"><i class="cell-icon tb-shoucang"></i>收藏商品</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		    <a class="cell-item" href="{php echo UXK('wode/dizhi')}">
+		        <div class="cell-left"><i class="cell-icon tb-dizhi"></i>收货地址</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		    <a class="cell-item" href="{php echo UXK('wode/tixian')}">
+		        <div class="cell-left"><i class="cell-icon tb-tixian1"></i>余额提现</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		    
+		    <a class="cell-item" href="{php echo UXK('wode/kefu')}">
+		        <div class="cell-left"><i class="cell-icon tb-kefu1"></i>联系客服</div>
+		        <div class="cell-right cell-arrow"></div>
+		    </a>
+		</div>
+		
+		
+</div>	
+		<div style="width: 100%;height: 53px;">
+			
+		</div>
+		
+		{mb daohang}
+		{mb js}
+		<script type="text/javascript">
+			new Vue({
+				el:"#wode1",
+				data:{
+					shu:{}
+				},
+				beforeCreate:function(){
+					var that=this;
+		            $z.post("{$_W['url']}",function(shu){
+		                 if(shu.shi==1){
+		                      that.shu=shu.shu;                
+		                 }else{
+		                   $z.toast(shu.shu);
+		                 }
+		            });
+					$z.dendai();
+					$('#wode1').show();
+				},
+				mounted:function(){
+					
+					$z.gb_dendai(); 
+					
+				},
+			});
+		</script>
+		
+		
+{mb jiao}

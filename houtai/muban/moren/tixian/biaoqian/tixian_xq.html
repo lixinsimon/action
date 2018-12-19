@@ -1,0 +1,65 @@
+
+  <div class="alert alert-info">
+    <font class="m-r-sm">提现单号：{$tixian['hao']}</font>
+  	<font class="m-r-sm">申请日期：{php echo date('Y-m-d H:i:s',$tixian['shijian'])}</font>
+		<font class="m-r-sm">昵称：{$tixian['nicheng']}</font>	</br>
+		<font class="m-r-sm">手机号：{$tixian['dianhua']}</font>	
+  </div>
+  <div class="alert alert-info">  	
+    <font class="m-r-sm">提现方式：
+    	{if $tixian[fangshi]=='bao'}
+    		<span>
+    			支付宝
+    		</span>
+    	{/if}
+    	{if $tixian[fangshi]=='xin'}
+    		<span>
+    			微信
+    		</span>
+    	{/if}
+    	{if $tixian[fangshi]=='ka'}
+    		<span>
+    			银行卡
+    		</span>
+    	{/if}
+    </font>
+  	<font class="m-r-sm">卡号或账号：{$tixian[zhanghao]}</font>
+	</br>	
+ </div>  
+  <div class="table-responsive b b-light">
+	<table class="table m-b-none">
+	  <thead>	  	
+	    <tr>
+          <th width="30%" style="min-width:350px;overflow: hidden;">提现信息</th>
+          <th width="15%" style="vertical-align:middle;text-align:center">提现金额</th>          
+	      </tr>
+	  </thead>
+	  <tbody>
+		  <tr class="panel-heading">
+         	 <td colspan="7">订单编号：{$tixian[hao]}&nbsp;&nbsp; 下单时间：{php echo date('Y-m-d H:i:s',$tixian['shijian'])}</td>
+     	  </tr>      
+      <tr>
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{$sp['tu']}" class="dker" >
+          </span>
+          <font class="m-l-xs" style="line-height:40px;">店铺昵称：{$tixian[nicheng]}</font>
+        </td>
+        <td style="vertical-align:middle;text-align:center">{$tixian[jine]}</td>   
+      </tr>
+	  </tbody>
+	</table>
+  </div>
+  <br>
+  <div class="form-group m-t-md">
+  <input type="hidden" id="tixianid" value="{$tixian['id']}" />
+  <input type="hidden" id="leibie" value="{$tixian['leibie']}" />
+  <input type="hidden" id="zhuangtai" value="{$tixian['zhuangtai']}" />
+  {if empty($tixian[zhuangtai])}
+	<a href="{php echo UHK('tixian/index',array('c'=>'xingqingpost','id'=>$tixian['id']))}" class="btn btn-success m-l-md">审核通过</a>
+	{/if}
+	{if $tixian[zhuangtai]!=5 and $tixian[zhuangtai]<20}
+	<a href="{php echo UHK('tixian/index')}" class="btn btn-danger">返回</a>
+	{/if}
+  </div>
+

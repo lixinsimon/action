@@ -1,0 +1,42 @@
+<?php
+DengLu();
+if($cao=='moren'){
+	$DangQianYe=max(1,$_J['page']);
+	$quTiaoShu=10;	
+	$tiaojian='danyuan='.$_W['danyuan'];		
+	$sql='select * from '.BM('zw_shangcheng_jiesuanbao')." where $tiaojian order by shijian DESC Limit ". ($DangQianYe - 1) * $quTiaoShu . ',' . $quTiaoShu;	
+	$lie=ChaQuan($sql);	
+	$shu=ChaZongShu('select count(*) from '.BM('zw_shangcheng_jiesuanbao')." where $tiaojian");		
+	$fenye=FenYe($shu,$DangQianYe,$quTiaoShu);		
+}elseif($cao=='bianji'){
+	$shu=Qu('zw_shangcheng_jiesuanbao',array('id'=>$_J['id']));
+	$shu['shouyi']=ZiFuChuan_Zhuan_ShuZu($shu['shouyi']);
+}elseif($cao=='xin'){
+	$shu['danyuan']=$_W['danyuan'];
+	$shu['biaoti']=trim($_J['biaoti']);
+	$shu['tu']=trim($_J['tu']);
+	$shu['tian']=trim($_J['tian']);
+	$shu['shouyi']=ShuZu_Zhuan_ZiFuChuan($_J['shouyi']);
+	$shu['qitou']=intval($_J['qitou']);		
+	if(empty($shu['biaoti'])){
+		XiaoXi('标题不能为空');
+	}
+	if(empty($shu['tian'])){
+		XiaoXi('投资天数');
+	}
+	if(empty($shu['shouyi'])){
+		XiaoXi('每日收益比例');
+	}
+	if($_J['id']){
+		Gai('zw_shangcheng_jiesuanbao',$shu,array('id'=>$_J['id'],'danyuan'=>$_W['danyuan']));
+		XiaoXi('更新成功');
+	}
+	$shu['shijian']=SHIJIAN;
+	ChaRu('zw_shangcheng_jiesuanbao',$shu);
+    XiaoXi('新增成功',UHK('jiesuanbao',array('c'=>'bianji','id'=>ChaRuID())));
+}elseif($cao=='shanchu'){
+	ShanChu('zw_shangcheng_jiesuanbao',array('id'=>$_J['id'],'danyuan'=>$_W['danyuan']));
+	XiaoXi('删除成功');
+}
+mb("index");
+?>

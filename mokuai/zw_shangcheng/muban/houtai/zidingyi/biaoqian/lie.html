@@ -1,0 +1,68 @@
+<div class="table-responsive m-t-md" style="overflow:visible;">
+    <table class="table table-striped b-light">
+        <thead>
+            <tr>
+                <th width="4%">ID</th>
+                <th width="15%">标题</th>
+                <th width="15%">类型</th>               
+                <th width="10%">设置默认</th>
+                <th width="20%">创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop $shu $s}
+            <tr>
+                <td style="vertical-align:middle;">{$s['id']}</td>
+                <td style="vertical-align:middle;">{$s[biaoti]}</td>
+                <td style="vertical-align:middle;">{$s['leixing']}</td>                
+                <td style="vertical-align:middle;">
+                	<label class="switch">
+	                    <input type="checkbox" id="{$s['id']}" name="{$s['leixing']}" {if $s['zhuangtai']==1} checked="checked" value="1" {/if}
+	                    {if $s['zhuangtai']!=1} value="0" {/if} onclick="clickCheckbox({$s['id']},'{$s['leixing']}')" >
+	                    <span></span>
+                	</label>
+                </td>
+                <td style="vertical-align:middle;">{php echo date('Y-m-d H:i:s',$s['shijian'])}</td>
+                <td style="vertical-align:middle;overflow:visible;">
+                     <!--<a   title="复制连接" class="btn btn-default btn-sm js-clip"><i class="fa fa-link"></i></a> -->
+                    <a class="btn btn-default btn-sm" href="{php echo UHK('zidingyi',array('c'=>'bianji','id'=>$s['id']))}" title="编辑"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-default  btn-sm" href="{php echo UHK('zidingyi',array('c'=>'shanchu','id'=>$s['id']))}" title="删除" onclick="return confirm('确定要删除该页面吗？');">
+                    	<i class="fa fa-remove"></i>
+                    </a>
+                </td>
+            </tr>
+            {/loop}
+        </tbody>
+    </table>
+</div>
+<div class="text-left">
+    {$fenye}
+</div>
+<script>
+        function clickCheckbox(id, leixing) {
+            var data = {
+                id: id,
+//              val: $("#" + id).val(),
+                leixing: leixing
+            }
+            $.ajax({
+                url: "{php echo UHK('zidingyi',array('c'=>'shemo'))}",
+                data: data,
+                type: "POST",
+                success: function (data) {
+//                  if (data != 0) {
+//                      location="{php echo UHK('zidingyi')}";
+//                  }
+//                  $("#" + id).val(1);
+                     var name=$("#" + id).attr("name");
+                    $("input[type='checkbox'][name="+name+"]").each(function(){
+						if($(this).attr('id')!=id){
+							$(this).removeAttr("checked");
+						}
+                	});
+                   
+                }    
+            })
+        }
+    </script>

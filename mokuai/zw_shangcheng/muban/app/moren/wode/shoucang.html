@@ -1,0 +1,259 @@
+{mb 'tou'}
+<style>
+.checkbox +.checkbox_icon:after {
+    font-family: 'YDUI-INLAY';
+    font-size: .44rem;
+    content: '\e604';
+    color: #D9D9D9;
+}
+
+.checked +.checkbox_icon:after{
+	content: '\e601';
+	color: #000;
+}
+#shouchan{
+	display: none;
+}
+.zw-shenglue2{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+.shou_name{
+	white-space: initial !important;
+	height: 1rem;
+	width: 57%;
+	line-height: .5rem;
+}
+.shou_jia{
+	color: #000000;
+}
+.shou_jia span{
+	color: #B1B1B1;
+	margin-left: .2rem;
+	font-size: .24rem;
+}
+.youxia{
+	position: absolute;
+	right: .3rem;
+	bottom: .2rem;
+	background: #000;
+	color: #fff;
+	border-radius:.25rem ;
+	height: .5rem;
+	line-height: .5rem;
+	width: 1.7rem;
+	text-align: center;
+}
+
+.zw-zhang-xuan{
+		width: 100%;
+		height: .6rem;
+		font-size: .26rem;
+		
+	}
+	.zw-zhang-xuan div{
+		text-align: center;
+		width: 50%;
+		height: .8rem;
+		line-height: .8rem;
+		float: left;
+		border-bottom: .05rem solid #f7f7f7 !important;
+	}
+	.hei{
+		position: relative;
+		background: #fff;
+	}
+	.hei:after{
+		content: ' ';
+		position: absolute;
+		bottom: 0;
+		width: 26%;
+		height: .07rem;
+		background: #000000;
+		left: 50%;
+		margin-left: -13%;
+		
+	}
+	
+	.bai{
+		background: #fff;
+		color: #000;
+	}
+
+
+</style>
+	<div id="shouchan">
+
+		
+<div class="touhang">
+	<a onclick="$z.go()"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div >我的收藏</div>
+</div>	
+	
+		<div class="zw-zhang-xuan">
+			<div :class="zhuangtai==0?'hei':'bai'" @click="qiehuan(0)" >全部收藏</div>
+			<div :class="zhuangtai==1?'hei':'bai'" @click="qiehuan(1)" >即将发售 </div>
+		</div>
+		
+			<label class="cell-item shouchan" v-for="(L,index) in lie" >				
+		        <span class="cell-left shou_z"  style="width: 85%;" @click="dakai(L.href)">
+		        	<img :src="L.tu" />
+		        	<div class="shou_name zw-shenglue2">
+		        		{{L.ming}}<font color="red" v-if='!L.zhuangtai'> (库存不足已删除)</font>
+		        	</div>
+		        	<div class="shou_jia">
+		        		￥{{L.jiage}}<span >￥{{L.yuanjia}}</span>
+		        	</div>
+		        </span>				
+		        <div class="youxia"  @click="dakai(L.href)">查看详情</div>
+		        <!--<label class="cell-right" v-if='L.zhuangtai'>
+		            <input type="checkbox" @click="Xuan(index)" :gid='L.id'  ref='xuan' class="checkbox checked" checked="checked" />		           
+		            <i class="checkbox_icon"></i>
+		        </label>
+		         <label class="cell-right" v-else>		          
+		            <input type="checkbox" class="checkbox" ref='xuan' disabled="disabled"/>		                     
+		        </label>-->
+		    </label>
+	    <!--<div class="dibu shang_di" >			
+			<label class="cell-right" style="padding-right:0px;position: relative;width: 35%;">								
+	            <input  class="shoudi checkbox checked" type="checkbox" ref='quanxuan' @click="QuanXuan" checked="checked" />
+	            <i class="checkbox_icon shoudi"></i>
+	            <span class="shouzhi">全选</span>				
+		    </label>
+		    <div style="position: absolute;right:0px;bottom: 0px;width: 65%;">
+				<a  class="dibu_d" style="background:#000;width: 35%;float: right;" @click="ShanChu">取消收藏</a>
+		       
+		     </div>
+		</div>-->
+		</div>
+{mb js}
+<script type="text/javascript">
+
+new Vue({
+	el:"#shouchan",
+	data:{
+		lie:[],
+  		bian:{"jie":false,"txt":"编辑"},
+  		zongjia:0,zhuangtai:0
+	},
+	methods:{
+		QuanXuan:function(){			
+			var x=this.$refs.xuan;
+			var checked=this.$refs.quanxuan.getAttribute('checked');
+			if(!checked){
+				this.$refs.quanxuan.setAttribute('checked','checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox checked');
+			}else{				
+				this.$refs.quanxuan.removeAttribute('checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox');
+			}
+			for(i in x){
+				var disabled= this.$refs.xuan[i].getAttribute('disabled');	
+				if(checked){
+			        this.$refs.xuan[i].removeAttribute('checked','checked');	
+			        this.$refs.xuan[i].setAttribute('class','checkbox');
+			    }else if(!disabled){
+			    	this.$refs.xuan[i].setAttribute('checked','checked');
+			    	this.$refs.xuan[i].setAttribute('class','checkbox checked');
+			    }
+			}
+			
+		},
+		qiehuan:function(e){
+					var that=this;
+					that.zhuangtai=e;
+//					that.ye=1;
+//					$z.post("{$_W['url']}",{ye:that.ye,jitiao:that.jitiao,zhuangtai:e,bi:'yu_e'},function(ret){            	
+//		            	if(ret.shi==1){	            
+//		            	
+//			            }              	
+//		            });
+		},
+		dakai:function(href){
+            	$z.dakai(href);
+        },
+		Xuan:function(index){
+			var checked=this.$refs.xuan[index].getAttribute('checked');
+			if(checked){
+				this.$refs.xuan[index].removeAttribute('checked');
+				this.$refs.xuan[index].setAttribute('class','checkbox');				
+			}else{
+				this.$refs.xuan[index].setAttribute('checked','checked');
+				this.$refs.xuan[index].setAttribute('class','checkbox checked');
+			}
+			var x=this.$refs.xuan;
+			var all=true;
+			for(i in x){
+				var c=this.$refs.xuan[i].getAttribute('checked');
+				if(!c && all){
+			       all=false;
+			    }
+			}			
+			if(all){
+				this.$refs.quanxuan.setAttribute('checked','checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox checked');
+			}else{				
+				this.$refs.quanxuan.removeAttribute('checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox');
+			}
+		},
+		
+		ShanChu:function(){
+			var x=this.$refs.xuan;	
+			var that=this;
+			var ids=[];
+			var id='';
+			for(i in x){
+				var c=this.$refs.xuan[i].getAttribute('checked');
+				if(c){
+					ids[i]=this.$refs.xuan[i].getAttribute('gid');
+				}else{
+					ids_No[i]=i;
+				}
+			}
+			
+			for(i in ids){
+				id+=ids[i]+"_";
+			}
+			
+			$z.post("{php echo UAK('wode/shoucang')}",{c:'shanchu',ids:id},function(s){
+				 $z.toast(s.shu);
+				 that.jiazai();
+			});
+			
+		},
+		jiazai:function(){
+			var that=this;
+			$z.post("{php echo UAK('wode/shoucang')}",function(shu){	
+				if(shu.shi==1){			
+					that.lie=shu.shu;			
+				}else{		
+					that.lie=[];
+					$z.toast(shu.shu);
+				}
+			});		
+		}
+		
+	},
+	beforeCreate:function(){
+		var that=this;
+		$z.post("{php echo UAK('wode/shoucang')}",function(shu){	
+			if(shu.shi==1){			
+				that.lie=shu.shu;			
+			}else{				
+				$z.toast(shu.shu);
+			}
+			$("#shouchan").show();
+		});		
+	},	
+	
+	
+});
+
+</script>
+
+{mb jiao}
+
+	

@@ -1,0 +1,21 @@
+
+
+<div class="z_img tu clearfix" style="padding: 0.2rem;padding-top: 0rem; padding-bottom: 0; background: #FFFFFF;">
+	<div id="shangpin2" class="kuang" style="float: left;width: 49%; margin-top: 0.12rem;" v-for="(item,index) in shu.{$k}.shangpin">
+		<a @click="DaKai('{php echo UAK('xiangqing/index')}&id='+item.id)" style="display: inline-block; background: #eeeeee;">
+			<img :src="item.tu" :height="shu.{$k}.gaodu" style="width: 100%;">
+			<div style=" background: #ededed;font-size: .3rem;width: 100%;">
+				<p>{{item.ming}}</p>
+				<section style="width: 100%;">
+					<span class="tejia" style="font-size: 0.35rem;float: left;">￥{{item.jiage}}</span>
+					<i class="yuanjia" style="font-size: 0.2rem;line-height: .5rem;">￥{{item.yuanjia}}</i>
+				</section>
+				
+			</div>
+			<div class="vipjia">
+				<span>VIP价</span>￥{{item.chengben}}&nbsp;
+			</div>
+			<span v-if="item.songliquan>0" class="son" style="right: .1rem;bottom: .2rem;"><img style="margin-top: -.01rem;" src="{$_W['yuming']}gongyong/images/li.png" /><em>x</em>{{item.songliquan}}</span>
+		</a>
+	</div>
+</div>

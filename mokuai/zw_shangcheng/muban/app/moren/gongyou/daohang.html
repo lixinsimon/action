@@ -1,0 +1,38 @@
+<footer class="m-tabbar dibu">
+	<a href="{php echo UAK('index')}" class="tabbar-item {if $_J['k']=='index'}tabbar-active{/if}">
+		<span class="tabbar-icon">
+			<img src="{php echo $_J['k']=='index'?$_W['gongyou'].'/images/tu1.png':$_W['gongyou'].'/images/tu11.png'}" style="height: .5rem;"/>
+            <!--<i class="icon-home"></i>-->
+        </span>
+		<span class="tabbar-txt">首页</span>
+	</a>
+
+	<a href="{php echo UAK('liebiao/fenlei')}" class="tabbar-item {if $_J['k']=='liebiao'}tabbar-active{/if}">
+		<span class="tabbar-icon">
+			<img src="{php echo $_J['k']=='liebiao'?$_W['gongyou'].'/images/tu2.png':$_W['gongyou'].'/images/tu22.png'}" style="height: .5rem;"/>
+            <!--<i class="tubiao tb-fenlei" style="height:.54rem;"></i>-->
+        </span>
+		<span class="tabbar-txt">分类</span>
+	</a>
+	<a href="{php echo UAK('dingdan/gouwuche')}" class="tabbar-item {if $_J['k']=='dingdan'}tabbar-active{/if}">
+		<span class="tabbar-icon">
+			<img src="{php echo $_J['k']=='dingdan'?$_W['gongyou'].'/images/tu3.png':$_W['gongyou'].'/images/tu33.png'}" style="height: .5rem;"/>
+            <!--<i class="icon-shopcart-outline"></i>-->
+        </span>
+		<span class="tabbar-txt">购物袋</span>
+	</a>
+	<!--<a href="{php echo UAK('fenxiao/vipqu')}" class="tabbar-item {if $_J['k']=='fenxiao'}tabbar-active{/if}">
+		<span class="tabbar-icon">
+		                <i style="height:.54rem;" class="tubiao tb-fenxiao1"></i>
+		            </span>
+		<span class="tabbar-txt">VIP区</span>
+	</a>-->
+	
+	<a href="{php echo UAK('wode/index')}" class="tabbar-item {if $_J['k']=='wode'}tabbar-active{/if}">
+		<span class="tabbar-icon">
+			<img src="{php echo $_J['k']=='wode'?$_W['gongyou'].'/images/tu4.png':$_W['gongyou'].'/images/tu44.png'}" style="height: .5rem;"/>
+        	<!--<i class="icon-ucenter-outline"></i>-->
+        </span>
+		<span class="tabbar-txt">我的</span>
+	</a>
+</footer>

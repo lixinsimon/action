@@ -1,0 +1,55 @@
+{mb 'tou'}
+		<header class="m-navbar">
+		    <a onclick="$z.go()" class="navbar-item">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		        <span class="navbar-title">修改密码</span>
+		    </div>
+		</header>
+	    <div class="cell-right gaimi"><input type="text" class="cell-input" name="oldpass" placeholder="请输入原密码" autocomplete="off" /></div>
+	    <div class="cell-right gaimi"><input type="password" class="cell-input" name="newpass" placeholder="请输入新密码" autocomplete="off" /></div>
+	    <div class="cell-right gaimi"><input type="password" class="cell-input" name="newpass2" placeholder="请输入再次输入密码" autocomplete="off" /></div>
+		<button type="submit" class="btn-block btn-danger dibu btn-zhai">保存</button>
+{mb js}
+	<script type="text/javascript">
+			$('.btn-zhai').click(function(){
+				var oldpass = $('[name=oldpass]').val();
+				var newpass = $('[name=newpass]').val();
+				var newpass2 = $('[name=newpass2]').val();
+				if (!oldpass) {
+					$z.toast("请输入原始密码");
+					return false;
+				}
+				if (!newpass) {
+					$z.toast("请输入新密码");
+					return false;
+				}
+				if (!newpass2) {
+					$z.toast("请再输入新密码");
+					return false;
+				}
+				if (newpass != newpass2) {
+					$z.toast("重复密码不一致");
+					return false;
+				}
+
+				$z.post('http://test.heodo.com/app/index.php?d=12&m=gf_shangcheng',{
+					k : "wode",
+					x : "xiugaimima",
+					c : "xiugaimima",
+					newpass : newpass,
+					oldpass : oldpass
+				},function(shu, err){
+					if (shu.shi == 1) {
+						$z.toast("修改成功");
+           				 $('input').val('');
+					} else {
+						$z.toast(shu.shu);
+					}
+				});
+		});
+	</script>
+{mb jiao}
+
+	

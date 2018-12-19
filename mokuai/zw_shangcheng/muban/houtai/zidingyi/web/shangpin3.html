@@ -1,0 +1,26 @@
+<!--<style type="text/css">
+	.yuanjia {
+		text-decoration:line-through;
+		font-size: 0.16rem;
+		display: block;
+		color: #b9b9b9;
+	}
+	
+	.tejia {
+		color: #ff0300;
+	}
+</style>-->
+
+<div class="z_img tu clearfix shangping3" style="padding: 2px 0.2rem; background: #FFFFFF;">
+	<div class="kuang1" style="float: left;width: 32%;margin-top: 0.2rem;overflow: hidden;position: relative;" v-for="(item,index) in shu.{$k}.shangpin">
+		<a @click="DaKai('{php echo UAK('xiangqing/index')}&id='+item.id)" style="display: inline-block; background: #eeeeee;">
+			<img :src="item.tu" :height="shu.{$k}.gaodu" style="width: 100%;">
+			<div style="padding-bottom:0.2rem;width: 100%;">
+				<p>{{item.ming}}</p>
+				<i class="yuanjia" style="text-decoration:line-through; font-size: 12px;display: block;color: #b9b9b9;">￥{{item.yuanjia}}</i>
+				<span class="tejia" style="color: #ff0300;">￥{{item.jiage}}</span>
+				<span v-if="item.songliquan>0" class="son"><img style="margin-top: -.01rem;" src="{$_W['yuming']}gongyong/images/li.png" /><em>x</em>{{item.songliquan}}</span>
+			</div>
+		</a>
+	</div>
+</div>

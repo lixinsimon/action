@@ -1,0 +1,346 @@
+<form action="" method="post" class="form-horizontal" role="form">
+	<input type="hidden" value="jichu" name="c" />
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">开启创客</label>
+    <div class="col-sm-10">
+      <select data-required="true" class="form-control parsley-validated" name="cenji">
+          <option value="0" {if empty($jichupeizhi['cenji'])}selected{/if}>关闭创客</option>
+          <option value="1" {if $jichupeizhi['cenji']==1}selected{/if}>开启1级</option>
+          <option value="2" {if $jichupeizhi['cenji']==2}selected{/if}>开启2级</option>
+          <option value="3" {if $jichupeizhi['cenji']==3}selected{/if}>开启3级</option>
+          <option value="4" {if $jichupeizhi['cenji']==4}selected{/if}>开启4级</option>
+          <option value="5" {if $jichupeizhi['cenji']==5}selected{/if}>开启5级</option>
+          <option value="6" {if $jichupeizhi['cenji']==6}selected{/if}>开启6级</option>
+          <option value="7" {if $jichupeizhi['cenji']==7}selected{/if}>开启7级</option>
+      </select>
+      <div class="help-block">默认余额比例请到<a href="#" class="text-info">【创客角色】</a>进行设置</div>
+    </div>
+  </div>
+
+  <!--<div class="line line-dashed b-b line-lg"></div>
+
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">成为创客条件</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="tiaojian" value="0" {if empty($jichupeizhi['tiaojian'])}checked="checked"{/if}>
+          <i></i> 无条件
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+   <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="tiaojian" value="5" {if $jichupeizhi['tiaojian']==5}checked="checked"{/if}>
+          <i></i>选定商品
+        </label>
+      </div>
+    </div>
+  </div>-->
+
+  
+
+  <!--<div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">完善资料</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="wanshanziliao" value="1" {if $jichupeizhi['wanshanziliao']==1}checked="checked"{/if}>
+          <i></i> 需要
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="wanshanziliao" value="0" {if empty($jichupeizhi['wanshanziliao'])}checked="checked"{/if}>
+          <i></i> 不需要
+        </label>
+      </div>
+      <span class="help-block">创客在创客或提现时是否必须完善资料</span>   
+    </div>
+  </div>-->
+  <!--<div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">是否需要审核</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shenhe" value="1" {if $jichupeizhi['shenhe']==1}checked="checked"{/if}>
+          <i></i>
+          需要
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shenhe" value="0" {if empty($jichupeizhi['shenhe'])}checked="checked"{/if}>
+          <i></i>
+          不需要
+        </label>
+      </div>
+      <span class="help-block">以上条件达到后，是否需要审核才能成为真正的创客</span>   
+    </div>
+  </div>-->
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">提现额度</label>
+    <div class="col-sm-10">
+        <input type="text" name="tixian_e" class="form-control" value="{$jichupeizhi['tixian_e']}">
+        <span class="help-block">提现的起提额度，满多少元以上才可提现</span>
+    </div>
+  </div>
+  <!--<div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">开启提现到余额</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="tixiandaoyu_e" value="1" {if $jichupeizhi['tixiandaoyu_e']==1}checked="checked"{/if}>
+          <i></i> 开启
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="tixiandaoyu_e" value="0" {if empty($jichupeizhi['tixiandaoyu_e'])}checked="checked"{/if}>
+          <i></i> 关闭
+        </label>
+      </div>
+      <span class="help-block">是否允许用户余额提现到余额</span>   
+    </div>
+  </div>-->
+  <!--<div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">结算天数</label>
+    <div class="col-sm-10">
+        <input type="text" name="jiesuantian" class="form-control" value="{$jichupeizhi['jiesuantian']}">
+        <span class="help-block">当订单完成后的n天后，余额才能申请提现</span>
+    </div>
+  </div>  -->
+   <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">购买资格Banner</label>
+    <div class="col-sm-8">
+      {php echo ShangTu('fenxiaoyindao',$jichupeizhi['fenxiaoyindao'])}
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">说明</label>
+    <div class="col-sm-8">
+      {php echo BianJiQi('xieyi',$jichupeizhi['xieyi'])}
+    </div>
+  </div>
+  <!--<div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label"><font class="text-danger">*</font>注册面头部图片</label>
+    <div class="col-sm-10">
+      {php echo ShangTu('toubu')}
+    </div>
+  </div>-->
+  <!--<div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">按钮文字</span>
+        <input type="text" class="form-control" name="wenzi[woyaofenxiao]" value="我要创客">
+        <span class="input-group-addon">商品详情页面“我要创客”按钮文字,建议使用4个汉字</span>
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">创客名称</span>
+        <input type="text" class="form-control" name="wenzi[fenxiaoshang]" value="创客">
+      </div>
+    </div>
+  </div>
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">我的小店</span>
+        <input type="text" class="form-control" placeholder="我的小店">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">创客中心</span>
+        <input type="text" class="form-control" placeholder="创客中心">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">成为创客</span>
+        <input type="text" class="form-control" placeholder="成为创客">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">提现</span>
+        <input type="text" class="form-control" placeholder="提现">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">余额</span>
+        <input type="text" class="form-control" placeholder="余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">创客余额</span>
+        <input type="text" class="form-control" placeholder="创客余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">累计余额</span>
+        <input type="text" class="form-control" placeholder="累计余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">可提现余额</span>
+        <input type="text" class="form-control" placeholder="可提现余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">已申请余额</span>
+        <input type="text" class="form-control" placeholder="已申请余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">待打款余额</span>
+        <input type="text" class="form-control" placeholder="待打款余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">未结算余额</span>
+        <input type="text" class="form-control" placeholder="未结算余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">成功提现余额</span>
+        <input type="text" class="form-control" placeholder="成功提现余额">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">余额明细</span>
+        <input type="text" class="form-control" placeholder="余额明细">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">创客订单</span>
+        <input type="text" class="form-control" placeholder="创客订单">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">我的团队</span>
+        <input type="text" class="form-control" placeholder="我的团队">
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+          <div class="input-group m-b">
+            <div class="input-group-addon">团队级别名称</div>
+            <input type="text" name="texts[c1]" class="form-control" value="一级" style="width:100px;">
+            <input type="text" name="texts[c2]" class="form-control" value="二级" style="width:100px;">
+            <input type="text" name="texts[c3]" class="form-control" value="三级" style="width:100px;">
+        </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"></label>
+    <div class="col-sm-10">
+      <div class="input-group m-b">
+        <span class="input-group-addon">我的客户</span>
+        <input type="text" class="form-control" placeholder="我的客户">
+      </div>
+    </div>
+  </div>-->
+
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+        <input type="submit" name="submit" value="提交" class="btn btn-danger col-lg-1">
+    </div>
+  </div>
+</form>

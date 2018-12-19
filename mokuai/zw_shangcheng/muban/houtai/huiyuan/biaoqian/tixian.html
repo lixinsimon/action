@@ -1,0 +1,71 @@
+<form method="post" class="form-horizontal" id="form1">
+	<div class="panel">
+		<div class="table-responsive panel-body">
+			<table class="table table-hover">
+				<input type="hidden" name="c" value="shanchu">
+				<thead class="navbar-inner">
+					<tr>
+						<!--<th style="width:44px;">删?</th>-->
+						<th style="width:150px;">姓名</th>
+						<th style="width:150px;">订单号</th>
+						<th style="width:200px;">账号/开户行</th>
+						<th style="width:150px;">金额</th>
+						<th style="width:180px;">时间</th>
+						<th style="width:100px;">打款方式</th>
+						<th style="text-align:right; width:80px ;">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					{loop $lie $l}
+					<tr>
+						<!--<td><input type="checkbox" name="id[]" value="{$l['id']}" class=""></td>-->
+						<td title="{$l['nicheng']}">
+							<img src="{$l['touxiang']}" style="width:30px;height:30px;padding1px;border:1px solid #ccc"> {$l['nicheng']} </td>
+						<td title="{$l['dingdanhao']}">{$l['dingdanhao']} </td>
+						<td>
+						
+							<span class="label label-primary">账号：{$l['yinhang']}</span>						
+							<br>
+							<span class="label label-warning">姓名：{$l['ming']}</span>						
+							{if $l['kaifuhang']}
+							<br>
+							<span class="label label-warning">开户行：{$l['kaifuhang']}</span>
+							{/if}
+							
+						</td>
+						<td>
+							<span class="label label-primary">金  额：{$l['zhi']}元</span>
+							
+						</td>
+						<td>
+							申请：{php echo date('Y-m-d H:i:s',$l['shijian'])}<br> 打款：{php echo date('Y-m-d H:i:s',$l['dakuanshijian'])} </td>
+						<td>
+							{if $l['dakuanfangshi']=='weixin'}
+							微信
+							{else}
+							银行/支付宝
+							{/if}							
+						</td>
+						<td class="text-right" style="overflow:visible;">
+							<div class="btn-group">
+								{if $l['zhuangtai']}
+								<a class="btn btn-default">已打款</a>
+								{else}
+								 <a href="{php echo UHK('huiyuan',array('c'=>'tixian_dakuan','id'=>$l['id']))}" title="打款" class="btn btn-success" onclick="return confirm('确认打款');">打款</a>								
+								{/if}
+							</div>
+						</td>
+					</tr>
+				   {/loop}
+					<!--<tr>
+						<td><input type="checkbox" name="" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});"></td>					
+						<td colspan="9"><input type="submit" name="submit" class="btn btn-primary" value="删除"></td>
+					</tr>-->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div>
+		{$fenye}
+	</div>
+</form>

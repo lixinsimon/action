@@ -1,0 +1,83 @@
+{if $_J['c']!='daochudingdan'}
+{mb tou}
+<style type="text/css">
+  .liebiao .dingd_xiangqing{display:none;}
+  .liebiao li a{padding:9px 20px 10px;}
+  li{list-style:none;}
+</style>
+<section class="vbox">
+  {mb dingbu_caidan}
+  <section>
+    <section class="hbox stretch">
+      {mb zuobu}
+      <!-- 内容开始 -->
+      <section id="content">
+        <section class="vbox">
+          <section class="scrollable m-t padder-lg">
+            <!-- right tab -->
+            <section class="panel panel-default">
+              <header class="panel-heading text-right bg-light">
+                <ul class="nav nav-tabs liebiao">
+                  <li {if empty($_J['zhuangtai'])}class="active"{/if}><a href="{php echo USK('dingdan')}" >全部订单({$zongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='daifu'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'daifu'))}" >待付款({$daifuzongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='daifa'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'daifa'))}" >待发货({$daifazongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='daishou'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'daishou'))}" >待收货({$daishouzongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='wancheng'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'wancheng'))}" >已完成({$wanchengzongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='quxiao'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'quxiao'))}" >已关闭({$quxiaozongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='tuikuan'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'tuikuan'))}" >申请退款({$tuikuanzongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='yituikuan'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'yituikuan'))}" >已退款({$yituikaunzongshu})</a></li>
+                  <li {if $_J['zhuangtai']=='tuihuo'}class="active"{/if}><a href="{php echo USK('dingdan',array('zhuangtai'=>'tuihuo'))}" >退换货({$tuihuo})</a></li>
+                  <li class="dingd_xiangqing"><a >订单详情</a></li>
+                </ul>
+              </header>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <!-- 全部订单 -->
+                  <div class="tab-pane fade active in">
+                    {mb "biaoqian/dingdan"}
+                  </div>
+                  <div id="gong9" ></div>
+                </div>
+              </div>
+            </section>
+            <!-- right tab -->
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>
+{mb 'biaoqian/daochu'}
+{mb 'biaoqian/querenfahuo'}
+{mb 'biaoqian/yongjin'}
+<!-- 查看物流 -->
+<div class="modal fade" id="kuaidi">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3>查看物流</h3></div>
+      <div class="modal-body " id="neirong" style="max-height:500px;overflow: auto;padding: 0px 15px;">
+
+      </div>
+      <div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</a></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $(".chakan").click(function(){
+        $(".liebiao li").removeClass("active");
+        $(".liebiao .dingd_xiangqing").show().addClass("active");
+        $.post('{php echo USK("dingdan",array("c"=>"dingdan_xq"))}',{'id':$(this).attr('data_id')},function(data){
+            $("#gong9").html(data);
+        });
+    });
+    function ChaKuaiDi(kuaidiid,kuaidihao){
+        $.post('{php echo USK("dingdan")}',{kuaidiid:kuaidiid,kuaidihao:kuaidihao,c:'kuaidi'},function(shu){
+            $('#kuaidi ').find('#neirong').html(shu);
+        });
+    }
+</script>
+{mb jiao}
+ {else}
+ {mb 'biaoqian/dingdan_xqdy'}
+ {/if}

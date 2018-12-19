@@ -1,0 +1,23 @@
+{mb 'tou'}
+
+	<header class="m-navbar">
+		    <a  class="navbar-item" onclick="$z.go()">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		   		   联系客服	
+		    </div>
+		    
+	</header>
+	<div class="mui-card-content" id="lianxifangshi" >
+		
+	</div>
+	{mb js}
+	<script>
+		$z.post('{php echo UXK("wode/kefu")}',function(shu){
+			$('#lianxifangshi').html(shu.shu);
+		},'json');
+	</script>
+{mb jiao}
+
+	

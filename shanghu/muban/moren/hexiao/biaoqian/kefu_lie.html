@@ -1,0 +1,143 @@
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <a class="accordion-toggle" style="display:block;" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+      筛选
+    </a>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body text-sm">
+      <form action="" method="get" class="form-horizontal" role="form">     
+				<input type="hidden" name="d" value="{$_W['danyuan']}" />
+				<input type="hidden" name="k" value="{$_J['k']}" />
+				<input type="hidden" name="x" value="{$_J['x']}" />
+				<div class="form-group">
+          <label class="col-sm-2 control-label" for="input-id-1">ID</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-id-1" name="id">
+          </div>
+        </div>       
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-id-1">昵称/姓名/手机</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-id-1" name="yonghu">
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="table-responsive m-t-lg">
+	<form action="" method="post" class="form-horizontal" role="form">
+		<input type="hidden" name="c" value="shanchu" />
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="2%">删？</th>
+        <th width="5%">ID</th>
+        <th width="20%">会员</th>          
+        <th width="20%">姓名/手机</th>      
+        <th width="20%">注册时间</th>
+        <th >操作</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{loop $huiyuan $hy}
+      <tr>
+        <td>
+          <label class="i-checks">
+            <input type="checkbox" name="id[]" value="{$hy['id']}"><i></i>
+          </label>
+        </td>
+        <td>{$hy['id']}</td>         
+        <td style="vertical-align:middle;">
+		        <span class="thumb-sm pull-left m-l-xs">                        
+		          <img src="{php echo JueDuiUrl($hy['touxiang'])}" style="width: 40px;height: 40px;" class="dker" alt="{$hy['nicheng']}">
+		        </span>
+            <div class="m-l-xs" style="line-height:40px;height: 40px;overflow:hidden; padding-left:5px;">{php echo empty($hy['nicheng'])?$hy['zhanghao']:$hy['nicheng']}</div>
+        </td>         
+        <td>
+        	<p>{$hy['xingming']}</p>
+        	<p>{$hy['shouji']}</p>
+        </td>        
+        <td>{php echo date("Y-m-d H:i:s",$hy['shijian'])}</td>
+        <td>
+            <a href="{php echo US('hexiao', array('c'=>'shanchu_kefu', 'hyid'=>$hy['id'],'hexiao_id'=>$_J['hexiao_id']))}" onclick="return confirm('确认删除？');return false;" class="btn btn-default  btn-sm" title="删除"><i class="fa fa-times"></i></a>
+       </td>
+      </tr> 
+      {/loop}
+      
+        <td colspan="22">
+          <button  class="btn btn-danger padder-lg"  type="button" id="tianjiakefu" data-toggle="modal" data-target="#kefu">添加客服</button>
+        </td>       
+      </tr>      
+    </tbody>
+  </table>
+  </form>
+  <div class="text-left">
+    {$fenye}
+  </div>
+</div>
+<!-- 选择上级弹出层 -->
+<div class="modal fade" id="kefu">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <h4 class="modal-title" id="myModalLabel">选择商户</h4>
+	    </div>
+	    <div class="modal-body">
+	      <form class="form-horizontal" role="form">
+	        <div class="form-group">
+	          <div class="col-sm-6">
+	            <div class="input-group">
+	              <input type="text" id="sousuo" class="form-control" placeholder="昵称|姓名|手机">
+	              <span class="input-group-btn">
+	                <button class="btn btn-default" id="so" type="button">搜索</button>
+	              </span>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="table-responsive">
+	        <table class="table table-striped b-light">
+	          <tbody id="tianjiahang">
+	          	
+	          </tbody>
+	        </table>
+	      </div>  
+	      </form>
+	    </div>
+	    <div class="modal-footer m-t-none">
+	      <div class="pull-right">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<script>
+		$("#so").click(function() {
+			var txt = $("#sousuo").val();    
+					$('#tianjiakefu').empty();
+					$.post('{php echo US("hexiao",array("c"=>"so_kefu"))}', {
+						'guanjianci': txt
+					}, function(shangji1) {	
+						if(shangji1.shi==1){
+							for(var i = 0, a = shangji1.shu.length; i < a; i++) {
+							   $('#tianjiahang').prepend('<tr><td style="vertical-align:middle;"><span class="thumb-sm pull-left m-l-xs"><img src="'+shangji1.shu[i].touxiang+'" class="dker"></span></td><td>' + shangji1.shu[i].nicheng + '</td><td style="vertical-align:middle;"><a href="{php echo US("hexiao",array("c"=>"tianjiankefu","id"=>$_J["hexiao_id"]))}&hyid='+shangji1.shu[i].id+'" class="btn btn-primary pull-right">选择</a></td></tr>');
+						  }
+						}
+						
+					},'json');
+			
+		
+	});
+</script>

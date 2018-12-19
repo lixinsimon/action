@@ -1,0 +1,58 @@
+ {mb tou}
+<section class="vbox">
+	{mb dingbu_y}
+	<section>
+		<section class="hbox stretch">
+			{mb zuobu}
+			<!-- 内容开始 -->
+			<section id="content">
+				<section class="vbox">
+					<section class="scrollable m-t padder-lg">
+						<h2 class="font-thin m-b" style="font-size:20px;">APP接口</h2>
+						<form class="form-horizontal" method="post">
+							<input type="hidden" name="c" value="tianjia" />
+							<!-- 短信接口开始 -->
+							<div class="panel panel-default">
+								<div class="panel-heading">下载地址									
+								<div class="panel-body">
+									<div class="form-group">
+
+				                      <label class="col-sm-2 control-label">开启注册下载APP</label>			
+				                      <div class="col-sm-10">  
+				                        <div class="radio-inline i-checks">				
+				                          <label>				
+				                            <input type="radio" name="app[kaiguan]" value="1" {if $pz['kaiguan']}checked="checked"{/if}>				
+				                            <i></i>开启				
+				                          </label>				
+				                        </div>				
+				                        <div class="radio-inline i-checks">
+				                        	<label>				
+				                            <input type="radio" name="app[kaiguan]" value="0" {if empty($pz['kaiguan'])}checked="checked"{/if}>				
+				                            <i></i> 关闭				
+				                          </label>				
+				                        </div>				
+				                        <span class="help-block">开启注册成功下载APP</span>   				
+				                      </div>				
+				                    </div>   
+									<div class="form-group">
+										<label class="col-sm-2 control-label">链接</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="app[url]" value="{$pz['url']}">
+										</div>
+									</div>							
+                                       
+									</div>
+									 <input  type="submit" value="提交" class="btn btn-danger">
+								</div>								 
+							</div>
+							
+						</form>
+					</section>
+				</section>
+			</section>
+			<!-- 内容结束 -->
+		</section>
+	</section>
+</section>
+
+{mb jiao}

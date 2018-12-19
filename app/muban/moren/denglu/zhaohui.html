@@ -1,0 +1,150 @@
+{mb tou}
+<style type="text/css">
+	.mibao{
+		width: 100%;
+		line-height: .8rem;
+		font-size: .3rem;
+		padding-left: .2rem;
+		box-sizing: border-box;
+	}
+	#mb{
+		display: none;
+	}
+	.zw-denglu{
+		background: #fff;
+	}
+	#chongzhi{
+		width: 34%;
+		background: #000;
+		color: #fff;
+		border-radius: 0;
+		margin-left: 33%;
+	}
+	.zw-denglu-kuai,.zw-denglu-kuai1{
+		border-radius: 0;
+	}
+	.zw-denglu-tu{
+		height: 26%;
+		margin-top: 10%;
+	}
+</style>
+
+<div class="zw-denglu" id="den">
+		
+		<div class="zw-denglu-tu">
+			<img src="{php echo $_W['yuming'].'./gongyong/images/zhiwei_logo.png'}" />
+		</div>
+		<div class="zw-denglu-kuai" style="">
+			<p class="new-p" style="line-height: .6rem;">输入新密码</p>
+		</div>
+		<div class="zw-denglu-kuai" style="background: #eee;margin-top: 0;">
+			<input class="zw-denglu-input" type="password"  id="mima" placeholder="" />
+		</div>
+		<div class="zw-denglu-kuai" style="">
+			<p class="new-p" style="line-height: .6rem;">确认新密码</p>
+		</div>
+		<div class="zw-denglu-kuai" style="background: #eee;margin-top: 0;">
+			<input class="zw-denglu-input" type="password"  id="querenmima" placeholder="" />
+		</div>
+		
+		<div class="zw-denglu-kuai"  style="background: #eee;margin-top: .3rem;">
+			<input class="zw-denglu-input" pattern="[0-9]*" type="number" id="shouji" placeholder="手机" />
+		</div>
+		
+		<div class="zw-denglu-kuai1" style="background: #eee;margin-top: .3rem;">
+			<input class="zw-denglu-input zw-juzhong"  id="yanzheng"  type="text" placeholder="输入验证码" />
+		</div>
+		<div  class="zw-denglu-an" id="fasong" style="margin-top: .3rem;margin-left: 0;background: #000;color: #fff;border-radius: 0;width: 20%;">获取短信</div>
+		
+		<div class="zw-denglu-kuai zw-juzhong"  type="submit" id="chongzhi" style="margin-top: .5rem;">确定</div>
+		<!--<div class="zw-denglu-di" v-if="tx.kai">{{tx.zi}}</div>-->
+		
+</div>
+{mb js}
+<script type="text/javascript">
+		$(function(){
+				$('#den').show();
+//			$('#shouji').bind('input propertychange', function() { 
+//				
+//				if($('#shouji').val().length==11){
+//					if(!(/^1(3|4|5|7|8)\d{9}$/.test($('#shouji').val()))){
+//			    		$z.toast('手机号输入有误', 'none', 1000);
+//			    		return false;
+//			   		}
+//					$z.post('{php echo UA("denglu/zhaohui")}',{c:'cha',shouji:$('#shouji').val()},function(data){
+//						if(data.shi==1){		
+//							$('#mb').show();
+//							$('.mibao').text('问题：'+data.shu.wen);
+//						}else{
+//							$z.toast(data.shu);
+//						}
+//					},'json');
+//				}
+//			})
+		})
+	
+		
+		$('#chongzhi').click(function(){			
+   			if($('#shouji').val()==""){
+	   			$z.toast('请输入手机号', 'none', 1000);
+	    	}else if(!(/^1(3|4|5|7|8)\d{9}$/.test($('#shouji').val()))){
+	    		$z.toast('手机号输入有误', 'none', 1000);
+	   		}else if($('#yanzheng').val()==""){
+	   			$z.toast('请输入验证码', 'none', 1000);
+	   		}else if($('#mima').val()==""){
+	   			$z.toast('请输入密码', 'none', 1000);
+    		}else if($('#mima').val().length>20||$('#mima').val().length<6){
+    			$z.toast('请设置6~20位数的密码', 'none', 1000);
+    		}else if($('#querenmima').val()!=$('#querenmima').val()){
+    			$z.toast('两次密码不同', 'none', 1000);
+    		}else{	
+				$z.post('{php echo UA("denglu/zhaohui")}',{
+					shouji:$('#shouji').val(),
+					yanzheng:$('#yanzheng').val(),
+					da:$('#da').val(),
+					mima:$('#mima').val(),
+					querenmima:$('#querenmima').val(),
+				},function(data){
+					if(data.shi==1){		
+					   window.location.href="{php echo UA('denglu')}";
+					}
+				   $z.toast(data.shu);
+				},'json');
+			}
+		});
+		
+		$('#fasong').click(function(){	
+				if($('#shouji').val()==""){
+			   		$z.toast('请输入手机号', 'none', 1000);
+			    }else if(!(/^1(3|4|5|7|8)\d{9}$/.test($('#shouji').val()))){
+					$z.toast('手机号输入有误', 'none', 1000);
+		   		}else{
+				var shi=$(this).attr('shi');	
+				if(shi==1){
+					return false;
+				}else{
+					$(this).attr('shi',1);
+					var i=60;	
+					var stop=setInterval(function(){
+						i--;
+						$('#fasong').html(i+'s');
+						if(i<=0){
+							clearInterval(stop);
+							$('#fasong').removeAttr('shi').html('发送');
+						}
+					},1000);
+					$z.post('{php echo UA("denglu/zhaohui")}',{c:'yanzhengma',shouji:$('#shouji').val()},function(shu){
+						if(shu.shi==1){
+							$z.toast(shu.shu);
+						}else{
+						   $z.toast(shu.shu);
+						   $('#fasong').removeAttr('shi').html('发送');	
+						}
+					},'json');
+					
+				}
+			}
+		});
+		
+</script>
+{mb jiao}

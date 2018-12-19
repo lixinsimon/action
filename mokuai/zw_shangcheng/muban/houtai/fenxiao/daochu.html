@@ -1,0 +1,60 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+		<meta name=ProgId content=Excel.Sheet>
+		<meta name=Generator content="Microsoft Excel 11">
+	</head>
+	<style>
+		td {
+			border: 1px solid #ccc;
+			padding: 5px 10px;
+			text-align: center;
+		}
+	</style>
+	<body>
+		<table  border=1 cellpadding=0 cellspacing=0 width="100%"  >
+			<tr>
+				<td>序列</td>
+			   <td>会员ID</td>
+			   <td>昵称</td>
+			   <td>推荐人</td>
+			   <td>推广会员（人）</td>
+			   <td>推广VIP（人）</td>
+			   <td>推广创客（人）</td>
+			   <td>姓名</td>
+			    <td>手机号</td>
+			    <td>身份角色</td>
+			    <td>余额</td>
+			    <td>积分</td>
+		       	<td>勋章</td>
+		       	<td>礼券</td>
+		       	<td>关注状态</td>
+		      	<td>注册时间</td>
+		       	<!--<td>成为VIP时间</td>-->
+			</tr>
+			{php $k=1}
+			{loop $hy $h}
+                <tr>
+                   <td>{php echo $k++}</td>
+				   <td>{$h['id']}</td>
+				   <td>{$h['nicheng']}</td>
+				   <td>{$h['fuji_id']}</td>
+				    <td>{$h['zong']['hui']}</td>
+				     <td>{$h['zong']['vip']}</td>
+				      <td>{$h['zong']['chuang']}</td>
+				    <td>{$h['xingming']}</td>
+				     <td>{$h['shouji']}</td>
+				      <td>{$h['dengjiming']}</td>
+				       <td>{$h['yongjin']}</td>
+				        <td>{$h['jifen']}</td>
+				          <td>{$h['xunzhang']}</td>
+				         <td>{$h['liquan']}</td>
+				         <td>{if $h['guanzhu']==1}关注{else}未关注{/if}</td>
+				            <td>{$h['shijian']}</td>
+				           <!--<td>{$h['fenxiaoshijian']}</td>-->
+               </tr>
+             {/loop}
+		</table>
+	</body>
+
+</html>

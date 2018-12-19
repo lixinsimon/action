@@ -1,0 +1,892 @@
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<div class="panel panel-default">
+
+		<div class="panel-heading"> 设置货到支付开关</div>
+
+		<div class="panel-body">
+
+			<div class="form-group">
+
+				<label class="col-sm-2 control-label">货到支付</label>
+
+				<div class="col-sm-10">
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="huodao[kaiguan]" value="1" {if $zhifu['huodao']['kaiguan']}checked="checked"{/if}>
+
+                            <i></i>开启
+
+                          </label>
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="huodao[kaiguan]" value="0" {if empty($zhifu['huodao']['kaiguan'])}checked="checked"{/if}>
+
+                            <i></i>关闭
+
+                          </label>
+
+					</div>
+
+					<span class="help-block">是否支持货到付款</span>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- 设置余额支付开始 -->
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">设置余额支付开关 </div>
+
+		<div class="panel-body">
+
+			<div class="form-group">
+
+				<label class="col-sm-2 control-label">余额支付</label>
+
+				<div class="col-sm-10">
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="yu_e[kaiguan]" value="1" {if $zhifu['yu_e']['kaiguan']}checked="checked"{/if}>
+
+                            <i></i>开启
+
+                          </label>
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="yu_e[kaiguan]" value="0" {if empty($zhifu['yu_e']['kaiguan'])}checked="checked"{/if}>
+
+                            <i></i> 关闭
+
+                          </label>
+
+					</div>
+
+					<span class="help-block">是否使用粉丝中心的余额直接支付</span>
+
+				</div>
+
+			</div>		
+
+		</div>
+
+	</div>
+
+	<!-- 设置余额支付结束 -->
+
+	<!-- 设置支付宝支付开关开始 -->
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">设置支付宝支付开关</div>
+
+		<div class="panel-body">
+
+			<div class="form-group">
+
+				<label class="col-sm-2 control-label">支付宝无线支付</label>
+
+				<div class="col-sm-10">
+
+					<div class="alert alert-success">
+
+						<i class="fa fa-ok-sign"></i>您的支付宝账号必须支持手机网页即时到账接口, 才能使用手机支付功能,
+						<a href="#" class="alert-link">申请及详情请查看这里</a>.
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="alipay[kaiguan]" value="1" {if $zhifu['alipay']['kaiguan']}checked="checked"{/if}>
+
+                            <i></i>开启
+
+                          </label>
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="alipay[kaiguan]" value="0" {if empty($zhifu['alipay']['kaiguan'])}checked="checked"{/if}>
+
+                            <i></i>关闭
+
+                          </label>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">收款支付宝账号</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="alipay[account]" class="form-control" value="{$zhifu['alipay']['account']}">
+
+						<span class="help-block">如果开启兑换或交易功能，请填写真实有效的支付宝账号，用于收取用户以现金兑换交易积分的相关款项。如账号无效或安全码有误，将导致用户支付后无法正确对其积分账户自动充值，或进行正常的交易对其积分账户自动充值，或进行正常的交易。 如您没有支付宝帐号，<a href="#" class="alert-link text-info">请点击这里注册</a></span>
+
+					</div>
+
+				</div>
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">合作者身份</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="alipay[partner]" class="form-control" value="{$zhifu['alipay']['partner']}">
+
+						<span class="help-block"></span>
+
+					</div>
+				</div>
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">校验密钥</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="alipay[secret]" class="form-control" value="{$zhifu['alipay']['secret']}">
+
+						<span class="help-block">支付宝签约用户可以在此处填写支付宝分配给您的交易安全校验码，此校验码您可以到支付宝官方的商家服务功能处查看</span>
+
+					</div>
+				</div>
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">APP_ID</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="alipay[app_id]" class="form-control" value="{$zhifu['alipay']['app_id']}">
+
+						<span class="help-block"></span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">支付宝公钥</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="alipay[alipay_public_key]" class="form-control" value="{$zhifu['alipay']['alipay_public_key']}">
+
+						<span class="help-block">支付宝提供公钥</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">(RSA2)私密钥</label>
+
+					<div class="col-sm-10">
+
+						<textarea name="alipay[apprsa]" class="form-control" style="height:200px;">{$zhifu['alipay']['apprsa']}</textarea>
+
+						<span class="help-block">APP密钥:<a href="#">生成RSA密钥</a>,开发者私钥;此处有APP用户填写</span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- 设置支付宝开关结束 -->
+
+	<!--  设置微信支付开关开始-->
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+
+			设置微信支付开关
+
+		</div>
+
+		<div class="panel-body">
+
+			<div class="form-group">
+
+				<label class="col-sm-2 control-label">微信支付</label>
+
+				<div class="col-sm-10">
+
+					<div class="alert alert-success">
+
+						<i class="fa fa-ok-sign"></i>你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能
+						<a href="#" class="alert-link">申请及详情请查看这里</a>.
+
+					</div>
+
+					<div class="alert alert-success">
+
+						<p>支付授权目录一: {$_W['yuming']}zhifu/</p>
+
+						<p>支付授权目录二: {$_W['yuming']}app/</p>
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="wechat[kaiguan]" value="1" {if $zhifu['wechat']['kaiguan']}checked="checked"{/if}>
+
+                            <i></i>开启
+
+                          </label>
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="wechat[kaiguan]" value="0" {if empty($zhifu['wechat']['kaiguan'])}checked="checked"{/if}>
+
+                            <i></i> 关闭
+
+                          </label>
+
+					</div>
+
+					<span class="help-block">是否使用微信支付</span>
+
+				</div>
+
+			</div>
+
+			<div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">支付账号</label>
+
+					<div class="col-sm-10">
+
+						<p class="form-control-static">{$_W['dy']['mingcheng']}</p>
+
+						<input type="hidden" name="wechat[account]" value="{$zhifu['wechat']['account']}">
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">身份标识<br>(appId)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" class="form-control" name="wechat[appid]" value="{$zhifu['wechat']['appid']}">
+
+						<span class="help-block">公众号身份标识 <a href="#" class="alert-link text-info">请通过修改公众号信息来保存</a></span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">身份密钥<br>(appSecret)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" class="form-control" name="wechat[appsecret]" value="{$zhifu['wechat']['appsecret']}">
+
+						<span class="help-block">公众平台API(参考文档API 接口部分)的权限获取所需密钥Key <a href="#" class="alert-link text-info">请通过修改公众号信息来保存</a></span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group" id="mchid">
+
+					<label class="col-sm-2 control-label">微信支付商户号(MchId)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="wechat[mchid]" class="form-control" value="{$zhifu['wechat']['mchid']}">
+
+						<span class="help-block">公众号支付请求中用于加密的密钥Key</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group s" id="apikey">
+
+					<label class="col-sm-2 control-label">商户支付密钥(API密钥)</label>
+
+					<div class="col-sm-10">
+
+						<div class="input-group">
+
+							<input type="text" name="wechat[apikey]" id="apikey" class="form-control" maxlength="32" value="{$zhifu['wechat']['apikey']}">
+
+							<span onclick="tokenGen();" style="cursor:pointer" class="input-group-addon">生成新的</span>
+
+						</div>
+
+						<span class="help-block">此值需要手动在腾讯商户后台API密钥保持一致。<a href="#" class="alert-link text-info">查看设置教程</a></span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="certs">
+
+				<div class="form-group" style="margin-right:0px;">
+
+					<label class="col-sm-2 control-label">CERT证书文件</label>
+
+					<div class="col-sm-10">
+
+						<input type="file" class="filestyle" data-icon="false" name="wechat[apiclient_cert]" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+						<div class="bootstrap-filestyle" style="display: inline;">
+
+							<span class="help-block">
+
+                            	{if $zhifu['wechat']['apiclient_cert']}
+
+                            	<span class="label label-success">已上传</span> {else}
+
+							<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 apiclient_cert.pem 文件</span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="form-group" style="margin-right:0px;">
+
+					<label class="col-sm-2 control-label">KEY密钥文件</label>
+
+					<div class="col-sm-10">
+
+						<input type="file" class="filestyle" data-icon="false" name="wechat[apiclient_key]" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+						<div class="bootstrap-filestyle" style="display: inline;">
+
+							<span class="help-block">
+
+                            	{if $zhifu['wechat']['apiclient_key']}
+
+                            	<span class="label label-success">已上传</span> {else}
+
+							<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 apiclient_key.pem 文件</span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="form-group" style="margin-right:0px;">
+
+					<label class="col-sm-2 control-label">ROOT文件</label>
+
+					<div class="col-sm-10">
+
+						<input type="file" class="filestyle" data-icon="false" name="wechat[rootca]" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+						<div class="bootstrap-filestyle" style="display: inline;">
+
+							<span class="help-block">
+
+                            	{if $zhifu['wechat']['rootca']}
+
+                            	<span class="label label-success">已上传</span> {else}
+
+							<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 rootca.pem 文件 </span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- 设置微信支付开关结束 -->
+
+	<!-- 设置APP微信支付开关开始 -->
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">设置APP微信支付开关</div>
+
+		<div class="panel-body">
+
+			<div class="form-group">
+
+				<label class="col-sm-2 control-label">微信支付</label>
+
+				<div class="col-sm-10">
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="appwechat[kaiguan]" value="1" {if $zhifu['appwechat']['kaiguan']}checked="checked"{/if}>
+
+                            <i></i> 开启
+
+                          </label>
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="appwechat[kaiguan]" value="0" {if empty($zhifu['appwechat']['kaiguan'])}checked="checked"{/if}>
+
+                            <i></i>关闭
+
+                          </label>
+
+					</div>
+
+					<span class="help-block">是否使用APP微信支付</span>
+
+				</div>
+
+			</div>
+
+			<div class="nbox">
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">身份标识<br>(appId)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" class="form-control" name="appwechat[key]" value="{$zhifu['appwechat']['key']}">
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">身份密钥<br>(appSecret)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" class="form-control" name="appwechat[secret]" value="{$zhifu['appwechat']['secret']}">
+
+					</div>
+
+				</div>
+
+				<div class="form-group" id="mchid">
+
+					<label class="col-sm-2 control-label">微信支付商户号(MchId)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="appwechat[mchid]" class="form-control" value="{$zhifu['appwechat']['mchid']}">
+
+						<span class="help-block">公众号支付请求中用于加密的密钥Key</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group" id="apikey">
+
+					<label class="col-sm-2 control-label">商户支付密钥(API密钥)</label>
+
+					<div class="col-sm-10">
+
+						<div class="input-group">
+
+							<input type="text" name="appwechat[apikey]" id="apikey" class="form-control" maxlength="32" value="{$zhifu['appwechat']['apikey']}">
+
+							<span onclick="tokenGen('app');" style="cursor:pointer" class="input-group-addon">生成新的</span>
+
+						</div>
+
+						<span class="help-block"><a href="#" class="alert-link text-info">申请APP微信支付</a></span>
+
+					</div>
+
+				</div>
+
+				<div id="certs">
+
+					<div class="form-group" style="margin-right:0px;">
+
+						<label class="col-sm-2 control-label">CERT证书文件</label>
+
+						<div class="col-sm-10">
+
+							<input type="file" class="filestyle" name="appwechat[apiclient_cert]" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+							<div class="bootstrap-filestyle" style="display: inline;">
+
+								<span class="help-block">
+
+	                            	{if $zhifu['appwechat']['apiclient_cert']}
+
+	                            	<span class="label label-success">已上传</span> {else}
+
+								<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 apiclient_cert.pem 文件</span>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="form-group" style="margin-right:0px;">
+
+						<label class="col-sm-2 control-label">KEY密钥文件</label>
+
+						<div class="col-sm-10">
+
+							<input type="file" class="filestyle" name="appwechat[apiclient_key]" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+							<div class="bootstrap-filestyle" style="display: inline;">
+
+								<span class="help-block">
+
+	                            	{if $zhifu['appwechat']['apiclient_key']}
+
+	                            	<span class="label label-success">已上传</span> {else}
+
+								<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 apiclient_key.pem 文件</span>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="form-group" style="margin-right:0px;">
+
+						<label class="col-sm-2 control-label">ROOT文件</label>
+
+						<div class="col-sm-10">
+
+							<input type="file" class="filestyle" name="appwechat[rootca]" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+							<div class="bootstrap-filestyle" style="display: inline;">
+
+								<span class="help-block">
+
+	                            	{if $zhifu['appwechat']['rootca']}
+
+	                            	<span class="label label-success">已上传</span> {else}
+
+								<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 rootca.pem 文件 </span>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- 设置APP微信支付开关结束 -->
+	<!-- 小程序微信支付开关开始 -->
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading">设置小程序微信支付</div>
+
+		<div class="panel-body">
+
+			<div class="form-group">
+
+				<label class="col-sm-2 control-label">是否开户</label>
+
+				<div class="col-sm-10">
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="xiaochengxu[kaiguan]" value="1" {if $zhifu['xiaochengxu']['kaiguan']}checked="checked"{/if}>
+
+                            <i></i> 开启
+
+                          </label>
+
+					</div>
+
+					<div class="radio-inline i-checks">
+
+						<label>
+
+                            <input type="radio" name="xiaochengxu[kaiguan]" value="0" {if empty($zhifu['xiaochengxu']['kaiguan'])}checked="checked"{/if}>
+
+                            <i></i>关闭
+
+                          </label>
+
+					</div>
+
+					<span class="help-block">是否使用小程序微信支付</span>
+
+				</div>
+
+			</div>
+
+			<div class="nbox">
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">身份标识<br>(appId)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" class="form-control" name="xiaochengxu[appid]" value="{$zhifu['xiaochengxu']['appid']}">
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-sm-2 control-label">身份密钥<br>(appSecret)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" class="form-control" name="xiaochengxu[secret]" value="{$zhifu['xiaochengxu']['secret']}">
+
+					</div>
+
+				</div>
+
+				<div class="form-group" id="mchid">
+
+					<label class="col-sm-2 control-label">微信支付商户号(MchId)</label>
+
+					<div class="col-sm-10">
+
+						<input type="text" name="xiaochengxu[mchid]" class="form-control" value="{$zhifu['xiaochengxu']['mchid']}">
+
+						<span class="help-block">公众号支付请求中用于加密的密钥Key</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group" id="apikey">
+
+					<label class="col-sm-2 control-label">商户支付密钥(API密钥)</label>
+
+					<div class="col-sm-10">
+
+						<div class="input-group">
+
+							<input type="text" name="xiaochengxu[apikey]" id="apikey" class="form-control" maxlength="32" value="{$zhifu['xiaochengxu']['apikey']}">
+
+							<span onclick="tokenGen('xiaochengxu');" style="cursor:pointer" class="input-group-addon">生成新的</span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div id="certs">
+
+					<div class="form-group" style="margin-right:0px;">
+
+						<label class="col-sm-2 control-label">CERT证书文件</label>
+
+						<div class="col-sm-10">
+
+							<input type="file" class="filestyle" name="xiaochengxu[apiclient_cert]" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+							<div class="bootstrap-filestyle" style="display: inline;">
+
+								<span class="help-block">
+
+	                            	{if $zhifu['xiaochengxu']['apiclient_cert']}
+
+	                            	<span class="label label-success">已上传</span> {else}
+
+								<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 apiclient_cert.pem 文件</span>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="form-group" style="margin-right:0px;">
+
+						<label class="col-sm-2 control-label">KEY密钥文件</label>
+
+						<div class="col-sm-10">
+
+							<input type="file" class="filestyle" name="xiaochengxu[apiclient_key]" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+							<div class="bootstrap-filestyle" style="display: inline;">
+
+								<span class="help-block">
+
+	                            	{if $zhifu['xiaochengxu']['apiclient_key']}
+
+	                            	<span class="label label-success">已上传</span> {else}
+
+								<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 apiclient_key.pem 文件</span>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="form-group" style="margin-right:0px;">
+
+						<label class="col-sm-2 control-label">ROOT文件</label>
+
+						<div class="col-sm-10">
+
+							<input type="file" class="filestyle" name="xiaochengxu[rootca]" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+							<div class="bootstrap-filestyle" style="display: inline;">
+
+								<span class="help-block">
+
+	                            	{if $zhifu['xiaochengxu']['rootca']}
+
+	                            	<span class="label label-success">已上传</span> {else}
+
+								<span class="label btn-warning">未上传</span> {/if} 下载证书 cert.zip 中的 rootca.pem 文件 </span>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- 小程序微信支付开关结束 -->
+	   <div class="form-group col-sm-12">
+          <input name="do-submit" type="submit" value="提交" class="btn btn-danger col-lg-1">        
+        </div>
+	
+
+
+</form>
+<script>
+
+  	function tokenGen(shui) {  		
+
+		var letters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+		var token = '';
+
+		for(var i = 0; i < 32; i++) {
+
+			var j = parseInt(Math.random() * (31 + 1));
+
+			token += letters[j];
+
+		}
+
+		if(shui=='app'){
+
+			$(':text[name="appwechat[apikey]"]').val(token);
+
+		}else if(shui=='xiaochengxu'){
+			$(':text[name="xiaochengxu[apikey]"]').val(token);
+		}else{
+
+			$(':text[name="wechat[apikey]"]').val(token);
+
+		}
+
+		
+
+	}
+
+  // 开关关闭时隐藏问题
+  $('input[type=radio][name$="\[kaiguan\]"]').click(function(){
+    var $this = $(this);
+    if($this.val() == 1){
+        $this.closest(".form-group").nextAll("div").show();
+    }else{
+        $this.closest(".form-group").nextAll("div").hide();
+    }
+  });
+  
+  $('input[type=radio][name$="\[kaiguan\]"]:checked').each(function(){
+	    var $this = $(this);
+	    if($this.val() == 1){
+	        $this.closest(".form-group").nextAll("div").show();
+	    }else{
+	        $this.closest(".form-group").nextAll("div").hide();
+	    }
+  });
+  </script>
+
+ <script src="{$_W['yuming']}gongyong/js/file-input/bootstrap-filestyle.min.js"></script>

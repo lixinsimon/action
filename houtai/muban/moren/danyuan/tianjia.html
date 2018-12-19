@@ -1,0 +1,252 @@
+  {mb tou}
+  <style>
+  	.control-label{color: #333333;font-weight: 600;}
+  </style>
+ <section class="vbox">
+   {mb dingbu}
+    <section>
+      <section class="hbox stretch">
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable padder m-t">
+              <form id="wizardform" class="form-horizontal" method="post" action="" data-validate="parsley" enctype="multipart/form-data">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                      <li {if $cao=='moren'}class="active"{/if}>
+                      	<a href="#step1" data-toggle="tab" aria-expanded="true">设置公众号信息</a>
+                      </li>
+                      <!--<li><a href="#step2" data-toggle="tab">设置权限</a></li>-->
+                      <li {if $cao=='step3'} class="active"{/if} >
+                      	<a href="#step3" data-toggle="tab">引导页面</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="panel-body">
+                    <div class="tab-content">
+                      <div class="tab-pane {if $cao=='moren'}active{/if}" id="step1">
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">公众登录用户</label>
+                            <div class="col-sm-10">
+                              <input type="text" name="mingcheng" class="form-control" data-required="true" value="{$dy['mingcheng']}">
+                              <span class="help-block m-b-none">请输入你的公众平台用户名</span>
+                            </div>
+                          </div>
+                          <div class="line line-dashed b-b line-lg pull-in"></div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-10">
+                              <input class="form-control input-lg m-b" type="text" name="miaoshu" value="{$dy['miaoshu']}">
+                              <span class="help-block m-b-none">用于说明此公众号的功能及用途。</span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">公众号帐号</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="zhanghao" value="{$dy['zhanghao']}">
+                              <span class="help-block m-b-none">填写公众号的帐号，一般为英文帐号</span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">原始ID</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="yuanshiid" value="{$dy['yuanshiid']}">
+                              <span class="help-block m-b-none">在给粉丝发送客服消息时,原始ID不能为空。建议您完善该选项</span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                                <label class="col-sm-2 control-label">公众号类型</label>
+                                <div class="col-sm-10">			                       
+			                            <div class="radio col-sm-2" style="width: 120px;">
+				                          <label>
+				                            <input type="radio" name="leixing" id="leixing" value="4" checked="checked" >
+				                                                         认证服务号
+				                          </label>
+				                        </div>
+				                        <div class="radio col-sm-2" style="width: 120px;">
+				                          <label>
+				                            <input type="radio" name="leixing" id="leixing" value="3">
+				                                                       认证订阅号
+				                          </label>
+				                        </div>
+				                         <div class="radio col-sm-2" style="width: 120px;">
+				                          <label>
+				                            <input type="radio" name="leixing" id="leixing" value="2" >
+				                                                         普通服务号 
+				                          </label>
+				                        </div>
+				                         <div class="radio col-sm-2" style="width: 120px;">
+				                          <label>
+				                            <input type="radio" name="leixing" id="leixing" value="1" >
+				                                                         普通订阅号
+				                          </label>
+				                        </div>
+			                      
+		                        </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">AppId</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="appid" value="{$dy['appid']}">
+                              <span class="help-block m-b-none">请填写微信公众平台后台的AppId</span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">AppSecret</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="appsecret" value="{$dy['appsecret']}">
+                              <span class="help-block m-b-none">请填写微信公众平台后台的AppSecret, 只有填写这两项才能管理自定义菜单</span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">Token</label>
+                            <div class="col-sm-10">
+                              <div class="input-group ">
+																  <input type="text" name="token" value="{$dy['token']}" class="form-control" readonly="readonly" autocomplete="off">
+																  <span class="input-group-btn">
+																	   <button class="btn btn-default" type="button" onclick="tokenGen();">一键生成</button>
+																  </span>
+															</div>
+                              <span class="help-block m-b-none">与公众平台接入设置值一致，必须为英文或者数字，长度为3到32个字符. 请妥善保管, Token 泄露将可能被窃取或篡改平台的操作数据.</span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">EncodingAESKey</label>
+                            <div class="col-sm-10">
+                              <div class="input-group ">
+																  <input type="text" name="encodingaeskey" value="{$dy['encodingaeskey']}" class="form-control" readonly="readonly" autocomplete="off">
+																  <span class="input-group-btn">
+																	   <button class="btn btn-default" type="button" onclick="EncodingAESKeyGen();">一键生成</button>
+																  </span>
+															</div>
+                              <span class="help-block m-b-none">与公众平台接入设置值一致，必须为英文或者数字，长度为43个字符. 请妥善保管, EncodingAESKey 泄露将可能被窃取或篡改平台的操作数据.</span>
+                            </div>
+                          </div>
+                     
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">上传验证文件</label>
+                            <div class="col-sm-10">
+                                 <input type="file" class="filestyle" name="yanzhengwenjian"  data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s">
+
+			                          <div class="bootstrap-filestyle" style="display: inline;">	                             
+		
+			                            <span class="help-block">下载证书 公众号JS授权域名的验证文件 </span>
+		
+			                          </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">二维码</label>
+                            <div class="col-sm-10">
+                              {php echo ShangTu('erweima',$dy['erweima'])}
+                              <span class="help-block m-b-none">只支持JPG图片</span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">LOGO</label>
+                            <div class="col-sm-10 bootstrap-filestyle">
+                              {php echo ShangTu('touxiang',$dy['touxiang'])}
+                              <span class="help-block m-b-none">只支持JPG图片</span>
+                            </div>
+                          </div>
+                          <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                          <div class="form-group m-b-md" style="overflow:hidden;">
+                            <div class="col-sm-4 col-sm-offset-2">
+                              <button type="submit"  name="do-submit" class="btn btn-danger ">提交</button>
+                            </div>
+                          </div>
+                      </div>
+                     
+                      <div class="tab-pane {if $cao=='step3'}active{/if}" id="step3">
+                        <div class="alert alert-info">
+                          您绑定的微信公众号：<font color="darkred"><B>{$dy['mingcheng']}</B></font>&nbsp;&nbsp;&nbsp;请按照下列引导完成配置。
+                        </div>
+                        <section class="comment-list block">
+                          <article id="comment-id-1" class="comment-item">
+                            <a class="pull-left thumb-sm avatar"><span class="circle bg-primary">01</span></a>
+                            <span class="arrow left"></span>
+                            <section class="comment-body panel panel-default">
+                              <div class="panel-body">
+                                <div>登录<a href="#" class="m-l-sm m-r-sm" style="color:#4cb6cb;text-decoration:underline;">微信公众平台</a> 点击左侧菜单最后一项，进入&nbsp;<font style="color:#1ab667;">[&nbsp;开发者中心&nbsp;]</font></div>
+                              </div>
+                            </section>
+                          </article>
+                          <article id="comment-id-1" class="comment-item">
+                            <a class="pull-left thumb-sm avatar"><span class="circle bg-success">02</span></a>
+                            <span class="arrow left"></span>
+                            <section class="comment-body panel panel-default">
+                              <div class="panel-body">
+                                <div>在开发者中心，找到<font style="color:#1ab667;">&nbsp;[&nbsp;服务器配置&nbsp;]</font>栏目下URL和Token设置</div>
+                                <div class="m-t-sm m-l-lg">#将以下链接填入对应输入框</div>
+                                <div class="form-group m-b-xs">
+                                  <label class="col-lg-1 control-label m-l-lg">URL:</label>
+                                  <div class="col-lg-10" style="padding-left:0px;">
+                                    <p class="form-control-static" style="color:red;">{$dy['url']}</p>
+                                  </div>
+                                </div>
+                                <div class="form-group m-b-xs">
+                                  <label class="col-lg-1 control-label m-l-lg">Token:</label>
+                                  <div class="col-lg-10" style="padding-left:0px;">
+                                    <p class="form-control-static" style="color:red;">{$dy['token']}</p>
+                                  </div>
+                                </div>
+                                <div class="form-group m-b-xs">
+                                  <label class="col-lg-1 control-label m-l-lg">EncodingAESKey:</label>
+                                  <div class="col-lg-10" style="padding-left:30px;">
+                                       <p class="form-control-static" style="color:red;">{$dy['encodingaeskey']}</p>
+                                  </div>
+                                </div>
+                                <div class="m-t-sm m-l-lg">#如果以前已填写过URL和Token，请点击<font style="color:#1ab667;">&nbsp;[&nbsp;修改配置&nbsp;]</font>，再填写上述链接</div>
+                                <div class="m-t-sm m-l-lg">#请点击<font style="color:#1ab667;">&nbsp;[&nbsp;启用&nbsp;]</font>，以启用服务器配置</div>
+                              </div>
+                            </section>
+                          </article>
+                        </section>
+                        <!-- / .comment-list -->
+                        <div class="form-group m-b-md" style="overflow:hidden;">
+                          <div class="col-sm-4 col-sm-offset-1">
+                            <a href="{php echo UH('danyuan/tianjia',array('c'=>'yanzheng'))}" class="btn btn-dark">检查是否接入成功</a>
+                            <a href="{php echo UH('danyuan/xinxi',array('d'=>$d['id']))}" class="btn btn-danger">暂不接入，先去查看管理功能</a>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+ <script>
+   if($(':text[name="token"]').val()==''){
+   	   tokenGen();
+   };
+	 if($(':text[name="encodingaeskey"]').val()==''){
+	   	   EncodingAESKeyGen();
+	   };
+ 	function tokenGen() {
+		var letters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		var token = '';
+		for(var i = 0; i < 32; i++) {
+			var j = parseInt(Math.random() * (31 + 1));
+			token += letters[j];
+		}
+		$(':text[name="token"]').val(token);
+	}
+	function EncodingAESKeyGen() {
+		var letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		var token = '';
+		for(var i = 0; i < 43; i++) {
+			var j = parseInt(Math.random() * 61 + 1);
+			token += letters[j];
+		}
+		$(':text[name="encodingaeskey"]').val(token);
+	}
+ </script>
+  <script src="{$_W['yuming']}gongyong/js/file-input/bootstrap-filestyle.min.js"></script>
+  {mb jiao}

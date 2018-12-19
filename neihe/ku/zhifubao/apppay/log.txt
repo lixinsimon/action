@@ -1,0 +1,12 @@
+执行日期：20170120193718
+
+执行日期：20170120193834
+partner=2088711657304701&service=mobile.securitypay.pay
+执行日期：20170121163606
+
+执行日期：20170121164756
+partner=2088711657304701&service=mobile.securitypay.pay&seller_id=heodo@qq.com&out_trade_no=2312312312&subject=ceshi&body=ceshi&total_fee=0.01&notify_url=http://test.heodo.com/zhifu/zhifubao_notify.php&_input_charset=utf-8&payment_type=1&it_b_pay=30m
+执行日期：20170121165508
+partner=2088711657304701&seller_id=heodo@qq.com&out_trade_no=2312312312&subject=ceshi&body=ceshi&total_fee=0.01&notify_url=http://test.heodo.com/zhifu/zhifubao_notify.php&service=mobile.securitypay.pay&payment_type=1&_input_charset=utf-8&it_b_pay=30m
+执行日期：20170121165518
+partner=2088711657304701&seller_id=heodo@qq.com&out_trade_no=23123123122&subject=ceshi&body=ceshi&total_fee=0.01&notify_url=http://test.heodo.com/zhifu/zhifubao_notify.php&service=mobile.securitypay.pay&payment_type=1&_input_charset=utf-8&it_b_pay=30m

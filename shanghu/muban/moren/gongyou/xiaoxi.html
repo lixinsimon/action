@@ -1,0 +1,35 @@
+{mb tou}
+  <style type="text/css">
+  .bg-white a.text-success{
+    color: #1ab667;
+  }
+  .bg-white .text-muted a{
+    color: #428bca !important;
+  }
+</style>
+<section class="vbox">
+    {mb dingbu}
+    <section>
+      <section class="hbox stretch">
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t">
+              <div class="media bg-white wrapper-lg" style="margin:15px 30px;">
+                <span class="pull-left thumb-md text-success" style="margin-right:60px;"><i class="fa fa-check-circle i-5x"></i></span>
+                <div class="media-body m-l-md">
+                  <div class="i-2x"><a href="#" class="text-success">{$xinxi}</a></div>
+                  <div class="i-md text-muted m-t-sm"><a href="{$url}">如果你的浏览器 3s 自动跳转，也可点击此链接..</a></div>
+                </div>
+              </div>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+<script>
+ setTimeout(function(){
+		window.location.href='{$url}';
+	},3000);
+</script>
+{mb jiao}

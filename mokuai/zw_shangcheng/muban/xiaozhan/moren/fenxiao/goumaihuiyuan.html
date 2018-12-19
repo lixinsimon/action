@@ -1,0 +1,55 @@
+{mb 'tou'}
+	<header class="m-navbar">
+		    <a onclick="$z.go()" class="navbar-item">
+		        <i  class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		       	购买会员
+		    </div>
+		    
+	</header>
+	<!--下拉刷新容器-->
+	<section id="J_List" >
+	    <div id="J_ListContent"  class="m-list list-theme1" ></div>
+	</section>
+	
+{mb js}	
+	
+	<script type="text/javascript" charset="utf-8">		
+		/*上拉加载*/
+		var page = 1, pageSize = 4;
+	    $('#J_List').infiniteScroll({
+	        pageSize: pageSize,
+	        initLoad: true,
+	        loadingHtml: '<strong>加载中...</strong>', 
+	        loadListFn: function () {
+	            var def = $.Deferred();
+	            $z.post('{$_W["url"]}',{ye: page, jiazaishu: pageSize},function(ret){	 
+	            	if(ret.shi==1){	            		
+	            	  var html = '';             	
+	            	  for(var i=0;i<ret.shu.length;i++){
+	            	  	html +='<a href="'+ret.shu[i].href+'" class="list-item J_Link" data-page="' + page + '"> ';
+					    html +='<div class="list-img"><img src="'+ret.shu[i].tu+'"></div>';
+					    html +='<div class="list-mes"><h3 class="list-title">'+ret.shu[i].ming+'</h3>';
+					    html +='<div class="list-mes-item"><div>';
+					    html +='<span class="list-price"><em>¥</em>'+ret.shu[i].jiage+'</span>';
+					    html +='<span class="list-del-price">'+ret.shu[i].yuanjia+'</span></div>';
+					    html +='<i class="icon-shopcart" style="color: #ED5001;"></i></div></div></a>';
+	            	  } 	            	 
+					   $('#J_ListContent').append(html);
+	            	}          	  
+	
+                    /* 获取数据，并插入页面后，调用resole，并传入当前获取的记录列表集合 */
+                    def.resolve(ret.shu);
+                    /* 页码自增1 */
+                    ++page;
+	            	
+	            });	           
+	            return def.promise();
+	        }
+	    });
+		
+	</script>
+{mb jiao}
+
+	 

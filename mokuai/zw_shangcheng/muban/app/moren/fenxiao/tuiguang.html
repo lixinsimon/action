@@ -1,0 +1,47 @@
+<html >
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>斑马分享</title>
+		<!--<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/ydui.css" />
+		<link rel="stylesheet" type="text/css" href="{$_W['yuming']}gongyong/css/zhiwei.css" />		
+		-->
+		<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/ydui.css" />
+		<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/zhiwei.css" />
+	</head>
+
+	<body>
+<style>
+	body,html{height:100%;width: 100%;overflow: hidden}
+	img(
+		width:100%  !important;
+	)
+	.navbar-item{
+		position: fixed;
+		top: .2rem;
+		left: .2rem;
+	}
+</style>
+	    <a  class="navbar-item" onclick="$z.go()">
+	        <i class="back-ico"></i>
+	    </a>
+		  
+<header id="header" class="zw-w100 zw-zuo">
+
+</header>
+
+{mb js}
+<script>
+
+$z.post('{php echo UAK("fenxiao/tuiguang")}',function(shu){ 
+	if(shu.shi==1){	
+		$('header').after(shu.shu);		
+	}
+
+});
+
+</script>
+{mb jiao}
+
+	 

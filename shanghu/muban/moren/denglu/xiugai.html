@@ -1,0 +1,31 @@
+{mb tou}
+<style>
+	body{
+		background-image: url("{$_W['yuming']}/shanghu/muban/moren/gongyou/images/bg.png");
+	}
+</style>	
+	<div class="box_login">
+		<h3>
+			登录到您的账号
+		</h3>
+		<span>
+			请输入您的账号和密码
+		</span>
+		<form action="{php echo US('denglu/index')}" method="post" >
+			<div class="form-group">
+			  <label for="exampleInputAccount1">账号</label>
+			  <input name="ming" type="text" class="form-control" id="exampleInputAccount1" placeholder="电子邮件/手机号/用户名">
+			</div>
+			<div class="form-group">
+			  <label for="exampleInputPassword1">密码</label>
+			  <input name="mima" type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+			</div>
+			<button type="submit" class="btn btn-primary" style="width: 100px;">提交</button>			
+		</form>
+		<div style="margin-top: 10px;">
+			<a style="margin-right: 20px;" href="{php echo US('denglu/xiugai')}">忘记密码？</a>
+			<a href="{php echo US('denglu/zhuce')}">注册</a>
+		</div>
+	</div>	
+
+{mb jiao}

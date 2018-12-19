@@ -1,0 +1,94 @@
+{mb 'tou'}
+	<link href="{$_W['yuming']}gongyong/css/mui.picker.css" rel="stylesheet" />
+	<link href="{$_W['yuming']}gongyong/css/mui.poppicker.css" rel="stylesheet" />
+	<style>
+		.ui-alert {
+			text-align:center;
+			font-size:0.9em;
+		}
+		.leixing div#userResult{
+			position:absolute;
+			right:20px;
+			top:0px;
+			color:#333;
+			line-height:44px;
+			z-index:9;
+		}
+	</style>
+	<header class="mui-bar mui-bar-nav">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:#222222"></a>
+		<h1 class="mui-title">我要反馈</h1>
+	</header>
+	<div class="mui-content">
+		<a href="#">
+			<div class="leixing">
+				<span class="mui-pull-left">反馈类型</span>
+				<div id='userResult' class="ui-alert">请选择</div><div id='showUserPicker' class="mui-pull-right">反馈类型反馈类型</div>
+				<div class="mui-pull-right sanjiao"></div>
+			</div>
+		</a>
+		<textarea id="question" class="mui-input-clear question" rows="5" placeholder="反馈内容" style="margin-bottom:0px;border:none;font-size:0.9em;"></textarea>
+		<div class="mui-input-group" style="margin-top:-4px;">
+		    <div class="mui-input-row liuyan">
+		        <label>联系方式:</label>
+		        <input type="text" class="mui-input-clear" placeholder="电话/邮箱" style="font-size:0.9em;width:70%;">
+		    </div>
+		</div>
+	</div>
+	<div style="position:fixed;bottom:0px;left:5px;right:5px;">
+		<button type="button" class="mui-btn mui-btn-block btn-zhai">提交</button>
+	</div>
+	<script src="{$_W['yuming']}gongyong/js/mui.picker.js"></script>
+	<script src="{$_W['yuming']}gongyong/js/mui.poppicker.js"></script>
+	<script>
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				//普通示例
+				var userPicker = new $.PopPicker();
+				userPicker.setData([{
+					value: 'ywj',
+					text: '配送服务'
+				}, {
+					value: 'aaa',
+					text: '意见与反馈'
+				}, {
+					value: 'lj',
+					text: '故障报错'
+				}, {
+					value: 'ymt',
+					text: '其他'
+				}, {
+					value: 'shq',
+					text: '故障报错'
+				}, {
+					value: 'zhbh',
+					text: '配送服务'
+				}, {
+					value: 'zhy',
+					text: '意见与反馈'
+				}, {
+					value: 'gyf',
+					text: '其他'
+				}, {
+					value: 'zhz',
+					text: '故障报错'
+				}, {
+					value: 'gezh', 
+					text: '配送服务'
+				}]);
+				var showUserPickerButton = doc.getElementById('showUserPicker');
+				var userResult = doc.getElementById('userResult');
+				showUserPickerButton.addEventListener('tap', function(event) {
+					userPicker.show(function(items) {
+						userResult.innerText = items[0].text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})(mui, document);
+	</script>
+{mb jiao}
+
+	

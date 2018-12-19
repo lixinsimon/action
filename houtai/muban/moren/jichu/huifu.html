@@ -1,0 +1,88 @@
+ {mb tou}
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <h2 class="font-thin m-b" style="font-size:20px;">系统回复</h2>
+              <form class="form-horizontal" method="post">
+              	<input type="hidden" name="c" value="post"/>
+                <!-- 系统回复 -->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    系统回复
+                  </div>
+                  <div class="panel-body">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">关注提示关键字:</label>
+                        <div class="col-sm-10">
+                          <div class="input-group">
+                            <input type="text" name="guanzhu" class="form-control" value="{$x['guanzhu']}" placeholder="可根据关键字直接关联指定的回复规则">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">搜索</button>
+                            </span>
+                          </div>
+                          <span class="help-block">当关注公众号时.触发该关键词;</span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">默认回复关键字:</label>
+                        <div class="col-sm-10">
+                          <div class="input-group">
+                            <input type="text" name="moren" value="{$x['moren']}" class="form-control" placeholder="可根据关键字直接关联指定的回复规则">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">搜索</button>
+                            </span>
+                          </div>
+                          <span class="help-block">当系统不知道该如何回复粉丝的消息时,触发该关键词;</span>
+                        </div>
+                      </div>
+                      <div class="form-group m-b-md" style="overflow:hidden;">
+                        <div class="col-sm-4 col-sm-offset-2">
+                          <button type="submit" class="btn btn-danger padder-lg">提交</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- 系统回复 -->
+              </form>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+  <script type="text/javascript">
+  $(".wenzi_bianji").click(function(){
+  	$(".liebiao li").removeClass("active");
+  	$(".liebiao .bj").show().addClass("active");
+	$.post('{php echo UH("jichu/tuwen",array("c"=>"bianji"))}',{'id':1},function(data){
+		$("#profile1-2").html(data);
+	})
+  })
+  $(".liebiao li:lt(2)").click(function(){
+  	$(".liebiao .bj").removeClass("active").hide();
+  })
+
+  var xiang_q = document.getElementById("xiang_q");
+  var hide_block = document.getElementById("hide_block");
+  var ch = document.getElementById("ch");
+  var gaoji = document.getElementById("gaoji");
+  function check(){
+    if(ch.checked==true){
+      xiang_q.style.display = 'block';
+    }else{
+      xiang_q.style.display = 'none';
+    }
+    if(gaoji.checked==true){
+      hide_block.style.display = 'block';
+    }else{
+      hide_block.style.display = 'none';
+    }
+  }
+  </script>
+ {mb jiao}

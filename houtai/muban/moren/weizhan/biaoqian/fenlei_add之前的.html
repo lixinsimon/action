@@ -1,0 +1,147 @@
+ <form class="form-horizontal">
+  <section class="panel panel-default">
+    <header class="panel-heading text-left bg-light">
+    分类详细设置
+    </header>
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">排序</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="" name="title" value="">
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">分类名称</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="" name="title" value="">
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">分类描述</label>
+        <div class="col-sm-10">
+          <textarea class="form-control parsley-validated" rows="6" data-minwords="6" data-required="true" placeholder="Type your message"></textarea>
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">是否添加微站首页导航</label>
+        <div class="col-sm-10">
+          
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="a" value="option1">
+              <i></i>
+              是
+            </label>
+          </div>
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="a" value="option2" checked="">
+              <i></i>
+              否
+            </label>
+          </div>
+          <span class="help-block m-b-none">开启此选项后,系统在微站首页导航自动生成以分类名称为导航名称的记录.关闭此选项后,系统将删除对应的导航记录</span>   
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">是否作为首页使用</label>
+        <div class="col-sm-10">
+          
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="a" value="option1">
+              <i></i>
+              是
+            </label>
+          </div>
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="a" value="option2" checked="">
+              <i></i>
+              否
+            </label>
+          </div>
+          <span class="help-block m-b-none">注意：该选项仅对父级分类有效。开启此选项后，分类模板将直接引用首页模板（home.html[注:该文件在home文件夹下面]]），分类的二级分类将作为导航显示</span>   
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label">直接链接</label>
+        <div class="col-sm-10">
+          <input type="text" name="click" value="" class="form-control">
+          <div class="help-block m-b-none">链接必须是以http://或是https://开头。没有直接链接，请留空</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="panel panel-default">
+    <header class="panel-heading text-left bg-light">
+    导航样式
+    </header>
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">图标类型</label>
+        <div class="col-sm-10">
+          
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="a" value="option1">
+              <i></i>
+              系统内置
+            </label>
+          </div>
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="a" value="option2" checked="">
+              <i></i>
+              自定义上传
+            </label>
+          </div>  
+        </div>
+      </div>
+      <div class="form-group" style="margin-right:0px;">
+        <label class="col-sm-2 control-label">系统图标</label>
+        <div class="col-sm-10">
+          <input type="file" class="filestyle" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s" id="filestyle-0" style="position: fixed; left: -500px;">
+          <div class="bootstrap-filestyle" style="display: inline;">
+            <input type="text" class="form-control inline v-middle input-s" disabled=""> 
+            <label for="filestyle-0" class="btn btn-default"><span>选择图标</span></label>
+          </div>
+          <span class="help-block m-b-none">导航的背景图标，系统提供了丰富的图标ICON。</span> 
+        </div>
+      </div>
+      <div class="form-group" style="margin-right:0px;">
+        <label class="col-sm-2 control-label">图标颜色</label>
+        <div class="col-sm-10">
+          <input type="file" class="filestyle" data-icon="false" data-classbutton="btn btn-default" data-classinput="form-control inline v-middle input-s" id="filestyle-0" style="position: fixed; left: -500px;">
+          <div class="bootstrap-filestyle" style="display: inline;">
+            <input type="text" class="form-control inline v-middle input-s" disabled=""> 
+            <label for="filestyle-0" class="btn btn-default"><span>选择颜色</span></label>
+          </div>
+          <span class="help-block m-b-none">图标颜色，上传图标时此设置项无效</span> 
+        </div>
+      </div>
+       <div class="form-group" style="margin-right:0px;">
+        <label class="col-sm-2 control-label">图标大小</label>
+        <div class="col-sm-10">
+          <div class="input-group m-b">
+            <input type="text" class="form-control">
+            <span class="input-group-addon">PX</span>
+          </div>
+          <span class="help-block m-b-none">图标的尺寸大小，单位为像素，上传图标时此设置项无效</span> 
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="panel-body">
+    <div class="form-group col-sm-12">
+      <input name="do-submit" type="submit" value="提交" class="btn btn-danger col-lg-1">
+      <input type="hidden" name="token" value="aa7ccb8a">
+    </div>
+  </div>
+</form>

@@ -1,0 +1,48 @@
+{mb tou}
+  <style type="text/css">
+  .bg-white a.text-success{
+    color: #1ab667;
+  }
+  .bg-white .text-muted a{
+    color: #428bca !important;
+  }
+</style>
+<section class="vbox">
+    {mb dingbu}
+    <section>
+      <section class="hbox stretch">
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t">
+              <div class="media bg-white wrapper-lg" style="margin:15px 30px;overflow:hidden">
+                <span class="pull-left thumb-md text-success" style="margin-right:40px;"><i class="fa fa-check-circle i-5x"></i></span>
+                <div class="media-body m-l-md">
+                  <div class="i-2x">
+                  	  <span class="text-success" id="dengdai">最新 知微v2.0</span>
+                  	 
+                  	  <i style="font-size: 14px;color:#f90202;padding-left:12px;" id="gengxin">更新>></i>
+                  </div>
+                  <div class="i-md text-muted m-t-sm" id="laobanben">当前v1.0</div>
+                </div>
+              </div>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+<script>
+$('#gengxin').click(function(){	
+	$('#dengdai').html('正在更新<i class="fa fa-spin fa-spinner show inline" id="spin"></i>');
+	$(this).hide();
+	$('#laobanben').text('请匆关闭');
+	$.post('{php echo UH("gengxin")}',function(s){
+		if(s.shi==1){
+			$('#dengdai').html('更新完成');
+			$('#laobanben').text('当前v2.0');
+		}
+	},'json');
+	
+});
+</script>
+{mb jiao}

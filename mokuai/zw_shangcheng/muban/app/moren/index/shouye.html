@@ -1,0 +1,402 @@
+{mb 'tou'}
+
+<style type="text/css">
+	#app{
+		display: none;
+	}
+.toubuhang{
+	height: .8rem;
+	width: 100%;
+	background: #fff;
+	border-bottom: 1px solid #EAE8E8;
+	border-top: 1px solid #EAE8E8;
+	z-index: 99;
+}
+.toubuhang li{
+	float: left;
+	width: 25%;
+	box-sizing: border-box;
+	text-align: center;
+	border-right: 1px solid #EAE8E8;
+	font-size: 0.25rem;
+	list-style: none;
+	height: .8rem;
+	line-height: .8rem;
+	position: relative;
+}
+.ziti{
+	width: 100%;
+	padding: 0.1rem 0.1rem;
+	height: 1.5rem;
+	border-bottom: 1px solid #EAE8E8;
+	overflow: hidden;
+	position: relative;
+	list-style: none;
+}
+.ziti div{
+	height: 100%;
+}
+.red{
+	color: red;
+}
+.pdian{
+	display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #DC8100;
+}
+.xuanzhuan{
+	width: 25px;
+    height: 25px;
+    display: inline-table;
+}
+.xuan1{
+	-webkit-transform: rotateZ(180deg);
+    -moz-transform: rotateZ(180deg);
+    -o-transform: rotateZ(180deg);
+    -ms-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
+    color: red;
+}
+.didian{
+	width: 100%;
+	background-color: #1c1b20;
+	padding: 0.3rem 0.3rem 0.4rem 0.3rem;
+	font-size: 16px;
+	height: 1rem;
+}
+.didian div{
+	color: white;
+	float: left;
+}
+.inp{
+	float: right;
+	border: none;
+	background-color: #eeebe6;
+	height: 0.6rem;
+	width: 4rem;
+	border-radius: 0.3rem;
+	padding-left: 0.25rem;
+	position: relative;
+	top: -0.07rem;
+}
+.didian input::-moz-placeholder{font-size: 12px;}
+.didian input::-webkit-input-placeholder{font-size: 12px;}
+.didian input:-ms-input-placeholder{font-size: 12px;}
+.fen_lei{
+	width: 100%;
+}
+.smfen{
+	width: 20%;
+	text-align: center;
+	padding: 0.3rem 0.2rem;
+	float: left;
+	background-color: white;
+	line-height: 22px;
+}
+.smfen img{
+	width: 100%;
+	border-radius: 2rem;
+}
+.fujin{
+	width: 100%;
+	padding: 0.2rem 0; 
+	background-color: white;
+	text-align: center;
+}
+.fujin span{
+	font-size: 18px;
+	font-weight: 550;
+}
+.jia_shan {
+    right: .1rem;
+    top: .15rem;
+}
+.jia_xia {
+    right: .1rem;
+    top: .43rem;
+}
+.sou{
+	position: absolute;
+	right: 0.5rem;
+	top: 0.4rem;
+}
+#J_Address2{
+	color: white;
+    border: none;
+    width: 2rem;
+}
+</style>
+<div id="app">
+	<!--<div class="didian">
+		<div>
+			<i class="icon-location"></i>
+			<input type="text" readonly id="J_Address2">
+		</div>
+		<input class="inp" type="text" placeholder="请输入商家或者商品名称"/>
+		<i class="icon-search sou"></i>
+	</div>-->
+	<div class="fen_lei">
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="smfen">
+			<img src="{$_W['gongyou']}/images/fenlei_02.jpg" />
+			<p>美食</p>
+		</div>
+		<div class="fujin">
+			<p>——— <span>附近商家</span> ———</p>
+		</div>
+	</div>
+	<div class="toubuhang">
+		<ul>
+			<li class="abc red"  @click="paixu(4,0)">综合排序<div class="jia_shan"></div><div class="jia_xia gaibian2"></div></li>
+			<li class="abc" @click="paixu(1,1)">销量最高</li>
+			<li class="abc" @click="paixu(2,2)">距离最近
+				<div v-show="leibie" style="position: absolute;width: 25%;left: 50%;height: auto;display: none;">
+					<ul>
+						<li @click="xuanzhu(aaa.id)" v-for="(aaa,index) in fenlei" style="width: 100%;float: left; text-align: center;background: white;color: #000000;border-bottom: 1px solid #EAE8E8;border-left: 1px solid #EAE8E8;">{{aaa.ming}}</li>
+					</ul>
+				</div>
+			</li>
+			<li class="abc" @click="paixu(3,3)" style="border: 0;">筛选<i class="icon-feedback"></i></li>
+		</ul>
+	</div>
+	<div id="J_List" style="margin-top: 1.9rem;background: #fff;width: 100%;">
+		<ul >
+			<li v-for="(item,index) in shu" class="ziti">
+				<a :href="'{php echo UAK('pinpai/jieshao')}&jingdu='+item.jingdu+'&weidu='+item.weidu+'&id='+item.id">
+					<div style="width: 20%;float: left;overflow: hidden;">
+						<img style="width: 1.4rem;height: 1.4rem;" :src="item.logo"/>
+					</div>
+					<div style="width: 80%;float: left;overflow: hidden;position: relative;padding-left: 0.1rem;box-sizing: border-box;">
+						<h3 style="font-size: 0.3rem;font-weight: 400;margin-bottom: 0.05rem;">{{item.nicheng}}</h3>
+						<p class="pdian">"{{item.xuanchuan}}"</p>
+						<span style="font-size: 0.2rem;color: #3C3C3C;position: absolute;bottom: 0;left: 0;"><i class="icon-location"></i>{{item.xiangxidizhi}}</span><br />
+						<span style="font-size: 0.2rem;color: #3C3C3C;position: absolute;top: 0.1rem;right: 0rem;">{{item.juli}}KM</span>
+					</div>
+				</a>
+			</li>
+		</ul>
+		
+		<!--<section id="J_List" style="margin-top: 2.1rem;background: #fff;width: 100%;float: left;">-->
+			<!--<li v-for="(item,index) in shu" class="ziti">
+				<a :href="'{php echo UA('pinpai/daohang/zw_shanghu')}&jingdu='+item.jingdu+'&weidu='+item.weidu">
+					<div style="width: 20%;float: left;overflow: hidden;">
+						<img style="width: 1.4rem;height: 1.4rem;" :src="item.logo"/>
+					</div>
+					<div style="width: 80%;float: left;overflow: hidden;position: relative;padding-left: 0.1rem;box-sizing: border-box;">
+						<h3 style="font-size: 0.3rem;font-weight: 400;">{{item.ming}}</h3>
+						<p class="pdian">"{{item.xuanchuan}}"</p>
+						<span style="font-size: 0.2rem;color: #3C3C3C;"><i class="icon-location"></i>{{item.xiangxidizhi}}</span><br />
+						<span style="font-size: 0.2rem;color: #3C3C3C;position: absolute;top: 0.1rem;right: 0rem;">{{item.juli}}KM</span>
+					</div>
+				</a>
+			</li>-->
+	    	<!--<div id="J_ListContent"  class="m-list list-theme1" ></div>
+		</section>	-->
+	</div>
+</div>
+<div id="allmap"></div> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bWVVbvF9vAzBKLA1bsNEX5agMu0jv9kd"></script>
+
+{mb js} 
+
+	<script src="http://static.ydcss.com/uploads/ydui/ydui.citys.js"></script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=bWVVbvF9vAzBKLA1bsNEX5agMu0jv9kd"></script>
+
+<script>
+	
+	 var flag = true;
+	
+	var V = new Vue({
+		el:"#app",
+		data:{
+			shu:[],
+			tiaoshu:15,
+			ye:1,
+			jingdu:0,
+			weidu:0,
+			leixing:0,
+			fenlei:[],
+			leibie:false,
+			aa:0
+		},
+		beforeCreate:function(){
+//			var that=this;
+//			huoqujingweidu();			
+//			var stop=setInterval(function(){
+//				if(that.jingdu>0){
+//					clearInterval(stop);
+//					$z.post("{$_W['url']}",{'ye':1,'tiaoshu':15,'jingdu':that.jingdu,'weidu':that.weidu},function(shu){
+//		                 if(shu.shi==1){
+//		                      that.shu=shu.shu.shu;
+//		                      that.fenlei=shu.shu.fenlei;
+//		                 }else{
+//		                   $z.toast(shu.shu);
+//		                 }
+//	                 });
+//				}
+//				
+//			},100);
+			
+			$('#app').show();
+		},
+		methods:{
+			paixu:function(e,i){
+				var that=this;
+				that.ye=1;
+				flag=true
+				$('.abc').eq(i).addClass('red').siblings('li').removeClass('red');
+				that.leixing=e;
+				if(e==2){
+						that.leibie=!that.leibie;
+				}else{
+					$z.post("{$_W['url']}",{'ye':1,'tiaoshu':15,'jingdu':that.jingdu,'weidu':that.weidu,'leibie':that.leixing},function(shu){
+		                 if(shu.shi==1){
+		                      that.shu=shu.shu.shu;                
+		                 }else{
+		                   $z.toast(shu.shu);
+		                 }
+		            });
+				}
+				
+			},
+			jiazai:function(shu){
+				var that = this;
+				console.log(shu)
+				var changdu = that.shu.length;				
+				for (i in shu) {
+					that.$set(that.shu,changdu++,shu[i]);
+				}
+//				that.Set()
+			},
+			xuanzhu:function(e){
+				var that = this;
+				that.aa=e;
+				$z.post("{$_W['url']}",{'ye':1,'tiaoshu':15,'leixing':e,'jingdu':that.jingdu,'weidu':that.weidu,'leibie':2},function(shu){
+		                 if(shu.shi==1){
+		                      that.shu=shu.shu.shu;                
+		                 }else{
+		                   $z.toast(shu.shu);
+		                 }
+		            });
+			}
+		}
+	})
+	
+
+//function huoqujingweidu(){
+//	var map = new BMap.Map("allmap");
+//	var point = new BMap.Point(116.331398,39.897445);
+//	map.centerAndZoom(point,12);
+//	var geolocation = new BMap.Geolocation();
+//	geolocation.getCurrentPosition(function(r){
+//		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+//			var mk = new BMap.Marker(r.point);
+//			map.addOverlay(mk);
+//			map.panTo(r.point);
+//			V.jingdu=r.point.lng;
+//			V.weidu = r.point.lat;
+//		}
+//		else {
+//			alert('failed'+this.getStatus());
+//		}        
+//	});
+//}
+
+
+
+	$(window).scroll(function(){
+			if(document.body.scrollHeight-parseInt($(this).scrollTop())<=document.body.clientHeight && flag){
+				flag = false;		
+				V.ye++;
+				$z.post('{php echo $_W["url"]}',{ye: V.ye, tiaoshu: V.tiaoshu,jingdu:V.jing,weidu:V.wei,leixing:V.leixing,leibie:V.aa},function(shu){
+					if(shu.shi==1){ 
+						V.jiazai(shu.shu.shu);
+						flag = true;
+					}else{
+						YDUI.dialog.alert('没有了');
+					}
+				});
+			}
+	});
+	$(function(){
+		    var $target = $('#J_Address2');
+		    var sj;
+		    var cs;
+		    var qx;
+		    var geolocation = new BMap.Geolocation();  
+			// 创建地理编码实例      
+			var myGeo = new BMap.Geocoder();      
+			geolocation.getCurrentPosition(function(r){  
+				if(this.getStatus() == BMAP_STATUS_SUCCESS){  
+					var pt = r.point;   
+					// 根据坐标得到地址描述    
+					myGeo.getLocation(pt, function(result){      
+					if (result){      
+						var addComp = result.addressComponents;  
+							sj = addComp.province;
+							sj = sj.substring(0,sj.length-1);
+							cs = addComp.city;
+							qx = addComp.district;
+							$target.citySelect({
+						        provance: sj,
+						        city: cs,
+						        area: qx
+						    });
+							$('#J_Address2').val(cs);
+						}      
+					});   
+				}  
+			});  
+ 
+		
+		    $target.on('click', function () {
+		        $target.citySelect('open');
+		    });
+		
+		    $target.on('done.ydui.cityselect', function (ret) {
+		        $(this).val(ret.area);
+		    });
+		});
+	
+</script>
+
+{mb jiao}

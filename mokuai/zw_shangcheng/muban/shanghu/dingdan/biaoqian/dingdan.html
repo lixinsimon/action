@@ -1,0 +1,111 @@
+<style type="text/css">
+	.dingdan_td .dingdan_box {
+		overflow: hidden;
+		position: relative;
+		border-bottom: 1px solid #d9e4e6;
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+	}
+	
+	.dingdan_td .dingdan_box:last-child {
+		border-bottom: none;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+	}
+	.yanse_0{background: #37ACCB;}
+	.yanse_5{background: #ABABAB;}
+	.yanse_6{background: #F5460C;}
+	.yanse_7{background: #ABABAB;}
+	.yanse_10{background: #F5460C;}
+	.yanse_20{background: #8192D6;}
+	.yanse_15{background: #FB9100;}
+	.yanse_30{background: #DBCBB8;}
+	.yanse_40{background: #B79E97;}	
+</style>
+{mb 'biaoqian/sousuo'}
+<div class="line line-dashed b-b line-lg"></div>
+<div class="table-responsive m-t-md">
+	<table class="table b-light">
+		<thead>
+			<tr>
+				<th width="30%" style="min-width:350px;overflow: hidden;">订单数：
+					<font color="red">{$dingdan['zongshu']}</font> &nbsp;&nbsp;&nbsp;订单金额：
+					<font color="red">{$dingdan['zong_e']}</font>
+				</th>
+				<th width="20%" style="vertical-align:middle;text-align:center">买家</th>
+				<th width="15%" style="min-width:120px;vertical-align:middle;text-align:center">支付方式</th>
+				<th width="15%" style="min-width:180px;vertical-align:middle;text-align:center">价格</th>
+				<th width="15%" style="vertical-align:middle;text-align:center">状态</th>
+				<th style="vertical-align:middle;text-align:center">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{loop $dingdan['dingdan'] $dd}
+			<tr class="panel-heading">
+				<td colspan="7">订单编号：{$dd['dingdanhao']}&nbsp; 下单时间：{php echo date('Y-m-d H:i:s',$dd['xiadanshijian'])} &nbsp;&nbsp;&nbsp;
+				    {if $dd['yongjin']}
+					<font color="ff6633">
+					余额:
+					{php $i=1}
+					{loop $dd['yongjin'] $k $yj}
+					{if intval($k)>0}
+					  {php echo $i++}级：{$yj}元 &nbsp;&nbsp;
+					{/if}
+					{/loop}
+					</font>
+					{/if}
+				</td>
+			
+			</tr>
+			<tr>
+				<td style="vertical-align:middle;" class="dingdan_td">
+					{loop $dd['dingdan_shangpin'] $ds}
+					<div class="dingdan_box">
+						<div class="thumb  m-l-xs">
+							<img src="{php echo JueDuiUrl($ds['tu'])}" class="dker" style="height: 50px;">
+						</div>
+						<div class="" style="min-width:250px;height:50px;overflow:hidden;position:absolute;top:0px;left:55px;">
+							<span class="m-l-xs block text-six text-md" style="min-width:250px;height:25px;overflow:hidden;">{$ds['ming']}</span>
+							<span class="m-l-xs block text-hui m-t-xs" style="min-width:250px;height:25px;overflow:hidden;">
+                <font class="m-r-sm">原价：{$ds['yuanjia']}</font>
+                <font class="m-r-sm">应付：{$ds['jiage']}</font>
+                <font class="m-r-sm">数量：x{$ds['shuliang']}</font>
+              </span>
+						</div>
+					</div>
+					{/loop}
+				</td>
+				<td style="vertical-align:middle;text-align:center">
+					<ul style="padding-left:0;">
+						<li><a href="#" class="text-info">{$dd['huiyuanming']}</a></li>
+						<li>收货人：{$dd['shouhuoren']}</li>
+						<li>收货手机：{$dd['shouhuodianhua']}</li>
+					</ul>
+				</td>
+				<td style="vertical-align:middle;text-align:center">
+					<label class="label label-success padder">{$dd['zhifuqudao']}</label>
+				</td>
+				<td style="vertical-align:middle;">
+					<ul style="padding-left:0;">
+						<li>小计：￥{php echo $dd['shijia']}</li>
+						<li>运费：￥{$dd['yunfei']}</li>
+						<li>折扣：-￥{php echo empty($dd['zhekou'])?0:$dd['zhekou']}</li>
+						<li>优惠券：-￥{php echo empty($dd['quan_e'])?0:$dd['quan_e']}</li>
+						<li>应收：￥{$dd['zongjia']}</li>
+					</ul>
+				</td>
+				<td style="vertical-align:middle;text-align:center">
+					<ul style="padding-left:0;">
+						<li><label class="label label-primary padder yanse_{$dd['zhuangtai']}">{$dd['zhuangtai_wenzi']}</label></li>
+						<li style="margin: 5px;"><small class="label bg-light">{$dd['peisong_wenzi']}</small></li>
+					</ul>
+				</td>
+				<td style="vertical-align:middle;text-align:center; ">
+					{mb 'biaoqian/caozuo'}
+				</td>
+			</tr>
+			{/loop}
+		</tbody>
+	</table>
+</div>
+<div class="text-left">{$fenye}</div>

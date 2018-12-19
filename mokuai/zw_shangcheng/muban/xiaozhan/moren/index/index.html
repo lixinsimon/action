@@ -1,0 +1,160 @@
+{mb 'tou'}
+<style>
+	.m-grids-5:before{border-bottom: 0px;}
+	#app{display: none; overflow:hidden;}
+</style>
+<!--<div class="shou">
+<a href="{php echo UXK('liebiao/lie')}"><span><i class="icon-search"></i>搜索宝贝</span></a>	
+</div>-->
+<div id="app" >
+	<div class="m-slider" id="J_Slider" >
+            <div class="slider-wrapper" style="height: auto;">
+                <div class="slider-item" v-for="(lunboo,index) in lunbo" style="height: auto;">
+                    <a  @click="dakai(lunboo.url)">
+                        <img :src="lunboo.tu">
+                    </a>
+                </div>
+            </div>
+            <div class="slider-pagination"></div>
+            <!-- 分页标识 -->
+        </div>
+
+    <div class="m_soutop">
+        <div class="m_shou">
+            <input type="text" value='' bindinput="sousuo" placeholder="输入关键字" />
+        </div>
+        <div class='annui shou-an' bindtap='sou'>{{souz}}</div>
+	</div>
+	<div style="width: 100%;margin:10px 0px;" id="fenlei" class="fenleicaidan">
+		<a :href="fenleii.url" class="grids-item " v-for="(fenleii,index) in fenlei" style="padding: 0.15rem 0;">
+			<img :src="fenleii.tu" class="feilei_tu">
+			<p class="grids-txt">{{fenleii.ming}}</p>
+		</a>
+	</div>
+	<div style="width: 100%;" class="m-grids-4" id="tuijian">
+		<div v-for="(tuijiann,index) in tuijian" class="grids-item" style="padding: 0px;">
+		   <a :href="tuijiann.url" class="tui_tu"><img class="tuhuo" :src="tuijiann.tu" ></a>		 
+		</div>
+	</div>  
+	<header class="m-navbar" style="margin-top: 10px;">
+		<a href="#" class="navbar-item">为您推荐</a>
+		<div class="navbar-center"></div>
+		<a href="{php echo UXK('liebiao/lie')}" class="navbar-item">更多<i class="next-ico"></i></a>
+	</header>
+
+</div>
+	<section id="J_List" >
+	    <div id="J_ListContent"  class="m-list list-theme1" ></div>
+	</section>	
+	<div style="width: 100%;height: 53px;"></div>
+	{mb daohang}
+	{mb js}
+	<script type="text/javascript">	
+		
+		  new Vue({
+		  		el:'#app',
+		  		data:{
+		  			lunbo:[],
+		  			gongao:[],		  				
+		  			fenlei:[{},{},{},{},{}],		  			
+		  			tuijian:[],
+					souz:'搜索',	  
+		  			show:false,
+					
+		  		},		  		
+		  		beforeCreate:function(){		  			
+		  			var _this=this;
+		  			$z.post('{$_W["url"]}',function(s){			  				
+		  				_this.lunbo=s.shu.lunbo;		  				
+		  				$('.slider-item a img:last').attr('src',s.shu.lunbo[0].tu);
+		  				$('.slider-item a:last').attr('href',s.shu.lunbo[0].url);
+		  				var L=s.shu.lunbo.length;		  				
+		  				$('.slider-item a img:first').attr('src',s.shu.lunbo[L-1].tu);
+		  				$('.slider-item a:first').attr('href',s.shu.lunbo[L-1].url);		  			
+		  				_this.fenlei=s.shu.fenlei;		  				
+		  				if(!s.shu.fenlei){
+		  					$('#fenlei').remove();
+		  				}
+		  				if(!s.shu.tuijian){
+		  					$('#tuijian').remove();
+		  				}	
+		  				$("#app").show();
+		  				
+		  				
+		           });		           
+		  		},		
+				
+				updated:function(){
+					//$('.feilei_tu').height($('.feilei_tu').width()/2);
+					  $('#J_Slider').slider({
+		                   speed: 200,
+		                   autoplay: 2000,
+		                   lazyLoad: true
+		                 });
+				},
+		  })
+		  
+
+
+	
+		/*分类自适应*/
+		var leishu = $("#fenlei a").length;		
+		if(leishu == 2) {
+			$("#fenlei").addClass("m-grids-2");
+		} else if(leishu == 3) {
+			$("#fenlei").addClass("m-grids-3");
+		} else if(leishu == 4) {
+			$("#fenlei").addClass("m-grids-4");
+		} else if(leishu == 5) {
+			$("#fenlei").addClass("m-grids-5");
+		} else if(leishu == 6) {
+			$("#fenlei").addClass("m-grids-3");
+		} else if(leishu == 7) {
+			$("#fenlei").addClass("m-grids-5");
+		} else if(leishu == 8) {
+			$("#fenlei").addClass("m-grids-4");
+		} else if(leishu == 9) {
+			$("#fenlei").addClass("m-grids-5");
+		} else if(leishu == 10) {
+			$("#fenlei").addClass("m-grids-5");
+		}
+	
+		/*上拉加载*/
+		var page = 1, pageSize = 4;
+	    $('#J_List').infiniteScroll({
+	        pageSize: pageSize,
+	        initLoad: true,
+	        loadingHtml: '<strong>加载中...</strong>', /* 当然也可以<img src="../img/loading.gif" /> */
+	        loadListFn: function () {
+	            var def = $.Deferred();
+	            $z.post('{$_W["url"]}',{ye: page, jiazaishu: pageSize,c:'jiazaishangpin'},function(ret){	 
+	            	if(ret.shi==1){	            		
+	            	  var html = '';             	
+	            	  for(var i=0;i<ret.shu.length;i++){
+	            	  	html +='<a href="'+ret.shu[i].href+'" class="list-item J_Link" data-page="' + page + '"> ';
+					    html +='<div class="list-img"><span><img src="'+ret.shu[i].tu+'"></span></div>';
+					    html +='<div class="list-mes"><h3 class="list-title">'+ret.shu[i].ming+'</h3>';
+					    html +='<div class="list-mes-item"><div>';
+					    html +='<span class="list-price"><em>¥</em>'+ret.shu[i].jiage+'</span>';
+					    html +='<span class="list-del-price">'+ret.shu[i].yuanjia+'</span></div>';
+					    html +='<i class="icon-shopcart" style="color: #ED5001;"></i></div></div></a>';
+	            	  } 	            	 
+					   $('#J_ListContent').append(html);
+	            	}          	  
+	
+                    /* 获取数据，并插入页面后，调用resole，并传入当前获取的记录列表集合 */
+                    def.resolve(ret.shu);
+                    /* 页码自增1 */
+                    ++page;
+	            	
+	            });	           
+	            return def.promise();
+	        }
+	    });
+		
+		
+	
+		</script>
+
+	
+{mb jiao}

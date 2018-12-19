@@ -1,0 +1,80 @@
+ {mb tou}
+<section class="vbox">
+	{mb dingbu_y}
+	<section>
+		<section class="hbox stretch">
+			{mb zuobu}
+			<!-- 内容开始 -->
+			<section id="content">
+				<section class="vbox">
+					<section class="scrollable m-t padder-lg">
+						<h2 class="font-thin m-b" style="font-size:20px;">存储接口</h2>
+						<form class="form-horizontal" method="post">
+							<input type="hidden" name="c" value="tianjia" />
+							<div class="panel panel-default">
+								<div class="panel-heading">开启存储方式</div>
+								<div class="panel-body">
+									<div class="form-group">
+				                      <label class="col-sm-2 control-label">开启存储方式</label>			
+				                      <div class="col-sm-10">  
+				                        <div class="radio-inline i-checks">				
+				                          <label>				
+				                            <input type="radio" name="cunchu[leixing]" value="0" {if empty($pz['leixing'])}checked="checked"{/if}>				
+				                            <i></i>本地存储				
+				                          </label>				
+				                        </div>				
+				                        <div class="radio-inline i-checks">
+				                        	<label>				
+				                            <input type="radio" name="cunchu[leixing]" value="qiniu" {if $pz['leixing']=='qiniu'}checked="checked"{/if}>				
+				                            <i></i> 七牛云				
+				                          </label>				
+				                        </div>			
+				                       		
+				                      </div>				
+				                    </div> 
+								</div>								 
+							</div>
+							<!-- 短信接口开始 -->
+							<div class="panel panel-default">
+								<div class="panel-heading">七牛云(
+									<a href="http://www.qiniu.com/">申请</a>)</div>
+								<div class="panel-body">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">AccessKey/AK</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="cunchu[qiniu][AccessKey]" value="{$pz['qiniu']['AccessKey']}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">SecretKey/SK</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="cunchu[qiniu][SecretKey]" value="{$pz['qiniu']['SecretKey']}">
+										</div>
+									</div>		
+									<div class="form-group">
+										<label class="col-sm-2 control-label">空间名称</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="cunchu[qiniu][kongjian]" value="{$pz['qiniu']['kongjian']}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">域名</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="cunchu[qiniu][yuming]" value="{$pz['qiniu']['yuming']}">
+										</div>
+									</div>
+								
+									 <input  type="submit" value="提交" class="btn btn-danger">
+								</div>								 
+							</div>
+							
+						</form>
+					</section>
+				</section>
+			</section>
+			<!-- 内容结束 -->
+		</section>
+	</section>
+</section>
+
+{mb jiao}

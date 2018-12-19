@@ -1,0 +1,101 @@
+<div class="form-group">
+  <label class="col-sm-2 control-label">支持线下核销</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="a" value="option1">
+        <i></i>不支持
+      </label>
+    </div>
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="a" value="option2" checked="">
+        <i></i>支持
+      </label>
+    </div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">核销门店选择</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" readonly="readonly">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#mendian">选择门店</button>
+      </span>
+    </div>
+    <span class="help-block m-b-none">如果不选择门店，则此商品支持在所有门店核销</span>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <div class="col-sm-4 col-sm-offset-2">
+    <button type="button" class="btn btn-danger padder-lg">提交</button>
+  </div>
+</div>
+
+<!-- 选择门店modal -->
+  <div class="modal fade" id="mendian">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+          <h4 class="modal-title" id="myModalLabel">选择门店</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <div class="col-sm-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="请输入门店名称">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">搜索</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg"></div>
+            <div class="table-responsive">
+            <table class="table table-striped b-light">
+              <tbody>
+                <tr> 
+                  <td style="vertical-align:middle;">西安市高新路51号尚中心1013室</td>
+                  <td style="vertical-align:middle;"><a href="#" class="btn btn-primary pull-right">选择</a></td>
+                </tr>
+                <tr> 
+                  <td style="vertical-align:middle;">西安市高新路51号尚中心1013室</td>
+                  <td style="vertical-align:middle;"><a href="#" class="btn btn-primary pull-right">选择</a></td>
+                </tr>
+                <tr> 
+                  <td style="vertical-align:middle;">西安市高新路51号尚中心1013室</td>
+                  <td style="vertical-align:middle;"><a href="#" class="btn btn-primary pull-right">选择</a></td>
+                </tr>
+                <tr> 
+                  <td style="vertical-align:middle;">西安市高新路51号尚中心1013室</td>
+                  <td style="vertical-align:middle;"><a href="#" class="btn btn-primary pull-right">选择</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>  
+          </form>
+        </div>
+        <div class="modal-footer m-t-none">
+          <div class="pull-left">
+            <ul class="pagination pagination-sm m-t-none m-b-none">
+              <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+            </ul>
+          </div>
+          <div class="pull-right">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

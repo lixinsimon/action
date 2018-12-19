@@ -1,0 +1,106 @@
+ {mb tou}
+<link rel="stylesheet" href="{$_W['yuming']}gongyong/js/nestable/nestable.css" type="text/css" />
+<style type="text/css">
+	.dd-item>button {
+		margin: 9px 0px;
+	}
+	
+	.form-horizontal .checkbox-inline {
+		padding-top: 0px;
+		margin-top: -3px;
+	}
+</style>
+
+<section class="vbox">
+	{mb dingbu_y}
+	<section>
+		<section class="hbox stretch">
+			{mb zuobu}
+			<!-- 内容开始 -->
+			<section id="content">
+				<section class="vbox">
+					<section class="scrollable m-t padder-lg">                       
+						<h2 class="font-thin m-b" style="font-size:20px;">分配权限</h2>
+						<!-- right tab -->
+						<section class="panel panel-default">
+							<header class="panel-heading">
+								分配权限
+							</header>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form" method="post">
+									<input type="hidden" name="c" value="bianji" />
+									<input type="hidden" name="id" value="{$dygl['id']}" />									
+									<div class="form-group" style="padding-left: 30px;">
+										当前公众号【<b style="color: red;">{$danyuan['mingcheng']}</b>】--->用户名【<b style="color: red;">{$yonghu['nicheng']}</b>】
+										
+									</div>
+									<div class="tab-content">
+										<div class="col-md-6 col-lg-6">
+											<div class="dd" id="nestable1" style="width:100%;max-width:1920px;">
+												<ol class="dd-list checkall">
+													{loop $qx $k $q}
+													<li class="dd-item">
+														<div class="dd-handle-self">
+															<label class="checkbox-inline i-checks">
+							                                  <input type="checkbox" name="quanxian[]" value="{$k}" class="checkAll" {if $quanxian[$k]}checked="checked"{/if}><i></i>
+							                                </label>{$q[0]}
+														</div>
+															{loop $q[1] $kk $qq}
+														<ol class="dd-list">														
+															<li class="dd-item" style="margin-bottom:5px;">
+																<div class="dd-handle-self">
+																	<label class="checkbox-inline i-checks">
+								                                      <input type="checkbox" name="quanxian[]" value="{$k}_{$kk}" class="childAll" {if $quanxian[$k.'_'.$kk]}checked="checked"{/if}><i></i>
+								                                    </label> {$qq[0]}
+																</div>
+																{loop $qq[1] $kkk $qqq}
+																<ol class="dd-list">																
+																	<li class="dd-item" style="margin-bottom:5px;">
+																		<div class="dd-handle-self">
+																			<label class="checkbox-inline i-checks">
+									                                          <input type="checkbox" name="quanxian[]" value="{$k}_{$kk}_{$kkk}" {if $quanxian[$k.'_'.$kk.'_'.$kkk]}checked="checked"{/if}><i></i>
+									                                        </label>{$qqq}
+																		</div>
+																	</li>
+																																
+																</ol>
+																{/loop}		
+															</li>
+															
+														</ol>
+														{/loop}
+													</li>
+													{/loop}
+												</ol>
+											</div>
+										</div>
+									</div>									
+								
+							</div>
+							<button type="submit" class="btn btn-danger">提交</button>
+							</form>
+						</section>
+					</section>
+					
+				</section>
+				
+			</section>
+			
+		</section>
+	</section>
+</section>
+
+<script src="{$_W['yuming']}gongyong/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+	$(".checkAll").click(function() {
+		$(this).parent().parent().parent().find("[type=checkbox]").attr("checked", $(this).attr("checked"));
+	});
+
+	$(".childAll").click(function() {
+		var onOff = true;
+		if(onOff) {
+			$(this).parent().parent().parent().find('input[type=checkbox]').attr("checked", $(this).attr("checked"));
+		}
+	});
+</script>
+{mb jiao}

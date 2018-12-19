@@ -1,0 +1,109 @@
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <a class="accordion-toggle" style="display:block;" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+      筛选
+    </a>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body text-sm">
+            <form class="form-horizontal" action="{php echo UHK('shanghu/index')}" method="post">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">店铺昵称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control"  placeholder="" name="nicheng" value="">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+				  <label class="col-sm-2 control-label" for="input-id-1">会员等级</label>
+				  <div class="col-sm-10">
+				    <select  class="form-control" name="dengji">
+				        <option value="">不限等级</option>
+				        {loop $DengJiLie $k $ming}
+				        <option value="{$k}">{$ming}</option>
+				        {/loop}       
+				    </select>
+				  </div>
+				</div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="table-responsive">
+        <table class="table table-striped b-light">
+            <thead>
+                <tr>
+                   
+                    <th width="5%">ID</th>                  
+                    <th width="18%">店铺昵称</th> 
+                    <th width="15%">等级</th>                  
+                    <th width="15%">注册时间</th>                   
+                    <th width="10%">审核</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {loop $shanghulie $item}
+                <tr>
+            
+                      <td>{$item['id']}</td>
+                   
+                    <td>{$item[ming]}</td> 
+                    <td>
+                       <!--  <select  class="form-control m-b dengji" data-id = "{$item['id']}">                         
+                          {loop $DengJiLie $k $DJ}
+                          <option value="{$k}" {if $k==$item['dengji']}selected{/if}>{$DJ}</option>
+                          {/loop}
+                        </select> -->
+                    </td>
+                  
+                    <td>{php echo date('Y-m-d H:i:s',$item['shijian'])}</td>
+                    <td>
+                    	<label class="switch">
+                          <input class="checkbox" data-id = "{$item['id']}" type="checkbox" {if $item['zhuangtai']}checked{/if}>
+                          <span></span>
+                        </label>
+                    </td>
+                    <td style="position:relative;">  
+                        <!-- <a href="{php echo UH('shanghu/index', array('c'=>'xinxi', 'shanghu_id'=>$item['id']))}" class="btn btn-sm btn-default" title="自定义模板"><i class="fa  icon-doc"></i></a> -->
+                        <a href="{php echo UH('shanghu/index', array('c'=>'bianji_', 'shanghu_id'=>$item['id']))}" class="btn btn-sm btn-default" title="编辑"><i class="fa fa-pencil"></i></a>
+                        <a href="{php echo UH('shanghu/index', array('c'=>'shanchu', 'shanghu_id'=>$item['id']))}" onclick="return confirm('确认删除此商户？');return false;" class="btn btn-default  btn-sm" title="删除"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                {/loop}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-left">{$fenye}</div>
+</section>
+<script type="text/javascript">
+	$('.checkbox').change(function(){		
+		var $checked = $(this).is(':checked');
+		$(this).prop('checked', $checked);
+		if($checked){
+			$checked=1;
+		}else{
+			$checked=0;
+		}		
+		$.post('{$_W["url"]}',{c:'gai',zhuangtai:$checked,id:$(this).attr('data-id')});
+	});
+	$('.dengji').change(function(){		
+		$.post('{$_W["url"]}',{c:'gai',dengji:$(this).val(),id:$(this).attr('data-id')});
+	});
+	$('.muban').change(function(){		
+		$.post('{$_W["url"]}',{c:'gai',muban:$(this).val(),id:$(this).attr('data-id')});
+	});
+	
+	$('.paixu').blur(function(){	
+		$.post('{$_W["url"]}',{c:'gai',paixu:$(this).val(),id:$(this).attr('data-id')});
+	});
+	
+	
+</script>

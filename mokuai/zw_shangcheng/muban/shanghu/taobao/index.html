@@ -1,0 +1,44 @@
+{mb tou}
+<style type="text/css">
+    #duli_div,#jicha_div,#hidden-block,.hidden_table{display:none;}
+    .panel .table_xiang tbody tr td,.panel .table_xiang thead tr th{vertical-align:middle;text-align:center;border-right:1px solid #ddd;}
+    .panel .table_xiang,.panel .table_xiang tr,.panel .table_xiang thead > tr > th,.panel .table_xiang tbody > tr > td{border-color:#ddd;}
+    .guige_box{background:#fefefe;}
+</style>
+<section class="vbox">
+    {mb dingbu_caidan}
+    <section>
+        <section class="hbox stretch">
+            {mb zuobu}
+            <!-- 内容开始 -->
+            <section id="content">
+                <section class="vbox">
+                    <section class="scrollable m-t padder-lg">
+                        <!-- right tab -->
+                        <section class="panel panel-default">
+                            <header class="panel-heading text-right bg-light">
+                                <ul class="nav nav-tabs liebiao">
+                                    <li {if $cao=='moren'} class="active"{/if}><a href="{php echo USK('tongji',array('c'=>moren))}" style="padding:9px 40px 10px;">淘宝导入</a></li>
+                                   
+                                </ul>
+                            </header>
+                            <div class="panel-body">
+                                <div class="tab-content">                                   
+                                    <div class="tab-pane fade active in">
+                                    	{if $cao=='moren'}
+                                          {mb "biaoqian/daoru"}
+                                        
+                                        {/if}
+                                    </div>                                
+                                </div>
+                            </div>
+                        </section>
+                        <!-- right tab -->
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+</section>
+
+{mb jiao}

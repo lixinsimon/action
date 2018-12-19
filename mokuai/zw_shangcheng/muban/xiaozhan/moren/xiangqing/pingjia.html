@@ -1,0 +1,98 @@
+{mb tou}
+<header class="m-navbar">
+			<a onclick="$z.go()" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				评论
+			</div>
+		
+</header>
+	<div id="pinglun">
+			<div class="m-celltitle" style="line-height: 1.5rem;color:#000000;">宝贝评分</div>
+			<div class="m-cell">
+			    <div class="cell-item">
+			        <div class="cell-right">
+			            <textarea class="cell-textarea" placeholder="请输入您的对宝贝的评价"></textarea>
+			        </div>
+			    </div>
+			</div>
+			
+			<div class="shangtu">
+				<i class="tubiao tb-jia"></i>
+			</div>
+			<div class="shangtu">
+				<img src="images/banner.jpg"/>
+			</div>
+			
+			<button type="submit" class="btn-block btn-danger" @click="denlu"  style="margin:.4rem 1%;width: 98%;">确定</button> 
+	</div>	
+	{mb js}
+	
+	
+	
+	
+
+<script src="{$_W['yuming']}gongyong/js/jquery.ratyli.js"></script>
+<script src="{$_W['yuming']}gongyong/js/webuploader/webuploader.min.js"></script>
+<script type="text/javascript">
+$(".ratyli").ratyli({
+    full: "<i class='xing tubiao icon-xingxing'></i>",
+    empty: "<i class='xing tubiao icon-xingxing1'></i>",
+});
+$.post('{$_W["url"]}',function(shu){
+	if(shu.shi==1){
+        if(shu.shu.pingjia==1){
+              mui.toast('您已经评论');
+              $('#tijiao').remove();
+        }
+     var h='<div class="shangpintu_l"><img src="'+shu.shu.tu+'"></div><div class="shangpintu_r"><p class="mui-ellipsis-2">'+shu.shu.ming+'</p><p></p><p>￥'+shu.shu.jiage+'</p></div>';       
+         $('.shangpin_tu').html(h);
+	}	
+},'json');
+
+var uploader = WebUploader.create({
+    server: '{php echo UXK("gongyou/wenjian",array("c"=>"upload"))}',
+    pick: '#pingjia_img_jia',
+    resize: false,
+    auto: true,
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,png',
+        mineTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+    }
+});
+
+uploader.on('uploadSuccess', function(file, shu) {
+	if(shu.filename){      
+        var html='<li class="pingjia_img"><img src="'+shu.url+'"><div class="close_pic"><i class="tubiao icon-close"></i></div><input type="hidden" name="tu[]" value="'+shu.filename+'"/></li>';
+         $('#pingjia_img_jia').before(html);
+    
+     }else{
+     	mui.toast("上传失败");
+     }
+  
+});
+uploader.on('uploadError', function(file, resp){
+	mui.toast("上传失败");
+});
+
+mui('.pingjiatu_pic').on('tap','.close_pic',function(){
+	$(this).parent().remove();
+})
+
+$('form').submit(function(event) {
+	var v= $(this).serializeArray();
+    var xingji=$('.rate-full').length;     
+	 $.post('{$_W["url"]}&xingji='+xingji,v,function(shu){
+       if(shu.shi==1){
+       	  $('#tijiao').remove();
+           mui.toast('您已经评论');
+       }
+	 },'json');
+	 
+	
+     return false;
+});
+</script>
+{mb jiao}

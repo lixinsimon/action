@@ -1,0 +1,29 @@
+<div class="table-responsive m-t-lg">
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="15%">登录时间</th>
+        <th width="15%">登录入口</th>
+        <th width="15%">终端设备</th>
+        <th width="25%">IP</th>
+        <th width="25%">openid</th>
+        <!--<th width="15%">操作入口</th>    -->    
+      </tr>
+    </thead>
+    <tbody>
+    	{loop $denglu $dl}
+      <tr>
+        <td>{php echo date("Y-m-d H:i:s",$dl['shijian'])}</td>        
+        <td>{$dl['zongduan']}</td>
+        <td><font>{$dl['xitong']}</font></td>
+        <td><font>{$dl['ip']}</font></td>
+        <td><font>{$dl['openid']}</font></td>
+        <!--<td style="overflow: hidden;" title="{$jf['rokouUrl']}">{$jf['rukouUrl']}</td>    -->  
+      </tr>  
+      {/loop}
+    </tbody>
+  </table>
+  <div class="text-left">
+    {$fenye}
+  </div>
+</div>

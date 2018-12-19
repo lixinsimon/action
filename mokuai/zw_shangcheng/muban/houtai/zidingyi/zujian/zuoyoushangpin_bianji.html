@@ -1,0 +1,165 @@
+<header class="tou">商品(左右滑动商品)</header>	
+
+<style>
+	.sptupian img{
+		width: 50px;
+		height: 50px;
+		margin-right: 4px;
+		margin-bottom: 4px;
+		box-sizing: border-box;
+		cursor: pointer;
+	}
+	.xuantupian div{
+		float: left;
+	}
+	.xuantupian img{
+		width: 100%;
+		height: 80px;
+		padding-right: 4px;
+		margin-bottom: 4px;
+		
+	}
+</style>
+
+<div class="form-group" style="margin-right:0px;">   
+	
+	
+    <div class="col-sm-10">   
+			<input type='hidden' name="z[{$shu['ming']}][geshi]" class='form-control' value="1">
+			<input type='hidden' name="z[{$shu['ming']}][hezikuan]" class='form-control hezikuandu' value="{$s['hezikuan']}">
+			
+			<div class="input-group m-b">
+				 <span class="input-group-addon">商品高度</span>
+				 <input type="text" name="z[{$shu['ming']}][gaodu]" class="form-control gaodu" placeholder="商品图片的高度" value="{$s['gaodu']}">
+			</div>
+			<div class="input-group m-b">
+				 <span class="input-group-addon">商品宽度</span>
+				 <input type="text" name="z[{$shu['ming']}][kuandu]" class="form-control kuandu" placeholder="商品图片的宽度" value="{$s['kuandu']}">
+			</div>
+			<div  class="input-group m-b">
+				 <span class="input-group-addon">搜索商品</span>
+				 <input type="text"  class="form-control chi" placeholder="输入商品名字或ID" value="">
+				 <span class="input-group-addon sousuo" style="cursor: pointer;" title="搜索"><i class="fa fa-search"></i></span>
+			</div>
+			
+			<div class="input-group m-b sptupian">
+
+				  
+			</div>
+			<div class="input-group m-b xuantupian">
+				{loop $s['shangpin'] $l}
+					<div style="position: relative;width: 25%;float: left;" class="shanchu">
+							<img src="{$l['tu']}"/>
+							<span onclick="{$shu['ming']}shanchu(this)" style="position: absolute;top: 0;right: 4px;background: red;width: 20px;color: #fff;text-align: center;line-height: 20px;cursor: pointer;">X</span>
+							<input type='hidden' name="z[{$shu['ming']}][tu][]" class='form-control' value="{$l['tu']}">
+							<input type='hidden' name="z[{$shu['ming']}][ming][]" class='form-control' value="{$l['ming']}">
+							<input type='hidden' name="z[{$shu['ming']}][jiage][]" class='form-control' value="{$l['jiage']}">
+							<input type='hidden' name="z[{$shu['ming']}][id][]" class='form-control' value="{$l['id']}">
+					</div>
+				{/loop}
+			</div>
+	</div>
+	
+</div>
+<script>
+	
+	/*防止图片拖拽*/
+	$(function(){
+		$('body').attr('ondragstart','return false');
+		{if $s['gaodu']}
+			setTimeout(function(){
+				I("#{$shu['ming']} .tu img").attr('height',{$s['gaodu']});
+			},500);
+		{/if}
+		{if !empty($s['shangpin'])}
+			setTimeout(function(){
+				I("#{$shu['ming']} .tu .panduan").val(1);
+			},500);
+		{/if}
+		{if !empty($s['kuandu'])}
+			setTimeout(function(){
+				I("#{$shu['ming']} .tu .hezi").css('width',(parseInt({$s['kuandu']})*{php echo count($s['shangpin'])})+({php echo count($s['shangpin'])}-1)*12);
+				I("#{$shu['ming']} .tu .kuandu").css('width',{$s['kuandu']});
+			},500);
+		{/if}
+	})
+	
+	$('#{$shu["ming"]} .gaodu').blur(function(){
+		I("#{$shu['ming']} .tu img").attr('height',$(this).val());
+	})
+	
+	$('#{$shu["ming"]} .kuandu').blur(function(){
+				
+		var  geshu = I("#{$shu['ming']} .kuandu").length;
+//		console.log(geshu);
+		
+		if(I("#{$shu['ming']} .tu .panduan").val()==0){
+			I("#{$shu['ming']} .tu .hezi").css('width',(parseInt($(this).val())*3)+24); 
+		}else{
+			I("#{$shu['ming']} .tu .hezi").css('width',(parseInt($(this).val())*geshu)+(12*(geshu-1)));
+		}
+			I("#{$shu['ming']} .tu .kuandu").css('width',$(this).val());
+			$("#{$shu['ming']} .hezikuandu").val((parseInt($(this).val())*geshu)+(12*(geshu-1)));
+
+	})
+	
+	$('#{$shu["ming"]} .sousuo').click(function(){
+		$.post("{$_W['url']}",{guanjianzi:$('#{$shu["ming"]} .chi').val(),c:'sousuoshangpin'},function(shu){
+			if(shu.shi==1){
+				$('#{$shu["ming"]} .sptupian').empty('img');
+				for (var i = 0,l=shu.shu.length;i<l;i++) {
+					$('#{$shu["ming"]} .sptupian').append("<img title='"+shu.shu[i].ming+"'  data-ming="+shu.shu[i].ming+"  data-jiage="+shu.shu[i].jiage+"  data-ids="+shu.shu[i].id+" data-img="+shu.shu[i].tu+" onclick='{$shu['ming']}xuanzetupian(this)' src='"+shu.shu[i].tu+"'/>");
+				}
+			}
+		},'json');
+	})
+	
+	
+	function {$shu['ming']}shanchu(e){
+		var a = $(e).closest('div').index();
+		I("#{$shu['ming']} .tu .kuandu").eq(a).remove();
+		e.parentNode.remove();
+		var kuandu = 120;
+		if($('#{$shu["ming"]} .kuandu').val()){
+			kuandu = $('#{$shu["ming"]} .kuandu').val();
+		}
+		var  geshu = I("#{$shu['ming']} .kuandu").length;
+		
+		I("#{$shu['ming']} .tu .hezi").css('width',((parseInt(kuandu)+12)*geshu)-12);
+		$("#{$shu['ming']} .hezikuandu").val(((parseInt(kuandu)+12)*geshu)-12);
+	}
+	
+	function {$shu['ming']}xuanzetupian(e){
+		
+		var panduan = I("#{$shu['ming']} .tu .panduan").val();
+		if(panduan == 0){
+			I("#{$shu['ming']} .hezi").empty();
+			I("#{$shu['ming']} .tu .panduan").val(1);
+			I("#{$shu['ming']} .tu .hezi").css('width',125*1-12);
+		}
+		
+		var gaodu = 100;
+		
+		if($('#{$shu["ming"]} .gaodu').val()){
+			gaodu = $('#{$shu["ming"]} .gaodu').val();
+		}
+		
+		var kuandu = 120;
+		if($('#{$shu["ming"]} .kuandu').val()){
+			kuandu = $('#{$shu["ming"]} .kuandu').val();
+		}
+		
+		I("#{$shu['ming']} .hezi").append('<div class="kuandu" style="float: left;width: '+kuandu+'px;margin-right: 12px;"><img src="'+e.dataset.img+'"style="width: 100%;" height="'+gaodu+'"><p>'+e.dataset.ming+'</p><span>'+e.dataset.jiage+'元</span></div>');
+		var  geshu = I("#{$shu['ming']} .kuandu").length;
+		
+		I("#{$shu['ming']} .tu .hezi").css('width',((parseInt(kuandu)+12)*geshu)-12);
+		
+		$("#{$shu['ming']} .hezikuandu").val(((parseInt(kuandu)+12)*geshu)-12);
+		
+		$('#{$shu["ming"]} .xuantupian').append("<div style='position: relative;width: 25%;float: left;' class='shanchu'><img src='"+e.dataset.img+"'/><span onclick='{$shu['ming']}shanchu(this)' style='position: absolute;top: 0;right: 4px;background: red;width: 20px;color: #fff;text-align: center;line-height: 20px;cursor: pointer;'>X</span> <input type='hidden' name='z[{$shu['ming']}][tu][]' class='form-control' value="+e.dataset.img+"><input type='hidden' name='z[{$shu['ming']}][jiage][]' class='form-control' value="+e.dataset.jiage+"><input type='hidden' name='z[{$shu['ming']}][ming][]' class='form-control' value="+e.dataset.ming+"><input type='hidden' name='z[{$shu['ming']}][id][]' class='form-control' value="+e.dataset.ids+"></div>");
+	}
+	
+	
+</script>
+
+     

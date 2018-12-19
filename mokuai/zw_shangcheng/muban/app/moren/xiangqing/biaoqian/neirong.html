@@ -1,0 +1,283 @@
+<style type="text/css">
+	#slider_xq .mui-control-content.mui-active{
+		display: block;
+	}
+	#slider_xq .mui-control-content{
+		display: none;
+	}
+	#slider_xq .mui-control-item.mui-active{
+		color:#ff5816;
+	}
+	#slider_xq .mui-slider .mui-slider-group .mui-slider-item{
+		width:100%;
+		height:auto;
+		overflow: hidden;
+	}
+</style>
+<div id="slider" class="mui-slider">
+	<div class="mui-slider-group mui-slider-loop">		
+		<div class="mui-slider-item">
+			<a ><img src="{$shangpin['tu']}"></a>
+		</div>
+		{loop $shangpin['xijietu'] $xj}
+		<div class="mui-slider-item">
+			<a ><img src="{$xj}"></a>
+		</div>		
+	    {/loop}	
+	  
+	</div>
+	{if $shangpin['xijietu']}
+	<div class="mui-slider-indicator">
+		<div class="mui-indicator mui-active"></div>
+		{loop $shangpin['xijietu'] $xj}
+		<div class="mui-indicator"></div>
+		{/loop}		
+	</div>
+	{/if}
+</div>
+<div class="shpin">
+	<div class="shpinming">
+		<h3>{$shangpin['ming']}</h3>
+	</div>
+	<div class="jiage">
+		<h3 class="mui-pull-left">￥<span>{$shangpin['jiage']}</span>{if $shangpin['baoyou']}(包邮){/if}</h3>
+		<h4 class="mui-pull-right" style="font-size:0.8em;font-weight:normal;color:#aaaaaa;line-height:1.4em;text-align:right;width:50%;">
+				销量:{$shangpin['chushoushu']}
+				<span style="margin-left:10%;">库存:{$shangpin['kucun']}</span>
+			</h4>
+	</div>
+</div>
+{if $guige['guige']}
+<ul class="mui-table-view" id="youguige" style="display: none;">
+	<li class="mui-table-view-cell">
+		<a class="mui-navigate-right"  onclick="guige('',this)"  style="color:#6f6f6f;font-size:0.8em;background:#fff;border-top:1px solid #eee;" data-target="#guige">
+			请选择商品规格及数量
+		</a>
+	</li>
+</ul>
+{/if}
+{if $_W['shezhi']['jiaoyi']['quan']}
+<ul class="mui-table-view" id='quan'>
+	<li class="mui-table-view-cell">
+		<a href="{php echo UAK('wode/quan')}" class="mui-navigate-right" style="color:#6f6f6f;font-size:0.8em;background:#fff;border-top:1px solid #eee;">
+			领取优惠券
+		</a>
+	</li>
+</ul>
+{/if}
+
+<div id="slider_xq" class="mui-slider">
+	<div id="sliderSegmentedControl_xq" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="background:#fff;margin-top:1px;">
+		<a class="mui-control-item mui-active" href="#item1mobile_xq" style="width:33.3%;" id="pingjia">
+			详情
+		</a>
+		<a class="mui-control-item" href="#item2mobile_xq" style="width:33.3%;">
+			参数
+		</a>
+		<a class="mui-control-item" href="#item3mobile_xq" style="width:33.3%;">
+			评价({$pingjiazongahu})
+		</a>
+	</div>
+	<div class="mui-slider-group">
+		<div id="item1mobile_xq"  class="mui-slider-item mui-control-content mui-active" style="background:#fff;padding-top:10px;">
+			<div class="shangtu mui-content-padded " id="xiangqing" style="margin-top:0;">	
+				{$shangpin['xiangqing']}
+			</div>
+		</div>
+		<div id="item2mobile_xq" class="mui-slider-item mui-control-content" style="background:#fff;padding-top:10px;">
+			{mb "biaoqian/canshu_lie"}
+		</div>
+		<div id="item3mobile_xq" class="mui-slider-item mui-control-content" style="background:#fff;padding-top:10px;">
+			{mb "biaoqian/pingjia_lie"}
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="guige" area-hidden="false">
+	<div class="modal-dialog">
+		<div class="modal-content" style="background:#fff;">
+			<!--<div class="modal-header">
+	      </div>-->
+			<div class="modal-body">
+				<ul class="mui-table-view" style="background:transparent">
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<img class="mui-media-object mui-pull-left modal_img" src="{$shangpin['tu']}">
+							<div class="mui-media-body">
+								<div class="mui-ellipsis-2 pic-right">{$shangpin['ming']}</div>
+								<span class="kucun_xq">
+									<font class="mui-pull-left jiawei">￥{$shangpin['jiage']}</font>
+									<font class="mui-pull-right jianshu">库存：{$shangpin['kucun']}件</font>
+								</span>
+							</div>
+							<button type="button" class="close mui-pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<input type="hidden" name="cunzaiguige" id="cunzaiguige" value="{php echo empty($guige['guige'])?0:1}" />
+			{if $guige}			
+			{loop $guige['guige_zu'] $gg}
+			<div class="modal-footer guigezu" style="border-top:1px solid #eee;">
+				<h5 class="guige-text">{$gg['guigezu_ming']}</h5>
+				{if $guige['guige']}				
+				<div class="dapei">
+					{loop $guige['guige'] $ggg}
+						{if $ggg['guigezu_id']==$gg['guigezu_id']}
+						   <button class="mui-bottom"  id="{$ggg['guige_id']}" img="{$ggg['guige_tu']}">{$ggg['guige_ming']}</button>
+						{/if}
+					{/loop}					
+				</div>				
+				{/if}
+			</div>
+			{/loop}
+			
+			{/if}
+			
+			<div class="modal-footer">
+				<form class="mui-input-group">
+					<div class="mui-input-row shuliang">
+						<label>购买数量</label>
+						<div class="mui-numbox">
+							<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+							<input class="mui-input-numbox" id="mui-input-numbox" type="number" value="1" />
+							<button class="mui-btn mui-btn-numbox-plus" type="button" data-numbox-max='{$shangpin["zuiduomailiang"]}'>+</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer" id="dibucaidao">
+				<button class="jiaru" onclick="jiarugouwuche()">加入购物袋</button>
+				<button class="goumai" onclick="goumai()">立即购买</button>
+				<input type="hidden" name="guigeid"  id="guigeid"/>
+			</div>
+			<div class="modal-footer" id="tishi" style="display:none">
+				<button class="jiaru" style="width: 100%; background: #DDDDDD;color: #999;">库存不足</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-backdrop fade" style="display:none;"></div>
+<script type="text/javascript" charset="utf-8">
+    var fenxiang={php echo json_encode($fenxiang)};
+	mui.init();	
+	var slider = document.getElementById('slider');
+	var group = slider.querySelector('.mui-slider-group');
+	var items = mui('.mui-slider-item', group);
+	var first = items[0].cloneNode(true);	
+	var last = items[items.length - 1].cloneNode(true);
+	group.appendChild(first);	
+	group.insertBefore(last,items[0]);
+	last.classList.add('mui-slider-item-duplicate');
+	first.classList.add('mui-slider-item-duplicate');
+	mui(slider).slider({
+		interval: 5000
+	});
+	$('.modal-backdrop,.close').click(function() {
+		$('#guige').hide().removeClass('in');
+		$('.modal-backdrop').removeClass('in').hide();
+	})
+	var shuliang=0;
+	$('.mui-btn-numbox-minus').click(function(){
+		    shuliang=$('#mui-input-numbox').val();
+		    shuliang=Number(shuliang)-Number(1);
+		if(shuliang>0){
+			$('#mui-input-numbox').val(shuliang);
+		}
+	});
+	$('.mui-btn-numbox-plus').click(function(){
+		    shuliang=$('#mui-input-numbox').val();		  
+		    shuliang=Number(shuliang)+Number(1);
+		    
+		if(shuliang<=$(this).attr('data-numbox-max')){
+			$('#mui-input-numbox').val(shuliang);
+		}else{
+			mui.toast('最多购买'+$(this).attr('data-numbox-max')+'件')
+		}
+	});
+	$('#mui-input-numbox').change(function(){
+		max=$('.mui-btn-numbox-plus').attr('data-numbox-max');
+		shuliang=$(this).val();
+		
+		if(Number(shuliang)>Number(max)){
+			$(this).val(max);
+		}
+		if(Number(shuliang)<1){
+			$(this).val(1);
+		}
+	});
+var xuanze={$xuanze};
+$('.dapei button').click(function(){
+	$(this).toggleClass('guige_btn').siblings().removeClass('guige_btn');	
+	if($(this).attr('img')!=''){
+		$('.modal_img').attr('src',$(this).attr('img'));
+	}	
+	var guigeid='';
+	for(var i=0;i<$('.dapei .guige_btn').length;i++){
+		guigeid+=$('.dapei .guige_btn').eq(i).attr('id')+'_';		
+	}
+	guigeid=guigeid.substring(0,guigeid.length-1);	
+	if(typeof(xuanze[guigeid])=='object'){
+		$('.mui-btn-numbox-plus').attr('data-numbox-max',xuanze[guigeid]['zuiduomailiang']);
+		$('#guigeid').val(xuanze[guigeid]['id']);
+		$('.jiawei').text('￥'+xuanze[guigeid]['guige_xuanze_jiage']);
+		$('.jianshu').text('库存：'+xuanze[guigeid]['guige_xuanze_kucun']+' 件');
+		if(xuanze[guigeid]['guige_xuanze_kucun']<=0){
+			$('#dibucaidao').hide();
+			$('#tishi').show();
+		}else{
+			$('#dibucaidao').show();
+			$('#tishi').hide();
+		}
+	}else{
+		$('.jiawei').text("￥{$shangpin['jiage']}");
+		$('.jianshu').text("库存：{$shangpin['kucun']} 件");
+		if({$shangpin['kucun']}<=0){
+			$('#dibucaidao').hide();
+			$('#tishi').show();
+		}else{
+			$('#dibucaidao').show();
+			$('#tishi').hide();
+		}
+	}
+	
+})
+
+
+
+mui.init({
+	swipeBack: false
+});
+(function($) {
+	$('.mui-scroll-wrapper').scroll({
+		indicators: true //是否显示滚动条
+	});
+	var html2 = 'fvgdgeber';
+	var html3 = 'erfgrg45yh65iiu';
+	var item2 = document.getElementById('item2mobile_xq');
+	var item3 = document.getElementById('item3mobile_xq');
+	document.getElementById('slider_xq').addEventListener('slide', function(e) {
+		if (e.detail.slideNumber === 1) {
+					item2.querySelector('.mui-scroll').innerHTML = html2;
+					$("#item2mobile_xq").show();
+					$("#item3mobile_xq,#item1mobile_xq").hide();
+		} else if (e.detail.slideNumber === 2) {
+					item3.querySelector('.mui-scroll').innerHTML = html3;
+					$("#item3mobile_xq").show();
+					$("#item2mobile_xq,#item1mobile_xq").hide();
+		}
+	});
+	var sliderSegmentedControl = document.getElementById('sliderSegmentedControl_xq');
+	$('.mui-input-group').on('change', 'input', function() {
+		if (this.checked) {
+			sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+			//force repaint
+			sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+		}
+	});
+})(mui);
+
+
+</script>

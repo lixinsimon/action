@@ -1,0 +1,30 @@
+<a href="#gong9" data-toggle="tab" data_id="{$dd['id']}" class="btn chakan" style="color: #FFF;background: #ffcc33;">查看详情</a>
+{if empty($dd['zhuangtai'])}
+<a href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'quxiao','id'=>$dd['dingdanhao']))}" class="btn" style="background: #ff6633;color: #FFF;">关闭订单</a>
+<a href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'fukuan','id'=>$dd['dingdanhao']))}" class="btn padder-xs" style="background: #ff0033;color: #FFF;">确认付款</a>
+{elseif $dd['zhuangtai']==5}
+
+<a href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'daifu','id'=>$dd['id']))}" class="btn padder-xs" style="background: #ff0033;color: #FFF;">恢复订单</a>
+{elseif $dd['zhuangtai']==6}
+
+<a href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'jujuetuikuan','id'=>$dd['id']))}" class="btn padder-xs" style="background: #ff0033;color: #FFF;">拒绝退款</a>
+<a href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'yituikuan','id'=>$dd['id']))}" class="btn" style="background: #ff6633;color: #FFF;">接受退款</a>
+{elseif $dd['zhuangtai']==10  || $dd['zhuangtai']==15}
+
+<a href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'yituikuan','id'=>$dd['id']))}" class="btn" style="background: #ff6633;color: #FFF;" onclick="return confirm('确认退款！款项将退到余额..')">给他退款</a>
+<a data-toggle="modal" data-target="#querenfahuo" onclick="QueRenFaHuo('{$dd['id']}','{$dd['shouhuoren']}','{$dd['shouhuoshengshiqu']} {$dd['shouhuodizhi']}')" class="btn padder-xs" style="background: #ff0033;color: #FFF;">确认发货</a>
+{elseif $dd['zhuangtai']==20}
+
+<a class="btn" data-toggle="modal" data-target="#kuaidi" onclick="ChaKuaiDi('{$dd['kuaidiid']}','{$dd['kuaidihao']}')" style="background: #ff6633;color: #FFF;">快递物流</a>
+<a  href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'shouhuo','id'=>$dd['id']))}"  class="btn padder-xs" style="background: #ff0033;color: #FFF;">确认收货</a>
+{elseif $dd['zhuangtai']==30}
+
+<a class="btn" data-toggle="modal" data-target="#kuaidi" onclick="ChaKuaiDi('{$dd['kuaidiid']}','{$dd['kuaidihao']}')" style="background: #ff6633;color: #FFF;">快递物流</a>
+<a class="btn" href="{php echo USK('dingdan',array('c'=>'daochudingdan','ddid'=>$dd['id']))}"  style="background: #ff8533;color: #FFF;">打印订单</a>
+
+<a href="{php echo USK('dingdan/pingjia',array('dingdan'=>$dd['id']))}" class="btn padder-xs" style="background: #ff0033;color: #FFF;">晒晒账单</a>
+<a href="{php echo USK('dingdan',array('c'=>'gaizhuanitai','zhuangtai'=>'tuihuo','id'=>$dd['id']))}" class="btn padder-xs" style="background: #C1194E;color: #FFF;" onclick="return confirm('确认退换货吗？')">退&nbsp; 换&nbsp; 货</a>
+
+{/if}
+
+

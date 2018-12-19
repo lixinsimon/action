@@ -1,0 +1,14 @@
+{mb tou}
+
+ <div class="nav navbar-nav" style="width: 100%;margin-bottom: 20px;float: left;"> 	
+    {loop $caidandaohang $cd}
+     <div class="btn-group">
+	    <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-toggle="dropdown">{$cd['ming']}<span class="caret"></span></button>
+	    <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupDrop1">
+	    	{loop $cd['erji'] $cdej}
+	     	<li><a href="{$cdej['url']}">{$cdej['ming']}</a></li>
+   			{/loop}	      
+	    </ul>
+	  </div>
+	  {/loop}
+  </div>

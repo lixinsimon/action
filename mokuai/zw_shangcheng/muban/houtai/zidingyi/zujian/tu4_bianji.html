@@ -1,0 +1,54 @@
+<header class="tou">四图</header>	
+ <table class="table">
+    <thead>
+      <tr>
+        <!--<th width="30%">名称</th>-->
+        <th width="30%">链接</th>
+        <th width="30%">图标</th>  
+       <th></th>
+      </tr>
+    </thead>
+    <tbody> 
+    	{if empty($s['tu4'])}
+			{php $s['tu4'][0]['url']=''}		
+			{php $s['tu4'][0]['tu']=''}		
+			{php $s['tu4'][1]['url']=''}		
+			{php $s['tu4'][1]['tu']=''}		
+			{php $s['tu4'][2]['url']=''}		
+			{php $s['tu4'][2]['tu']=''}
+			{php $s['tu4'][3]['url']=''}		
+			{php $s['tu4'][3]['tu']=''}
+		{/if}
+    	{loop $s['tu4'] $kk $ming}
+      <tr>       
+        <!--<td style="vertical-align:middle;"><input type="hidden" class="form-control ming" name="z[{$shu['ming']}][ming][]" value="{$ming}"></td>-->
+        <td style="vertical-align:middle;"><input type="text" class="form-control url" name="z[{$shu['ming']}][tu4][{$kk}][url]" value="{$ming['url']}"></td>
+        <td class="btn-shuxing" style="vertical-align:middle;">
+        	<div class="input-group" onclick="$ShangTu(this);">		
+						<input type="hidden" name="z[{$shu['ming']}][tu4][{$kk}][tu]" she='tu' value="{$ming['tu']}" class="form-control tu st_img" readonly="readonly" autocomplete="off" >			
+						<span class="input-group-btn">
+							<img src="{php echo JueDuiUrl($ming['tu'])}"  class="img-responsive img-thumbnail st_img" style="width: 35px;height: 35px;border: 0px;padding: 0px;border-radius:0px">
+							<button class="btn btn-default" type="button"  zujian="{$shu['ming']}">选择图片</button>
+						</span>
+				   </div>
+        </td>  
+      </tr>
+      {/loop}
+    </tbody>
+     
+  </table>
+  <script>
+
+	  setInterval(function(){
+	  	$.each($('#{$shu["ming"]} .tu'),function(i){
+		     var tu=$(this).val();
+		     if(tu){
+	  		 	  I("#{$shu['ming']} .tu4 ").eq(i).attr('src',tu);		
+	  		 }		     
+	  	});
+	  },500);
+	  	
+		
+  </script>
+
+  

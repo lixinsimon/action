@@ -1,0 +1,51 @@
+ <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+      <div class="navbar-header aside bg-info">
+        <a class="btn btn-link visible-xs">
+          <i class="icon-list"></i>
+        </a>
+        <a href="{php echo US('danyuan')}" class="navbar-brand text-lt">
+          <i class="fa fa-mail-reply"></i>
+          <img src="{$_W['yuming']}/gongyong/images/logo.png" alt="." class="hide">
+          <span class="hidden-nav-xs m-l-sm">商户管理</span>
+        </a>
+        <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
+          <i class="icon-settings"></i>
+        </a>
+      </div>
+      <div class="nav navbar-nav">
+      	{if !empty($caidan)}
+        <h2 class="font-thin inline m-l-md text-info" style="font-size:20px; margin-right: 20px;">{$mokuaiming}</h2>
+        {loop $caidan $cd}      
+        <div class="btn-group m-l-sd m-b-sm " style="margin-top:-1px;">
+          <a href="{$cd['url']}" class="btn btn-default">{$cd['ming']}</a>
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+          <ul class="dropdown-menu">
+          	{loop $cd['erji'] $cdej}
+             <li><a href="{$cdej['url']}">{$cdej['ming']}</a></li>
+            {/loop}
+          </ul>
+        </div>
+        {/loop}
+        {/if}
+        
+      </div>
+      <div class="navbar-right">
+        <ul class="nav navbar-nav m-n hidden-xs nav-user user">         
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img src="{$_W['yuming']}/gongyong/images/yami.png" width="40">
+              </span>
+              {$_W['shanghu']['nicheng']} <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu animated fadeInRight">            
+      
+              <li class="divider"></li>
+              <li>
+                <a href="{php echo US('denglu/zhuxiao')}">退出</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>      
+    </header>

@@ -1,0 +1,39 @@
+<div class="main panel panel-default">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+                <tr>
+                    <th style="width:50px;">ID</th>
+                    <th style="width:150px;">名称</th>
+                    <!--<th style="width:150px;">配送类型</th>-->
+                    <th style="width:120px;">首重价格</th>
+                    <th style="width:120px;">续重价格</th>
+                    <th style="width:100px;">操作</th>
+                </tr>
+            </thead>            
+            <tbody>
+              {loop $kuaidi $k}
+                <tr>
+                    <td>{$k['id']}</td>                  
+                    <td>{$k['ming']}</td>
+                    <!--<td>
+                        {if $k['leixing']==1}
+                         货到付款
+                        {elseif $k['leixing']==2}
+                         自提
+                        {else}                         
+                         先付款后发货
+                        {/if}
+                    </td>-->
+                    <td>{$k['shoujia']}</td>
+                    <td>{$k['xujia']}</td>
+                    <td style="text-align:left;">
+                        <a href="{php echo UHK('shangpin/kuaidi',array('c'=>'bianji','id'=>$k['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="修改"><i class="fa fa-pencil"></i></a>
+                        <a href="{php echo UHK('shangpin/kuaidi',array('c'=>'shanchu','id'=>$k['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="删除" onclick="return confirm('确认删除')"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                {/loop}
+            </tbody>
+        </table>
+    </div>
+</div>

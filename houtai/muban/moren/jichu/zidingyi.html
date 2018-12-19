@@ -1,0 +1,291 @@
+ {mb tou}
+  <link rel="stylesheet" href="{$_W['yuming']}gongyong/js/nestable/nestable.css" type="text/css" />
+  <style type="text/css">
+  .dd{max-width:100%;}
+  .dd-item,.dd-item .dd-item-list{overflow:hidden;}
+  .dd-item > button{height:34px;margin:10px 0px;}
+  .dd-item .dd-item-list .form-group{float:left;padding:10px;}
+  .chang_input{width:235px;}
+  .duan_input{width:180px;}
+  .dd-list:hover{background:rgb(245,245,245);}
+  .dd-list .dd-handle.move_icon{background:transparent;border:none;float:left;box-shadow:none;margin:15px 0px;padding:0px 15px;}
+  .del_menu{float:left;margin:15px 0px;/*border-left:1px solid #e1e1e1;*/padding:0px 15px;cursor:pointer;}
+  .del_menu i{transform:rotate(45deg);margin-right:6px;}
+  .add_childmenu{float:left;margin:15px 0px;border-left:1px solid #e1e1e1;padding:0px 15px;cursor:pointer;}
+  .add_childmenu i{margin-right:6px;}
+  .set_action{float:left;margin:15px 0px;border-right:1px solid #e1e1e1;padding:0px 15px;cursor:pointer;}
+  .set_action i{margin-right:6px;}
+  .xian_img{float:left;padding:10px 10px 10px 0px;}
+  .i{border-color:#545ca6}
+  </style>
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              
+              <h2 class="font-thin m-b" style="font-size:20px;">自定义菜单</h2>
+              <!-- right tab -->
+              <form action="" method="post">
+              	<section class="panel panel-default">
+                <header class="panel-heading">
+                  	菜单编辑器
+                </header>
+                <div class="panel-body">
+                  <div class="dd" id="nestable1">
+                  	{loop $cd $k $c}
+                    <ol class="dd-list menu" k="{$k}">
+                    	<li class="dd-item" data-id="1">                    		
+                    		<div class="dd-item-list">
+                    			<div class="form-group">
+                    				<input type="text" class="form-control chang_input name" value="{$c['name']}" placeholder="菜单名称" name="name[{$k}][name]">                    				
+	                    			<input type="hidden" name="url[{$k}]" value="{if $c['key']}{$c['key']}{elseif $c['pagepath']}{$c['pagepath']}{else}{$c['url']}{/if}" class="url"/>
+	                				<input type="hidden" name="type[{$k}]" value="{$c['type']}" class="type"/>
+                    			</div>              			
+                				<div class="set_action" onclick="DongZou(this)" data-toggle="modal" data-target="#dialog"	{if $c['sub_button']} style="display: none;" {/if}>                					
+                					<i class="fa fa-pencil"></i>设置链接
+                				</div>
+       
+                				<div class="del_menu" onClick="sc_menu(this)">
+                					<i class="fa fa-plus"></i>删除菜单
+                				</div>
+                				<div class="add_childmenu" onClick="add_childmenu({$k},this)">
+                					<i class="fa fa-plus"></i>添加子菜单
+                				</div>
+                    		</div>
+                    		<ol class="dd-list list-child">
+                    			{loop $c['sub_button'] $kk $d}
+                    			<li class="dd-item dd-children" data-id="1" kk="{$kk}">
+                    				<div class="dd-item-list"><img src="{php echo JueDuiUrl("./gongyong/images/xian.png")}" class="xian_img">
+                    					<div class="form-group">
+                    						<input type="text"  class="form-control duan_input name" placeholder="菜单名称" value="{$d['name']}" name="name[{$k}][{$kk}]">                    						
+                    					    <input type="hidden" name="url[{$k}][{$kk}]" value="{if $d['key']}{$d['key']}{elseif $d['pagepath']}{$d['pagepath']}{else}{$d['url']}{/if}" class="url"/>
+                					        <input type="hidden" name="type[{$k}][{$kk}]" value="{$d['type']}" class="type"/>
+                    					</div>
+                    					<div class="set_action" onclick="DongZou(this)" data-toggle="modal" data-target="#dialog">
+                    						
+                    					    <i class="fa fa-pencil"></i>设置链接
+                    					</div>
+                    					<div class="del_menu" onClick="sc_childmenu(this)">
+                    						<i class="fa fa-plus"></i>删除菜单
+                    					</div>
+                    				</div>
+                    			</li>
+                    			{/loop}
+                    		</ol>
+                    	</li>
+                    </ol>
+                    {/loop}
+                  </div>
+                </div>
+                <div class="panel-footer">
+                  <a class="btn btn-dark padder addMenu">添加菜单</a> &nbsp; &nbsp; &nbsp;  
+                  <span class="help-inline">最多只能添加三个主菜单，每个子菜单下可添加5个子菜单 </span>
+                </div>
+              </section>
+              <button class="btn btn-danger padder"  type="submit">保存菜单结构</button>
+              </form>
+			  </section>
+            </section>
+          </section>
+        </section>
+
+      </section>
+    </section>    
+ </section>
+ 
+ <!-- 弹出 -->
+  <div id="dialog" class="modal fade in" aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3>选择菜单 【<span id="mingcheng">菜单名称</span>】 要执行的操作</h3>
+        </div>
+        <div class="modal-body">
+
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="type" value="view" id="type_view" checked="" class="lianjie type_">
+              <i></i> 链接
+            </label>
+          </div>
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="type" value="click" id="type_click" class="type_">
+              <i></i> 触发关键字
+            </label>
+          </div>
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="type" value="scancode_push" id="type_scancode" class="type_">
+              <i></i> 扫码
+            </label>
+          </div>
+          <div class="radio-inline i-checks">
+            <label>
+              <input type="radio" name="type" value="miniprogram" id="type_scancode" class="type_">
+              <i></i> 小程序
+            </label>
+          </div> 
+          <div class="kuai_one">
+            <hr>
+            <div class="input-group">
+              <input class="form-control" type="text" id='http'>
+              <div class="input-group-btn">
+                <button class="btn btn-primary" id="search"><i class="fa fa-external-link"></i> 链接</button>
+              </div>
+            </div>
+            <span class="help-block">指定点击此菜单时要跳转的链接（注：链接需加http://）</span>
+            <span class="help-block"><strong>注意: 由于接口限制. 如果你没有网页oAuth接口权限.</strong></span>
+          </div>
+          <div style="position:relative;display:none;" class="kuai_two">
+            <hr>
+            <div class="input-group">
+              <input class="form-control" type="text" id="guanjianci">
+              <div class="input-group-btn">
+                <button class="btn btn-primary" id="search"><i class="fa fa-search"></i> 搜索</button>
+              </div>
+            </div>
+            <div id="key-result" style="width:100%;position:absolute;top:55px;left:0px;display:none;z-index:10000">
+              <ul class="dropdown-menu" style="display:block;width:88%;"></ul>
+            </div>
+            <span class="help-block">指定点击此菜单时要执行的操作, 你可以在这里输入关键字, 那么点击这个菜单时就就相当于发送这个内容至系统</span>
+           
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a  class="pull-right btn btn-primary span2" data-dismiss="modal" id="ti_jiao">保存</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  
+
+  // 添加子菜单
+  function add_childmenu(i,e){
+    // alert( $('.list-child').children('.dd-children').length );
+    var childrenMenu = $(e).parent().next().children('.dd-children');
+    if( childrenMenu.length < 5 ) {
+	  var k=$(e).parent().next().children('.dd-children').eq(childrenMenu.length-1).attr('kk');
+      if(k>=0){
+      	 k=Number(k)+Number(1);
+      }else{
+      	 k=1;
+      }
+      var $html=$('<li class="dd-item dd-children" data-id="1" kk='+k+'><div class="dd-item-list"><img src="{php echo JueDuiUrl("images/xian.png")}" class="xian_img"><div class="form-group"><input type="text" class="form-control duan_input name" placeholder="名称" name="name['+i+']['+k+']"><input type="hidden" name="url['+i+']['+k+']"  class="url"/><input type="hidden" name="type['+i+']['+k+']" class="type"/></div><div class="set_action" data-toggle="modal"  onclick="DongZou(this)"  data-target="#dialog" ><i class="fa fa-pencil"></i>设置链接</div><div class="del_menu" onClick="sc_childmenu(this)"><i class="fa fa-plus"></i>删除菜单</div></div></li>');
+      $(e).parent().next().append($html);
+    }else{
+      return;
+    };
+    //如果有子菜单，隐藏父级菜单动作按钮
+    if( childrenMenu.length >= 0 ){
+      $(e).siblings('.set_action').hide();
+    }
+  };
+
+  // 删除子菜单
+  function sc_childmenu(e){
+  	if(!confirm('确认删除')){
+  		return false;
+  	}
+    var my_ol = $(e).closest('ol');
+    $(e).parent().parent().remove();
+    if(my_ol.find('li').length<=0){
+      my_ol.siblings("div.dd-item-list").find("div.set_action").show();
+    }
+  };
+
+  // 添加菜单
+  $('.addMenu').click(function(){
+    var addMenu = $('#nestable1').children('.menu');
+    if( addMenu.length < 3 ) {
+      var k=$('#nestable1 .menu:last').attr('k');
+      if(k>=0){
+      	 k=Number(k)+Number(1);
+      }else{
+      	 k=1;
+      }         
+      var $html=$('<ol class="dd-list menu" k="'+k+'"><li class="dd-item" data-id="1"><div class="dd-item-list"><div class="form-group"><input type="text" class="form-control chang_input name" placeholder="菜单名称" name="name['+k+'][name]"><input type="hidden" name="url['+k+']" class="url"/><input type="hidden" name="type['+k+']" class="type"/></div><div class="set_action" data-toggle="modal"  onclick="DongZou(this)" data-target="#dialog"><i class="fa fa-pencil"></i>设置链接</div><div class="del_menu" onClick="sc_menu(this)"><i class="fa fa-plus"></i>删除菜单</div><div class="add_childmenu" onClick="add_childmenu('+k+',this)"><i class="fa fa-plus"></i>添加子菜单</div></div><ol class="dd-list list-child"></ol></li></ol>');
+      $('#nestable1').append($html);
+    }else{
+      return false;
+    };
+  });
+
+  // 删除菜单
+  function sc_menu(e){
+  	if(!confirm('确认删除')){
+  		return false;
+  	}
+    $(e).parent().parent().parent().remove();
+  };
+
+  // 设置菜单动作链接和其他内容切换
+  $('input[type=radio].lianjie').click(function(){
+    $('.kuai_one').show();
+    $('.kuai_two').hide();
+  });
+  $('input[type=radio]:not(.lianjie)').click(function(){  
+    $('.kuai_one').hide();
+    $('.kuai_two').show();
+  });
+var t;
+function DongZou(e){
+     t=e;
+	 var name=$(e).parent().find('.name').val();
+	 var url=$(e).parent().find('.url').val();
+	 var type=$(e).parent().find('.type').val();
+	if(type){		
+		$('#type_'+type).attr('checked','true');		
+	}else{		
+       $('#type_view').attr('checked','checked');
+    }
+    if(type==''){
+        $('#http').val('');
+    }else if(type=='view'){
+		$('#http').val(url);
+		$('#guanjianci').val('');
+	}else{
+		$('#http').val('');
+		$('#guanjianci').val(url);
+	}
+	if(name){
+      $('#mingcheng').text(name);
+    }else{
+      $('#mingcheng').text('菜单名称');
+    }
+}
+$("#ti_jiao").click(function(){
+   var v=$('.type_:checked').val();
+   var u=$('#http').val();
+   var g=$('#guanjianci').val();
+   $(t).parent().find('.type').val(v);
+   if(g){
+    $(t).parent().find('.url').val(g);
+   }else{
+     $(t).parent().find('.url').val(u);
+   }
+   
+});
+$('form').submit(function(){     
+     var is=false;
+     for (var i = 0; i < $('.name').length; i++) {
+          if($('.name').eq(i).val()==''){
+             $('.name').eq(i).css('border','1px solid red');
+             is=true;
+          }
+     }
+     if(is){
+        return false;
+     }
+});
+  
+  </script>
+ {mb jiao}
+ 

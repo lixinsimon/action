@@ -1,0 +1,13 @@
+{loop $liebiao $item}
+<li class="mui-table-view-cell mui-media">
+    <a data-href="javascript:openWin('wentineirong','wentineirong.html',{id:'{$item['id']}'})" data-id="{$item['id']}" data-zhijielianjie="{php echo $item['zhijielianjie'] ? $item['zhijielianjie'] : 'javascript:void(0)' }">
+        {if !empty($item['suoluetu'])}<img class="mui-pull-left" src="{php echo JueDuiUrl($item['suoluetu'])}" style="margin-left:0px;margin-right: 15px;width:70px;">{/if}
+        <div class="mui-media-body" style="margin-left:15px;">
+            <p class="mui-ellipsis-2" style="font-size:1.2em;color:#333;"  data-xq="{php echo UA('xinwen/xinwen-xq', array('id'=>$item['id']))}">
+            {$item['biaoti']}</p>
+            <span style="margin-top:5px;color:#999;display:block;">{php echo date("Y-m-d h:i", $item['shijian'])}</span>
+        </div>
+    </a>
+</li>
+{/loop}
+

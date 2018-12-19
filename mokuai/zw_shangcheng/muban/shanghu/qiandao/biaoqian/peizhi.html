@@ -1,0 +1,84 @@
+<form action="" method="post" class="form-horizontal" role="form" data-validate="parsley">
+	<input type="hidden" name="c" id="c" value="peizhixiugai" />
+  <div class="form-group">
+    <label class="col-sm-2 control-label">签到</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shezhi" value="1" {if $pz['kaiguan']==1 || $pz['kaiguan']==NULL}checked=""{/if}>
+          <i></i>开启
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shezhi" value="0" {if $pz['kaiguan']==0 }checked=""{/if}>
+          <i></i>关闭
+        </label>
+      </div>
+    </div>
+  </div>
+<div {if $pz['kaiguan']==0}style="display: none;{/if}">
+	
+
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">连签1天</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="lian[0]" value="{$lianqian[0]}">
+    </div>
+  </div>  
+<div class="form-group">
+    <label class="col-sm-2 control-label">连签2天</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  name="lian[1]" value="{$lianqian[1]}">
+    </div>
+  </div> 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">连签3天</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  name="lian[2]" value="{$lianqian[2]}">
+    </div>
+  </div> 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">连签4天</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  name="lian[3]" value="{$lianqian[3]}">
+    </div>
+  </div> 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">连签5天</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  name="lian[4]" value="{$lianqian[4]}">
+    </div>
+  </div> 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">连签6天</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  name="lian[5]" value="{$lianqian[5]}">
+    </div>
+  </div> 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">连签7天</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  name="lian[6]" value="{$lianqian[6]}">
+    </div>
+  </div> 
+  <div class="line line-dashed b-b line-lg"></div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">签到规则</label>
+    <div class="col-sm-8">
+      {php echo BianJiQi('guizhe',$pz['guizhe'])}
+    </div>
+  </div>  
+   </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group m-b-md m-t-md" style="overflow:hidden;">
+    <div class="col-sm-4 col-sm-offset-2">
+      <button type="submit" class="btn btn-danger padder-lg">提交</button>
+    </div>
+  </div>
+  
+ 
+  
+</form>

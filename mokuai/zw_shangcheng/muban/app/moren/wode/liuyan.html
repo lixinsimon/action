@@ -1,0 +1,139 @@
+{mb 'tou'}	
+
+<style type="text/css">
+	.webuploader-pick{
+		height: 2.2rem;
+		background:transparent;
+		left: 10%;
+	}
+	.m-cell{
+		width: 90%;
+		float: left;
+		margin-left: 5%;
+		margin-top: .2rem;
+		height: 3rem;
+		border: 1px solid #CCCCCC;
+	}
+	.btn-zhai{
+		float: left;
+		margin-top: 1rem;
+		width: 90% !important;
+		margin-left: 5%;
+		border-radius:0 ;
+	}
+	body{
+		background: #fff;
+	}
+	#liuyan{
+		font-size: .3rem;
+	}
+</style>
+
+    <div class="touhang">
+		<a onclick="$z.go()"><img style="width: auto !important; " src="{$_W['gongyou']}/images/左箭头.png" /></a>
+		<div >在线留言</div>
+	</div>
+    <div id="den" style="background: #fff;">
+        <form method="post">
+    
+           
+      	<div class="m-cell">
+		    <div class="cell-item">
+		        <div class="cell-right">
+		            <textarea class="cell-textarea" id="liuyan" placeholder="在此写下您的留言，我们会竭诚为您服务！"></textarea>
+		        </div>
+		    </div>
+		</div>
+            
+            
+        <div class="chuan-tu" style="float: left;display: block;" id="shangchuantouxiang">
+            <div class="shangchuan" >上传图片</div>
+            <input name="yingyezhizhao" type="hidden" id="yingyezhizhao" value="">
+            <img src="">
+        </div>
+        <div class="chuan-tu" style="float: right;" id="shangchuantouxiang1">
+            <div class="shangchuan">上传图片</div>
+            <input name="dianzhao" type="hidden" id="dianzhao" value="">
+            <img src="">
+        </div>
+
+       
+        <div class="btn-block btn-danger  btn-zhai">确认提交</div>
+         </form>
+    </div>
+{mb js}                      
+	<script src="{$_W['yuming']}gongyong/js/ydui.citys.js"></script>
+	<script src="{$_W['yuming']}gongyong/js/webuploader/webuploader.min.js"></script>	
+	<script>	
+	
+			var uploader = WebUploader.create({
+				server:'{php echo UA("gongyou/wenjian",array("c"=>"upload"))}',
+				pick:'#shangchuantouxiang',
+				resize:false,
+				auto:true,
+				accept:{
+					title:'Images',
+					extensions: 'gif,jpg,jpeg,png',
+					mineTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+				}
+			});
+			uploader.on('uploadSuccess', function(file, resp){
+				 $("#yingyezhizhao").val(resp.url);
+				
+                $('#shangchuantouxiang').find("img").attr('src', resp.url);
+			});
+			var uploader1 = WebUploader.create({
+				server:'{php echo UA("gongyou/wenjian",array("c"=>"upload"))}',
+				pick:'#shangchuantouxiang1',
+				resize:false,
+				auto:true,
+				accept:{
+					title:'Images',
+					extensions: 'gif,jpg,jpeg,png',
+					mineTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+				}
+			});
+			uploader1.on('uploadSuccess', function(file, resp){
+                $("#dianzhao").val(resp.url); 
+                $('#shangchuantouxiang1').find("img").attr('src', resp.url);
+			});
+	    	 chushi();
+            // 保存
+            $('.btn-zhai').click(function() {
+             
+                $(this).attr('shi', 1).text('执行中...');
+                var shu = $z.form_val('form');
+               	shu['liuyan'] = $('#liuyan').val();
+                shu['k'] = "wode";
+                shu['x'] = "liuyan";
+                shu['c'] = "baocun";
+                $z.post($z.bhurl, shu, function(s) {
+                    $('.btn-zhai').attr('shi', 0).text('保存');
+//                  chushi();
+                    $z.toast(s.shu);
+                    setTimeout(function(){
+                    	$z.go();
+                    },2000);
+                });
+            });
+
+
+        function chushi() {
+            $z.post("{$_W['url']}", function(shu) {
+                if (shu.shi == 1) {
+                    $("#liuyan").val(shu.shu.liuyan);
+
+                    $('#yingyezhizhao').val(shu.shu.tu.yingyezhizhao).next('img').attr('src',shu.shu.tu.yingyezhizhao);
+                    $('#dianzhao').val(shu.shu.tu.dianzhao).next('img').attr('src',shu.shu.tu.dianzhao);
+
+                    
+                } else {
+//                  $z.toast(shu.shu);
+                }
+
+            }, 'json');
+        }
+	</script>
+{mb jiao}
+
+	

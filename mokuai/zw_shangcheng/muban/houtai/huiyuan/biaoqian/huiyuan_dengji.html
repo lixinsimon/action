@@ -1,0 +1,33 @@
+<div class="table-responsive m-t-md">
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="">会员角色</th>
+        <th width="">角色名称</th>
+        <th width="">角色折扣</th>
+        <th width="">升级条件</th>
+        <th width="">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{loop $dengji $dj}
+      <tr>
+        <td style="vertical-align:middle;">{$dj['dengji']}</td>
+        <td style="vertical-align:middle;">{$dj['ming']}</td>
+        <td style="vertical-align:middle;">{$dj['zhekou']}</td>
+        <td style="vertical-align:middle;">消费额满 {$dj['tiaojian']} 元自动升级</td>
+        <td style="vertical-align:middle;">
+          <a class="btn btn-success padder-xs edit_deng_btn" data_id="{$dj['id']}" href="#gong4" data-toggle="tab">编辑</a>
+          <a href="{php echo UHK('huiyuan',array('c'=>'dengji_shanchu','id'=>$dj['id']))}" class="btn btn-default padder-xs">删除</a>
+        </td>
+      </tr>
+     {/loop}
+    </tbody>
+  </table>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <a class="btn btn-default padder-md add_dengji_btn" href="#gong4" data-toggle="tab">添加新角色</a>
+      </div>
+    </div>
+  </form>
+</div>

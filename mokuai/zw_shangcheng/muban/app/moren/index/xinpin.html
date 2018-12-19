@@ -1,0 +1,151 @@
+{mb 'tou'}
+<style type="text/css">
+	.m_top_z{
+	    padding: .28rem 0px 0px .3rem;
+	}
+	.back-ico:before, .navbar-item .next-ico:before{
+		color: #fff;
+	}
+	.m_top a{
+		display: inline-block;
+	}
+	.mo-title{
+		display: inline-block;
+		line-height: .9rem;
+		font-size: .3rem;
+		color: #fff;
+		font-weight: initial;
+	}
+	body{
+		background: #fff;
+	}
+	.prod-jiage span {
+		float:right;
+		color: #000000;
+	}
+	.prod-jiage img{
+		display: inline-block;
+		position: relative;
+		top: .02rem;
+	}
+	.ku{
+		width: 100%;
+		height: .4rem;
+	}
+	.ku img{
+		height: .35rem;
+	}
+	.vipjia{
+		color:#c49f51;
+		background: #fff;
+		border: 1px solid #c49f51 ;
+		font-size: .26rem;
+		height: .31rem;
+		float: left;
+		padding: 0 !important;
+		box-sizing: content-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.vipjia span{
+		background: #c49f51;
+		color: #fff;
+		font-size: .24rem;
+		padding: 0 .1rem;
+		height: 100%;
+		float: left;
+		box-sizing: border-box;
+	}
+	
+</style>
+<div id="app">
+
+	<div class="touhang">
+			<a onclick="$z.go()"><img style="width: auto !important; " src="{$_W['gongyou']}/images/左箭头.png" /></a>
+			<div >新品上架</div>
+	</div>
+	
+	
+	<div id="J_List" class="main-wrap" >
+		<ul class="xp-pro">
+			<li v-for="sj in shuju" @click="dakai(sj.id)">
+				<div class="xp--img">
+					<img :src="sj.xinpintu"/>
+				</div>
+				<h3 class="prod-title zw-shenglue">{{sj.ming}}</h3>
+				
+				<div class="ku"  >
+					<div class="vipjia" v-if="sj.cuxiao!=1">
+						<span>VIP价</span>￥{{sj.chengben}}&nbsp;
+					</div>
+					<img v-else src="{$_W['gongyou']}/images/VIP专区.png" />
+				</div>
+				<div class="prod-jiage">
+					￥{{sj.jiage}} <font>￥{{sj.yuanjia}}</font>
+					<span v-if="sj.songliquan>0"><img style="width: .3rem;" src="{$_W['gongyou']}/images/li.png" /> <em>x</em> {{sj.songliquan?sj.songliquan:0}}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+{mb js}
+<script type="text/javascript">
+	var V=new Vue({
+		  		el:'#app',
+		  		data:{
+		  			shuju:[],
+		  			toutu:''
+		  		},		  		
+		  		beforeCreate:function(){		  			
+		  			var that=this;
+		  					
+		  			var fx={php echo json_encode($_W['shezhi']['fenxiang'])};
+		  			  fx.url='{$_W["url"]}'+'&t='+'{$_W["huiyuan"]["id"]}';
+					$z.FenXiang(fx,function(shu){});
+				},
+				methods:{
+					dakai:function(id){
+						$z.dakai("{php echo UAK('xiangqing')}&id="+id);
+					}
+				}
+		});
+		/*上拉加载*/ 
+		var page = 1, pageSize = 8;
+	    $('#J_List').infiniteScroll({
+	        pageSize: pageSize,
+	        initLoad: true,
+	        loadingHtml: '<strong>加载中...</strong>', /* 当然也可以<img src="../img/loading.gif" /> */
+	        loadListFn: function () {
+	            var def = $.Deferred();
+	            $z.post('{$_W["url"]}',{ye: page, jiazaishu: pageSize},function(ret){
+	            	if(ret.shi==1){	
+					    var i=V.shuju.length;
+					    for(l in ret.shu){
+					   		V.$set(V.shuju,i++,ret.shu[l]);
+					    }
+					    $('#app').show();
+	            	} 
+                    def.resolve(ret.shu);
+                    /* 页码自增1 */
+                    ++page;
+	            });	           
+	            return def.promise();
+	        }
+	    });
+		
+</script>
+<div class="huibg" style="display: none;" >
+	<img src="{php echo JueDuiUrl($_W['shezhi']['shezhi']['guanzhu'])}" />
+</div>
+<script type="text/javascript">
+	$z.post('{php echo  UA("gongyou/guanzhu")}', function(shu) {
+		if(shu.shi) {
+			if(shu.shu.guanzhu!=1){
+				$(".huibg").show();
+			}
+		} 
+	});
+</script>
+
+{mb jiao}

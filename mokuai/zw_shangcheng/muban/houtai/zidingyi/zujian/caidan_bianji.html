@@ -1,0 +1,83 @@
+<header class="tou">分类</header>	
+    <input type="hidden" name="z[{$shu['ming']}][geshi]" value="3">
+ <table class="table">
+    <thead>
+      <tr>
+        <th width="30%">名称</th>
+        <th width="30%">链接</th>
+        <th width="30%">图标</th>  
+       <th></th>
+      </tr>
+    </thead>
+    <tbody> 
+    	{if empty($s['fenlei'])}
+    	{php $s['fenlei'][0]['ming']='名称'}    
+    	{php $s['fenlei'][0]['url']=''}    
+    	{php $s['fenlei'][0]['tu']=''}    
+    	{php $s['fenlei'][1]['ming']='名称'}    
+    	{php $s['fenlei'][1]['url']=''}    
+    	{php $s['fenlei'][1]['tu']=''}    
+    	{php $s['fenlei'][2]['ming']='名称'}    
+    	{php $s['fenlei'][2]['url']=''}    
+    	{php $s['fenlei'][2]['tu']=''}    
+    	{/if}
+    	{loop $s['fenlei']  $ming}
+      <tr>       
+        <td style="vertical-align:middle;"><input type="text" class="form-control ming" name="z[{$shu['ming']}][ming][]" value="{$ming['ming']}"></td>
+        <td style="vertical-align:middle;"><input type="text" class="form-control url" name="z[{$shu['ming']}][url][]" value="{$ming['url']}"></td>
+        <td class="btn-shuxing" style="vertical-align:middle;">
+        	<div class="input-group" onclick="$ShangTu(this);">		
+						<input type="hidden" name="z[{$shu['ming']}][tu][]" she='tu' value="{$ming['tu']}" class="form-control tu st_img" readonly="readonly" autocomplete="off" >			
+						<span class="input-group-btn">
+							<img src="{php echo JueDuiUrl($ming['tu'])}"  class="img-responsive img-thumbnail st_img" style="width: 35px;height: 35px;border: 0px;padding: 0px;border-radius:0px">
+							<button class="btn btn-default" type="button" zujian="{$shu['ming']}">选择图片</button>
+						</span>
+				   </div>
+        </td>  
+        <td class="btn-shuxing shanchufenlei" style="vertical-align:middle;cursor: pointer;">删</td>
+      </tr>
+      {/loop}
+    </tbody>
+     
+  </table>
+   <a href="javascript:" class="new" style="text-align: center;color: #0099CC; display: block;">新增+</a>
+  <script>
+
+	  setInterval(function(){
+	  	$.each($('#{$shu["ming"]} .ming'),function(i){
+	  		 var m=$(this).val();	
+	  		 if(m){
+	  		 	 I("#{$shu['ming']} .ming").eq(i).text(m);
+	  		 }
+		     var tu=$('#{$shu["ming"]} .tu').eq(i).val();
+		     if(tu){
+	  		 	  I("#{$shu['ming']} .feilei_tu").eq(i).attr('src',tu);		
+	  		 }		     
+	  	});
+	  },500);
+	  
+	  $('#{$shu["ming"]} .new').click(function(){
+	  	var html='<tr><td style="vertical-align:middle;"><input type="text" class="form-control ming" name="z[{$shu["ming"]}][ming][]" value="名称"></td>';
+	  	    html+='<td style="vertical-align:middle;"><input type="text" class="form-control url" name="z[{$shu["ming"]}][url][]" value=""></td>';
+	  	    html+='<td class="btn-shuxing" style="vertical-align:middle;">';
+	  	    html+='<div class="input-group" onclick="$ShangTu(this);">';
+	  	    html+='<input type="hidden" name="z[{$shu["ming"]}][tu][]" she="tu" value="" class="form-control tu st_img" readonly="readonly" autocomplete="off" >	';
+	  	    html+='<span class="input-group-btn">';
+	  	    html+='<img src="{php echo JueDuiUrl("")}"  class="img-responsive img-thumbnail st_img" style="width: 35px;height: 35px;border: 0px;padding: 0px;border-radius:0px">';
+	  	    html+='<button class="btn btn-default ftu" type="button"  zujian="{$shu["ming"]}">选择图片</button>';
+	  	    html+='</span></div></td>';
+	  	    html+='<td class="btn-shuxing shanchufenlei" style="vertical-align:middle;cursor: pointer;">删</td>';	  	   
+	  	    html+='</tr>';
+	  	
+	  	
+	      $('#{$shu["ming"]} tbody').append(html);      
+	      var h='<a class="grids-item"><img class="feilei_tu" src="{php echo JueDuiUrl("")}"><p class="grids-txt ming">名称</p></a>';
+	   	  I("#{$shu['ming']} .fenleicaidan").append(h);
+		  });	  
+		 
+		  	$('#{$shu["ming"]}').on('click','.shanchufenlei',function(){	  		
+		  		 $(this).parent().remove();
+		  		  var index=$('#{$shu["ming"]} .shanchufenlei').index(this);
+		  		   I("#{$shu['ming']} .fenleicaidan a").eq(index).remove(); 	  		 
+		  	});
+  </script>

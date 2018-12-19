@@ -1,0 +1,308 @@
+{mb 'tou'}
+<!--<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />-->
+<style type="text/css">
+
+	#wqb{
+		display: none;
+	}
+	.zw-shenglue{
+	 	overflow: hidden; /*自动隐藏文字*/
+	    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	    white-space: nowrap;/*强制不换行*/
+	}
+	.zw-zhang-t{
+		width: 100%;
+		height: 2.5rem;
+		background: #fff;
+		position: relative;
+		line-height: 2.5rem;
+		text-align: center;
+		font-size: .8rem;
+	}
+	.zw-zhang-t1{
+		position: absolute;
+		left: .2rem;
+		top: .2rem;
+		font-size: .3rem;
+		line-height: .3rem;
+	}
+	.zw-zhang-z{
+		width: 100%;
+		height: .8rem;
+		line-height: .8rem;
+		box-sizing: border-box;
+		padding:0 .2rem;
+		background: #fff;
+		font-size: .3rem;
+		margin-top: .2rem;
+	}
+	
+	
+	.mingxi{
+		width: 100%;
+		height: 2rem;
+		padding: 0rem .2rem;
+		
+		font-size: .25rem;
+		box-sizing: border-box;
+		border-bottom: .1rem solid #f7f7f7;
+	}
+	.mingxi-z{
+		float: left;
+		line-height: .4rem;
+		margin-top: .1rem;
+	}
+	.mingxi-z-tu{
+		width: 1.6rem;
+		height: 1.6rem;
+		border-radius:50%;
+		overflow: hidden;
+		float: left;
+	}
+	.mingxi-z-tu img{
+		width: 100%;
+	}
+	
+	.mingxi-z-zhi{
+		float: left;
+		margin-left: .2rem;
+		margin-top: .25rem;
+	
+	}
+	.mingxi-z-zhi span{
+		overflow: hidden; /*自动隐藏文字*/
+	    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	    white-space: nowrap;/*强制不换行*/
+	   width: 1.5rem;
+	   display:block
+	}
+	
+	.mingxi-y{
+		margin-top:.35rem ;
+		float: right;
+		line-height: .4rem;
+		width: 45%;
+		text-align: left;
+	}
+	.zw-zhang-xuan{
+		width: 100%;
+		height: .8rem;
+		font-size: .3rem;
+		margin: .2rem 0;
+	}
+	.zw-zhang-xuan div{
+		text-align: center;
+		width: 33.33%;
+		height: .8rem;
+		line-height: .8rem;
+		float: left;
+	}
+	.hei{
+		background: #000000;
+		color: #fff;
+	}
+	.bai{
+		background: #fff;
+		color: #000;
+	}
+	
+	
+	.baibeijing{
+		height: 2.2rem;
+		background: #fff;
+	}
+	.huangguan{
+		position: initial;
+		top: initial;
+		left: initial;
+		margin: 0;
+		display: flex;
+		height: 100%;
+		width: auto;
+		padding-top: .3rem;
+	}
+	.user-phto{
+		width: 1.46rem;
+		height: 1.46rem;
+		border-radius: 50%;
+		margin: 0 .32rem;
+		overflow: hidden;
+	}
+	.user-phto img{
+		width: 100%;
+		display: block;
+	}
+	.user-msg{
+		flex: 1;
+		text-align: left;
+		font-size: .3rem;
+	}
+	.user-id{
+		font-size: .23rem;
+		margin: .1rem 0;
+		color: #000;
+	}
+	.huiyuan{
+		margin: 0;
+		width: auto;
+		display: inline-block;
+	}
+	.huiyuan img,.huiyuan h5{
+		display: inline-block;
+	}
+	
+</style>
+	<div id="wqb">
+
+<div class="touhang">
+	<a onclick="$z.go()"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div >团队管理</div>
+</div>
+		<div class="baibeijing">
+			<div class="huangguan">
+				<div class="user-phto">
+					<img :src="shu.touxiang">
+				</div>
+				<div class="user-msg" style="padding-top: .1rem;">
+					<div style="font-size: .3rem;" >{{shu.nicheng?shu.nicheng:'会员ID:'+shu.id}}</div>
+					<div class="user-id">ID:{{shu.id}}</div>
+					<div class="user-id">{{shu.fenxiaodengjiming}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="zw-zhang-xuan">
+			<div :class="zhuangtai==11?'hei':'bai'" @click="qiehuan(11)" >我的会员({{zong.hui>0?zong.hui:0}})</div>
+			<div :class="zhuangtai==12?'hei':'bai'" @click="qiehuan(12)" >VIP({{zong.vip>0?zong.vip:0}}) </div>
+			<div :class="zhuangtai==13?'hei':'bai'" @click="qiehuan(13)" >创客({{zong.chuang>0?zong.chuang:0}}) </div>
+		</div>
+	
+		
+		<section id="J_List" style="background: #FFFFFF;">
+		    <div id="J_ListContent">
+		    	
+		    	<div class="mingxi" v-for="l in lie">
+		    		<div class="mingxi-z">
+		    			<div class="mingxi-z-tu">
+		    				<img :src="l.touxiang"/>
+		    			</div>
+		    			<div class="mingxi-z-zhi">
+		    				<span>{{l.nicheng}}</span>ID:{{l.id}}<br />
+		    				<a style="color: #0000CC;" v-if="l.zhanghao" :href="'tel:'+l.zhanghao">{{l.zhanghao}}</a>
+		    				<a style="color: #999999;" v-else >未注册</a>
+		    			</div>
+		    		</div>
+		    		<div class="mingxi-y">
+		    			会员等级：{{l.ming}}<br />
+		    			最近登录：{{l.zuijin}}<br />
+		    			最近一周登录次数：{{l.cishu}}次
+		    		</div>
+		    	</div>
+				    
+		    </div>
+		</section>
+	
+	</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+			el:"#wqb",
+			data:{					
+	  			lie:[],
+	  			zong:{hui:'',vip:'',chuang:''},
+	  			zhuangtai:11,
+	  			ye:1,
+	  			jitiao:10,
+	  			shu:[],
+	  			y:[],
+ 				z:[true,true,true],
+ 				ALL:[{},{},{}],
+ 				aa:0,
+ 				hui:[],vip:[],chuang:[],
+ 				tingzhijiazai:true
+			},
+			methods:{
+				qiehuan:function(zhuangtai){
+					this.tingzhijiazai=true;
+					var that=this;
+					if(zhuangtai==11){
+							that.lie=that.hui;
+					}else if(zhuangtai==12){
+							that.lie=that.vip;
+					}else if(zhuangtai==13){
+							that.lie=that.chuang;
+					}
+		            
+		            this.zhuangtai=zhuangtai;
+	 				if(!this.y[zhuangtai]){
+	 					this.ye=1;
+	 					$z.jiazai_mei(true);
+	 					$z.jiazai_chushihua();
+	 				}else{ 					
+	 					$z.jiazai_mei(this.z[zhuangtai]);
+	 				}
+		            
+				},
+				JiaZai:function(shu){	 		
+					var that=this;
+					var shuzhu=[];
+					if(that.zhuangtai==11){
+						a=0;
+						shuzhu=that.hui;
+					}else if(that.zhuangtai==12){
+						a=1;
+						shuzhu=that.vip;
+					}else if(that.zhuangtai==13){
+						a=2;
+						shuzhu=that.chuang;
+					}
+					that.aa=a;
+					
+	 				for(var i=0;i<shu.length;i++){
+	 					that.$set(shuzhu,shuzhu.length,shu[i]);
+	 				}
+	 				
+	 				if(that.zhuangtai==11){
+							that.lie=that.hui;
+					}else if(that.zhuangtai==12){
+							that.lie=that.vip;
+					}else if(that.zhuangtai==13){
+							that.lie=that.chuang;
+					}
+	 			
+	 			},
+			}
+		})
+	
+   	$z.jiazai('',function(){
+	    var zhuangtai=V.zhuangtai;
+		var ye=V.ye;
+		if(!V.tingzhijiazai){
+			return false;
+		}
+		V.tingzhijiazai=false;
+		$z.post('{$_W["url"]}',{ye:V.ye,jitiao:V.jitiao,fenxiaodengji:V.zhuangtai},function(ret){		
+			if(ret.shi){
+			    V.tingzhijiazai=true;
+				V.JiaZai(ret.shu.lie);					
+			}else{
+				V.z[zhuangtai]=false;
+				$z.jiazai_mei(false);
+			}
+			
+			V.zong=ret.shu.zong;
+		    V.zhuangtai=ret.shu.zhuangtai;
+		    
+		    if(ret.shu.huiyuan.nicheng){
+		    	ret.shu.huiyuan.nicheng=ret.shu.huiyuan.nicheng.substring(0,6);
+	        }    		   
+		    V.shu=ret.shu.huiyuan;
+	        V.ye++;
+			V.y[zhuangtai]=V.ye;
+			$('#wqb').show();
+	    });
+	},1);
+
+</script>
+{mb jiao}
+
+	

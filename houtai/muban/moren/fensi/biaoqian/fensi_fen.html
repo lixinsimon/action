@@ -1,0 +1,215 @@
+<div class="alert alert-info">
+  如果您的公众号类型为："认证订阅号" 或 "认证服务号",您可以使用粉丝分组功能。点击这里 <font class="text-info">"同步粉丝分组"</font>
+</div>
+<section class="panel panel-default">
+  <div class="panel-heading">
+    <a class="accordion-toggle" style="display:block;" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+      筛选
+    </a>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body text-sm">
+      <form action="" method="get" class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-id-1">昵称</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="input-id-1">
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">用户名</label>
+          <div class="col-sm-10">
+            
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="a" value="option1">
+                <i></i>
+                不指定
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="a" value="option2" checked="">
+                <i></i>
+                已经注册为会员
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="a" value="option2" checked="">
+                <i></i>
+                未注册为会员
+              </label>
+            </div>  
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">是否关注</label>
+          <div class="col-sm-10">
+            
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="b" value="option1">
+                <i></i>
+                不限
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="b" value="option2" checked="">
+                <i></i>
+                已关注
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="b" value="option2" checked="">
+                <i></i>
+                取消关注
+              </label>
+            </div>  
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">关注/取消关注时间</label>
+          <div class="col-sm-10">
+            <input class="input-sm input-s datepicker-input form-control pull-left" size="16" type="text" value="12-11-2016" data-date-format="dd-mm-yyyy"><font class="pull-left padder" style="margin-top:6px;">至</font><input class="input-sm input-s datepicker-input form-control pull-left" size="16" type="text" value="06-12-2016" data-date-format="dd-mm-yyyy">
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+          </div>
+        </div>
+      </form> 
+    </div>
+  </div>
+</section>
+
+<div class="line line-dashed b-b line-lg"></div>
+<div class="table-responsive m-t-md">
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="5%"></th>
+        <th width="15%">头像</th>
+        <th width="15%">昵称</th>
+        <th width="15%">对应用户</th>
+        <th width="15%">是否关注</th>
+        <th width="15%">关注/取消时间</th>
+        <th width="20%">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <label class="i-checks">
+            <input type="checkbox"><i></i>
+          </label>
+        </td>
+        <td>
+            <span class="thumb-sm pull-left m-l-xs">                        
+              <img src="{php echo JueDuiUrl('images/a0.png')}" class="dker" alt="...">
+              <i class="on b-black"></i>
+            </span>
+        </td>
+        <td><font>东北的大花裤衩</font></td>
+        <td>
+          <font class="text-info">东北的大花裤衩</font>
+        </td>
+        <td>
+          <button class="btn btn-success padder-lg">已关注</button>
+        </td>
+        <td>
+          2016-12-01 16:42:16
+        </td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          <button class="btn btn-success padder-lg">编辑</button>
+          <button class="btn btn-default padder-md">查看详情</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label class="i-checks">
+            <input type="checkbox"><i></i>
+          </label>
+        </td>
+        <td>
+            <span class="thumb-sm pull-left m-l-xs">                        
+              <img src="{php echo JueDuiUrl('images/a0.png')}" class="dker" alt="...">
+              <i class="on b-black"></i>
+            </span>
+        </td>
+        <td><font>东北的大花裤衩</font></td>
+        <td>
+          <font class="text-info">东北的大花裤衩</font>
+        </td>
+        <td>
+          <button class="btn btn-success padder-lg">已关注</button>
+        </td>
+        <td>
+          2016-12-01 16:42:16
+        </td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          <button class="btn btn-success padder-lg">编辑</button>
+          <button class="btn btn-default padder-md">查看详情</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label class="i-checks">
+            <input type="checkbox"><i></i>
+          </label>
+        </td>
+        <td>
+          <button class="btn btn-danger padder-lg">删除</button>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <font>删除    同步粉丝信息    下载所有粉丝
+同步粉丝信息: 选定粉丝后, 访问公众平台获取特定粉丝的相关资料, 如果已对应用户, 那么将会把未登记的资料填充至关联用户. 需要为认证微信服务号, 或者高级易信号
+下载所有粉丝: 访问公众平台下载所有粉丝列表(这个操作不能获取粉丝资料, 只能获取粉丝标志). 需要为认证微信服务号, 或者高级易信号              </font>
+<div class="line line-dashed b-b line-lg"></div>
+</div>
+<div class="text-left">
+  <ul class="pagination pagination-sm">
+    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+  </ul>
+</div>
+</div>

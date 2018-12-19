@@ -1,0 +1,241 @@
+<form action="" method="get" class="form-horizontal" role="form">
+  	<input type="hidden" name="m" value="{$_W['mo']}" />
+	<input type="hidden" name="d" value="{$_W['danyuan']}" />
+	<input type="hidden" name="k" value="{$_J['k']}" />
+<div class="form-group">
+  <label class="col-sm-2 control-label">成为创客时间</label>
+  <div class="col-sm-10">
+    <div class="radio-inline i-checks">
+      <label>
+        <input type="radio" name="shijian" value="0" checked="">
+        <i></i>不搜索
+      </label>
+    </div>
+    
+    <div class="radio-inline i-checks m-l-lg">
+      <label>
+        <input type="radio" name="shijian" value="1">
+        <i></i>搜索
+      </label>
+    </div>
+    <div style="display:inline-block;">
+    		{php echo RiQi('kaishi')}      
+    </div>
+    <div style="display:inline-block;">
+    		至   
+    </div>
+    <div style="display:inline-block;">
+    	 {php echo RiQi('jieshu')}      
+    </div>
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="input-id-1">ID</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="input-id-1" name="id">
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="input-id-1">会员信息</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="input-id-1" name="yonghu" placeholder="可搜索昵称/姓名/手机号">
+  </div>
+</div>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="input-id-1">会员角色</label>
+  <div class="col-sm-10">
+    <select  class="form-control" name="dengji">
+        <option value="">不限角色</option>
+        {loop $dengji $dj}
+        <option value="{$dj['id']}">{$dj['ming']}</option>
+        {/loop}       
+    </select>
+  </div>
+</div>
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+      <!--<button type="button" class="btn btn-info btn-sm padder-lg" data-toggle="modal" data-target="#myModal">导出Excel</button>-->
+    </div>
+  </div>
+</form>
+<div class="line line-dashed b-b line-lg"></div>
+
+<div class="table-responsive m-t-md" style="overflow:visible;">
+  <header class="panel-heading font-bold">总数：{$shu}</header>
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="4%">ID</th>
+        <!--<th width="20%">推荐人</th>-->
+        <th width="20%">昵称</th>
+        <th width="10%">姓名</th>       
+        <th width="10%">会员角色</th>
+        <th width="10%">注册时间</th>
+        <th width="5%">积分/余额</th>        
+       <!-- <th width="6%">关注</th>-->
+        <th >操作</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{loop $huiyuanlie $hyl}
+      <tr>
+        <td style="vertical-align:middle;">{$hyl['id']}</td>
+        <!--<td style="vertical-align:middle;">        
+          {if empty($hyl['fuji_id'])}
+            <label class="label label-default padder">暂无</label>          	
+          {else}
+            <span class="thumb-sm  m-l-xs" style="display: block;" >                        
+                <img src="{php echo JueDuiUrl($hyl['fuji_touxiang'])}" class="dker" title="{$hyl['fuji_nicheng']}">
+            </span>
+            <p style="height: 25px;overflow: hidden;" title="{$hyl['fuji_nicheng']}">{$hyl['fuji_nicheng']}</p>
+          {/if}
+         
+        </td>-->
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm m-l-xs">                        
+            <img src="{php echo JueDuiUrl($hyl['touxiang'])}" class="dker" title="{$hyl['nicheng']}">
+          </span>
+          <p style="height: 25px;overflow: hidden;" title="{$hyl['nicheng']}">{$hyl['nicheng']}</p>
+        </td>
+        <td style="vertical-align:middle;">{$hyl['xingming']}</td>      
+        <td style="vertical-align:middle;">{php echo empty($dengjilie[$hyl['huiyuandengji']])?'普通会员':$dengjilie[$hyl['huiyuandengji']]}</td>
+        <td style="vertical-align:middle;">{php echo date('Y-m-d H:i:s',$hyl['huiyuanshijian'])}</td>
+        <td style="vertical-align:middle;">
+          <ul style="padding-left:0;">
+            <li style="margin-bottom:8px;"><a href="{php echo USK('huiyuan',array('id'=>$hyl['id']))}&c=jifen" class="label label-primary padder">白积分：{$hyl['jifen']}</a></li>
+            <li style="margin-bottom:8px;"><a href="{php echo USK('huiyuan',array('id'=>$hyl['id']))}&c=hongjifen" class="label label-danger padder" >红积分：{php echo $hyl['hongjifen']?$hyl['hongjifen']:0}</a></li>
+          <!--  <li><label class="label label-default padder">余额：{$hyl['yu_e']}</label></li>-->
+          </ul>
+        </td>       
+        <!--<td style="vertical-align:middle;">
+        	{if empty($hyl['guanzhu'])}
+          <label class="label label-default padder">未关注</label>
+          {else}
+          <label class="label label-success padder">已关注</label>
+          {/if}
+        </td>-->
+        <td style="vertical-align:middle;overflow:visible;">
+          <div class="btn-group">
+            <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">操作 <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu" style="z-index: 999999">
+              <li><a class="huiyuan_xq_btn" href="{php echo UH('fensi/huiyuan',array('bianji'=>'bianji','id'=>$hyl['id']))}"  title="会员详情"><i class="fa fa-edit"></i> 会员详情</a></li>                        
+             <li><a href='{php echo USK("fenxiao",array("c"=>"fenxiaoshang","id"=>$hyl["id"]))}' class="shang_btn"><i class="fa fa-edit"></i>设置为创客</a></li>
+             <!--<li><a href="" title="会员订单"><i class="fa fa-list"></i> 查看订单</a></li>                        
+              <li ><a href="" title="充值积分"  data-toggle="modal" data-target="#myModal-b"><i class="fa fa-credit-card"></i> 充值积分</a></li>                        
+              <li><a href="" title="充值余额"  data-toggle="modal" data-target="#myModal-c"><i class="fa fa-money"></i> 充值余额 </a></li>
+              <li><a href="" title="设置黑名单"><i class="fa fa-minus-circle"></i> 设置黑名单</a></li>-->
+               <li><a href="{php echo USK('huiyuan',array('c'=>'tixian','id'=>$hyl['id']))}" title="查看提现" ><i class="fa fa-money"></i> 查看提现 </a></li>
+              <li><a href="{php echo USK('huiyuan',array('c'=>'shanchu','id'=>$hyl['id']))}" title="删除会员"><i class="fa fa-times"></i> 删除会员</a></li> 
+            </ul>
+          </div>
+        </td>
+      </tr> 
+    {/loop}
+    </tbody>
+  </table>
+</div>
+<div class="text-left">
+  {$fenye}
+</div>
+
+<!-- 导出设置 -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">导出设置</h4>
+      </div>
+      <div class="modal-body">
+        <div class="doc-buttons">
+          <a href="#" class="btn btn-s-md btn-default">一元夺宝商业版</a>                
+          <a href="#" class="btn btn-s-md btn-primary">创客城</a>
+          <a href="#" class="btn btn-s-md btn-default">微信投票</a>
+          <a href="#" class="btn btn-s-md btn-primary">签到</a>
+          <a href="#" class="btn btn-s-md btn-default">微信投票</a>
+          <a href="#" class="btn btn-s-md btn-default">签到</a>
+          <a href="#" class="btn btn-s-md btn-primary">直播</a>
+          <a href="#" class="btn btn-s-md btn-primary">聊天机器人</a>
+          <a href="#" class="btn btn-s-md btn-default">幸运大转盘</a>
+          <a href="#" class="btn btn-s-md btn-default">一元夺宝商业版</a>
+          <a href="#" class="btn btn-s-md btn-primary">幸运大转盘</a>
+          <a href="#" class="btn btn-s-md btn-default">一元夺宝商业版</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">完成</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 积分充值 -->
+<div class="modal fade" id="myModal-b">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">积分充值</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">当前积分</label>
+            <div class="col-sm-10">
+              1250.00
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">充值积分</label>
+            <div class="col-sm-10">
+              <input type="password" name="password" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">充值</button>
+        <button type="button" class="btn btn-default">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 余额充值 -->
+<div class="modal fade" id="myModal-c">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">余额充值</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">当前积分</label>
+            <div class="col-sm-10">
+              1250.00
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">充值积分</label>
+            <div class="col-sm-10">
+              <input type="password" name="password" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">充值</button>
+        <button type="button" class="btn btn-default">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

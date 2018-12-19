@@ -1,0 +1,123 @@
+{mb 'tou'}	
+
+<style type="text/css">
+	.webuploader-pick{
+		height: 2.2rem;
+		background:transparent;
+		left: 10%;
+	}
+</style>
+
+
+    <header class="m-navbar">
+        <a onclick="$z.go()" class="navbar-item">
+            <i class="back-ico"></i>
+        </a>
+        <div class="navbar-center">
+            <span class="navbar-title">评价</span>
+        </div>
+    </header>
+    <div id="app">
+        <form method="post">
+            
+            <div class="m-celltitle zw-size30">评价</div>
+			<div class="m-cell">
+			    <div class="cell-item">
+			        <div class="cell-right">
+			            <textarea class="cell-textarea"  v-model="wenben" placeholder="请输入您对商品的评价"></textarea>
+			        </div>
+			    </div>
+			</div>
+          	<div class="cell-item" style="background: #fff; margin-top:10px ;padding: .2rem;">
+                <div class="cell-left" style="width: 20%;">交易评星</div>
+                <div class="zw-zuo">
+                	<img class="zw-xing" v-for="(item,i) in xing"  @click="bian(i)" :src="item"/>
+                </div>
+            </div>
+			<!--<div class="zw-shangtulie">
+				<img class="zw-shangtu-kuai" src="http://www.zhiwi.cn/gongyong/shangchuan/images/12/2017/11/lz09VxFf00Lg9Gg14H34F04h4LT1X9.png" />
+				<img class="zw-shangtu-kuai" src="http://www.zhiwi.cn/gongyong/shangchuan/images/12/2017/11/lz09VxFf00Lg9Gg14H34F04h4LT1X9.png" />
+				<div class="chuan-tu tubiao tb-jia zw-shangtu-kuai" style="border: 1px solid #000000;" id="shangchuantouxiang"> </div>
+			</div>-->
+           
+
+        </form>
+        <button @click="tijiao" type="submit" class="btn-block btn-danger dibu btn-zhai">保存</button>
+    </div>
+{mb js}
+	<script src="http://static.ydcss.com/uploads/ydui/ydui.citys.js"></script>
+	<script src="{$_W['yuming']}gongyong/js/webuploader/webuploader.min.js"></script>	
+	<script>	
+	var V=new Vue({
+		el:"#app",
+		data:{			
+		   xing: ['http://www.zhiwi.cn/gongyong/images/xing.png'], xingji:'',wenben:'',tu:''
+		},
+		mounted:function(){
+			var that=this;
+		    var chulie=[];
+		    for (var a = 0; a < 5; a++) {
+		        chulie.push('http://www.zhiwi.cn/gongyong/images/xing.png');
+		    }
+		    that.xing=chulie;
+		},
+		methods:{			
+			bian:function(e) {
+			    var that = this;
+			    var index = e+1;
+			     that.xingji=index;
+
+			    for (var a = 0; a < index; a++) {
+			    	this.$set(that.xing, a, 'http://www.zhiwi.cn/gongyong/images/xing1.png');
+			    }
+			    for (var a = 0; a < 5 - index; a++) {
+			      var shuzhi = a + parseInt(index);
+			      this.$set(that.xing, shuzhi, 'http://www.zhiwi.cn/gongyong/images/xing.png')
+			    }
+			},
+			tijiao:function(){
+				var that=this;
+				
+				if(!that.wenben){
+					$z.toast('内容不能为空');
+					return false;
+				}else if(!that.xingji){
+					$z.toast('星级不能为空');
+					return false;
+				}
+				
+				$z.post('{$_W["url"]}',{neirong:that.wenben,xingji:that.xingji,c:'tianjia'},function(shu){
+					if(shu.shi){
+						$z.toast(shu.shu);
+						$z.dakai("{php echo UAK('dingdan/dingdan')}");
+					}else{
+						$z.toast(shu.shu);
+					}
+				});
+				
+			}
+		},
+	
+	});
+	
+
+			var uploader = WebUploader.create({
+				server:'http://www.zhiwi.cn/app/index.php?d=12&x=wenjian&k=gongyou&c=upload',
+				pick:'#shangchuantouxiang',
+				resize:false,
+				auto:true,
+				accept:{
+					title:'Images',
+					extensions: 'gif,jpg,jpeg,png',
+					mineTypes: 'image/gif,image/jpg,image/jpeg,image/png'
+				}
+			});
+			uploader.on('uploadSuccess', function(file, resp){
+				V.tu=resp.url;				
+				
+                $('#shangchuantouxiang').find("img").attr('src', resp.url);
+			});	
+	</script>
+{mb jiao}
+
+	

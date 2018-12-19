@@ -1,0 +1,102 @@
+<form data-validate="parsley" class="form-horizontal" method="post" action="">
+<input type="hidden" value="{$huifu['id']}" name="id" />
+
+<section class="panel panel-default">
+  <header class="panel-heading">                  
+    添加回复规则
+  </header>  
+  <div class="panel-body">   
+      <div class="form-group">
+        <label class="col-sm-2 control-label">回复规则名称</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control input" name="ming" value="{$huifu['ming']}" placeholder="请输入回复规则的名称" data-required="true">
+          <span class="help-block m-b-sm">您可以给这条规则起一个名字, 方便下次修改和查看.</span>
+          <div class="alert alert-danger m-b-none inline wrapper-xs padder">
+            选择高级设置: 将会提供一系列的高级选项供专业用户使用.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+          <div class="checkbox i-checks">
+            <label>
+              <input type="checkbox" id="gaoji" name="" onClick="check()"><i></i> 高级设置
+            </label>
+          </div>
+        </div>
+      </div>
+      <div id="hide_block">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">状态</label>
+          <div class="col-sm-10">
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="zhuangtai" value="1" checked="checked">
+                <i></i>启用
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="zhuangtai" value="0">
+                <i></i>禁用
+              </label>
+            </div>  
+            <span class="help-block m-b-sm">您可以临时禁用这条回复.</span>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+       <div class="form-group">
+          <label class="col-sm-2 control-label">置顶回复</label>
+          <div class="col-sm-10">
+          	<div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="shunxu" value="1" checked="checked" >
+                <i></i>普通
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="shunxu" value="255">
+                <i></i>置顶
+              </label>
+            </div>
+              
+            <span class="help-block m-b-sm">“置顶”时无论在什么情况下均能触发且使终保持最优先级.</span>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">触发关键字</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="ci" placeholder="请输入触发关键字" value="{$huifu['ci']}" data-required="true">
+          <span class="help-block m-b-sm">您可以给这条规则起一个名字, 方便下次修改和查看. </span>
+          <div class="alert alert-danger m-b-none inline wrapper-xs padder">
+            选择高级触发: 将会提供一系列的高级触发方式供专业用户使用(注意: 如果你不了解, 请不要使用).
+          </div>
+        </div>
+      </div>
+   
+  </div>
+</section>
+
+<section class="panel panel-default">
+  <header class="panel-heading">                  
+    回复内容
+  </header>
+  <div class="panel-body">   
+      <div class="form-group">
+        <label class="col-sm-2 control-label">内容</label>
+        <div class="col-sm-10">
+          <textarea style="height: 80px;" class="form-control parsley-validated" name="neirong" data-required="true">{$huifu['neirong']}</textarea>
+        </div>
+      </div>  
+  </div>
+</section>
+<div class="form-group">
+  <div class="col-sm-4">
+    <button type="submit" class="btn btn-danger">提交</button>
+  </div>
+</div>
+</form>

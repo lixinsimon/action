@@ -1,0 +1,24 @@
+{mb 'tou'}
+<style>
+	body,html{height:100%;}
+</style>
+<header id="header" class="mui-bar mui-bar-transparent">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left back"></a>
+	<img src="{php echo $_W['yuming'].'gongyong/images/share.png'}" style="width:30px;height:30px;margin-top:8px;margin-left:0px;float:right;">
+</header>
+<div style="text-align: center;" id='jiazai'>
+  <img id="loading" src="{$_W['yuming']}gongyong/images/loading.gif"  width="65" height="65" style="margin-top: 150px" >
+</div>
+<script>
+
+$.post('{php echo UXK("fenxiao/tuiguang")}',function(shu){ 
+	if(shu.shi==1){	
+		$('header').after(shu.shu);		
+	}
+
+},'json');
+
+</script>
+{mb jiao}
+
+	 

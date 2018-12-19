@@ -1,0 +1,80 @@
+<form action="" method="get" class="form-horizontal" role="form" id="form1"> <input type="hidden" name="m" value="{$_W['mo']}" /> <input type="hidden" name="d" value="{$_W['danyuan']}" /> <input type="hidden" name="k" value="{$_J['k']}" /> <input type="hidden" name="c" id="c" value="{$_J['c']}" />
+	<div class="form-group"><label class="col-sm-2 control-label">申请时间</label>
+		<div class="col-sm-10">
+			<div class="radio-inline i-checks"> <label>        <input type="radio" name="shijian" value="0" checked="">        <i></i>不搜索      </label> </div>
+			<div class="radio-inline i-checks m-l-lg"> <label>        <input type="radio" name="shijian" value="1">        <i></i>搜索      </label> </div>
+			<div style="display:inline-block;"> {php echo RiQi('kaishi')} </div>
+			<div style="display:inline-block;"> 至 </div>
+			<div style="display:inline-block;"> {php echo RiQi('jieshu')} </div>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group"> <label class="col-sm-2 control-label" for="input-id-1">提现单号</label>
+		<div class="col-sm-10"> <input type="text" class="form-control" id="input-id-1" name="dingdanhao"> </div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group"> <label class="col-sm-2 control-label" for="input-id-1">会员信息</label>
+		<div class="col-sm-10"> <input type="text" class="form-control" id="input-id-1" name="yonghu" placeholder="可搜索昵称/姓名/手机号"> </div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group"> <label class="col-sm-2 control-label" for="input-id-1">状态</label>
+		<div class="col-sm-10">
+			<select class="form-control" name="zhuangtai">
+				<option value="">不限</option>
+				<option value="0">待核审</option>
+				<option value="10">待打款</option>
+				<option value="20">已打款</option>
+				<option value="5">无效</option>
+			</select>
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg"></div>
+	<div class="form-group">
+		<div class="col-lg-offset-2 col-lg-10"> <button type="button" onclick="tijiao()" class="btn btn-sm padder-lg btn-dark">搜索</button> <button type="button" onclick="daochu()" class="btn btn-info btn-sm padder-lg" data-toggle="modal1" data-target="#myModal">导出Excel</button> </div>
+	</div>
+</form>
+<script>
+	function tijiao() {
+		var url = "";
+		$("#c").val("{$_J['c']}");
+		$("#form1").attr('action', url);
+		$("#form1").submit();
+	}
+
+	function daochu() {
+		var url = "index.php?d={$_J['d']}&k={$_J['k']}&m={$_J['m']}";
+		$("#c").val('tixiandaochu');
+		$("#form1").attr('action', url);
+		$("#form1").submit();
+	}
+</script>
+<div class="line line-dashed b-b line-lg"></div>
+<div class="table-responsive m-t-md">
+	<header class="panel-heading font-bold"> 总数：{$zongshu}</header>
+	<table class="table table-striped b-light">
+		<thead>
+			<tr>
+				<th width="16%">提现单号</th>
+				<th width="20%">会员信息</th>
+				<th width="12%">提现方式</th>
+				<th width="12%">申请余额</th>
+				<th width="12%">申请时间</th>
+				<th width="12%">状态</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody> {loop $lie $l}
+			<tr>
+				<td style="vertical-align:middle;">{$l['dingdanhao']}</td>
+				<td style="vertical-align:middle;"> <span class="thumb-sm pull-left m-l-xs">                                  <img src="{$l['touxiang']}" class="dker" alt="{$l['nicheng']}">        </span>
+					<div class="m-l-xs" style="line-height:40px; overflow: hidden; height: 40px;">{$l['nicheng']}</div>
+				</td>
+				<td style="vertical-align:middle;">{php echo $tixianfangshi_text[$l['tixianfangshi']]}</td>
+				<td style="vertical-align:middle;">{$l['jin_e']}</td>
+				<td style="vertical-align:middle;">{php echo date('Y-m-d H:i:s',$l['shenqingshijian'])}</td>
+				<td style="vertical-align:middle;"> <label class="label {if $l['zhuangtai']==5}label-default{elseif empty($l['zhuangtai'])}label-danger{elseif $l['zhuangtai']==10}label label-warning{else}label-success{/if} padder">{php echo  $zhuangtai_text[$l['zhuangtai']]}</label> </td>
+				<td style="vertical-align:middle;">
+					<a href="{php echo USK('fenxiao',array('c'=>'xiangq','id'=>$l['id']))}" class="btn btn-default btn-sm padder-lg fenxiao_btn">详情</a>
+				</td>
+			</tr> {/loop} </tbody>
+	</table>{$fenye}</div>

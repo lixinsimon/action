@@ -1,0 +1,194 @@
+{mb 'tou'}
+	<style type="text/css">
+		.m-navbar:after{
+			border: 0px;
+		}
+		.kuai-tu{
+			width: 30%;
+			margin: 0 auto;
+			margin-bottom: .3rem;
+		}
+		#fenxiao{
+			display: none;
+		}
+		.zong-wrap{
+			padding: .2rem;
+			border-bottom: .2rem solid #eee;
+		}
+		.zong{
+			height: 2rem;
+			background: #000;
+			text-align: center;
+		}
+		.zong p{
+			font-size: .8rem;
+			color: #fff;
+			padding-top: .2rem;
+			padding-bottom: .1rem;
+			text-align: center;
+		}
+		.zong span{
+			font-size: ..28rem;
+			color: #fff;
+			
+		}
+		.m-cell{
+			margin-bottom: 0;
+			border-bottom: .2rem solid #eee !important;
+			display: block;
+		}
+		.m-cell:after{
+			border-bottom: none;
+		}
+		.cell-right,.cell-left{
+			color: #000;
+		}
+		.list-wrap .cell-right{
+			min-height: .76rem;
+		}
+		.shouyi{
+			position: absolute;
+			left: 4rem;
+			top: 0;
+			line-height: .76rem;
+			font-size: .3rem;
+			color: #000;
+		}
+		.list-wrap .cell-item{
+			position: relative;
+		}
+		.zhaung{
+			display: block;
+			width: 2.6rem;
+			line-height: .8rem;
+			text-align: center;
+			color: #fff;
+			font-size: .3rem;
+			background: #000;
+			margin: .5rem auto;
+		}
+		body{
+			background: #fff;
+		}
+		
+	
+	</style>
+
+	<div class="touhang">
+		<a onclick="$z.go()"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+		<div >我的收益</div>
+	</div>
+	
+	<div id="fenxiao">	
+		<div class="zong-wrap">
+			<div class="zong">
+				<p>{{shu.zong_e}}</p>
+				<span>总收益</span>
+			</div>
+		</div>
+		<div class="list-wrap">
+			<a href="{php echo UAK('fenxiao/yongjinmingxi',array('zhuangtai'=>1))}" class="m-cell" >
+			    <div class="cell-item">
+			        <div class="cell-left">可提现收益（余额）</div>
+			        <div class="shouyi">{{shu.ketixian}}</div>
+			        <div class="cell-right cell-arrow">详情</div>
+			    </div>
+		    </a>
+		    <a href="{php echo UAK('fenxiao/yongjinmingxi',array('zhuangtai'=>0))}" class="m-cell" >
+			    <div class="cell-item">
+			        <div class="cell-left">待到账收益</div>
+			        <div class="shouyi">{{shu.daidao}}</div>
+			        <div class="cell-right cell-arrow">详情</div>
+			    </div>
+		    </a>
+		    <a href="{php echo UAK('fenxiao/tixianmingxi')}" class="m-cell">
+			    <div class="cell-item">
+			        <div class="cell-left">累计提现收益</div>
+			        <div class="shouyi">{{shu.leiji}}</div>
+			        <div class="cell-right cell-arrow">详情</div>
+			    </div>
+			</a>
+		</div>
+		
+		<a class="zhaung" href="{php echo UAK('index')}">
+			去赚更多
+		</a>
+		
+		<!--<div class="fenxiao-top">
+			<header class="m-navbar" style="background: transparent;">			   
+			    <div class="navbar-center">创客中心</div>		    
+			</header>
+			<h2>{{shu.ketixian}}</h2>
+			<p>可提现余额（元）</p>
+			<div class="fenxiao-t">
+				{{shu.nicheng}}({{shu.dengjiming}})
+			</div>
+			<div class="fenxiao-t-b">
+				<div class="fenxiao-t-left">
+					<div>余额总额（元）</div>
+					<h2>{{shu.zong_e}}</h2>
+				</div>
+				<a href="{php echo UAK('fenxiao/tixian')}" class="fenxiao-t-right">提现</a>
+			</div>
+		</div>--> 
+		
+		<!--<div class="m-grids-3" id="wode">
+		    <a href="{php echo UAK('fenxiao/yongjinmingxi')}" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_08.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>余额明细</span></div>
+		    </a>
+		    <a href="{php echo UAK('fenxiao/tixianmingxi')}" class="grids-item">
+		       <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_10.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>提现明细</span></div>
+		    </a>
+		   
+        	<a href="{php echo UAK('fenxiao/tuiguang')}" class="grids-item">
+                <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_12.png'}" class="kuai-tu">
+                <div class="grids-txt">推广二维码</div>
+        	</a>
+          
+		    <a href="{php echo UAK('fenxiao/wanshanxinxi')}" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_19.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>收款方式</span></div>
+		    </a>
+		    <a href="{php echo UAK('fenxiao/wodetuandui')}" class="grids-item">
+		        <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_17.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>我的团队</span></div>
+		    </a>
+		    <a href="{php echo UAK('fenxiao/wodekehu')}" class="grids-item">
+		       <img src="{php echo $_W['yuming'].'gongyong/images/zhonge_icon_18.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>我的客户</span></div>
+		    </a>		  		
+		    <a href="{php echo UAK('fenxiao/yindaogoumai')}" class="grids-item">
+		      	<img src="{php echo $_W['yuming'].'gongyong/images/piao.png'}" class="kuai-tu">
+		        <div class="grids-txt"><span>我要升级</span></div>
+		    </a>	   
+		</div>-->
+		
+		</div>	
+
+	{mb js}
+	<script type="text/javascript">
+			new Vue({
+				el:"#fenxiao",
+				data:{
+					shu:[]
+				},
+				beforeCreate:function(){					
+					var that=this;
+					$z.post('{$_W["url"]}',function(shu){0 
+						if(shu.shi==1){							  
+							that.shu=shu.shu;	
+							$('#fenxiao').show();
+						}
+					});
+					 
+				}
+				
+			});
+			
+		</script>
+{mb jiao}
+
+
+	 

@@ -1,0 +1,85 @@
+{mb 'tou'}
+<style type="text/css">
+	.ti{
+		border: 1px solid #C0C0C0;
+		float: right;
+		padding: .1rem .2rem;
+		margin: -.16rem .3rem 0px 0px;
+		border-radius: .1rem;
+	}
+	#wqb{
+		display: none;
+	}
+</style>
+	<div id="wqb">
+		<div class="wqb_t" >
+			<header class="m-navbar" style="background-color:transparent !important;color: #fff;">
+			    <a onclick="$z.go()" class="navbar-item">
+			        <i class="back-ico"></i>
+			    </a>
+			    <div class="navbar-center" >
+			   		   我的钱包	
+			    </div>		    
+			</header>
+			<h2>账户余额（元）</h2>
+			<h3>￥<span>{{qian}}</span></h3>
+		</div>
+		<div class="wqb_zd">
+			<h4 style="font-weight:normal;">我的账单记录 </h4>
+		</div>
+		
+		<section id="J_List" style="background: #FFFFFF;">
+		    <div id="J_ListContent">
+		    	   	<div class="jilu" v-for="L in lie">
+						<div class="jilu-z">
+							<p>{{L.shuoming}}</p>
+							<font style="color: #6F6F6F;">{{L.shijian}}</font>
+						</div>
+						<div class="jilu-y">{{L.zhi}}</div>
+				    </div>
+		    </div>
+		</section>
+	
+	</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+				el:"#wqb",
+				data:{					
+		  			qian:0.00,
+		  			lie:[]
+				},
+				beforeCreate:function(){
+					var that=this;
+					$z.post('{$_W["url"]}',function(shu){
+						if(shu.shi){
+							that.qian=shu.shu.yu_e;
+						}
+					})
+				}
+			})
+	
+    var page = 1, pageSize = 10;
+
+    $('#J_List').infiniteScroll({
+        pageSize: pageSize,
+        initLoad: true,
+        loadingHtml: '<strong>加载中...</strong>',
+        loadListFn: function () {
+            var def = $.Deferred();
+            $z.post("{$_W['url']}",{c:'yu_elie',ye:page++,jitiao:pageSize},function(ret){            	
+            	if(ret.shi==1){	            		
+	            	   for(var i in ret.shu){
+        		    	V.$set(V.lie,V.lie.length++,ret.shu[i]);            		    	
+        		    }  
+	            }              	
+                def.resolve(ret.shu);               
+                $("#wqb").show();
+            });
+            return def.promise();
+        }
+    });
+</script>
+{mb jiao}
+
+	

@@ -1,0 +1,39 @@
+
+<style type="text/css">
+	.canshu{
+		margin-top:0;
+		margin-bottom: 55px;
+	}
+	.canshu li{
+		width:100%;
+		padding:10px 15px;
+		height:auto;
+		overflow: hidden;
+		background:#fff;
+		margin-bottom:1px;
+		border-bottom:1px solid #eee;
+	}
+	.canshu li p{
+		width:30%;
+		text-align:left;
+		color:#999;
+		font-size:14px;
+		float:left;
+		margin-bottom:0;
+	}
+	.canshu li p:last-child{
+		width:70%;
+		color:#333;
+	}
+</style>
+<ul class="canshu">
+    {if $shangpin['shuxing']}
+    {loop $shangpin['shuxing'][ming] $k $sj} 
+	<li>
+		<p>{$sj}</p><p>{$shangpin['shuxing']['zhi'][$k]}</p>
+	</li>
+	{/loop}
+	{else}
+	<li><p>无</p><p></p></li>
+	{/if}
+</ul>

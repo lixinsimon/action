@@ -1,0 +1,69 @@
+{mb 'tou'}
+<style type="text/css">
+	.m-grids-2{
+		background: #000;
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+	}
+	.grids-txt span{
+		color: #fff;
+		font-size: .3rem;
+	}
+	.m-cell:after{
+		width: 0%;
+	}
+	.m-grids-2:before{
+		width: 100%;
+	}
+</style>
+<div id="app" style="display: none;">
+
+<div class="touhang">
+	<a onclick="$z.go()"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div >客服与帮助</div>
+</div>
+	
+	
+	 <div class="m-cell">
+	    <a v-for="(l,index) in lie" class="cell-item" :href="l.href"  >
+	        <div class="cell-left">{{l.biaoti}}</div>
+	        <div class="cell-right cell-arrow"></div>
+	    </a>
+	</div>
+	
+	<div class="mui-card-content" id="lianxifangshi" >
+		
+	</div>
+	
+	<div class="m-grids-2">
+	    <a href="{php echo UAK('wode/liuyan')}" class="grids-item">
+	        <div class="grids-txt"><span>在线留言</span></div>
+	    </a>
+	    <a :href="'tel:'+kefu" class="grids-item">
+	        <div class="grids-txt"><span>客服热线</span></div>
+	    </a>
+	</div>
+</div>	
+	{mb js}
+	<script>
+		new Vue({
+			el:'#app',
+			data:{
+				lie:[],kefu:''
+			},
+			beforeCreate:function(){
+				var that=this;
+				$z.post('{php echo UAK("wode/kefu")}',function(shu){
+						that.lie=shu.shu.lie;
+						that.kefu=shu.shu.kefu;
+						$('#app').show();
+				},'json');
+			},
+			
+				
+		})
+		
+	
+	</script>
+{mb jiao}

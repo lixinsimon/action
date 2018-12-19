@@ -1,0 +1,101 @@
+<form action="" data-validate="parsley" method="post"  class="form-horizontal" role="form">
+	<input type="hidden" name="c" value="post" />
+	<input type="hidden" name="fid" value="{$feilei['id']}" />
+  <!--<div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">分类链接(点击复制)</label>
+    <div class="col-sm-10">
+      <font class="text-info" style="line-height:30px;"> http://dp.heodo.com/app/index.php?i=2&c=entry&p=list&do=shop&m=ewei_shop </font>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>-->
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">排序</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" placeholder="0" name="shunxu" value="{$feilei['shunxu']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"><span class="text-danger">*</span>选择上级分类</label>
+    <div class="col-sm-10">
+	     <select name="fuji_id" class="form-control">
+	      <option value="0">顶级分类</option>
+	      {loop $feileilie $fl}
+	        {if $fl['id']!=$feilei['id']}
+	        <option value="{$fl['id']}"  {if $fl['id']==$add_id || $fl['id']==$feilei['fuji_id']}selected{/if}>{$fl['ming']}</option>
+	        {/if}
+	      {/loop}
+	    </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"><span class="text-danger">*</span>分类名称</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="ming"  data-required="true" value="{$feilei['ming']}">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">图标</label>
+    <div class="col-sm-10">
+      {php echo ShangTu('tu',$feilei['tu'])}
+    </div>
+  </div>
+  <!--<div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">直接链接</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" placeholder="直接跳转此链接" name="zhiurl" value="{$feilei['zhiurl']}">
+    </div>
+  </div>-->
+  <!--<div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">推荐首页</label>
+    <div class="col-sm-10">
+      
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shouye" value="1" {if $feilei['shouye']>0}checked="checked"{/if}>
+          <i></i>是
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shouye" value="0" {if empty($feilei['shouye'])}checked="checked"{/if}>
+          <i></i>否
+        </label>
+      </div>   
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">是否显示</label>
+    <div class="col-sm-10">
+      
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="zhuangtai" value="1" {if $feilei['zhuangtai']>0}checked="checked"{/if}>
+          <i></i>是
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="zhuangtai" value="0" {if empty($feilei['zhuangtai'])}checked="checked"{/if}>
+          <i></i>否
+        </label>
+      </div>   
+    </div>
+  </div>-->
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-danger padder-lg">提交</button>
+    </div>
+  </div>
+</form>
+<script>
+	$('.form-horizontal').parsley();
+</script>

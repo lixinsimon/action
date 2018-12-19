@@ -1,0 +1,52 @@
+{mb 'tou'}
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left back"></a>
+    <h1 class="mui-title">优惠券</h1>
+</header>
+<div class="mui-content mui-card-content mui-scroll-wrapper mui-fullscreen" id="pullrefresh">  
+   <div class="mui-scroll">
+      <div class="youhuiquan mui-table-view">
+          
+      </div>
+    </div>
+</div>
+
+<script>
+
+mui.init({
+      pullRefresh: {
+        container: '#pullrefresh',
+        up: {
+          auto:true,
+          contentrefresh: '正在加载...',
+          callback: pullupRefresh
+        }
+      }
+    });
+var ye=1;
+function pullupRefresh() {  
+ $.post('{php echo $_W["url"]}',{ye:ye++},function(shu){ 
+     if(shu.shi==1){ 
+       $('.youhuiquan').append(shu.shu); 
+         var cunzai=false;
+     }else{
+        var  cunzai=true;
+     }; 
+     mui('#pullrefresh').pullRefresh().endPullupToRefresh(cunzai);
+   },'json');
+     
+}
+mui('body').on('tap','.lingqu',function(){
+	 var _this=$(this);
+	 $.post($(this).attr("url"),function(shu){
+          if(shu.shi==1){
+            _this.addClass('pic_2');
+            _this.removeAttr('url').find('p').text('已领取');
+            _this.removeClass('lingqu');
+          }else{
+          	mui.toast(shu.shu);
+          }
+	 },'json');
+});
+</script>
+{mb 'jiao'}

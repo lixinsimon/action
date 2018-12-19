@@ -1,0 +1,262 @@
+<script src="../gongyong/js/jquery_1_72.js"></script>
+<script src="../gongyong/js/city.min.js"></script>
+<section class="panel panel-default">
+    <div class="panel-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            筛选
+        </a>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body text-sm">
+            <form id="frm" class="form-horizontal" method="get" name="form1">
+                <input type="hidden" name="m" value="{$_W['mo']}"/>
+                <input type="hidden" name="k" value="tongji"/>
+                <input type="hidden" name="d" value="{$_W['danyuan']}"/>
+                <input type="hidden" id="c" name="c" value="peisong"/>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商品名称</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" name="ming" placeholder="商品名称" value="{$_J['ming']}">
+                    </div>
+                </div>
+                <div class="form-group">
+                 	<span class="col-sm-2 control-label">支付方式</span>
+                 	 <div class="col-sm-7">
+					<select data-required="true" value="{$_J['zhifuqudao']}" class="form-control" name="zhifuqudao" id="zhifuqudao">
+						<option value="">不限</option>
+						<option  value="weixin">微信支付</option>
+						<option value="zhifubao">支付宝</option>
+						<option value="yu_e">余额支付</option>
+						<option value="houtai">后台支付</option>
+						<option value="yinlian">银联支付</option>
+						<option value="daofu">货到付款</option>
+					</select>
+					 </div>
+                </div>	
+                <div class="form-group">
+                 	<span class="col-sm-2 control-label">自提点选择</span>
+                 	 <div class="col-sm-7">
+					<select data-required="true" value="{$_J['tuang1']}" class="form-control" name="tuang1" id="zhifuqudao">
+						<option value="">不限</option>
+						{loop $ziti $dj}
+				        	<option value="{$dj['id']}" {if $_J['tuang1']==$dj['id']}selected{/if}>{$dj['nicheng']}</option>
+				        {/loop}
+					</select>
+					 </div>
+                </div>	
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">搜索自提点</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" name="tuang" placeholder="请输入团长名称或小区名" value="{$_J['tuang']}">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+              
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">支付时间</label>
+                    <div class="col-sm-10">
+                        <div class="radio-inline i-checks">
+                            <label>
+                                <input type="radio" name="sousuo" value="0" {if $_J['sousuo']==0}checked="checked"{/if}>
+                                <i></i>不搜索
+                            </label>
+                        </div>
+
+                        <div class="radio-inline i-checks m-l-lg">
+                            <label>
+                                <input type="radio" name="sousuo" value="1" {if $_J['sousuo']==1}checked="checked"{/if}>
+                                <i></i>搜索
+                            </label>
+                        </div>
+                        <div style="display:inline-block;">
+                            {php echo RiQi('kaishi','',true)}
+                        </div>
+                        <div style="display:inline-block;">
+                            至
+                        </div>
+                        <div style="display:inline-block;">
+                            {php echo RiQi('jieshu','',true)}
+                        </div>
+                    </div>
+                    <script>
+                        var kaishi = "{$_J['kaishi']}";
+                        var jieshu = "{$_J['jieshu']}";
+                        if (kaishi !== "" && jieshu !== "") {
+                            $('[name="kaishi"]').attr('value', kaishi);
+                            $('[name="jieshu"]').attr('value', jieshu);
+                        }
+                    </script>
+                </div>
+
+                <!--<div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">排序方式</label>
+                    <div class="col-sm-10">
+                        <div class="radio-inline i-checks">
+                            <label>
+                                <input type="radio" name="xuanze" value="0" {if $_J['xuanze']==0}checked="checked"{/if}>
+                                <i></i>按销售量
+                            </label>
+                        </div>
+
+                        <div class="radio-inline i-checks m-l-lg">
+                            <label>
+                                <input type="radio" name="xuanze" value="1" {if $_J['xuanze']==1}checked="checked"{/if}>
+                                <i></i>按销售额
+                            </label>
+                        </div>
+                        
+                    </div>
+                </div>-->
+                
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                	<style>
+                		dl,dd,dt,ul,li,ol{list-style-type:none;margin:0;padding:0;}
+                		.liststyle span{position:relative;height:36px;line-height:36px;display:inline-block;border:1px solid #E8E8E8;border-radius:5px;padding:0 0 0 8px;cursor:pointer;background:white;float:left;margin-right:9px;margin-bottom:10px;}
+						.liststyle span i{display:inline-block;height:36px;line-height:36px;padding-right:30px;position:relative;}
+						.liststyle span i:after{content:"";display:block;width:20px;height:36px;position:absolute;right:0;top:0;background-image:url(../gongyong/images/jt_nor.png);background-repeat:no-repeat;background-position:0 center;background-size:10px auto;}
+						.liststyle span ul{width:100%;border-radius:0 0 5px 5px;position:absolute;border:1px solid #E8E8E8;background:white;left:-1px;top:36px;border-top:0;margin-bottom:10px;display:none;z-index:10;}
+						.liststyle span ul li{width:100%;float:left;overflow:hidden;border-top:1px solid #E8E8E8;}
+						.liststyle span ul li:first-child{border-top:0;}
+						.liststyle span ul li a{display:block;height:36px;line-height:36px;padding:0 8px;color:#494949;}
+                	</style>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="button" class="btn btn-primary padder-lg" onclick="sousuo1()">搜索</button>
+                        <button type="button" class="btn btn-primary padder-lg" onclick="daochu()">导出 Excel</button>
+                    </div>
+                </div>
+            </form>
+            <script>
+                function sousuo1() {
+                    document.getElementById("frm").submit();
+                }
+                function daochu() {
+                    $('#c').val('daochupeisong');
+                    document.getElementById("frm").submit();
+                }
+            </script>
+        </div>
+    </div>
+</section>
+<div class="table-responsive">
+    <table class="table table-striped b-t b-light">  	
+    	<thead>
+        <tr>
+            <th colspan="5" style="background: #f7fafa;">
+            	实际销售额：<font color="red">{$zong_E}</font>元</th>           
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th>商品名</th>
+            <th>支付方式</th>
+            <th>总金额</th>
+            <th>配送小区</th>
+            <th>团长姓名</th>
+            <th>团长电话</th>
+            <th>总数量</th>
+             <th>完成时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {loop $res $lie}
+        <tr>
+            <td style="vertical-align:middle;">{$lie['商品名']}</td>
+            <td style="vertical-align:middle;">{$lie['支付方式']}</td>
+			 <td style="vertical-align:middle;">{$lie['总金额']}</td>
+            <td style="vertical-align:middle;">{$lie['配送小区']}</td>
+             <td style="vertical-align:middle;">{$lie['团长姓名']}</td>
+            <td style="vertical-align:middle;">{$lie['团长电话']}</td>
+            <td style="vertical-align:middle;">{$lie['总数量']}</td>
+              <td style="vertical-align:middle;">{$lie['完成时间']}</td>
+        </tr>
+        {/loop}
+        </tbody>
+    </table>
+</div>
+{$FenYe}
+<!--<footer class="panel-footer">
+    <div class="row">
+        <div class="col-sm-8">
+            <a class="btn btn-default padder-lg" href="{php echo UHK('shangpin',array('c'=>tianjia))}">添加商品</a>
+        </div>
+        <div class="col-sm-4 text-right text-center-xs">
+            &lt;!&ndash;加载商品&ndash;&gt;
+        </div>
+    </div>
+</footer>-->
+<script>
+    $('.shangping_edit').click(function () {
+        $('.liebiao li').removeClass('active');
+        $('.liebiao li:last').show().addClass('active');
+        $('#tianjia form').html('');
+        $('#bianji form').html('');
+        $.post("{php echo UHK('shangpin')}", {id: $(this).attr('data-id'), c: 'bianji'}, function (data) {
+            $('#bianji form').html(data);
+        });
+    });
+
+    $('[data-zhuangtai]').click(function () {
+        var t = $(this);
+        var current = t.attr("data-zhuangtai");
+        var id = t.attr("data-id");
+        var column = t.attr("data-column");
+        var show = t.attr('data-show');
+        eval("show = " + show);
+        if (current === "1") {
+            $.post("{php echo UHK('shangpin/index', array('c'=>'zhuangtai'))}", {
+                zhuangtai: 0,
+                id: id,
+                column: column
+            }, function (shu) {
+                if (shu.shi == 1) {
+                    t.attr("data-zhuangtai", 0);
+                    t.removeClass("btn-success");
+                    t.addClass("btn-dark");
+                    t.text(show['k0']);
+                }
+            }, 'json');
+
+        } else if (current === "0") {
+            $.post("{php echo UHK('shangpin/index', array('c'=>'zhuangtai'))}", {
+                zhuangtai: 1,
+                id: id,
+                column: column
+            }, function (shu) {
+                if (shu.shi == 1) {
+                    t.attr("data-zhuangtai", 1);
+                    t.removeClass("btn-dark");
+                    t.addClass("btn-success");
+                    t.text(show['k1']);
+                }
+            }, 'json');
+        }
+    });
+</script>
+
+<script type="text/javascript" src="{php echo $_W['yuming']}gongyong/js/jquery.zclip.js"></script>
+<script type="text/javascript">
+
+    $('[data-copy]').each(function () {
+        var url = $(this).attr("data-url");
+        $(this).zclip({
+            path: "{php echo $_W['yuming']}/gongyong/js/ZeroClipboard.swf",
+            copy: url,
+            afterCopy: function () {
+                var obj = $('<em> &nbsp; <span class="label label-success"><i class="fa fa-check-circle"></i> 复制成功</span></em>');
+                var enext = $(this).next().html();
+                if (!enext || enext.indexOf('&nbsp; <span class="label label-success"><i class="fa fa-check-circle"></i> 复制成功</span>') < 0) {
+                    $(this).after(obj);
+                }
+                setTimeout(function () {
+                    obj.remove();
+                }, 2000);
+            }
+        });
+    });
+
+</script>

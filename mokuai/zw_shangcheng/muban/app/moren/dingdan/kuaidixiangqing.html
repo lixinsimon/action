@@ -1,0 +1,120 @@
+{mb 'tou'}
+<style type="text/css">
+			.kuai{
+				width: 100%;
+				height: .5rem;
+				float: left;
+				font-size: .3rem;
+				line-height: .6rem;
+				padding-left: .2rem;
+				background: #fff;
+				box-sizing: border-box;
+			}
+			.kuai:nth-child(2){
+				line-height: .4rem;
+				height: .4rem;
+				font-size: .26rem;
+			}
+			.zw-shenglue2{
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				overflow: hidden;
+			}
+			.zw-wl{
+				width: 100%;
+				float: left;
+				background: #fff;
+				margin-top: .2rem;
+				position: relative;
+				overflow: hidden;
+				
+			}
+			.zw-wl:after{
+				content: ' ';
+				height: 100%;
+				width: 2px ;
+				background: #e3e3e3;
+				position: absolute;
+				left:9.8%;
+				top: 1.1rem;
+			}
+			.zw-wl-t{
+				width: 100%;
+				line-height: .6rem;
+				padding: .1rem .2rem;
+				box-sizing: border-box;
+			}
+			.zw-wl-x{
+				width: 100%;
+				float: left;
+				color: #9a9a9a;
+				margin-bottom: .4rem;
+			}
+			.zw-wl-x img{
+				width: 6%;
+				float: left;
+				text-align: center;
+				margin-left : 7% ;
+				z-index: 999;
+				position: relative;
+			}
+			.zw-wl-x div{
+				width: 80%;
+				font-size: .3rem;
+				float: right;
+				padding-right: 10%;
+				box-sizing: border-box;
+				margin-bottom: .1rem;
+			}
+			
+			
+		</style>
+		<header class="m-navbar">
+		    <a onclick="$z.go()" class="navbar-item">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		      	查询物流
+		    </div>	    
+		</header>
+		<div id="dan" style="display: none;">
+			<div class="kuai">
+				{{dan.ming?dan.ming:'其他快递'}}
+			</div>
+			<div class="kuai">
+				订单编号：{{dan.hao?dan.hao:'未设定'}}
+			</div>
+			<div class="zw-wl">
+				<div class="zw-wl-t">物流跟踪</div>
+				<div class="zw-wl-x" :style="i==0?'color:#73c191':''" v-for="(l,i) in lie">
+					<img v-if="i==0" src="{$_W['gongyou']}/images/订单跟踪1.png"/><img style="width: 4%;margin-left:8% ;" v-else src="{$_W['gongyou']}/images/订单跟踪2.png"/>
+					<div class="zw-shenglue2">{{l.context}}</div>
+					<div>{{l.time}}</div>
+				</div>
+			</div>
+		</div>
+{mb js}
+<script type="text/javascript">
+			new Vue({
+				el:"#dan",
+				data:{
+					dan:{
+						hao:"sddf54654646",ming:"顺丰快递",
+					},
+					lie:[]
+				},
+				beforeCreate:function(){
+					var that=this;
+					$z.post("{$_W['url']}",function(shu){
+						that.dan.ming=shu.shu.ming;
+						that.dan.hao=shu.shu.hao;
+						that.lie=shu.shu.data;
+						$('#dan').show();
+					})
+				}
+			})
+			
+			
+		</script>
+{mb jiao}

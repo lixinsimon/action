@@ -1,0 +1,235 @@
+{mb tou}
+
+<script src="{$_W['yuming']}shanghu/muban/moren/gongyou/js/diqu.js"></script>
+<div style="background: #fff;padding: 0 25px">
+	<div style="text-align: left;padding-bottom: 20px;">
+		<header style="height: 40px;background: #F7FAFA;text-align: center;border-bottom: 1px solid #EAEEF1;margin: 0 -25px;">
+	    	<ul class="dao_hang">
+	    		<li {if $cao=='moren'} class="xuanzhong"{/if}>
+	    			<a href="#">店铺信息</a>
+	    		</li>
+	    	</ul>
+	    </header>
+		<form method="post" action="{php echo US('jichu/xinxi', array('c'=>'xiugai'))}" class="form-horizontal">
+		  <!--店铺基本信息-->
+		    <div class="form-group dianpu">
+			    <div class='xinximingcheng'><span>店铺名称</span></div>
+			    <div style="width: 80%;float: left;">
+			    	<input value="{$xinxi[nicheng]}" type="text" class="form-control" name="nicheng">
+			    </div>
+			</div>
+			
+			<div class="hengxian"></div>
+			
+					    <div class="form-group dianpu">
+			    <div class='xinximingcheng'><span>店铺描述</span></div>
+			    <div style="width: 80%;float: left;">
+					<input value="{$xinxi[miaosu]}" type="text" class="form-control" name='miaosu' placeholder="">
+			   </div>			  
+			</div> 
+			
+			<div class='hengxian'></div>
+			
+			
+		    <div class="form-group dianpu">	
+			    <div class='xinximingcheng'><span>选择地址</span></div>
+			    <div class="col-sm-3" style="padding-left: 0 !important;">
+			      <select class="form-control" id="sheng">
+			      	{if $xinxi[sheng]}<option>{$xinxi[sheng]}</option>{/if}
+			      </select>
+			    </div>
+			    <div class="col-sm-3" style="padding-left: 0 !important;">
+			      <select class="form-control" id="shi">
+			      	{if $xinxi[shi]}<option>{$xinxi[shi]}</option>{/if}	      	
+			      </select>
+			    </div>
+			    <div class="col-sm-3" style="padding-left: 0 !important;">
+			      <select class="form-control" id="xian">
+			      	{if $xinxi[xian]}<option>{$xinxi[xian]}</option>{/if}	      	
+			      </select>
+			    </div>
+		    </div>   
+			<div class='hengxian'></div>
+			
+		    <div class="form-group dianpu">
+			    <div class='xinximingcheng'><span>详细地址</span></div>
+			    <div style="width: 80%;float: left;">
+			 	 <input type="text" class="form-control" value="{$xinxi[xiangxidizhi]}" name="xiangxidizhi" id="xiangqingdizhi" placeholder="">
+				</div> 
+			</div> 
+			<div class='hengxian'></div>
+			
+			
+			<div class="form-group dianpu">
+			  <div class='xinximingcheng'><span>客服电话</span></div>
+			    <div style="width: 80%;float: left;">
+				  <input type="text" class="form-control" value="{$xinxi[dianhua]}" name="dianhua" placeholder="">
+				</div>			  
+			</div> 
+			
+			<div class='hengxian'></div>
+			<div class="form-group dianpu">
+			    <div class='xinximingcheng'><span>银行卡</span></div>
+			    <div style="width: 80%;float: left;">
+			 	 <input type="text" class="form-control" value="{$xinxi['kaxinxi']['ka']}" name="ka" id="xiangqingdizhi" placeholder="">
+				</div> 
+			</div> 
+			<div class='hengxian'></div>
+			
+			<div class="form-group dianpu">
+			    <div class='xinximingcheng'><span>支付宝</span></div>
+			    <div style="width: 80%;float: left;">
+			 	 <input type="text" class="form-control" value="{$xinxi['kaxinxi']['bao']}" name="bao" id="xiangqingdizhi" placeholder="">
+				</div> 
+			</div> 
+			<div class='hengxian'></div>
+			
+			<div class="form-group dianpu">
+			    <div class='xinximingcheng'><span>微信</span></div>
+			    <div style="width: 80%;float: left;">
+			 	 <input type="text" class="form-control" value="{$xinxi['kaxinxi']['xin']}" name="xin" id="xiangqingdizhi" placeholder="">
+				</div> 
+			</div> 
+			<div class='hengxian'></div>
+			
+				<div class="form-group dianpu">
+			  <div class='xinximingcheng'><span>客服QQ</span></div>
+			    <div style="width: 80%;float: left;">				
+			   	 <input type="text" class="form-control" value="{$xinxi[QQ]}" name='QQ' id="QQ" placeholder="">
+				</div> 
+			</div> 
+			<div class='hengxian'></div>
+			
+					    <div class="form-group dianpu">
+			  <div class='xinximingcheng'><span>邮箱</span></div>
+			    <div style="width: 80%;float: left;">				
+			  		<input type="text" class="form-control" value="{$xinxi[youxiang]}" name="youxiang" id="youxiang" placeholder="">
+				</div>	
+			</div>	
+			<div class='hengxian'></div>
+			
+			
+			<div class="form-group dianpu">
+			  <div class='xinximingcheng'><span>营业执照</span></div>
+			    <div style="width: 80%;float: left;">				
+			        {php echo ShangTu('yinyezhizhao', $xinxi['yingyezhao'])}
+			        <span class="help-block m-b-none">（大图片建议尺寸：360像素 * 200像素）</span>
+			    </div>
+		 	 </div>	
+			<div class='hengxian'></div>			
+		  
+			<div class="form-group dianpu">
+			  <div class='xinximingcheng'><span>店铺logo</span></div>
+			  <div style="width: 80%;float: left;">				
+		      	{php echo ShangTu('logo', $xinxi['logo'])}
+		       	<span class="help-block m-b-none">（大图片建议尺寸：360像素 * 360像素）</span>
+		      </div>
+		    </div>
+			
+			<div class='hengxian'></div>
+		  <a class="btn btn-default dizhiku">点击循环地址库</a>
+		  <div style="display: none;">
+			  <input id="dizhi1" name="sheng" value=""/>
+			  <input id="dizhi2" name="shi" value=""/>
+			  <input id="dizhi3" name="xian" value=""/>
+		  </div>
+		  
+		   <div class="form-group">
+			  <div style="float: left;width: 15%;line-height: 32px;text-align: right;padding-left: 30px;height: 32px;"></div>
+		      <div style="width: 80%;float: left;">
+			  	<button type="submit" style="float: left;width: 100px;" class="btn btn-default">提交</button>
+		 	  </div>
+		  </div>
+		</form>
+	</div>
+</div>
+<script>	
+	  	$(function(){  		
+				for (var i=0,l=citys.length;i<l;i++) {
+					$('#sheng').append("<option>"+citys[i].n+"</option>");				
+				}
+					for (var a=0,h=citys[0].c.length;a<h;a++) {						
+					$('#shi').append("<option>"+citys[0].c[a].n+"</option>");
+				}
+					for (var p=0,h=citys[0].c[0].a.length;p<h;p++) {						
+					$('#xian').append("<option>"+citys[0].c[0].a[p]+"</option>");
+				}
+					$('#dizhi1').val($('#sheng').val());
+					$('#dizhi2').val($('#shi').val());
+					$('#dizhi3').val($('#xian').val());	
+	  	});
+	  	$('#sheng').change(function(){
+	  		for (var i=0,l=citys.length;i<l;i++) {	  			
+		  		if($(this).val() == citys[i].n){		  			
+		  			$('#shi option').remove();
+			  		for (var a=0,n=citys[i].c.length;a<n;a++) {								
+								$('#shi').append("<option>"+citys[i].c[a].n+"</option>");							
+						}		
+						$('#dizhi1').val($('#sheng').val());
+						$('#dizhi2').val($('#shi').val());
+						$('#dizhi3').val($('#xian').val());
+		  			}
+				}
+		  	$('#xian option').remove();  
+			$('#dizhi3').val('');		  	
+	  	});	  	
+	  	$('.dizhiku').click(function(){
+//			for (var i=0,l=citys.length;i<l;i++) {
+////				console.log(citys[i].n);
+////				console.log(citys[i]);
+//				var shi = citys[i].c;
+//				for (var o=0,k=shi.length;o<k;o++) {
+//					console.log(shi[o].n);
+//				}
+//			}
+			$.post("{$_W['url']}",{dizhi:citys,c:'dizhiw'},function(shu){
+				console.log(shu);
+			})
+	  	})
+	  	
+	  	
+	  	$('#shi').change(function(){
+					for (var i=0,l=citys.length;i<l;i++) {	  			
+			  		for (var a=0,n=citys[i].c.length;a<n;a++) {
+			  			if($(this).val() == citys[i].c[a].n){
+		  					$('#xian option').remove();
+			  				for(var b = 0,m = citys[i].c[a].a.length;b<m;b++){
+									$('#xian').append("<option>"+citys[i].c[a].a[b]+"</option>");	  					
+			  				}
+			  				$('#dizhi1').val($('#sheng').val());
+								$('#dizhi2').val($('#shi').val());
+								$('#dizhi3').val($('#xian').val());
+			  			}
+		  		    }
+				}
+	  	});
+	  	$('#xian').change(function(){
+			$('#dizhi1').val($('#sheng').val());
+			$('#dizhi2').val($('#shi').val());
+			$('#dizhi3').val($('#xian').val());
+	  	});	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+	  </script> 
+<!--<script>
+			var options = {
+		   url:"{php echo US('gongyou/wenjian',array('c'=>'upload'))}",
+		   responseHandler:function(e){
+		   	 var toJson=JSON.parse(e.response);
+		   	console.log(toJson);
+		   }
+		};
+		$('.uploader').uploader(options);
+//	 console.log(uploader);
+	
+	
+</script>-->
+{mb jiao}

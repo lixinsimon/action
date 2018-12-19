@@ -1,0 +1,407 @@
+{mb tou}
+<style type="text/css">
+    ul,li{
+    	list-style:none;
+    	padding:0;
+    }
+	.pingjia{
+		width:100%;
+		height:auto;
+		padding:10px 15px;
+		overflow: hidden;
+		background:#fff;
+	}
+	.pingjia p{
+		text-indent:0;
+		font-size:15px;
+		color:#000;
+	}
+	.pingjia_top{
+		width:100%;
+		height:auto;
+		padding-top:15px;
+		overflow: hidden;
+		background:#fff;
+	}
+	.pingjia_top_l{
+		float:left;
+		margin-right:10px;
+	}
+	.pingjia_top_l img{
+		width:30px;
+		height:30px;
+		border-radius:30px;
+	}
+	.pingjia_top span{
+		color:#999;
+		font-size:15px;
+		line-height:30px;
+	}
+	.pingjia_one p{
+		text-indent:0;
+		color:#333;
+		font-size:13px;
+		line-height:20px;
+		margin:0 0 20px 0px;
+	}
+	.pingjia_one p.zhuijia{
+		font-size:15px;
+		color:#ff3918;
+		margin-bottom:10px;
+		margin-top:10px;
+		padding-top:10px;
+		border-top:1px solid #eee;
+	}
+	.pingjia_biaoti{
+		height:auto;
+		overflow: hidden;
+	}
+	.pingjia_biaoti span{
+		float:left;
+		font-size:15px;
+		color:#ff5816;
+		line-height:30px;
+		margin-right:15px;
+	}
+	.pingjia_biaoti span:last-child{
+		float:right;
+		color:#ff3918;
+		margin-right:0;
+	}
+	.pingjia_guige{
+		width:100%;
+		height:auto;
+		overflow: hidden;
+		margin:0px 0 10px 0px;
+	}
+	.pingjia_guige span{
+		float:left;
+		font-size:12px;
+		color:#999;
+		line-height:20px;
+		margin-right:15px;
+	}
+	.pingjia .chakan_all{
+		width:40%;
+		text-align: center;
+		margin:10px auto;
+		padding:3px 8px;
+		border:1px solid #ff3918;
+		color:#ff3918;
+		font-size:14px;
+		line-height:20px;
+		border-radius:4px; 
+	}
+	.pingjiatu_pic{
+		height:auto;
+		overflow: hidden;
+		margin-left:0px;
+		margin-top:1px;
+	}
+	.pingjia_img{
+		position: relative;
+		width:100%;
+		border:none;
+	}
+	.pingjia_img img{
+		width:100%;
+		height:auto;
+		border-radius: 3px;
+	}
+	.dianzan{
+		width:100%;
+		height:50px;
+		background:#f4f4f4;
+		overflow: hidden;
+		color:#c8c8c8;
+		border-top:1px solid #dfdfdf;
+		position:fixed;
+		bottom:0;
+	}
+	.pinglun_anniu{
+		width:50%;
+		height:auto;
+		float:left;
+		text-align: center;
+		line-height:48px;
+		border-right:1px solid #dfdfdf;
+		color:#666;
+	}
+	.pinglun_anniu span{
+		font-size:15px;
+	}
+	.dianzan .tubiao{
+		margin-left:10px;
+	}
+	.zan_xuanzhong{
+		color:red;
+	}
+	.pinglun_kuang{
+		width:100%;
+		background:#eee;
+		padding:10px 15px;
+		height:auto;
+		overflow: hidden;
+		position:fixed;
+		bottom:0px;
+		border-top:1px solid #ccc;
+		display:none;
+		z-index:500;
+	}
+	.pinglun_kuang input{
+		float:left;
+		width:80%;
+		height:36px;
+		margin-bottom:0;
+		background:transparent;
+		border:none;
+		border-radius:0;
+		border-bottom:1px solid #ff3918;
+	}
+	.pinglun_kuang button{
+		float:right;
+		width:16%;
+		height:36px;
+		margin-left:4%;
+		background:#ff3918;
+		border:1px solid #ff3918;
+	}
+	.shangpin_tu{
+		width:100%;
+    	padding:15px;
+    	height:auto;
+    	overflow: hidden;
+    	background:#fff;
+		margin:1px 0px;
+		margin-bottom:8px;
+    }
+    .shangpintu_l{
+    	width:88px;
+    	height:68px;
+    	float:left;
+    	padding-right:15px;
+    }
+    .shangpintu_l img{
+    	width:100%;
+    	height:100%;
+    }
+    .shangpintu_r{
+    	width:63%;
+    	float:left;
+    }
+	.shangpintu_r p{
+		margin-bottom:0px;
+		font-size:16px;
+		color:#ff5816;
+		margin-top:7px;
+	}
+	.shangpintu_r p:first-child{
+		color:#333;
+		font-size:15px;
+		line-height:20px;
+		height:40px;
+		margin-top:0;
+	}
+	.all_top{
+		background:#fff;
+		padding:10px 15px;
+	}
+	.all_top .icon-pinglun{
+		color:#ff5816;
+	}
+	.all_top span{
+		color:#333;
+		font-size:15px;
+	}
+	.all_bot{
+		margin:1px 0 0;
+	}
+	.all_bot_a{
+		width:100%;
+		height:auto;
+		padding:10px 15px;
+		overflow: hidden;
+		background:#fff;
+		margin-bottom:1px;
+	}
+	.all_bot_biaoti span{
+		float:left;
+		font-size:15px;
+		color:#ff5816;
+		line-height:30px;
+		margin-right:15px;
+	}
+	.all_bot_guige{
+		width:100%;
+		height:auto;
+		overflow: hidden;
+		margin:0px 0 10px 40px;
+	}
+	.all_bot_guige span{
+		float:left;
+		font-size:12px;
+		color:#999;
+		line-height:20px;
+	}
+	.all_bot_one p{
+		text-indent:0;
+		color:#333;
+		font-size:13px;
+		line-height:20px;
+		margin:0 0 4px 40px;
+	}
+	.zanzan{
+		width:70px;
+		float:right;
+		color:#999;
+		text-align:center;
+		padding:2px;
+		border:1px solid #eee;
+		border-radius:20px;
+	}
+	.zanzan .icon-zan{
+		font-size:12px;
+	}
+	.zanzan span{
+		font-size:12px;
+	}
+</style>
+<div class="mui-content">
+		<div class="pingjia">
+			<!--<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+	  			<div class="mui-scroll">-->
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="pingjia_top">
+							<div class="pingjia_top_l">
+								<img src="{php echo $_W['yuming'].'gongyong/images/touxiang_wo.png'}">
+							</div>
+							<div class="pingjia_biaoti">
+								<span>商城商城</span>
+								<span>
+									<i class="tubiao icon-xingxing"></i>
+									<i class="tubiao icon-xingxing"></i>
+									<i class="tubiao icon-xingxing"></i>
+									<i class="tubiao icon-xingxing"></i>
+									<i class="tubiao icon-xingxing"></i>
+								</span>
+							</div>
+							<div class="pingjia_one">
+								<div class="pingjia_guige">
+									<span>2017-1-13</span>
+									<span>颜色2色</span>
+									<span>规格50ml</span>
+								</div>
+								<p>很喜欢呢~很不错~~服务很好~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~</p>
+								<ul class="pingjiatu_pic">
+						            <li class="pingjia_img">
+						            	<img src="{php echo $_W['yuming'].'gongyong/images/pingjia_img01.jpg'}">
+						            </li>
+						            <li class="pingjia_img">
+						            	<img src="{php echo $_W['yuming'].'gongyong/images/pingjia_img03.jpg'}">
+						            </li>
+						            <li class="pingjia_img">
+						            	<img src="{php echo $_W['yuming'].'gongyong/images/pingjia_img02.jpg'}">
+						            </li>
+						        </ul>
+					        </div>
+					        <div class="pingjia_one">
+					        	<p class="zhuijia">追加评论</p>
+								<p>很喜欢呢~很不错~~服务很好~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~还会再来哒~</p>
+					        </div>
+						</li>
+					</ul>
+				<!--</div>
+			</div>-->
+		</div>
+		<div class="shangpin_tu">
+			<div class="shangpintu_l">
+				<img src="{php echo $_W['yuming'].'gongyong/images/pingjia_img03.jpg'}">
+			</div>
+			<div class="shangpintu_r">
+				<p class="mui-ellipsis-2">玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱玫瑰酱</p>
+				<p>￥36.00</p>
+			</div>
+		</div>
+		<div class="pinglun_all" style="margin-bottom:51px;">
+			<div class="all_top">
+				<i class="tubiao icon-pinglun"></i>
+        		<span>全部评论（10）</span>
+			</div>
+			<ul class="all_bot">
+				<li class="all_bot_a">
+					<div class="pingjia_top_l">
+						<img src="{php echo $_W['yuming'].'gongyong/images/touxiang_wo.png'}">
+					</div>
+					<div class="all_bot_biaoti">
+						<span>商城商城</span>
+					</div>
+					<div class="all_bot_one">
+						<div class="all_bot_guige">
+							<span>3天前</span>
+						</div>
+						<p>很喜欢呢~很不错~~服务很好~还会再来哒~还会再来哒~还会再来哒~</p>
+			       	</div>
+			       	<div class="zanzan">
+			        	<i class="tubiao icon-zan"></i>
+			        	<span>点赞</span>
+			        </div>
+				</li>
+				<li class="all_bot_a">
+					<div class="pingjia_top_l">
+						<img src="{php echo $_W['yuming'].'gongyong/images/touxiang_wo.png'}">
+					</div>
+					<div class="all_bot_biaoti">
+						<span>商城商城</span>
+					</div>
+					<div class="all_bot_one">
+						<div class="all_bot_guige">
+							<span>3天前</span>
+						</div>
+						<p>很喜欢呢~很不错~~服务很好~还会再来哒~还会再来哒~还会再来哒~</p>
+			       </div>
+			       <div class="zanzan">
+			        	<i class="tubiao icon-zan"></i>
+			        	<span>点赞</span>
+			        </div>
+				</li>
+			</ul>
+		</div>
+		<div class="dianzan">
+        	<div class="pinglun_anniu" id="dainzan_an">
+        		<i class="tubiao icon-zan"></i>
+        		<span>点赞</span>
+        	</div>
+        	<div class="pinglun_anniu" id="pinglun_an">
+        		<i class="tubiao icon-pinglun"></i>
+        		<span>评论</span>
+        	</div>
+        </div>
+		<div class="pinglun_kuang">
+			<input type="text" value=""/>
+			<button type="button" class="mui-btn mui-btn-primary">发送</button>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$('#dainzan_an').click(function(){
+			$(this).find('.icon-zan').toggleClass("zan_xuanzhong");
+			$(this).find('span').toggleClass("zan_xuanzhong");
+		});
+		
+		$('#pinglun_an').click(function(){
+			$('.pinglun_kuang').show();
+			$('.dianzan').hide();
+			$("input").focus();
+		});
+		
+		$("input").blur(function(){
+			$('.pinglun_kuang').hide();
+			$('.dianzan').show();
+		});
+		
+		$('.zanzan').click(function(){
+			$(this).find('.icon-zan').toggleClass("zan_xuanzhong");
+			$(this).find('span').toggleClass("zan_xuanzhong");
+		});
+	</script>
+{mb jiao}

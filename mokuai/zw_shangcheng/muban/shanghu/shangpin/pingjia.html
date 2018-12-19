@@ -1,0 +1,77 @@
+ {mb tou}
+<style type="text/css">
+  .liebiao .add_pingjia,.liebiao .huifu{display:none;}
+</style>
+<section class="vbox">
+    {mb dingbu_caidan}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <!-- right tab -->
+              <section class="panel panel-default">
+                <header class="panel-heading text-right bg-light">
+                  <ul class="nav nav-tabs liebiao">
+                    <li class="active"><a href="#gong1" data-toggle="tab" style="padding:9px 40px 10px;">评价管理</a></li>
+                    <li><a href="#gong2" data-toggle="tab" style="padding:9px 40px 10px;">添加评价</a></li>
+                    <li class="add_pingjia"><a style="padding:9px 40px 10px;">添加此商品评价</a></li>
+                    <li class="huifu"><a style="padding:9px 40px 10px;">回复评价</a></li>
+                  </ul>
+                </header>
+                <div class="panel-body">
+                  <div class="tab-content">     
+                    <!-- 评价管理 -->
+                    <div class="tab-pane fade active in" id="gong1">
+                      {mb "biaoqian/pingjia1"}
+                    </div>
+                    <!-- 评价管理 -->
+                    <!-- 添加评论 -->
+                    <div class="tab-pane fade" id="gong2">
+                      {mb "biaoqian/pingjia_add"}
+                    </div>
+                    <!-- 添加评论 -->
+                    <!-- 添加此商品评论 -->
+                    <div class="tab-pane fade" id="gong3">
+                      
+                    </div>
+                    <!-- 添加此商品评论 -->
+                    <!-- 回复评价 -->
+                    <div class="tab-pane fade" id="gong4">
+                      
+                    </div>
+                    <!-- 回复评价 -->
+                  </div>
+                </div>
+              </section>
+              <!-- right tab -->
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+
+  <script type="text/javascript">
+    $(".add_pingjia").click(function(){
+      $(".liebiao li").removeClass("active");
+      $(".liebiao .add_pingjia").show().addClass("active");
+      $.post('{php echo USK("shangpin/pingjia",array("c"=>"add"))}',{'id':$(this).attr('data_id')},function(data){
+        $("#gong3").html(data);
+      })
+    })
+    $(".pingjia_huifu").click(function(){
+      $(".liebiao li").removeClass("active");
+      $(".liebiao .huifu").show().addClass("active");
+      $.post('{php echo USK("shangpin/pingjia",array("c"=>"back"))}',{'id':$(this).attr('data_id')},function(data){
+        $("#gong4").html(data);
+      })
+    })
+    $(".liebiao li:lt(2)").click(function(){
+      $(".liebiao .add_pingjia").removeClass("active").hide();
+      $(".liebiao .huifu").removeClass("active").hide();
+    })
+  </script>
+ {mb jiao}

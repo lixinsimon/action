@@ -1,0 +1,46 @@
+<div id="fenlei" v-if='huadongfenlei' :class="[shu.{$k}.lie>0 ? 'zw-fenlei'+shu.{$k}.lie : 'zw-fenlei5']">
+
+    <div v-for="(item,index) in shu.{$k}.fenlei" class="zw-fenlei-k   ooppoopp">
+        <a @click="DaKai(item.url)">
+            <div class="zw-fenlei-kt">
+                <img class="i_mg" :src="item.tu" />
+            </div>
+            <div class="zw-fenlei-zi zw-shenglue">{{item.ming}}</div>
+        </a>
+    </div>
+
+
+
+</div>
+
+<div id="fenlei" style="position: relative;overflow: hidden;width: 100%;" v-else :class="[shu.{$k}.lie>0 ? 'zw-fenlei'+shu.{$k}.lie : 'zw-fenlei5']">
+
+    <div id="huadong" style="float: left;width: 1000px;height: 100%;position: absolute;left: 0;top: 0;" class="clearfixlw wrap-box">
+		<div class="clearfixlw">
+			<div class="clearfixlw wrap-height" style="float: left;width: 95vw;">
+				<div v-for="(item,index) in shu.{$k}.fenlei" class="zw-fenlei-k clearfixlw" v-if='index<10'>
+					<a @click="DaKai(item.url)">
+						<div class="zw-fenlei-kt">
+							<img class="i_mg" :src="item.tu" />
+						</div>
+						<div class="zw-fenlei-zi zw-shenglue">{{item.ming}}</div>
+					</a>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<div class="clearfixlw" style="float: left;width: 100vw;padding-left: .4rem;">
+				<div v-for="(item,index) in shu.{$k}.fenlei" v-if='index>=10' class="zw-fenlei-k clearfixlw">
+					<a @click="DaKai(item.url)">
+						<div class="zw-fenlei-kt">
+							<img class="i_mg" :src="item.tu" />
+						</div>
+						<div class="zw-fenlei-zi zw-shenglue">{{item.ming}}</div>
+					</a>
+				</div>
+			</div>
+		</div>
+    </div>
+	<div style="clear: both;"></div>
+</div>
+
+

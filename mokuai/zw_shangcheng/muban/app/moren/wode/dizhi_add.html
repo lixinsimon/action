@@ -1,0 +1,92 @@
+{mb 'tou'}
+	<link href="{$_W['yuming']}gongyong/css/mui.picker.css" rel="stylesheet" />
+	<link href="{$_W['yuming']}gongyong/css/mui.poppicker.css" rel="stylesheet" />
+	<style>
+		.mui-btn {
+			font-size: 16px;
+			padding: 8px;
+			margin: 3px;
+		}
+		.ui-alert {
+			text-align:right;
+			padding: 20px 10px 20px 0px;
+			font-size: 0.9em;
+		}
+	</style>
+	<header class="mui-bar mui-bar-nav">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:#222222"></a>
+		<h1 class="mui-title">添加新地址</h1>
+	</header>
+	<div class="mui-content" style="margin-bottom: 51px;">
+		<form class="mui-input-group input_box">
+			<input type="hidden" name="id" value="{$dizhi['id']}" />
+			<div class="mui-input-row input-items">
+				<label style="font-size:0.9em;">收货人</label>
+				<input type="text" name="ming" class="address_input" value="{$dizhi['ming']}" placeholder="请输入收货人姓名" style="font-size:0.9em;">
+			</div>
+			<div class="mui-input-row input-items">
+				<label style="font-size:0.9em;">联系电话</label>
+				<input type="text" name="dianhua" class="address_input" value="{$dizhi['dianhua']}" placeholder="请输入联系电话" pattern="[0-9]*" maxlength="11" style="font-size:0.9em;">
+			</div>
+			<div class="mui-input-row input-items" style="position:relative;">
+				<label style="font-size:0.9em;">所在地区</label>
+				<button id='showCityPicker3' class="mui-btn mui-btn-block xuanze_dizhi" type='button'></button>
+				<div id='cityResult3' class="ui-alert tian_dizhi" style="">{php echo empty($dizhi['shengshiqu'])?'请选择':$dizhi['shengshiqu']}</div>
+				<i class="mui-icon mui-icon-arrowright mui-pull-right" style="margin-top:8px;margin-right:5px;margin-left:5px;"></i>
+			</div>
+			<div class="mui-input-row input-items">
+				<label style="font-size:0.9em;">详细地址</label>
+				<input type="text" name="dizhi" class="address_input mui-ellipsis" value="{$dizhi['dizhi']}" placeholder="请输入详细地址" style="font-size:0.9em;">
+			</div>
+		</form>
+	</div>
+	<div id="results"></div>
+	<div style="position:fixed;bottom:0px;left:5px;right:5px;">
+		<button type="button" class="mui-btn mui-btn-block btn-zhai">保存</button>
+	</div>
+	<script src="{$_W['yuming']}gongyong/js/mui.picker.js"></script>
+	<script src="{$_W['yuming']}gongyong/js/mui.poppicker.js"></script>
+	<script src="{$_W['yuming']}gongyong/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				//级联示例
+				var cityPicker3 = new $.PopPicker({
+					layer: 3
+				});
+				cityPicker3.setData(cityData3);
+				var showCityPickerButton = doc.getElementById('showCityPicker3');
+				var cityResult3 = doc.getElementById('cityResult3');
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker3.show(function(items) {
+						cityResult3.innerText =  (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+					});
+				}, false);
+				
+			});
+		})(mui, document);		
+		$('.btn-zhai').click(function(){
+			if($(this).attr('shi')==1){				
+				return false;
+			}
+			$(this).attr('shi',1).text('执行中...');
+			$.ajax({
+			   type: "POST",
+			   url: "{php echo UAK('wode/dizhi',array('c'=>'post'))}",
+			   data: $(".input_box").serialize()+'&shengshiqu='+$('#cityResult3').text(),
+			   dataType: "json",
+			   success: function(shu){
+			      if(shu.shi==1){
+			      	 window.location.href="{php echo UAK('wode/dizhi')}";
+			      }else{
+			      	mui.toast(shu.shu);
+			      }
+			   }
+			});
+			$(this).removeAttr('shi').text('保存');
+	    });
+	</script>
+{mb jiao}
+
+	

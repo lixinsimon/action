@@ -1,0 +1,26 @@
+<style>
+	.grids-item {
+		width: 20%;
+	}
+</style>
+
+<div class="fenleicaidan" >	
+	{if empty($s['fenlei'])}
+	{php $s['fenlei'][0]['ming']='名称'}    
+	{php $s['fenlei'][0]['url']=''}    
+	{php $s['fenlei'][0]['tu']=''}    
+	{php $s['fenlei'][1]['ming']='名称'}    
+	{php $s['fenlei'][1]['url']=''}    
+	{php $s['fenlei'][1]['tu']=''}    
+	{php $s['fenlei'][2]['ming']='名称'}    
+	{php $s['fenlei'][2]['url']=''}    
+	{php $s['fenlei'][2]['tu']=''}    
+	{/if}
+	{loop $s['fenlei'] $ming}
+	<a class="grids-item">
+		<img class="feilei_tu" src="{php echo JueDuiUrl($ming['url'])}">
+		<p class="grids-txt ming">{$ming['ming']}</p>
+	</a>
+    {/loop}
+    
+</div>

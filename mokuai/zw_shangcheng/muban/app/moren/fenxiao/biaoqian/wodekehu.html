@@ -1,0 +1,13 @@
+{loop $kehu $kh}
+<li class="mui-table-view-cell mui-media">
+	<img class="mui-media-object mui-pull-left" src="{$kh['touxiang']}">
+	<div class="mui-media-body">
+		{$kh['nicheng']}
+		<p class='mui-ellipsis'>{php echo date("Y-m-d H:i",$kh['shijian'])}</p>
+	</div>
+	<div class="mui-media-right">
+		<span style="display:block;">{$kh['dingdanshu']}订单</span>
+		<!--<span style="display:block;color:#eb5449;">0.00元</span>-->
+	</div>
+</li>
+{/loop}

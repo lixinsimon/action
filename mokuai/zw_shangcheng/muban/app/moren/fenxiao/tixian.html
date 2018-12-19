@@ -1,0 +1,397 @@
+{mb tou}
+<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />
+<style type="text/css">
+	/*修改提示文字的颜色*/
+	input::-webkit-input-placeholder { /* WebKit browsers */ 
+		color: #999999; 
+	} 
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+		color: #999999; 
+	} 
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+		color: #999999; 
+	} 
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+		color: #999999; 
+	} 
+	input{
+		border: 0;
+	}
+	body{
+		background: #fff;
+	}
+	.input-kuai{
+		width: 100%;
+		float: left;
+		height: .7rem;
+		line-height: .7rem;
+		font-size: .28rem;
+		color: #010101;
+		margin-top: .1rem;
+		border-bottom:1px solid #999999 ;
+	
+	}
+	.input-kuai div:nth-child(1){
+		width: 40%;
+		float: left;
+		text-align: left;
+		font-size: .28rem;
+		display: flex;
+		align-items: center;
+	}
+	.input-kuai div:nth-child(2){
+		width: 40%;
+		float: left;
+		text-align: left;
+		font-size: .28rem;
+		display: flex;
+		align-items: center;
+	}
+	.input-kuai div:nth-child(3){
+		float: right;
+		display: flex;
+		height: 100%;
+		align-items: center;
+	}
+	.input-kuai img{
+		width:.33rem ;
+		display: inline-block;
+		
+	}
+	.input-kuai input{
+		border: 0;
+		float: left;
+		line-height: .7rem;
+		color: #010101;
+	}
+	.tijiao{
+		float: left;
+		width: 100%;
+		background: #000000;
+		color: #fff;
+		font-size: .4rem;
+		text-align: center;
+		height: .8rem;
+		line-height: .8rem;
+		
+	}
+	.tixing{
+		color: #999999 !important;
+		font-size: .2rem;
+		width: 100%;
+		float: left;
+		text-align: left;
+		position: relative;
+		padding-left: .8rem;
+		box-sizing: border-box;
+		margin-top: .9rem;
+	}
+	.tixing span{
+		position: absolute;
+		left: 0rem;
+		top: 0;
+		font-size: .24rem;
+	}
+	
+	
+
+	.zuotu{
+		width:.9rem;
+	}
+	.tzhi{
+		float: left;
+		width: 100%;
+		height: .8rem;
+		line-height: .8rem;
+		box-sizing: border-box;
+	}
+	.zuotu{
+		width: .9rem;
+		float: left;
+	}
+	.zuotu div{
+		margin-top: .1rem;
+		height: .7rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.zuotu img{
+		width: .55rem;
+	}
+	.zhuk{
+		/*float: left;*/
+		width:80%;
+		/*margin-left: 10%;*/
+		margin: 0 auto;				
+	}
+	.jine{
+		height: 1rem;
+		float: left;
+		width: 100%;
+		border-bottom: 1px solid #999999;
+		display: flex;
+		align-items: center;
+		text-align: left;
+	}
+	.jine img{
+		width: .4rem;
+		display: inline-block;
+	}
+	.jine input{
+		line-height: .9rem;
+		font-size: .5rem;
+		margin-left: .3rem;
+	}
+	.tizhi{
+		width: 100%;
+		font-size: .24rem;
+		line-height: .7rem;
+		margin-bottom: .2rem;
+	}
+	.tizhi span{
+		font-size: .25rem;
+		color: #000000;
+		font-weight: bold;
+	}
+	.tianjia{
+		font-size: .32rem;
+	}
+	.tianjia span{
+		float: right;
+		color: #fff;
+		background: #000000;
+	
+		width: 1.2rem;
+		height: .4rem;
+		font-size: .28rem;
+		display: flex;
+		align-items: center;
+			justify-content: center;
+	}
+	.timima{
+		line-height: .5rem;
+		margin-top: 2.1rem;
+		float: left;
+		width: 100%;
+		margin-bottom: .35rem;
+	}
+	.timima input{
+		display: inline-block;
+		width: 2.5rem;
+		height: .5rem;
+		line-height: .5rem;
+		text-align: center;
+		background: #eeeeee !important;
+		margin-left: .3rem;
+	}
+	.zhebg{
+		background: rgba(0,0,0,.3);
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999;
+	}
+	.zhet{
+		position: absolute;
+		top: 5.2rem;
+		left: 20%;
+		width: 60%;
+		height: 1.15rem;
+		line-height: 1.15rem;
+		background: #fff;
+		text-align: center;
+		border-bottom: 1px solid #999999;
+	}
+	.zheb{
+		position: absolute;
+		top:6.35rem;
+		height: .8rem;
+		line-height: .8rem;
+		left: 20%;
+		width: 60%;
+		text-align: center;
+	}
+	.zheb div:nth-child(1){
+		width: 50%;
+		background: #fff;
+		color: #000000;
+		float: left;
+	}
+	.zheb div:nth-child(2){
+		width: 50%;
+		background: #000;
+		color:#fff;
+		float:  left;
+	}
+	#app{
+		display: none;
+		width: 100%;
+		overflow: hidden;
+	}
+	body{
+		width: 100%;
+		overflow: hidden;
+	}
+</style>
+<div id="app">
+<div class="touhang">
+	<a onclick="$z.go()"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div >提现</div>
+</div>
+
+	<div class="zhuk" >
+		<div class="tzhi">
+			提现金额
+		</div>
+		
+		<div class="jine">
+			<img src="{$_W['gongyou']}/images/qian.png" />
+			<input type="number" v-model="jine" />
+		</div>
+		
+		<div class="tizhi">当前余额{{shuju.ketixian}}元，满{{shuju.qidian}}元以上可提现。<span @click="quan" >全部提现</span></div>
+	
+		<div class="tianjia" >选择提现方式 <a v-if="shuju.xingming" href="{php echo UAK('wode/tixianxinxi')}"><span>去添加</span></a><span v-else @click='tiao' >去添加</span>  </div>
+		
+		<div class="input-kuai" v-if="shuju.kahao"  @click="xuanzhong('yinhang')">
+			<div>招商银行储蓄卡</div>
+			<div>（{{shuju.kahao}}）</div>
+			<div>
+				<img v-show="xuan=='yinhang'" src="{$_W['gongyou']}/images/xuanzhog.png"/>
+				<img v-show="xuan!='yinhang'" src="{$_W['gongyou']}/images/xuantu.png"/>
+			</div>
+			
+		</div>
+		<div class="input-kuai" v-if="shuju.weixin_zhanghao"  @click="xuanzhong('weixin')">
+			<div>微信账号</div>
+			<div>{{shuju.weixin_zhanghao}}</div>
+			<div  >
+			<img v-show="xuan=='weixin'" src="{$_W['gongyou']}/images/xuanzhog.png"/>
+				<img v-show="xuan!='weixin'" src="{$_W['gongyou']}/images/xuantu.png"/>
+			</div>
+		</div>
+		<div class="input-kuai"  v-if="shuju.zhifubao_zhanghao"  @click="xuanzhong('zhifubao')">
+			<div>支付宝账号</div>
+			<div>{{shuju.zhifubao_zhanghao}}</div>
+			<div>
+			<img v-show="xuan=='zhifubao'" src="{$_W['gongyou']}/images/xuanzhog.png"/>
+				<img v-show="xuan!='zhifubao'" src="{$_W['gongyou']}/images/xuantu.png"/>
+			</div>
+		</div>
+		
+		<div class="timima">
+			提现密码
+			<input id="she" type="password"  v-model="mima" />
+			
+		</div>
+		
+		
+		<div @click="tijiao" class="tijiao">
+			提现
+		</div>
+		<div class="tixing"><span>声明：</span>请仔细核实您所输入的内容是否正确，为保证账户安全，账户信息将被锁定，如需更改，请联系Z时代官方客服。</div>
+	</div>
+	<div class="zhebg" v-show="queren==1">
+		<div class="zhet" >密码错误</div>
+		<div class="zheb" >
+			<a href="{php echo UAK('wode/xiugaimima') }"><div >找回密码</div></a>
+			<div  @click="gai(0)" >重新输入</div>
+		</div>
+	</div>
+</div>
+
+
+{mb js}
+<script type="text/javascript">
+	var V=new Vue({
+		el: "#app",
+		data: {
+			shuju:[],
+			jine:'',xuan:'',mima:'',queren:0
+		},
+		beforeCreate: function() {
+			var that = this;
+			$z.post('{$_W["url"]}', function(shu) {
+				if(shu.shi) {
+					
+					
+					if(shu.shu.zhifubao_zhanghao){
+						var zhi=shu.shu.zhifubao_zhanghao;
+						shu.shu.zhifubao_zhanghao=shu.shu.zhifubao_zhanghao.substring(0,zhi.length-4)+'****';
+						that.xuan='zhifubao';
+					}
+					if(shu.shu.weixin_zhanghao){
+						var zhi=shu.shu.weixin_zhanghao;
+						shu.shu.weixin_zhanghao=zhi.substring(0,zhi.length-4)+'****';
+						that.xuan='weixin';
+					}
+					if(shu.shu.kahao){
+						var zhi=shu.shu.kahao;
+						shu.shu.kahao=shu.shu.kahao.substring(zhi.length-4,zhi.length);
+						that.xuan='yinhang';
+					}
+					that.shuju = shu.shu;
+				}
+				$('#app').show();
+			})
+		},
+		methods: {
+			tijiao:function(e){
+				var that=this;			 
+				$z.post('{php echo UAK("fenxiao/tixian",array("c"=>"tixian"))}',{
+					mima:that.mima,fangshi:that.xuan,jine:that.jine
+				},function(s){
+					if(s.shi==1){
+						$z.toast(s.shu);
+						setTimeout(function(){
+//							history.go(0) 
+							$z.dakai("{php echo UAK('wode')}");
+						},3000);					 
+					}else if(s.shi==2){
+						that.queren=1;
+					}else if(s.shi==3){
+						$z.toast(s.shu);
+						setTimeout(function(){
+							$z.dakai("{php echo UAK('wode/shimingrenzheng')}");
+						},1000);	
+					}else{
+						$z.toast(s.shu);
+					}
+				});			
+			},
+			xuanzhong:function(e){
+				this.xuan=e;
+			},
+			gai:function(e){
+				var that=this;
+				that.queren=e;
+				if(that.queren==0){
+					that.mima='';
+					
+					$('#she').focus();
+					
+				}
+			},
+			quan:function(){
+				this.jine=this.shuju.ketixian;
+			},
+			tiao:function(){
+				$z.toast('您还未实名认证',1000);
+				setTimeout(function(){
+					$z.dakai("{php echo UAK('wode/shimingrenzheng')}");
+				},1000);
+			}
+		},
+
+	});
+	$(function(){
+		$('#she').css('background','#EEEEEE');
+	})
+
+</script>
+
+{mb jiao}

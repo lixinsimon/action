@@ -1,0 +1,314 @@
+{mb tou}
+<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />
+<style type="text/css">
+	/*修改提示文字的颜色*/
+	input::-webkit-input-placeholder { /* WebKit browsers */ 
+		color: #999999; 
+	} 
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+		color: #999999; 
+	} 
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+		color: #999999; 
+	} 
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+		color: #999999; 
+	} 
+	body{
+		background: #fff;
+	}
+	.input-kuai{
+		width: 100%;
+		float: left;
+		height: .7rem;
+		line-height: .7rem;
+		font-size: .28rem;
+		color: #010101;
+		margin-top: .1rem;
+		border-bottom:1px solid #999999 ;
+	}
+	.input-kuai div{
+		width: 1.7rem;
+		float: left;
+		text-align: left;
+		font-size: .28rem;
+		display: flex;
+		align-items: center;
+	}
+	.input-kuai div img{
+		width:.55rem ;
+	}
+	.input-kuai input{
+		border: 0;
+		float: left;
+		line-height: .7rem;
+		color: #010101;
+		width: 68%;
+	}
+	.tijiao{
+		float: left;
+		width: 100%;
+		background: #000000;
+		color: #fff;
+		font-size: .3rem;
+		text-align: center;
+		height: 1rem;
+		line-height: 1rem;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+	}
+	.tixing{
+		color: #999999 !important;
+		font-size: .2rem;
+		width: 100%;
+		float: left;
+		text-align: left;
+		position: relative;
+		padding-left: .8rem;
+		box-sizing: border-box;
+		margin-top: .9rem;
+	}
+	.tixing span{
+		position: absolute;
+		left: 0rem;
+		top: 0;
+		font-size: .24rem;
+	}
+	
+	
+	.m-cell{
+		height: .7rem;
+		
+	}
+	.cell-left{
+		font-size: .26rem !important;
+	}
+	.cell-right{
+	
+		height: .7rem !important;
+		min-height: .7rem !important;
+	}
+	.cell-arrow:after{
+		font-size: .3rem;
+	}
+	.cell-right span{
+		color: #949494;
+			font-size: .26rem !important;
+	}
+	.zuotu{
+		width:.9rem;
+	}
+	.tzhi{
+		float: left;
+		width: 100%;
+		height: .8rem;
+		line-height: .8rem;
+		padding-left: .2rem;
+		box-sizing: border-box;
+	}
+	.zuotu{
+		width: .9rem;
+		float: left;
+	}
+	.zuotu div{
+		margin-top: .1rem;
+		height: .7rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.zuotu img{
+		width: .55rem;
+	}
+	.youk{
+		float: left;
+		width:6rem ;
+	}
+	.m-cell{
+		margin-bottom: 0 !important;
+	}
+	.zhebg{
+		background: rgba(0,0,0,.3);
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999;
+	}
+	.zhet{
+		position: absolute;
+		top: 5.2rem;
+		left: 20%;
+		width: 60%;
+		height: 1.15rem;
+		line-height: 1.15rem;
+		background: #fff;
+		text-align: center;
+		border-bottom: 1px solid #999999;
+	}
+	.zheb{
+		position: absolute;
+		top:6.35rem;
+		height: .8rem;
+		line-height: .8rem;
+		left: 20%;
+		width: 60%;
+		text-align: center;
+	}
+	.zheb div:nth-child(1){
+		width: 50%;
+		background: #fff;
+		color: #000000;
+		float: left;
+	}
+	.zheb div:nth-child(2){
+		width: 50%;
+		background: #000;
+		color:#fff;
+		float:  left;
+	}
+	#app{
+		display: none;
+	}
+</style>
+
+<div class="touhang">
+	<a onclick="$z.go()"><img style="width: auto !important; " src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div >提现信息完善</div>
+</div>
+<div id="app">
+	<div class="m-cell">
+	    <div class="cell-item" style="height: .7rem;">
+	        <div class="cell-left">实名认证</div>
+	        <div class="cell-right cell-arrow"><span style="margin-right: .3rem;">{{shuju.renzheng==1?'已认证':'未认证'}}</span> </div>
+	    </div>
+	</div>
+	<div class="tzhi">
+		添加提现方式
+	</div>
+	
+	<div class="zuotu" >
+		<div>
+			<img src="{$_W['gongyou']}/images/weixinzhifu.png"/>
+		</div>
+		<div>
+			<img src="{$_W['gongyou']}/images/zhifubaozhifu.png"/>
+		</div>
+		<div>
+			<img src="{$_W['gongyou']}/images/yinlianzhifu.png"/>
+		</div>
+	</div>
+	<div class="youk" >
+		<div class="input-kuai">
+			<div>微信账号</div>
+			<input type="text" :disabled="shuju.weixinkai!=1" v-model="shuju.weixin_zhanghao" placeholder="请输入实名认证的真实账号" />
+		</div>
+		<div class="input-kuai">
+			<div>支付宝账号</div>
+			<input type="text"  :disabled="shuju.zhifubaokai!=1" v-model="shuju.zhifubao_zhanghao"  placeholder="请输入实名认证的真实账号" />
+		</div>
+		<div class="input-kuai" style="border:0;">
+			<div style="width: 60%;">请填写持卡人本人的银行卡</div>
+		</div>
+		<div class="input-kuai" style="margin-top: 0;">
+			<div>持卡人</div>
+			<input type="text" :disabled="shuju.xingming" v-model="shuju.xingming"  />
+		</div>
+		<div class="input-kuai">
+			<div>银行卡号</div>
+			<input type="text" :disabled="shuju.kahaokai!=1"  v-model="shuju.kahao"  />
+		</div>
+		<div class="input-kuai">
+			<div>开户银行</div>
+			<input type="text" :disabled="shuju.kaihuyinhangkai!=1"  v-model="shuju.kaihuyinhang" />
+		</div>
+		<div class="input-kuai">
+			<div>开户支行</div>
+			<input type="text" :disabled="shuju.kaihuhangkai!=1" v-model="shuju.kaihuhang"  />
+		</div>
+		<div class="input-kuai">
+			<div>手机号码</div>
+			<input type="text" :disabled="shuju.shoujikai!=1" v-model="shuju.shouji"  placeholder="银行预留手机号" />
+		</div>
+		
+		<div class="tixing"><span>声明：</span>请仔细核实您所输入的内容是否正确，为保证账户安全，账户信息将被锁定，如需更改，请联系Z时代官方客服。</div>
+		<div style="width: 100%;height: 1.4rem;"></div>
+	</div>
+	
+	<div @click="gai(1)" class="tijiao">
+		确认添加
+	</div>
+	
+	<div class="zhebg" v-show="queren==1">
+		<div class="zhet" >是否确认添加</div>
+		<div class="zheb" >
+			<div @click="gai(0)">重新输入</div>
+			<div  @click="tijiao" >确认添加</div>
+		</div>
+	</div>
+	
+</div>
+
+
+{mb js}
+<script type="text/javascript">
+	var V=new Vue({
+		el: "#app",
+		data: {
+			shuju:[],queren:0
+		},
+		beforeCreate: function() {
+			var that = this;
+			$z.post('{$_W["url"]}', function(shu) {
+				if(shu.shi) {
+					that.shuju = shu.shu;
+				}
+				$("#app").show();
+			})
+		},
+		methods: {
+			tijiao:function(e){
+				var that=this;			 
+				$z.post('{php echo UAK("wode/tixianxinxi",array("c"=>"baocun"))}',that.shuju,function(s){
+					$z.toast(s.shu);
+					if(s.shi==1){
+						setTimeout(function(){
+//							history.go(0) 
+							var ye="{$_J['ye']}"; 
+							if(ye==1){
+//								$z.go(-2);
+								$z.dakai("{php echo UAK('fenxiao/tixian')}");
+							}else{
+//								$z.go(0);
+								$z.dakai("{php echo UAK('fenxiao/tixian')}");
+							}
+
+							
+						},1000);					 
+					}					
+				});			
+			},
+			gai:function(e){
+				this.queren=e;
+			}
+		},
+
+	});
+$(function () {
+    var isPageHide = false;
+    window.addEventListener('pageshow', function () {
+      if (isPageHide) {
+        window.location.reload();
+      }
+    });
+    window.addEventListener('pagehide', function () {
+      isPageHide = true;
+    });
+  })
+
+</script>
+
+{mb jiao}

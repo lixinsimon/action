@@ -1,0 +1,38 @@
+<div class="table-responsive m-t-md" style="overflow:visible;">
+    <table class="table table-striped b-light">
+        <thead>
+            <tr>
+                <th width="4%">ID</th>
+                <th width="15%">标题</th>
+                <th width="15%">使用条件/优惠</th>
+                <th width="20%">已使用/领取/剩余数量</th>
+                <th width="10%">有效期限</th>
+                <th width="20%">创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop $juan $j}
+            <tr>
+                <td style="vertical-align:middle;">{$j['id']}</td>
+                <td style="vertical-align:middle;">{$j['biaoti']}</td>
+                 <td style="vertical-align:middle;">满{$j['tiaojian']}元优惠{$j['e']}元</td>
+                <td style="vertical-align:middle;">
+                {php echo empty($j['shiyong'])?0:$j['shiyong'];}
+                /{php echo empty($j['lingqu'])?0:$j['lingqu'];}
+                /{php echo $j['zongshu']-$j['lingqu']-$j['shiyong']}</td>
+                <td style="vertical-align:middle;">{php echo date('Y-m-d',$j['kaishi']).'<br/>'.date('Y-m-d',$j['jieshu'])}</td>
+                <td style="vertical-align:middle;">{php echo date('Y-m-d H:i:s',$j['shijian'])}</td>
+                <td style="vertical-align:middle;overflow:visible;">
+                    <!-- <a  title="复制连接" class="btn btn-default btn-sm js-clip"><i class="fa fa-link"></i></a> -->
+                    <a class="btn btn-default btn-sm" href="{php echo UDK('quan',array('c'=>'bianji','id'=>$j['id']))}" title="编辑"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-default  btn-sm" href="{php echo UDK('quan',array('c'=>'shanchu','id'=>$j['id']))}" title="删除" onclick="return confirm('确定要删除该优惠券吗？');"><i class="fa fa-remove"></i></a>
+                </td>
+            </tr>
+            {/loop}
+        </tbody>
+    </table>
+</div>
+<div class="text-left">
+    {$fenye}
+</div>

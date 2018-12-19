@@ -1,0 +1,292 @@
+<!-- 编辑基本混合图文回复 -->
+<section class="panel panel-default">
+  <header class="panel-heading">                  
+    添加回复规则
+  </header>
+  <div class="panel-body">
+    <form class="form-horizontal" method="get">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">回复规则名称</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="请输入回复规则的名称" value="关键字">
+          <span class="help-block m-b-sm">您可以给这条规则起一个名字, 方便下次修改和查看. </span>
+          <div class="alert alert-danger m-b-none inline wrapper-xs padder">
+            选择高级设置: 将会提供一系列的高级选项供专业用户使用.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+          <div class="checkbox i-checks">
+            <label>
+              <input type="checkbox" id="gaoji" onClick="check()"><i></i> 高级设置
+            </label>
+          </div>
+        </div>
+      </div>
+      <div id="hide_block">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">状态</label>
+          <div class="col-sm-10">
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="a" value="option1" checked="">
+                <i></i>
+                启用
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="a" value="option2">
+                <i></i>
+                禁用
+              </label>
+            </div>  
+            <span class="help-block m-b-sm">您可以临时禁用这条回复.</span>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">置顶回复</label>
+          <div class="col-sm-10">
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="b" value="option1" checked="">
+                <i></i>
+                置顶
+              </label>
+            </div>
+            <div class="radio-inline i-checks">
+              <label>
+                <input type="radio" name="b" value="option2">
+                <i></i>
+                普通
+              </label>
+            </div>  
+            <span class="help-block m-b-sm">“置顶”时无论在什么情况下均能触发且使终保持最优先级.</span>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">优先级</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="输入这条回复规则优先级">
+            <span class="help-block m-b-sm">您可以给这条规则起一个名字, 方便下次修改和查看. </span>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">触发关键字</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="请输入触发关键字" value="关键字">
+          <span class="help-block m-b-sm">您可以给这条规则起一个名字, 方便下次修改和查看. </span>
+          <div class="alert alert-danger m-b-none inline wrapper-xs padder">
+            选择高级触发: 将会提供一系列的高级触发方式供专业用户使用(注意: 如果你不了解, 请不要使用).
+          </div>
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+          <div class="checkbox i-checks">
+            <label>
+              <input type="checkbox"><i></i> 高级设置
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<section class="panel panel-default">
+  <header class="panel-heading">                  
+    回复内容
+  </header>
+  <div class="panel-body">
+    <form class="form-horizontal" method="get">
+      <div class="row clearfix reply">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 panel-group">
+          <div class="panel panel-default border-11a068">
+            <div class="panel-body">
+              <div class="img">
+                <i class="default">封面图片</i>
+                <img src="">
+                <span class="text-left ng-binding"></span>
+                <div class="mask">
+                  <a href="javascript:;"><i class="fa fa-book"></i>导入文章</a>
+                  <a href="javascript:;"><i class="fa fa-edit"></i>编辑</a>
+                  <a href="javascript:;"><i class="fa fa-times"></i>删除</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="add"><span><i class="fa fa-plus"></i> 添加</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-9 col-md-9 col-lg-9">
+          <div class="card">
+            <div class="inner">
+              <div class="panel panel-default border-11a068">
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">标题</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" placeholder="添加图文消息的标题">
+                    </div>
+                  </div>
+                  <div class="line line-dashed b-b line-lg"></div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">作者</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" placeholder="添加图文消息的作者" >
+                    </div>
+                  </div>
+                  <div class="line line-dashed b-b line-lg"></div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">排序</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" placeholder="添加排序">
+                      <span class="help-block m-b-sm">排序只能在提交后显示。按照从大到小的顺序对图文排序</span>
+                    </div>
+                  </div>
+                  <div class="line line-dashed b-b line-lg"></div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">封面</label>
+                    <div class="col-sm-10">
+                      <div class="col-xs-3 img m-b-sm">
+                        <span><i class="icon-picture text-hui"></i>&nbsp;添加图片</span>
+                      </div>
+                      <span class="help-block m-b-sm" style="clear:both;">封面（大图片建议尺寸：360像素 * 200像素）</span>
+                      <div class="checkbox">
+                        <label class="i-checks">
+                          <input type="checkbox"><i></i> 封面图片显示在正文中
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="line line-dashed b-b line-lg"></div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">描述</label>
+                    <div class="col-sm-10">
+                      <textarea style="height: 80px;" class="form-control" name="description" placeholder="添加图文消息的简短描述"></textarea>
+                      <div class="checkbox">
+                        <label class="i-checks">
+                          <input type="checkbox" id="ch" onClick="check()"><i></i> 是否编辑图文详情
+                        </label>
+                      </div>
+                      <span class="help-block m-b-sm m-t-sm">编辑详情可以展示这条图文的详细内容, 可以选择不编辑详情, 那么这条图文将直接链接至下方的原文地址中.</span>
+                    </div>
+                  </div>
+                  <div class="line line-dashed b-b line-lg"></div>
+                  <div id="xiang_q">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">详情</label>
+                      <div class="col-sm-10">
+                        <div class="btn-toolbar m-b-sm btn-editor" data-role="editor-toolbar" data-target="#editor">
+                          <div class="btn-group">
+                            <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font">
+                              <i class="fa fa-font"></i><b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a data-edit="fontName Serif" style="font-family:'Serif'">Serif</a></li>
+                              <li><a data-edit="fontName Sans" style="font-family:'Sans'">Sans</a></li>
+                              <li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>
+                              <li><a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a></li>
+                              <li><a data-edit="fontName Courier" style="font-family:'Courier'">Courier</a></li>
+                              <li><a data-edit="fontName Courier New" style="font-family:'Courier New'">Courier New</a></li>
+                              <li><a data-edit="fontName Comic Sans MS" style="font-family:'Comic Sans MS'">Comic Sans MS</a></li>
+                              <li><a data-edit="fontName Helvetica" style="font-family:'Helvetica'">Helvetica</a></li>
+                              <li><a data-edit="fontName Impact" style="font-family:'Impact'">Impact</a></li>
+                              <li><a data-edit="fontName Lucida Grande" style="font-family:'Lucida Grande'">Lucida Grande</a></li>
+                              <li><a data-edit="fontName Lucida Sans" style="font-family:'Lucida Sans'">Lucida Sans</a></li>
+                              <li><a data-edit="fontName Tahoma" style="font-family:'Tahoma'">Tahoma</a></li>
+                              <li><a data-edit="fontName Times" style="font-family:'Times'">Times</a></li>
+                              <li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li>
+                              <li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
+                            </ul>
+                          </div>
+                          <div class="btn-group">
+                            <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+                              <li><a data-edit="fontSize 5" style="font-size:24px">Huge</a></li>
+                              <li><a data-edit="fontSize 3" style="font-size:18px">Normal</a></li>
+                              <li><a data-edit="fontSize 1" style="font-size:14px">Small</a></li>
+                              </ul>
+                          </div>
+                          <div class="btn-group">
+                            <a class="btn btn-default btn-sm" data-edit="bold" title="" data-original-title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="italic" title="" data-original-title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="strikethrough" title="" data-original-title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="underline" title="" data-original-title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                          </div>
+                          <div class="btn-group">
+                            <a class="btn btn-default btn-sm" data-edit="insertunorderedlist" title="" data-original-title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="insertorderedlist" title="" data-original-title="Number list"><i class="fa fa-list-ol"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="outdent" title="" data-original-title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="indent" title="" data-original-title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                          </div>
+                          <div class="btn-group">
+                            <a class="btn btn-default btn-sm" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                          </div>
+                          <div class="btn-group">
+                            <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Hyperlink"><i class="fa fa-link"></i></a>
+                            <div class="dropdown-menu">
+                              <div class="input-group m-l-xs m-r-xs">
+                                <input class="form-control input-sm" placeholder="URL" type="text" data-edit="createLink">
+                                <div class="input-group-btn">
+                                  <button class="btn btn-default btn-sm" type="button">Add</button>
+                                </div>
+                              </div>
+                            </div>
+                            <a class="btn btn-default btn-sm" data-edit="unlink" title="" data-original-title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+                          </div>
+                          
+                          <div class="btn-group hide">
+                            <a class="btn btn-default btn-sm" title="" id="pictureBtn" data-original-title="Insert picture (or just drag &amp; drop)"><i class="fa fa-picture-o"></i></a>
+                            <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" style="opacity: 0; position: absolute; top: 0px; left: 0px; width: 0px; height: 0px;">
+                          </div>
+                          <div class="btn-group">
+                            <a class="btn btn-default btn-sm" data-edit="undo" title="" data-original-title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                            <a class="btn btn-default btn-sm" data-edit="redo" title="" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                          </div>
+                        </div>
+                        <div id="editor" class="form-control" style="overflow:scroll;height:150px;max-height:150px" contenteditable="true">
+                          Go ahead…
+                        </div>
+                      </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">来源</label>
+                    <div class="col-sm-10">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="图文消息的来源地址" >
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button"><i class="fa fa-external-link"></i> 系统链接</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<div class="form-group">
+  <div class="col-sm-4">
+    <button type="submit" class="btn btn-danger">提交</button>
+  </div>
+</div>
+<!-- 编辑基本混合图文回复 -->

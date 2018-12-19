@@ -1,0 +1,67 @@
+<form class="form-horizontal" id="input_box_add_no" method="post" action="{php echo USK('weizhan/index', array('c'=>'xiugai'))}">
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">排序</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"  name="paixu" value="{$wendang['paixu']}">
+                <span class="help-block m-b-none">文档的显示顺序，越大则越靠前</span>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">标题</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"  name="biaoti" value="{$wendang['biaoti']}">
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">文档类别</label>
+            <div class="col-sm-5">
+                <select name="leibie" class="form-control m-b">
+                    <option>请选择一级分类</option>
+                    {loop $fenlei $item}
+                    <option value="{$item['id']}" {if $item[ 'id']==$wendang['leibie']}selected{/if}>{$item['ming']}
+                    </option>
+                    {/loop}
+                </select>
+            </div>
+            <div class="col-sm-5">
+                <!-- <select name="account" class="form-control m-b">
+          <option>请选择二级分类</option>
+        </select> -->
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">简介</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" name="jianjie" rows="5">{$wendang['jianjie']}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <div class="checkbox i-checks">
+                    <label>
+                        <input type="checkbox" {php echo $wendang['tiquneirongtu']==1 ? "checked": ''} name="tiquneirongtu" value="1"><i></i> 提取内容的第一个图片为缩略图
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">内容</label>
+            <div class="col-sm-10">
+                <div style="width:85%">{php echo BianJiQi('neirong', $wendang['neirong'])}</div>
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group col-sm-12">
+            <input type="submit" value="提交" class="btn btn-danger col-lg-1">
+            <input type="hidden" name="token" value="aa7ccb8a">
+            <input type="hidden" name="id" value="{$wendang['id']}">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,222 @@
+<form action="" method="post" class="form-horizontal" role="form" data-validate="parsley">
+	<input type="hidden" name="c" id="c" value="moren" />
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1"><font class="text-danger">*</font>商城名称</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" data-required="true" name="shezhi[ming]" value="{$shezhi['ming']}">
+    </div>
+  </div>
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">样式图</label>
+    <div class="col-sm-10">
+    	<img width="400" height="500" src="{$_W['yuming']}gongyong/images/yangshitu.png"/>
+    </div>
+  </div>
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">商城LOGO</label>
+    <div class="col-sm-10">
+      {php echo ShangTu("shezhi[logo]",$shezhi['logo'])}
+      <span class="help-block m-b-none">正方形图片</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">1</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[dianzhao1][url]" value="{$shezhi['dianzhao1']['url']}"/>
+      {php echo ShangTu("shezhi[dianzhao1][tu]",$shezhi['dianzhao1']['tu'])}
+      <span class="help-block m-b-none">商城首页店招，建议尺寸750*360</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">2</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://"  name="shezhi[dianzhao2][url]" value="{$shezhi['dianzhao2']['url']}"/>
+      {php echo ShangTu("shezhi[dianzhao2][tu]",$shezhi['dianzhao2']['tu'])}
+      <span class="help-block m-b-none">商城首页店招，建议尺寸750*360</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">3</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[dianzhao3][url]" value="{$shezhi['dianzhao3']['url']}"/>
+      {php echo ShangTu("shezhi[dianzhao3][tu]",$shezhi['dianzhao3']['tu'])}
+      <span class="help-block m-b-none">商城首页店招，建议尺寸750*360</span>
+    </div>
+  </div>
+  
+   <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">4</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[guanggao1][url]" value="{$shezhi['guanggao1']['url']}"/>
+      {php echo ShangTu("shezhi[guanggao1][tu]",$shezhi['guanggao1']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">5</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://"  name="shezhi[guanggao2][url]" value="{$shezhi['guanggao2']['url']}"/>
+      {php echo ShangTu("shezhi[guanggao2][tu]",$shezhi['guanggao2']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">6</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[guanggao3][url]" value="{$shezhi['guanggao3']['url']}"/>
+      {php echo ShangTu("shezhi[guanggao3][tu]",$shezhi['guanggao3']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">7</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[guanggao4][url]" value="{$shezhi['guanggao4']['url']}"/>
+      {php echo ShangTu("shezhi[guanggao4][tu]",$shezhi['guanggao4']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  
+   <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">8</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[guanggao5][url]" value="{$shezhi['guanggao5']['url']}"/>
+      {php echo ShangTu("shezhi[guanggao5][tu]",$shezhi['guanggao5']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  
+   <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">9</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[guanggao6][url]" value="{$shezhi['guanggao6']['url']}"/>
+      {php echo ShangTu("shezhi[guanggao6][tu]",$shezhi['guanggao6']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  
+   <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">10</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[guanggao7][url]" value="{$shezhi['guanggao7']['url']}"/>
+      {php echo ShangTu("shezhi[guanggao7][tu]",$shezhi['guanggao7']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">吊顶1</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[diaoding1][url]" value="{$shezhi['diaoding1']['url']}"/>
+      {php echo ShangTu("shezhi[diaoding1][tu]",$shezhi['diaoding1']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">吊顶2</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[diaoding2][url]" value="{$shezhi['diaoding2']['url']}"/>
+      {php echo ShangTu("shezhi[diaoding2][tu]",$shezhi['diaoding2']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">吊顶3</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="http://" name="shezhi[diaoding3][url]" value="{$shezhi['diaoding3']['url']}"/>
+      {php echo ShangTu("shezhi[diaoding3][tu]",$shezhi['diaoding3']['tu'])}
+      <span class="help-block m-b-none">建议尺寸750*360</span>
+    </div>
+  </div>
+  
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">客服电话</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="shezhi[dianhua]" value="{$shezhi['dianhua']}">
+    </div>
+  </div>  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">商城状态</label>
+    <div class="col-sm-10">
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shezhi[zhuangtai]" value="1" {if $shezhi['zhuangtai']==1 || $shezhi['zhuangtai']==NULL}checked=""{/if}>
+          <i></i>开启
+        </label>
+      </div>
+      <div class="radio-inline i-checks">
+        <label>
+          <input type="radio" name="shezhi[zhuangtai]" value="0" {if $shezhi['zhuangtai']==0 }checked=""{/if}>
+          <i></i>关闭
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">公告1</label>
+    <div class="col-sm-10">
+    	<input type="text" class="form-control"  placeholder="公告标题"  name="shezhi[gonggao][1][biaoti]" value="{$shezhi['gonggao'][1]['biaoti']}"/>
+       <input type="text" class="form-control"  placeholder="http://"  name="shezhi[gonggao][1][url]" value="{$shezhi['gonggao'][1]['url']}" />       
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">公告2</label>
+    <div class="col-sm-10">
+    	<input type="text" class="form-control"  placeholder="公告标题"  name="shezhi[gonggao][2][biaoti]" value="{$shezhi['gonggao'][2]['biaoti']}"/>
+       <input type="text" class="form-control"  placeholder="http://"  name="shezhi[gonggao][2][url]" value="{$shezhi['gonggao'][2]['url']}" />       
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group" style="margin-right:0px;">
+    <label class="col-sm-2 control-label">公告3</label>
+    <div class="col-sm-10">
+    	<input type="text" class="form-control"  placeholder="公告标题"  name="shezhi[gonggao][3][biaoti]" value="{$shezhi['gonggao'][3]['biaoti']}"/>
+       <input type="text" class="form-control"  placeholder="http://"  name="shezhi[gonggao][3][url]" value="{$shezhi['gonggao'][3]['url']}" />       
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">商城关闭跳转链接</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1" name="shezhi[guanbiurl]" value="{$shezhi['guanbiurl']}">
+      <span class="help-block m-b-none">如果您不采用系统页面，则可以设置关闭提醒连接，当商城关闭时跳转到此链接（非任何商城的连接）</span>
+    </div>
+  </div> 
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">联系方试</label>
+    <div class="col-sm-8">
+      {php echo BianJiQi('shezhi[lianxifangshi]',$shezhi['lianxifangshi'])}
+    </div>
+  </div>  
+  
+  <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group m-b-md m-t-md" style="overflow:hidden;">
+    <div class="col-sm-4 col-sm-offset-2">
+      <button type="submit" class="btn btn-danger padder-lg">提交</button>
+    </div>
+  </div>
+</form>

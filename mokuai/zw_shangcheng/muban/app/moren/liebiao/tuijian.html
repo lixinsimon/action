@@ -1,0 +1,76 @@
+{mb 'tou'}
+<style type="text/css">
+	body,html{
+		background: #000;
+	}
+	.m_top_z{
+	    padding: .28rem 0px 0px .3rem;
+	}
+	.back-ico:before, .navbar-item .next-ico:before{
+		color: #fff;
+	}
+	.m_top a{
+		display: inline-block;
+	}
+	.mo-title{
+		display: inline-block;
+		line-height: .9rem;
+		font-size: .3rem;
+		color: #fff;
+		font-weight: initial;
+	}
+</style>
+<div id="app">
+	<div class="m_top" style="background: #000;">
+		<a onclick="$z.go()" class="m_top_z" style="width: 10%;">
+			<i class="back-ico"></i>
+		</a>
+		<h2 class="mo-title">今日推荐</h>
+	</div>
+	<div class="main-wrap" style="padding-top: .9rem;">
+		<div class="tj-banner">
+			<img src="{$_W['gongyou']}/images/tj-banner.jpg"/>
+		</div>
+		
+		<ul class="tj-product">
+			<li>
+				<a>
+					<div class="tj--l">
+						<div>
+							<img src="{$_W['gongyou']}/images/banma-prod.jpg"/>
+						</div>
+					</div>
+					<div class="tj--r">
+						<h3>小青柑</h3>
+						<span>18颗礼盒装</span>
+						<div class="tj--r-b">
+							<div class="sell">立即购买</div>
+							<span>￥398<font>￥565</font></span>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a>
+					<div class="tj--l">
+						<div>
+							<img src="{$_W['gongyou']}/images/banma-prod.jpg"/>
+						</div>
+					</div>
+					<div class="tj--r">
+						<h3>小青柑</h3>
+						<span>18颗礼盒装</span>
+						<div class="tj--r-b">
+							<div class="sell">立即购买</div>
+							<span>￥398<font>￥565</font></span>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{mb js}
+
+
+{mb jiao}

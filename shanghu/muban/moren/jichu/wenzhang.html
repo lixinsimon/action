@@ -1,0 +1,34 @@
+ {mb tou}
+ <div style="background: #fff;">
+	<header style="height: 40px;background: #F7FAFA;text-align: center;border-bottom: 1px solid #EAEEF1;">
+    	<ul class="dao_hang">
+    		<li {if $cao=='moren'} class="xuanzhong"{/if}>
+    			<a href="{php echo US('jichu/wenzhang')}">文章列表</a>
+    		</li>
+    		
+    		<li {if $cao=='paihang'} class="xuanzhong"{/if}>
+    			<a href="{php echo US('jichu/wenzhang',array('c'=>'tianjia'))}" >添加文章</a>  			
+    		</li>
+    		{if $cao=='bianji_'}
+		        <li {if $cao=='paihang'} class="xuanzhong"{/if}>
+	    			<a >编辑文章</a>  			
+	    		</li>
+	        {/if}
+    	</ul>
+    </header>
+	<div class="panel-body">
+	    <div class="tab-content">
+	        <div class="tab-pane fade active in">
+	            {if $cao=='moren'}
+	            {mb "biaoqian/wenzhang_list"}
+	            {elseif  $cao=='bianji_'}
+	            {mb "biaoqian/wenzhang_edit"}
+	            {elseif  $cao=='tianjia'}
+	            {mb "biaoqian/wenzhang_add"}
+	            {/if}
+	        </div>
+	       
+	    </div>
+	</div>
+</div>
+{mb jiao}

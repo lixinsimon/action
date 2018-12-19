@@ -1,0 +1,49 @@
+{mb tou}
+<section class="vbox">
+    {mb dingbu}
+    <section>
+      <section class="hbox stretch">
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable padder m-t">
+              <!--<div class="alert alert-info">
+                温馨提示：Hi,{$_W['yonghu']['yonghuming']},您所在的会员组, 账号有效期限：1970-01-01 ~~ 无限制,可添加10个公众号,已添加0个。还可添加10个公众号。
+              </div>-->
+              <div class="row">
+              	{loop $dy $d}
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                  <div class="item bg-white r r-2x">
+                    <div class="pos-rlt">
+                      <div class="item-overlay opacity r r-2x bg-black r-t padder-v">
+                        <a href="{php echo UH('danyuan/tianjia',array('d'=>$d['id']))}" class="btn btn-overlay btn-active">编辑</a>
+                        <!--<a href="#" class="btn btn-overlay">删除</a>-->
+                      <!--  <a href="quanxian.html" class="btn btn-overlay">设置权限</a>-->
+                        <a href="{php echo UH('xitong/guanliyuan',array('d'=>$d['id']))}" class="btn btn-overlay">操作员管理</a>
+                      </div>
+                      <a href="#">
+                        <div class="wrapper">
+                          <img src="{if !empty($d['touxiang'])}{php echo JueDuiURL($d['touxiang'])}{else}{$_W['yuming']}/gongyong/images/yami.png{/if}" class="img-circle thumb pull-left m-r-sm" width="50">
+                          <h4 class="clear text-ellipsis">{$d['mingcheng']}</h4>
+                        </div>
+                        <p class="wrapper text-muted text-ellipsis-4">{$d['miaoshu']}</p>
+                        <div class="padder text-muted" style="padding-bottom:15px;"><i class="icon-calendar m-r-xs"></i>服务有效期：未设置</div>
+                      </a>
+                    </div>
+                  </div>
+                  <a href="{php echo UH('danyuan/xinxi',array('d'=>$d['id']))}" class="btn btn-block no-radius btn-success r-b r-2x"><i class="iconfont icon-iconfontgongju"></i> 管理此公众号</a>
+                </div>
+                {/loop}                
+                <!--<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                  <a href="{php echo UH('danyuan/tianjia','',true)}"><div class="r r-2x add_gz">
+                    +增加公众号
+                  </div></a>
+                </div>-->
+              </div>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+  </section>
+
+{mb jiao}

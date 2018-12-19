@@ -1,0 +1,186 @@
+<form action="{php echo USK('hexiao/index', array('c'=>'xiugai'))}" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+	<input type="hidden" value="{$hexiao['id']}" name="id" />
+	<div class="line line-dashed b-b line-lg pull-in"></div>	
+	<div class="form-group">
+		<label class="col-lg-2 control-label">绑定商户</label>
+		<div class="col-lg-10">
+			<div class="input-group">
+				<input type="hidden" name="shanghu" id="shanghu" value="{$hexiao['shanghu']}" />
+				<input type="text"  value="{$hexiao['shanghuming']}" maxlength="30" id="agent" class="form-control" readonly="">
+				<div class="input-group-btn">
+					<button class="btn btn-default" type="button" id="xuanshangji" data-toggle="modal" data-target="#shangji">商户</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group" style="margin-right:0px;">
+		<label class="col-sm-2 control-label">logo</label>
+		<div class="col-sm-10">
+			{php echo ShangTu('logo',$hexiao['logo'])}
+		</div>
+	</div>
+
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="input-id-1">店铺昵称</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="nicheng" value="{$hexiao['nicheng']}">
+		</div>
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" >客服电话</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="dianhua" value="{$hexiao['dianhua']}">
+		</div>
+	</div>	
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group dianpu">
+		<label class="col-sm-2 control-label" for="input-id-1">地区</label>
+		<div class="col-sm-10">
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="sheng" name="sheng">
+					{if $hexiao[sheng]}
+					<option>{$hexiao[sheng]}</option>{/if}
+				</select>
+			</div>
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="shi" name="shi">
+					{if $hexiao[shi]}
+					<option>{$hexiao[shi]}</option>{/if}
+				</select>
+			</div>
+			<div class="col-sm-3" style="padding-left: 0 !important;">
+				<select class="form-control" id="xian" name="xian">
+					{if $hexiao[xian]}
+					<option>{$hexiao[xian]}</option>{/if}
+				</select>
+			</div>
+		</div>
+
+	</div>
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="input-id-1">详细地址</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="input-id-1" name="xiangxidizhi" value="{$hexiao['xiangxidizhi']}">
+		</div>
+	</div>
+
+	<div class="line line-dashed b-b line-lg pull-in"></div>
+	<div class="form-group m-b-md" style="overflow:hidden;">
+		<div class="col-sm-4 col-sm-offset-2">
+			<button type="submit" class="btn btn-danger padder-lg">提交</button>
+		</div>
+	</div>
+</form>
+
+<!-- 选择上级弹出层 -->
+<div class="modal fade" id="shangji">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <h4 class="modal-title" id="myModalLabel">选择商户</h4>
+	    </div>
+	    <div class="modal-body">
+	      <form class="form-horizontal" role="form">
+	        <div class="form-group">
+	          <div class="col-sm-6">
+	            <div class="input-group">
+	              <input type="text" id="sousuo" class="form-control" placeholder="请输入商户">
+	              <span class="input-group-btn">
+	                <button class="btn btn-default" id="chashangji" type="button">搜索</button>
+	              </span>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="table-responsive">
+	        <table class="table table-striped b-light">
+	          <tbody id="tianjiahang">
+	          	
+	          </tbody>
+	        </table>
+	      </div>  
+	      </form>
+	    </div>
+	    <div class="modal-footer m-t-none">
+	      <div class="pull-right">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<script src="{$_W['yuming']}gongyong/js/diqu.js"></script>
+<script>
+	$(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			$('#sheng').append("<option>" + citys[i].n + "</option>");
+		}
+		for(let a = 0, h = citys[0].c.length; a < h; a++) {
+			$('#shi').append("<option>" + citys[0].c[a].n + "</option>");
+		}
+		for(let p = 0, h = citys[0].c[0].a.length; p < h; p++) {
+			$('#xian').append("<option>" + citys[0].c[0].a[p] + "</option>");
+		}
+		$('#dizhi1').val($('#sheng').val());
+		$('#dizhi2').val($('#shi').val());
+		$('#dizhi3').val($('#xian').val());
+	});
+	$('#sheng').change(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			if($(this).val() == citys[i].n) {
+				$('#shi option').remove();
+				for(let a = 0, n = citys[i].c.length; a < n; a++) {
+					$('#shi').append("<option>" + citys[i].c[a].n + "</option>");
+				}
+				$('#dizhi1').val($('#sheng').val());
+				$('#dizhi2').val($('#shi').val());
+				$('#dizhi3').val($('#xian').val());
+			}
+		}
+		$('#xian option').remove();
+		$('#dizhi3').val('');
+	});
+	$('#shi').change(function() {
+		for(let i = 0, l = citys.length; i < l; i++) {
+			for(let a = 0, n = citys[i].c.length; a < n; a++) {
+				if($(this).val() == citys[i].c[a].n) {
+
+					$('#xian option').remove();
+					for(let b = 0, m = citys[i].c[a].a.length; b < m; b++) {
+						$('#xian').append("<option>" + citys[i].c[a].a[b] + "</option>");
+					}
+					$('#dizhi1').val($('#sheng').val());
+					$('#dizhi2').val($('#shi').val());
+					$('#dizhi3').val($('#xian').val());
+				}
+			}
+		}
+	});
+	$('#xian').change(function() {
+		$('#dizhi1').val($('#sheng').val());
+		$('#dizhi2').val($('#shi').val());
+		$('#dizhi3').val($('#xian').val());
+	});
+	function huoqudata(e) {
+		$('#agent').val(e.dataset.nicheng);
+		$('#shanghu').val(e.dataset.id);
+	}
+
+	$("#chashangji").click(function() {
+		var txt = $("#sousuo").val();
+		if(txt.length == 0) {} else {
+			$('#tianjiahang').empty();
+			$.post('{php echo US("hexiao",array("c"=>"so_shanghu"))}', {
+				'guanjianci': txt
+			}, function(data) {
+				var shangji1 = JSON.parse(data);
+				for(let i = 0, a = shangji1.shu.length; i < a; i++) {
+					$('#tianjiahang').prepend('<tr><td>' + shangji1.shu[i].nicheng + '</td><td style="vertical-align:middle;"><a href="#" onclick="huoqudata(this)" data-id="' + shangji1.shu[i].id + '" data-nicheng="' + shangji1.shu[i].nicheng + '" data-dismiss="modal" class="btn btn-primary pull-right">选择</a></td></tr>');
+				}
+			});
+		}
+	});
+</script>

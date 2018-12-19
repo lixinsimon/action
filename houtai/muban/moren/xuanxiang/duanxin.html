@@ -1,0 +1,110 @@
+ {mb tou}
+<section class="vbox">
+	{mb dingbu_y}
+	<section>
+		<section class="hbox stretch">
+			{mb zuobu}
+			<!-- 内容开始 -->
+			<section id="content">
+				<section class="vbox">
+					<section class="scrollable m-t padder-lg">
+						<h2 class="font-thin m-b" style="font-size:20px;">短信接口</h2>
+						<form class="form-horizontal" method="post">
+							<input type="hidden" name="c" value="tianjia" />
+							
+							<div class="panel panel-default">
+			                  <div class="panel-heading"> 设置是否开启短信验证</div>
+			                  <div class="panel-body">
+			                    <div class="form-group">
+			                      <label class="col-sm-2 control-label">注册短信验证</label>
+			                      <div class="col-sm-10">                        
+			                        <div class="radio-inline i-checks">
+			                          <label>
+			                            <input type="radio" name="duanxin[dayu][zhuce][kaiguan]" value="1" {if $pz['dayu']['zhuce']['kaiguan']}checked="checked"{/if}>
+			                            <i></i>开启
+			                          </label>
+			                        </div>
+			                        <div class="radio-inline i-checks">
+			                          <label>
+			                            <input type="radio" name="duanxin[dayu][zhuce][kaiguan]" value="0" {if empty($pz['dayu']['zhuce']['kaiguan'])}checked="checked"{/if}>
+			                            <i></i>关闭
+			                          </label>
+			                        </div>
+			                        <span class="help-block">是否开启注册页的短信验证</span>   
+			                      </div>
+			                    </div>
+			                  </div>
+			                </div>
+							
+							<!-- 短信接口开始 -->
+							<div class="panel panel-default">
+								<div class="panel-heading">阿里大鱼(
+									<a href="http://www.alidayu.com/">申请</a>)</div>
+								<div class="panel-body">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">App key</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="duanxin[dayu][key]" value="{$pz['dayu']['key']}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">App Secret</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="duanxin[dayu][secret]" value="{$pz['dayu']['secret']}">
+										</div>
+									</div>
+									<div class="panel-body duanxin-bgBox ">
+										<label class="col-sm-2 control-label">发送模板</label>
+										<div class="input-group col-sm-10">
+											<div class="input-group col-sm-10">
+												<span class="input-group-addon">签名</span>
+												<input type="text" class="form-control" name="duanxin[dayu][denglu][qianming]" value="{$pz['dayu']['denglu']['qianming']}" placeholder="登录验证">
+												<span class="input-group-addon">模板ID</span>
+												<input type="text" class="form-control" name="duanxin[dayu][denglu][id]" value="{$pz['dayu']['denglu']['id']}" placeholder="模板ID 如：SMS_16230093">
+											</div>
+											<span class="help-block">模板内容: 验证码${code}，您正在登录${product}，若非本人操作，请勿泄露。</span>
+											<div class="input-group col-sm-10">
+												<span class="input-group-addon">签名</span>
+												<input type="text" class="form-control" name="duanxin[dayu][zhuce][qianming]" value="{$pz['dayu']['zhuce']['qianming']}" placeholder="注册验证">
+												<span class="input-group-addon">模板ID</span>
+												<input type="text" class="form-control" name="duanxin[dayu][zhuce][id]" value="{$pz['dayu']['zhuce']['id']}" placeholder="模板ID 如：SMS_16230093">
+											</div>
+											<span class="help-block">模板内容: 验证码${code}，您正在注册成为${product}用户，感谢您的支持！</span>
+											<div class="input-group col-sm-10">
+												<span class="input-group-addon">签名</span>
+												<input type="text" class="form-control" name="duanxin[dayu][biangeng][qianming]" value="{$pz['dayu']['biangeng']['qianming']}" placeholder="修改密码">
+												<span class="input-group-addon">模板ID</span>
+												<input type="text" class="form-control" name="duanxin[dayu][biangeng][id]" value="{$pz['dayu']['biangeng']['id']}" placeholder="模板ID 如：SMS_16230093">
+											</div>
+											<span class="help-block">模板内容:验证码${code}，您正在尝试修改${product}登录密码，请妥善保管账户信息。</span>
+											<div class="input-group col-sm-10">
+												<span class="input-group-addon">签名</span>
+												<input type="text" class="form-control" name="duanxin[dayu][shenfen][qianming]" value="{$pz['dayu']['shenfen']['qianming']}" placeholder="身份验证">
+												<span class="input-group-addon">模板ID</span>
+												<input type="text" class="form-control" name="duanxin[dayu][shenfen][id]" value="{$pz['dayu']['shenfen']['id']}" placeholder="模板ID 如：SMS_16230093">
+											</div>
+											<span class="help-block">模板内容:验证码${code}，您正在进行${product}身份验证，打死不要告诉别人哦！</span>
+											<div class="input-group col-sm-10">
+												<span class="input-group-addon">签名</span>
+												<input type="text" class="form-control" name="duanxin[dayu][huodong][qianming]" value="{$pz['dayu']['huodong']['qianming']}" placeholder="活动验证">
+												<span class="input-group-addon">模板ID</span>
+												<input type="text" class="form-control" name="duanxin[dayu][huodong][id]" value="{$pz['dayu']['huodong']['id']}" placeholder="模板ID 如：SMS_16230093">
+											</div>
+											<span class="help-block">模板内容:验证码${code}，您正在参加${product}的${item}活动，请确认系本人申请。</span>
+										</div>
+                                       
+									</div>
+									 <input  type="submit" value="提交" class="btn btn-danger">
+								</div>								 
+							</div>
+							
+						</form>
+					</section>
+				</section>
+			</section>
+			<!-- 内容结束 -->
+		</section>
+	</section>
+</section>
+
+{mb jiao}

@@ -1,0 +1,462 @@
+{mb 'tou'}
+<style>
+.checkbox +.checkbox_icon:after {
+    font-family: 'YDUI-INLAY';
+    font-size: .44rem;
+    content: '\e604';
+    color: #D9D9D9;
+}
+
+.checked +.checkbox_icon:after{
+	content: '\e601';
+	color: #000;
+}
+#shouchan{
+	display: none;
+}
+.m-spinner{
+    position: absolute;
+    right: 0rem;
+    bottom: 0rem;
+}
+.shouchan{
+	position: relative;
+}
+
+/*购物袋列表*/
+.car-wrap li{
+	padding: .2rem;
+	display: flex;
+	background: #fff;
+	margin-bottom: .15rem;
+}
+.car-l{
+	width: .7rem;
+}
+.car-c{
+	width: 1.6rem;
+	height: 1.6rem;
+	overflow: hidden;
+	background: #eee;
+}
+.car-c img{
+	width: 100%;
+	vertical-align: middle;
+	display: inline-block;
+}
+.car-r{
+	flex: 1;
+}
+.car-r h3{
+	font-size: .26rem;
+	font-weight: initial;
+	line-height: .26rem;
+	margin-bottom: .08rem;
+	height: .52rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.car-r p{
+	font-size: .2rem;
+	color: #999;
+}
+.car-r{
+	font-size: .26rem;
+	position: relative;
+	margin-left: .26rem;
+	height: 1.6rem;
+}
+.car-r-jiage{
+	position: absolute;
+	bottom: -.1rem;
+	width: 100%;
+}
+.m-spinner > a{
+	width: .52rem;
+	height: .52rem;
+	line-height: .52rem;
+}
+.m-spinner > input{
+	width: .4rem;
+	height: .52rem;
+	line-height: .52rem;
+}
+.shou_jia{
+	position: initial;
+	float: none;
+}
+body{
+	background: #eee;
+}
+.shoudi{
+	left: .2rem;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.shouzhi{
+	left: .8rem;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.jieshuan-t{
+	font-size: .35rem;
+	width: 65%;
+}
+
+.jieshuan-t{
+	margin-top: 0;
+}
+.shang_di{
+	bottom: 1.11rem;
+}
+.gais:after{
+	color: #e2e2e2 !important;
+}
+.checkbox{
+	width: .9rem;
+	height: 1rem;
+	position: absolute;
+	left: -.2rem !important;
+	top: .2rem !important;
+	display: block;
+}
+
+
+.jia1{
+  margin-bottom: .10rem;
+  width: 10%;
+  height: .50rem;
+   text-align: center;
+   float: right;
+   margin-right: 10%;
+   line-height: .54rem
+}
+.J_Del1{
+  float: left;
+  margin-left: -100%;
+  width: 100%;
+  background:#eee;
+    height: .50rem;
+    line-height: .54rem;
+  font-size: .40rem;
+  display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.jia1 input{
+  height: .50rem;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  float: left;
+  color: #000000 !important;
+  line-height: .54rem;
+  text-align: center;
+  width: .4rem;
+}
+.J_Add1{
+   line-height: .54rem;
+  float: left;
+  width: 100%;
+    height: .50rem;
+  margin-right: -100%;
+  font-size: .40rem;
+  background: #eee;
+  display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>
+	<div id="shouchan">
+		<header class="m-navbar" >
+		    <a  class="navbar-item" onclick="$z.go()">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		   		   购物袋	
+		    </div>
+		    <a  class="navbar-item" @click="bianji" v-text="bian.txt"></a>
+		</header>
+			<!--<div class="gouwu-t">
+				<img src="http://test.heodo.com/gongyong/images/icon-dianpu.png">
+				{{ming}}
+			</div>-->
+			<ul class="car-wrap">
+				<li v-for="(L,index) in lie" >
+					<div class="car-l">
+						 <label class="cell-right" v-if='L.zhuangtai' style="line-height: 1.6rem;position: relative;">
+				            <input  type="checkbox"  style="border: none !important;" @click="Xuan(index)" ref='xuan' class="checkbox checked " checked="checked" />		           
+				            <i class="checkbox_icon"></i>
+				        </label>
+				         <label class="cell-right" style="position: relative;" v-else>		          
+				            <input type="checkbox" style="border: none !important;" class="checkbox" ref='xuan' disabled="disabled"/>		                     
+				        </label>
+					</div>
+					<div class="car-c" @click="dakai(L.shangpin)">
+						<img :src="L.tu" />
+					</div>
+					<div class="car-r">
+						<h3  @click="dakai(L.shangpin)" >{{L.ming}}<font color="red" v-if='!L.zhuangtai'> (库存不足已删除)</font></h3>
+						<!--<p>原产益生菌种发酵  常温酸奶</p>-->
+						<p  > 库存：{{L.kucun}}{{L.danwei}}</p>
+						
+						<div class="car-r-jiage">
+							<!--<span style="float: right;" class="m-spinner"  >
+							    <a :class="L.shuliang==1?'gais':''"  class="J_Del" @click="geshu(index,'jian')"></a>
+							    <input type="text" disabled="disabled"  class="J_Input" :value="L.shuliang" ref='SL' :gid='L.id'/>
+							    <a  class="J_Add"  @click="geshu(index,'jia')" ></a>
+							</span>-->
+							
+							
+							 <div class='jia1'>
+				      		    	<div  class="J_Del1"  @click="geshu(index,'jian')">-</div>
+				  				    <input type="number" disabled="disabled"  :value="L.shuliang"  ref='SL' :gid='L.id' />
+				 					    <div class="J_Add1"  @click="geshu(index,'jia')" >+</div>
+							  </div>
+							
+							
+							<div class="shou_jia" >
+				        		￥<span :jiage='L.jiage' ref="jiage">{{L.jiage}}</span>
+				        	</div>
+						</div>
+							
+					</div>
+				</li>
+			</ul>
+		
+		    <div style="width: 100%;height: 2rem;float: left;"></div>
+		    	
+		   
+	    <div class=" shang_di" style="background: #fff;" >			
+			<label class="cell-right" style="padding-right:0px;position: relative;width: 35%;">								
+	            <input style="top: .5rem !important;border: 0;"  class="shoudi checkbox checked" type="checkbox" ref='quanxuan' @click="QuanXuan" checked="checked" />
+	            <i class="checkbox_icon shoudi"></i>
+	            <span class="shouzhi">全选</span>				
+		    </label>
+		    <div style="position: absolute;right:0px;bottom: 0px;width: 65%;">
+				<a v-if="bian.jie" class="dibu_d" style="background:#000;width: 41%;float: right;" @click="ShanChu">删除</a>
+		        <div class="jieshuan" v-else>
+		        	<div class="jieshuan-t">总计：￥{{zongjia}}<span ></span></div>
+		        	<a class="dibu_d" style="background:#000;width: 92%;float: right;" @click="JieSuan">结算</a>
+		    	</div>
+		     </div>
+		</div>
+		</div>
+{mb daohang}
+{mb js}
+<script type="text/javascript">
+
+new Vue({
+	el:"#shouchan",
+	data:{
+		lie:[],
+  		bian:{"jie":false,"txt":"编辑"},
+  		zongjia:0,ming:'',suo:false
+	},
+	methods:{
+		QuanXuan:function(){			
+			var x=this.$refs.xuan;
+			var checked=this.$refs.quanxuan.getAttribute('checked');
+			if(!checked){
+				this.$refs.quanxuan.setAttribute('checked','checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox checked');
+			}else{				
+				this.$refs.quanxuan.removeAttribute('checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox');
+			}
+			for(i in x){
+				var disabled= this.$refs.xuan[i].getAttribute('disabled');	
+				if(checked){
+			        this.$refs.xuan[i].removeAttribute('checked','checked');	
+			        this.$refs.xuan[i].setAttribute('class','checkbox');
+			    }else if(!disabled){
+			    	this.$refs.xuan[i].setAttribute('checked','checked');
+			    	this.$refs.xuan[i].setAttribute('class','checkbox checked');
+			    }
+			}
+			this.zongji();
+		},
+		dakai:function(id){
+			$z.dakai("{php echo UAK('xiangqing')}&id="+id);
+		},
+		Xuan:function(index){
+			var checked=this.$refs.xuan[index].getAttribute('checked');
+			if(checked){
+				this.$refs.xuan[index].removeAttribute('checked');
+				this.$refs.xuan[index].setAttribute('class','checkbox');				
+			}else{
+				this.$refs.xuan[index].setAttribute('checked','checked');
+				this.$refs.xuan[index].setAttribute('class','checkbox checked');
+			}
+			var x=this.$refs.xuan;
+			var all=true;
+			for(i in x){
+				var c=this.$refs.xuan[i].getAttribute('checked');
+				if(!c && all){
+			       all=false;
+			    }
+			}			
+			if(all){
+				this.$refs.quanxuan.setAttribute('checked','checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox checked');
+			}else{				
+				this.$refs.quanxuan.removeAttribute('checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox');
+			}
+			this.zongji();
+		},
+		bianji:function(){
+			this.bian.jie=!this.bian.jie;
+			if (this.bian.jie) {
+				this.bian.txt="完成";
+				var x=this.$refs.xuan;				
+				for(i in x){					
+					this.$refs.xuan[i].removeAttribute('checked','checked');	
+			        this.$refs.xuan[i].setAttribute('class','checkbox');			      
+				}
+				this.$refs.quanxuan.removeAttribute('checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox');
+			} else{				
+				this.bian.txt="编辑";
+				var x=this.$refs.xuan;				
+				for(i in x){
+					this.$refs.xuan[i].setAttribute('checked','checked');
+			    	this.$refs.xuan[i].setAttribute('class','checkbox checked');
+			    	
+				}
+				this.$refs.quanxuan.setAttribute('checked','checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox checked');
+			}
+			this.zongji();
+		},
+		geshu:function(index,jia_jian){	
+			var that=this;
+//			if(that.suo){
+//				$z.toast('请勿点击过快');
+//			}
+//			that.suo=true;
+			var zhi=that.lie[index].shuliang;
+			var yuanzhi=zhi;
+			var id=that.lie[index].id;
+		
+			if(parseInt(that.lie[index].shuliang)>=parseInt(that.lie[index].kucun)){
+				$z.toast('库存不足');
+				return false;
+			}
+			
+			if(jia_jian=='jia'){
+				zhi++;	
+				that.lie[index].shuliang=zhi;
+			}else if(jia_jian=='jian'){
+				zhi--;	
+				if(zhi<1){
+				   $z.toast('至少购买一件！');	
+				   return false;
+				}
+				that.lie[index].shuliang=zhi;    
+			}					
+			
+//			$z.post("{php echo UAK('dingdan/gouwuche')}",{kucun:zhi,id:id,c:jia_jian},function(shu){
+//			    if(shu.shi==0){						    
+//			    	$z.toast(shu.shu);
+//			    	that.lie[index].shuliang=yuanzhi;
+//			    }
+//			    that.suo=false;
+//			});	
+						
+		},
+		zongji:function(){
+			var x=this.$refs.xuan;	
+			var zongjia=0;	
+			var ids=[];
+			var ids_No=[];
+			for(i in x){
+				var c=this.$refs.xuan[i].getAttribute('checked');
+				if(c){
+					var z=this.$refs.jiage[i].getAttribute('jiage');
+					var sl=this.$refs.SL[i].value;
+					zongjia=parseInt(Number(zongjia)+Number(z)*Number(sl));	
+					ids[i]=this.$refs.SL[i].getAttribute('gid');
+				}else{
+					ids_No[i]=i;
+				}
+			}
+			this.zongjia=zongjia;
+			this.ids=ids;
+			this.ids_No=ids_No;
+		},
+		ShanChu:function(){
+			var that=this;
+				if(!this.ids){			 
+				   return false;
+				}
+			YDUI.dialog.confirm('提醒',  '确认删除选择商品吗？',  function () {
+				var ids;
+				for(i in that.ids){					
+				      ids+=','+that.ids[i];	
+				}
+			
+				$z.post("{php echo UAK('dingdan/gouwuche')}",{c:'shanchu',ids:ids},function(s){
+					 $z.toast(s.shu);
+					$z.post("{$_W['url']}",function(shu){	
+						if(shu.shi==1){			
+							that.lie=shu.shu.lie;			
+						}else{				
+							$z.toast(shu.shu);
+						}
+					});		
+				});
+ 			});
+		},
+	
+		JieSuan:function(){
+			var that=this;
+			var ids='&ids=';
+			for(i in this.ids){					
+			      ids+='_'+this.ids[i];	
+			}
+			for(var a=0;a<that.lie.length;a++){
+				$z.post("{php echo UAK('dingdan/gouwuche')}",{kucun:that.lie[a].shuliang,id:that.lie[a].id,c:'jia'},function(shu){
+				    if(shu.shi==0){						    
+//				    	$z.toast(shu.shu);
+//				    	that.lie[index].shuliang=yuanzhi;
+				    }else{
+				    	
+				    }
+				});	
+				if(a==that.lie.length-1){
+					 $z.dakai('{php echo UAK("dingdan/querendingdan")}'+ids);
+				}
+			}
+			
+//			that.suo=false;
+			
+		   
+		}
+	},
+	beforeCreate:function(){
+		var that=this;
+		$z.post("{$_W['url']}",function(shu){	
+			if(shu.shi==1){			
+				that.lie=shu.shu.lie;			
+			}else{				
+				$z.toast(shu.shu);
+			}
+			that.ming=shu.shu.ming;
+			$("#shouchan").show();
+		});		
+	},	
+	updated:function(){
+		this.zongji();		
+	},
+	
+	
+});
+
+</script>
+
+{mb jiao}
+
+	

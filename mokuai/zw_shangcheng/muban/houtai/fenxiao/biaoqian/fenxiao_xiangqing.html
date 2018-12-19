@@ -1,0 +1,125 @@
+
+  <div class="alert alert-info">
+    <font class="m-r-sm">提现单号：{$tixian['dingdanhao']}</font>
+  	<font class="m-r-sm">申请日期：{php echo date('Y-m-d H:i:s',$tixian['shenqingshijian'])}</font>
+  	{if $tixian['shenheshijian']}
+		<font class="m-r-sm">审核时间：{php echo date('Y-m-d H:i:s',$tixian['shenheshijian'])}</font>
+		{/if}
+		{if $tixian['dakuanshijian']}
+		<font class="m-r-sm">打款时间：{php echo date('Y-m-d H:i:s',$tixian['dakuanshijian'])}</font>
+		{/if}		
+		</br>
+		<font class="m-r-sm">绑定手机号：{$tixian['zhanghao']}</font></br>
+		<font class="m-r-sm">昵称：{$tixian['nicheng']}</font>	</br>
+		<font class="m-r-sm">姓名：{$tixian['xingming']}</font>	</br>
+			<font class="m-r-sm">提现方式：{$tixian['fangshi']}</font>	
+  </div>
+  {if $tixian['fangshi']=='银行卡' }
+  <div class="alert alert-info">  	
+    <font class="m-r-sm">持卡人：{$tixian['xingming']}</font></br>
+  	<font class="m-r-sm">银行卡号：{$tixian['kahao']}</font></br>
+		<font class="m-r-sm">开户银行：{$tixian['kaihuyinhang']}</font></br>
+		<font class="m-r-sm">开户支行：{$tixian['kaihuhang']}</font></br>
+		<font class="m-r-sm">手机号码：{$tixian['shoujis']}</font></br>
+	</br>	
+ </div>  
+ {/if}
+  {if $tixian['fangshi']=='支付宝' }
+ <div class="alert alert-info">  	
+    <font class="m-r-sm">支付宝账号：{$tixian['zhifubao_zhanghao']}</font>
+	</br>	
+ </div>
+ {/if}
+   {if $tixian['fangshi']=='微信' }
+ <div class="alert alert-info">  	
+     <font class="m-r-sm">微信账号：{$tixian['weixin_zhanghao']}</font>
+	</br>	
+ </div>
+ {/if}
+  <div class="table-responsive b b-light">
+	<table class="table m-b-none">
+	 
+	  <tbody>
+	  	{loop $dingdan $dd}     
+		  <tr class="panel-heading">
+          <td colspan="7">[创客城]订单编号：{$dd['dingdanhao']}&nbsp;&nbsp; 下单时间：{php echo date('Y-m-d H:i:s',$dd['xiadanshijian'])}&nbsp;&nbsp;余额：{$dd['yj']}</td>
+     </tr>      
+      {loop $dd['shangpin'] $sp}
+      <tr>
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{$sp['tu']}" class="dker" >
+          </span>
+          <font class="m-l-xs" style="line-height:40px;">{$sp['ming']}</font>
+        </td>
+        <td style="vertical-align:middle;text-align:center">{$sp['jiage']}*{$sp['shuliang']}</td>   
+         
+      </tr>
+      {/loop}    
+      {/loop}
+      
+      {loop $duihuan_dingdan $dd}     
+		  <tr class="panel-heading">
+          <td colspan="7">[积分商城]订单编号：{$dd['dingdanhao']}&nbsp;&nbsp; 下单时间：{php echo date('Y-m-d H:i:s',$dd['xiadanshijian'])}&nbsp;&nbsp;余额：{$dd['yj']}</td>
+     </tr>      
+      {loop $dd['shangpin'] $sp}
+      <tr>
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{$sp['tu']}" class="dker" >
+          </span>
+          <font class="m-l-xs" style="line-height:40px;">{$sp['ming']}</font>
+        </td>
+        <td style="vertical-align:middle;text-align:center">{$sp['jiage']}*{$sp['shuliang']}</td>          
+      </tr>
+      {/loop}    
+      {/loop}
+		
+	  </tbody>
+	</table>
+  </div>
+  <br>
+  
+  {if $zhuangtai_text[$tixian['zhuangtai']]!='已打款' }
+    <div class="line line-dashed b-b line-lg"></div>
+  <div class="form-group">
+  <label class="col-sm-2 control-label">无效理由</label>
+    <div class="col-sm-6">
+      <input type="text" id="wuxiao"  {if $tixian['wuxiao'] }disabled="disabled"{/if}  class="form-control" value="{$tixian['wuxiao']}">
+    </div>
+  </div>
+  {/if}
+  
+  <div class="block text-right"><label class="label label-primary font-thin">{php echo $zhuangtai_text[$tixian['zhuangtai']]}</label>&nbsp;&nbsp; &nbsp;&nbsp; 实际打款：<font class="i-2x text-danger">{$tixian['jin_e']}</font>元</div>
+  <div class="form-group m-t-md">
+  <input type="hidden" id="tixianid" value="{$tixian['id']}" />
+  <input type="hidden" id="zhuangtai" value="{$tixian['zhuangtai']}" />
+  {if empty($tixian['zhuangtai'])}
+	<a href="{php echo UHK('fenxiao',array('c'=>'xingqingpost','id'=>$tixian['id'],'zhuangtai'=>'shenhe'))}" class="btn btn-success m-l-md" onclick="return confirm('确认审核通过？')">审核通过</a>
+	{/if}
+	{if $tixian['zhuangtai']==10}
+	 <a href="{php echo UHK('fenxiao',array('c'=>'xingqingpost','id'=>$tixian['id'],'zhuangtai'=>'dakuan'))}" class="btn btn-success m-l-md" onclick="return confirm('已确认打款到【{php echo $tixianfangshi_text[$tixian['tixianfangshi']]}】')">已给他打款到【{php echo $tixianfangshi_text[$tixian['tixianfangshi']]}】</a>
+	{/if}
+	{if $tixian['zhuangtai']!=5 and $tixian['zhuangtai']<20}
+	<div class="btn btn-danger" id="tijiao"  >无效</div>
+	{/if}	
+  </div>
+
+<script>
+		
+	$(function(){
+			var url="{php echo UHK('fenxiao',array('c'=>'xingqingpost','id'=>$tixian['id'],'zhuangtai'=>'wuxiao'))}";
+			$('#tijiao').click(function(){
+				 var r=confirm("确认无效？订单金额将返回至余额")
+				if(r==true){
+							window.location.href=url+'&zhi='+$('#wuxiao').val();
+				}
+			})
+	})
+	
+		
+	
+	
+	
+	
+</script>

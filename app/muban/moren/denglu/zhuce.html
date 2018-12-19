@@ -1,0 +1,135 @@
+{mb tou}
+<!--<div id="den">
+			
+		
+			<div class="cell-item" style="background: #fff; margin-top:15px ;">
+		        <div class="cell-left" style="width: 20%;">手机号</div>
+		        <div class="cell-right"><input id='shouji' type="number" pattern="[0-9]*" class="cell-input" placeholder="请输入您的手机号" /></div>
+		    </div>
+		    <div class="cell-item" style="background: #fff;" v-show="duanxin==1" >
+		        <div class="cell-left" style="width: 20%;">验证码</div>
+		        <div class="cell-right"><input type="text" class="cell-input" placeholder="请输入手机验证码" :value="duanxin==1 ? '':'1111'" />
+		        <button type="button" class="btn btn-warning" id="fasong">发送</button>
+		        </div>
+		    </div>
+		
+		    <div class="cell-item" style="background: #fff;">
+		        <div class="cell-left" style="width: 20%;">密码</div>
+		        <div class="cell-right"><input id="mima" type="password"  class="cell-input" placeholder="请输入密码"  /></div>	  			       
+		    </div>
+		    <div class="cell-item" style="background: #fff;">
+		        <div class="cell-left" style="width: 20%;">确认密码</div>
+		        <div class="cell-right"><input id="querenmima" type="password"  class="cell-input" placeholder="请再次输入密码" /></div>	  			       
+		    </div>
+		   <button type="submit" class="btn-block btn-danger" id="zhuce" >注册</button>    
+		    <a href="{php echo UA('denglu')}" class="btn-block " style="border: 1px solid #ccc;color: #333;background: #fff;">已有账户点此登录</a> 
+		
+		
+</div>-->
+<div class="zw-denglu" id="den">
+		
+		<div class="zw-denglu-tu">
+			<img src="{php echo empty($_W['shezhi']['shezhi']['logo'])? $_W['yuming'].'./gongyong/images/zhiwei_logoss.png' : $_W['shezhi']['shezhi']['logo']}" />
+		</div>
+		<div class="zw-denglu-kuai">
+			<input class="zw-denglu-input" pattern="[0-9]*" type="number" id="shouji" placeholder="手机" />
+		</div>
+		<div class="zw-denglu-kuai">
+			<input class="zw-denglu-input" type="password"  id="mima" placeholder="密码" />
+		</div>
+		<div class="zw-denglu-kuai1" v-show="duanxin==1">
+			<input class="zw-denglu-input zw-juzhong"  :value="duanxin==1 ? '':'1111'"  type="text" placeholder="动态验证码" />
+		</div>
+		<div  class="zw-denglu-an" v-show="duanxin==1" id="fasong">发送</div>
+		<div class="zw-denglu-kuai zw-juzhong"  type="submit" id="zhuce">注册</div>
+		<a class="zw-denglu-kuai zw-juzhong"  href="{php echo UA('denglu',array('z'=>SHIJIAN))}" >已有账号点此登录</a>
+		<!--<div class="zw-denglu-di" v-if="tx.kai">{{tx.zi}}</div>-->
+		
+</div>
+
+{mb js}
+<script type="text/javascript">
+		    new Vue({
+		  		el:'#den',
+		  		data:{
+		  			xieyi:'',duanxin:'',tx:false
+		  		},		  		
+		  		beforeCreate:function(){		  			
+		  			var that=this;
+		  			$z.post('{$_W["url"]}',{c:'shezhi'},function(s){			  				
+		  				that.duanxin=s.shu.duanxin.dayu.zhuce.kaiguan;
+		  				$('#den').show();
+		           	});		           
+		  		},	
+		  		methods:{
+		  		
+		  		}
+		  	})
+		     
+		   $('#fasong').click(function(){	
+				var shi=$(this).attr('shi');	
+				if(shi==1){
+					return false;
+				}else{
+					$(this).attr('shi',1);
+					var i=60;	
+					var stop=setInterval(function(){
+						i--;
+						$('#fasong').html(i+'s');
+						if(i<=0){
+							clearInterval(stop);
+							$('#fasong').removeAttr('shi').html('发送');
+						}
+					},1000);
+					$.post('{php echo UA("denglu/zhuce")}',{c:'yanzhengma',shouji:$('#shouji').val()},function(shu){		
+						if(shu.shi==1){
+							 $z.toast(shu.shu);
+						}else{
+						  $z.toast(shu.shu);
+						   clearInterval(stop);
+						   $('#fasong').removeAttr('shi').html('发送');	
+						}
+					},'json');
+					
+				}
+			})
+		    
+		    
+		    $('#zhuce').click(function(){			    	
+		    			var txt=document.getElementsByTagName("input");
+		    			var leixing=document.getElementById('leixing');
+		   				if(txt[0].value==""){
+			    			$z.toast('请输入手机号');
+			    		}else if(!(/^1(3|4|5|7|8)\d{9}$/.test(txt[0].value))){
+			    			$z.toast('手机号输入有误');
+			    		}else if(txt[2].value==""){
+			    			$z.toast('请输入验证码');
+			    		}else if(txt[1].value==""){
+			    			$z.toast('请输入密码');
+			    		}else if(txt[1].value.length>20||txt[1].value.length<6){
+			    			$z.toast('请设置6~20位数的密码');
+			    		}else if(txt[1].value!=txt[1].value){
+			    			$z.toast('两次密码不同');
+			    		}else{
+							$z.post('{php echo UA("denglu/zhuce")}',{
+								shouji:txt[0].value,
+								yanzheng:txt[2].value,
+								mima:txt[1].value,
+								querenmima:txt[1].value,								
+							},function(data){							
+								if(data.shi==1){
+									$z.toast('注册成功');
+									setTimeout(function(){
+										window.location.href=data.shu.url;	
+									},1000);
+								}else{
+									$z.toast(data.shu);
+								}
+							   
+							},'json');
+						}
+			});
+		    
+	    
+</script>
+{mb jiao}

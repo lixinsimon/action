@@ -1,0 +1,85 @@
+{mb 'tou'}
+<style type="text/css">
+
+	#wqb{
+		display: none;
+	}
+	.zw-shenglue{
+	 	overflow: hidden; /*自动隐藏文字*/
+	    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	    white-space: nowrap;/*强制不换行*/
+	}
+	.xiaoxi{
+		width: 100%;
+		padding: .2rem;
+		float: left;
+		box-sizing: border-box;
+	}
+	.xiaoxi-b{
+		float: right;
+		width: 100%;
+		text-align: right;
+	}
+	.xiaoxi-t{
+		float: left;
+		width: 100%;
+		font-size:.3rem;
+	}
+</style>
+	<div id="wqb">
+
+		
+		 <div class="touhang">
+			<a onclick="$z.go()"><img style="width: auto !important; " src="{$_W['gongyou']}/images/左箭头.png" /></a>
+			<div >{{leixing==1?'我的消息':'系统消息'}}</div>
+		</div>
+		
+		<section id="J_List" style="background: #FFFFFF;">
+		    <div id="J_ListContent">
+		    	<div class="xiaoxi"  v-for="L in lie">
+		    		<div class="xiaoxi-t">{{L.neirong}}</div>
+		    		<div class="xiaoxi-b">{{L.shijian}}</div>
+		    	</div>
+		    </div>
+		</section>
+	
+	</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+			el:"#wqb",
+			data:{					
+	  			qian:0.00,
+	  			lie:[],
+	  			leixing:1,
+	  			ye:0,
+	  			jitiao:10
+			},
+			
+		})
+    $('#J_List').infiniteScroll({
+        pageSize: V.jitiao,
+        initLoad: true,
+        loadingHtml: '<strong>加载中...</strong>',
+        loadListFn: function () {
+            var def = $.Deferred();
+            V.ye=V.ye+1;
+            $z.post("{$_W['url']}",{ye:V.ye,jitiao:V.jitiao,bi:'xiaoxi',c:'lie'},function(ret){            	
+            	if(ret.shi==1){	            		
+	            	for(var i in ret.shu.lie){
+        		    	V.$set(V.lie,V.lie.length++,ret.shu.lie[i]);            		    	
+        		    }  
+	            }              	
+             	if( ret.shu.lie==''){
+	            	ret.shu.lie='没有了';
+	            }
+                def.resolve(ret.shu.lie);               
+                $("#wqb").show();
+            });
+            return def.promise();
+        }
+    });
+</script>
+{mb jiao}
+
+	

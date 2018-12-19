@@ -1,0 +1,156 @@
+{mb 'tou'}
+<style>
+.checkbox +.checkbox_icon:after {
+    font-family: 'YDUI-INLAY';
+    font-size: .44rem;
+    content: '\e604';
+    color: #D9D9D9;
+}
+
+.checked +.checkbox_icon:after{
+	content: '\e601';
+	color: #ff8300;
+}
+#shouchan{
+	display: none;
+}
+</style>
+	<div id="shouchan">
+		<header class="m-navbar" >
+		    <a  class="navbar-item" onclick="$z.go()">
+		        <i class="back-ico"></i>
+		    </a>
+		    <div class="navbar-center">
+		   		  收藏商品	
+		    </div>
+		   
+		</header>
+			<label class="cell-item shouchan" v-for="(L,index) in lie" >				
+		        <span class="cell-left shou_z"  style="width: 85%;">
+		        	<img :src="L.tu" />
+		        	<div class="shou_name">
+		        		{{L.ming}}<font color="red" v-if='!L.zhuangtai'> (库存不足已删除)</font>
+		        	</div>
+		        	<div class="shou_jia">
+		        		￥<span :jiage='L.jiage' ref="jiage">{{L.jiage}}</span>
+		        	</div>
+		        
+		        </span>				
+		        <label class="cell-right" v-if='L.zhuangtai'>
+		            <input type="checkbox" @click="Xuan(index)" ref='xuan' class="checkbox checked" checked="checked" />		           
+		            <i class="checkbox_icon"></i>
+		        </label>
+		         <label class="cell-right" v-else>		          
+		            <input type="checkbox" class="checkbox" ref='xuan' disabled="disabled"/>		                     
+		        </label>
+		    </label>
+	    <div class="dibu shang_di" >			
+			<label class="cell-right" style="padding-right:0px;position: relative;width: 35%;">								
+	            <input  class="shoudi checkbox checked" type="checkbox" ref='quanxuan' @click="QuanXuan" checked="checked" />
+	            <i class="checkbox_icon shoudi"></i>
+	            <span class="shouzhi">全选</span>				
+		    </label>
+		    <div style="position: absolute;right:0px;bottom: 0px;width: 65%;">
+				<a  class="dibu_d" style="background:#ff3918;width: 35%;float: right;" @click="ShanChu">取消收藏</a>
+		       
+		     </div>
+		</div>
+		</div>
+{mb js}
+<script type="text/javascript">
+
+new Vue({
+	el:"#shouchan",
+	data:{
+		lie:[],
+  		bian:{"jie":false,"txt":"编辑"},
+  		zongjia:0,
+	},
+	methods:{
+		QuanXuan:function(){			
+			var x=this.$refs.xuan;
+			var checked=this.$refs.quanxuan.getAttribute('checked');
+			if(!checked){
+				this.$refs.quanxuan.setAttribute('checked','checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox checked');
+			}else{				
+				this.$refs.quanxuan.removeAttribute('checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox');
+			}
+			for(i in x){
+				var disabled= this.$refs.xuan[i].getAttribute('disabled');	
+				if(checked){
+			        this.$refs.xuan[i].removeAttribute('checked','checked');	
+			        this.$refs.xuan[i].setAttribute('class','checkbox');
+			    }else if(!disabled){
+			    	this.$refs.xuan[i].setAttribute('checked','checked');
+			    	this.$refs.xuan[i].setAttribute('class','checkbox checked');
+			    }
+			}
+			
+		},
+		Xuan:function(index){
+			var checked=this.$refs.xuan[index].getAttribute('checked');
+			if(checked){
+				this.$refs.xuan[index].removeAttribute('checked');
+				this.$refs.xuan[index].setAttribute('class','checkbox');				
+			}else{
+				this.$refs.xuan[index].setAttribute('checked','checked');
+				this.$refs.xuan[index].setAttribute('class','checkbox checked');
+			}
+			var x=this.$refs.xuan;
+			var all=true;
+			for(i in x){
+				var c=this.$refs.xuan[i].getAttribute('checked');
+				if(!c && all){
+			       all=false;
+			    }
+			}			
+			if(all){
+				this.$refs.quanxuan.setAttribute('checked','checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox checked');
+			}else{				
+				this.$refs.quanxuan.removeAttribute('checked');
+				this.$refs.quanxuan.setAttribute('class','shoudi checkbox');
+			}
+		},
+		
+		ShanChu:function(){
+			if(!this.ids){			 
+			   return false;
+			}
+			var sp=[];
+			var lie=this.lie;
+			var a=0;
+			for(i in this.ids_No){					
+			      sp[a++]=lie[i];	
+			}		
+			this.lie=sp;
+			$z.post("{php echo UXK('dingdan/gouwuche')}",{c:'shanchu',ids:this.ids},function(s){
+				 $z.toast(s.shu);
+			});
+			
+		},
+		
+	},
+	beforeCreate:function(){
+		var that=this;
+		$z.post("{php echo UXK('dingdan/gouwuche')}",function(shu){	
+			console.log(shu);
+			if(shu.shi==1){			
+				that.lie=shu.shu;			
+			}else{				
+				$z.toast(shu.shu);
+			}
+			$("#shouchan").show();
+		});		
+	},	
+	
+	
+});
+
+</script>
+
+{mb jiao}
+
+	

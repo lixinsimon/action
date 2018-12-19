@@ -1,0 +1,106 @@
+<form class="form-horizontal" id="input_box_add_no" method="post" action="{php echo UHK('xitong/wendang', array('c'=>'tianjia'))}" onsubmit=""><div class="panel-body">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">排序</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="" name="paixu" value="">
+            <span class="help-block m-b-none">文档的显示顺序，越大则越靠前</span>
+        </div>
+    </div>
+    <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="" name="biaoti" value="">
+        </div>
+    </div>
+    <div class="line line-dashed b-b line-lg"></div>        
+    <div class="form-group">
+        <label class="col-sm-2 control-label">文档类别</label>
+        <div class="col-sm-5">
+            <select name="leibie" class="form-control m-b">
+                <option>请选择一级分类</option>
+                {loop $fenlei $item}
+                <option value="{$item['id']}">{$item['ming']}</option>
+                {/loop}
+            </select>
+        </div>
+        <div class="col-sm-5">
+            <!-- <select name="account" class="form-control m-b">
+          <option>请选择二级分类</option>
+        </select> -->
+        </div>
+    </div>
+    <!-- <div class="line line-dashed b-b line-lg"></div> -->
+    <!--  <div class="form-group">
+      <label class="col-sm-2 control-label">选择内容模板</label>
+      <div class="col-sm-10">
+        <select name="template" class="form-control">
+          <option value="">使用默认设置</option>
+            <option value="default">微站默认模板</option>
+          </select>
+      </div>
+    </div> -->
+    <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">简介</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" name="jianjie" rows="5"></textarea>
+        </div>
+    </div>   
+    <div class="form-group">
+        <label class="col-sm-2 control-label">内容</label>
+        <div class="col-sm-10">
+            <div style="width:85%">{php echo BianJiQi('neirong')}</div>
+        </div>
+    </div>
+    <div class="line line-dashed b-b line-lg"></div>
+</div>
+<!-- <header class="panel-heading text-left bg-light">
+    积分设置
+</header>
+<div class="panel-body">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">是否赠送积分</label>
+        <div class="col-sm-10">
+            <div class="radio-inline i-checks">
+                <label>
+                    <input type="radio" name="shifouzengsongjifen" value="1">
+                    <i></i> 赠送
+                </label>
+            </div>
+            <input type="text" name="jifenzhi" value="" class="form-control" style="display: inline-block;width: 80px">
+            <div class="radio-inline i-checks">
+                <label>
+                    <input type="radio" name="shifouzengsongjifen" value="0" checked>
+                    <i></i> 不赠送
+                </label>
+            </div>
+            <span class="help-block m-b-none">设置赠送积分后,粉丝在分享时赠送积分.粉丝的好友在点击阅读时,也会赠送积分</span>
+        </div>
+    </div>
+</div> -->
+<div class="panel-body">
+    <div class="form-group col-sm-12">
+        <input type="submit" value="提交" class="btn btn-danger col-lg-1">
+        <input type="hidden" name="token" value="aa7ccb8a">
+    </div>
+</div>
+</form>
+<!--<script type="text/javascript">
+$('[name="tiquneirongtu"]', "#gong2").click(function() {
+    var form = $(this).closest('form');
+    var n = form.find('[name="neirong"]').val();
+    var img = n.match(/.*?<img.*?src="([^\s]+)".*?>.*/);
+    if (img) {
+        var r = img[1];
+        if (r) {
+            var suoluetu = form.find('[name=suoluetu]');
+            suoluetu.val(r);
+            suoluetu.parent().next().children('img').attr("src", r);
+        }
+    } else {
+        alert('未找到正确的图片路径，请上传后重新选择');
+        return false;
+    }
+});
+</script>-->

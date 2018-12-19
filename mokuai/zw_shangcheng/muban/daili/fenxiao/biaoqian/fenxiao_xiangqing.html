@@ -1,0 +1,90 @@
+
+  <div class="alert alert-info">
+    <font class="m-r-sm">提现单号：{$tixian['dingdanhao']}</font>
+  	<font class="m-r-sm">申请日期：{php echo date('Y-m-d H:i:s',$tixian['shenqingshijian'])}</font>
+  	{if $tixian['shenheshijian']}
+		<font class="m-r-sm">审核时间：{php echo date('Y-m-d H:i:s',$tixian['shenheshijian'])}</font>
+		{/if}
+		{if $tixian['dakuanshijian']}
+		<font class="m-r-sm">打款时间：{php echo date('Y-m-d H:i:s',$tixian['dakuanshijian'])}</font>
+		{/if}		
+		</br>
+		<font class="m-r-sm">账号：{$tixian['zhanghao']}</font></br>
+		<font class="m-r-sm">昵称：{$tixian['nicheng']}</font>	</br>
+		<font class="m-r-sm">手机号：{$tixian['shouji']}</font>	
+  </div>
+  <div class="alert alert-info">  	
+    <font class="m-r-sm">开户名：{$tixian['kaihuming']}</font>
+  	<font class="m-r-sm">卡号：{$tixian['kahao']}</font>
+		<font class="m-r-sm">银行：{$tixian['yinhang']}</font>
+		<font class="m-r-sm">开户行：{$tixian['kaihuhang']}</font>	
+	</br>	
+ </div>  
+ <div class="alert alert-info">  	
+    <font class="m-r-sm">支付宝：{$tixian['zhifubao_zhanghao']}</font>
+  	<font class="m-r-sm">姓名：{$tixian['zhifubao_ming']}</font>		
+	</br>	
+ </div>
+  <div class="table-responsive b b-light">
+	<table class="table m-b-none">
+	  <thead>	  	
+	    <tr>
+          <th width="30%" style="min-width:350px;overflow: hidden;">商品信息</th>
+          <th width="15%" style="vertical-align:middle;text-align:center">商品单价/数量</th>          
+	      </tr>
+	  </thead>
+	  <tbody>
+	  	{loop $dingdan $dd}     
+		  <tr class="panel-heading">
+          <td colspan="7">[创客城]订单编号：{$dd['dingdanhao']}&nbsp;&nbsp; 下单时间：{php echo date('Y-m-d H:i:s',$dd['xiadanshijian'])}&nbsp;&nbsp;余额：{$dd['yj']}</td>
+     </tr>      
+      {loop $dd['shangpin'] $sp}
+      <tr>
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{$sp['tu']}" class="dker" >
+          </span>
+          <font class="m-l-xs" style="line-height:40px;">{$sp['ming']}</font>
+        </td>
+        <td style="vertical-align:middle;text-align:center">{$sp['jiage']}*{$sp['shuliang']}</td>   
+         
+      </tr>
+      {/loop}    
+      {/loop}
+      
+      {loop $duihuan_dingdan $dd}     
+		  <tr class="panel-heading">
+          <td colspan="7">[积分商城]订单编号：{$dd['dingdanhao']}&nbsp;&nbsp; 下单时间：{php echo date('Y-m-d H:i:s',$dd['xiadanshijian'])}&nbsp;&nbsp;余额：{$dd['yj']}</td>
+     </tr>      
+      {loop $dd['shangpin'] $sp}
+      <tr>
+        <td style="vertical-align:middle;">
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{$sp['tu']}" class="dker" >
+          </span>
+          <font class="m-l-xs" style="line-height:40px;">{$sp['ming']}</font>
+        </td>
+        <td style="vertical-align:middle;text-align:center">{$sp['jiage']}*{$sp['shuliang']}</td>          
+      </tr>
+      {/loop}    
+      {/loop}
+		
+	  </tbody>
+	</table>
+  </div>
+  <br>
+  <div class="block text-right"><label class="label label-primary font-thin">{php echo $zhuangtai_text[$tixian['zhuangtai']]}</label>&nbsp;&nbsp; &nbsp;&nbsp; 实际打款：<font class="i-2x text-danger">{$tixian['jin_e']}</font>元</div>
+  <div class="form-group m-t-md">
+  <input type="hidden" id="tixianid" value="{$tixian['id']}" />
+  <input type="hidden" id="zhuangtai" value="{$tixian['zhuangtai']}" />
+  {if empty($tixian['zhuangtai']) || $tixian['zhuangtai']==5}
+	<a href="{php echo UDK('fenxiao',array('c'=>'xingqingpost','id'=>$tixian['id'],'zhuangtai'=>'shenhe'))}" class="btn btn-success m-l-md">批量审核通过</a>
+	{/if}
+	{if $tixian['zhuangtai']==10}
+	 <a href="{php echo UDK('fenxiao',array('c'=>'xingqingpost','id'=>$tixian['id'],'zhuangtai'=>'dakuan'))}" class="btn btn-success m-l-md" onclick="return confirm('确认打款到【{php echo $tixianfangshi_text[$tixian['tixianfangshi']]}】')">给他打款到【{php echo $tixianfangshi_text[$tixian['tixianfangshi']]}】</a>
+	{/if}
+	{if $tixian['zhuangtai']!=5 and $tixian['zhuangtai']<20}
+	<a href="{php echo UDK('fenxiao',array('c'=>'xingqingpost','id'=>$tixian['id'],'zhuangtai'=>'wuxiao'))}" class="btn btn-danger">无效</a>
+	{/if}	
+  </div>
+

@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+	<div class="panel-heading">数据统计</div>
+	<div class="panel-body">
+		<div class="row">
+		  <div class="col-md-9 col-md-push-5">
+		  	总积分：<i style="color: red; font-size: 50px;">{$zong_e}</i>
+		  </div>
+		  <div class="col-md-3 col-md-pull-9">
+		  	<form class="form-inline" role="form" method="post">
+		  	  <input type="hidden"  name="c" value="{$cao}_post"/>		  	  
+			  <div class="form-group">
+			    <label class="sr-only" for="exampleInputEmail2">增/减</label>
+			    <input type="text" class="form-control" name="jifen" placeholder="增/减积分">
+			  </div>	
+			  <button type="submit" class="btn btn-default">提交</button>
+			</form>
+		  	
+		  </div>
+		</div>
+		
+	</div>	
+</div>
+<div class="table-responsive panel-body">
+	<table class="table table-hover">		
+		<thead class="navbar-inner">
+			<tr>
+				<th style="width:44px;">ID</th>
+				<th style="width:300px;">标题</th>							
+				<th>积分数</th>				
+				<th style="width:190px;">时间</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			{loop $lie $L}
+			<tr>
+				<td>{$L['id']}</td>
+				<td>{$L['shuoming']}</td>						
+				<td>					
+					<span class="label label-primary">{$L['zhi']}</span>
+				</td>				
+				<td>{php echo date('Y-m-d H:i:s',$L['shijian'])}</td>				
+			</tr>
+			{/loop}
+		</tbody>
+	</table>
+	{$fenye}
+</div>

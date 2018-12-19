@@ -1,0 +1,197 @@
+{mb 'tou'}
+<!--<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />-->
+<style type="text/css">
+	.list-title{
+		display: -webkit-box !important;
+		-webkit-line-clamp: 2 !important;
+		line-height: .35rem !important;
+		height: .7rem !important;
+		-webkit-box-orient: vertical !important;
+		white-space:pre-wrap !important;
+		font-weight: normal !important;
+		font-size: 12px !important;
+	}
+	.list-item {
+		width: 33.33% !important;
+	}
+	.slider-pagination-item{
+		height: 3px !important;
+		border-radius: 0% !important;
+		width: 10px !important;
+		opacity: .3;
+	}
+	.slider-pagination-item-active{
+		background: #fff !important;
+			opacity: 1 !important;
+	}
+	.hengkuai{
+		width: 100%;
+		float: left;
+		line-height: 1rem;
+		height: .9rem;
+		text-align: center;
+		background: #fff;
+		color: #000000;
+		font-size: .34rem;
+	}
+	.list-del-price{
+		padding-left: 0;
+		margin-left: 0;
+		display: block;
+		text-decoration: line-through;
+	}
+	.list-theme1{
+		padding: 0 .2rem 0;
+		background: #fff;
+	}
+	.list-item{
+		padding: 0 !important;
+		width: 32% !important;
+		margin-top: 0 !important;
+		margin-bottom: .2rem;
+	}
+	.list-item:nth-child(3n-1){
+		margin: 0 2% 0;
+	}
+	.list-price{
+		font-size: 12px;
+		color: rgb(255, 3, 0);
+		font-weight:bold;
+	}
+	.list-del-price:after{
+		border-top: 0 ;
+	}
+	.son{
+		position: absolute;
+		right: 0;
+		font-size: .3rem;
+		line-height: .2rem;
+	}
+	.son em{
+		font-size: .2rem;
+	}
+	.son img{
+		position: absolute;
+		left: -.35rem;
+		width: .25rem;
+	}
+	.list-item{
+		position: relative;
+	}
+	.shouqing{
+		position: absolute;
+		right:0rem;
+		bottom: 0rem;
+		width: .9rem !important;
+		height: .9rem !important;
+		margin-top: 0rem !important;
+		background: none !important;
+	}
+	.list-img{
+		position: relative;
+	}
+</style>
+<div id="app">
+	<div class="m-slider" id="J_Slider" >
+            <div class="slider-wrapper" style="height: auto;">
+                <div class="slider-item" v-for="(lunboo,index) in lunbo" style="height: auto;">
+                    <a :href="lunboo.url">
+                        <img :src="lunboo.tu">
+                    </a>
+                </div>
+            </div>
+            <div class="slider-pagination"></div>
+            <!-- 分页标识 -->
+    </div>
+</div>
+<div class="hengkuai">
+	VIP专区
+</div>
+
+<section id="J_List" >
+    <div id="J_ListContent"  class="m-list list-theme1" ></div>
+</section>	
+<div style="width: 100%;height: 53px;"></div>
+{mb daohang}	
+	{mb js}
+	<script type="text/javascript">
+	 new Vue({
+		  		el:'#app',
+		  		data:{
+		  			lunbo:[],
+		  		},		  		
+		  		beforeCreate:function(){		  			
+		  			var that=this;
+		  			$z.post('{$_W["url"]}',{c:'lunbo'},function(s){
+		  				that.lunbo=s.shu.dianzhao;
+		  				var fx={php echo json_encode($_W['shezhi']['fenxiang'])};
+		  				  fx.url='{$_W["url"]}'+'&t='+'{$_W["huiyuan"]["id"]}';
+						$z.FenXiang(fx,function(shu){});
+		  			});
+				},
+				updated:function(){
+					  $('#J_Slider').slider({
+	                   speed: 200,
+	                   autoplay: 2000,
+	                   lazyLoad: true
+	                 });
+				},
+		});
+		/*上拉加载*/
+		var page = 1, pageSize = 8;
+	    $('#J_List').infiniteScroll({
+	        pageSize: pageSize,
+	        initLoad: true,
+	        loadingHtml: '<strong>加载中...</strong>', /* 当然也可以<img src="../img/loading.gif" /> */
+	        loadListFn: function () {
+	            var def = $.Deferred();
+	            $z.post('{$_W["url"]}',{ye: page, jiazaishu: pageSize},function(ret){
+	            	if(ret.shi==1){	            		
+	            	  var html = '';             	
+	            	  for(var i=0;i<ret.shu.length;i++){
+	            	  	html +='<a href="'+ret.shu[i].href+'" class="list-item J_Link"   data-page="' + page + '"> ';
+					    html +='<div class="list-img"><span><img src="'+ret.shu[i].tu+'"></span>';
+					    if(ret.shu[i].kucun<=0 || ret.shu[i].kucun==''){
+					    	  html +='<img class="shouqing"  src="{$_W['gongyou']}/images/shouqing.png" />';
+					    }
+					   
+					    html +=' </div><div class="list-mes"><div class="list-title">'+ret.shu[i].ming+'</div>';
+					    html +='<div class="list-mes-item"><div>';
+					    html +='<span class="list-del-price" style=" font-size: 12px;display: block;color: #b9b9b9;">￥'+ret.shu[i].yuanjia+'</span>';
+					    html +='<span class="list-price"><em>¥</em>'+ret.shu[i].jiage+'</span>';
+					    if(ret.shu[i].songliquan>0){
+					    	  html +='<span class="son"><img  src="{$_W['gongyou']}/images/li.png" /><em>x</em>'+ret.shu[i].songliquan+'</span>';
+					    }
+					  
+					    html +='</div></div></div></a>';
+					    
+	            	  } 	            	 
+					   $('#J_ListContent').append(html);
+	            	}          	  
+	
+                    /* 获取数据，并插入页面后，调用resole，并传入当前获取的记录列表集合 */
+                    def.resolve(ret.shu);
+                    /* 页码自增1 */
+                    ++page;
+	            	
+	            });	           
+	            return def.promise();
+	        }
+	    });
+		
+</script>
+<div class="huibg" style="display: none;" >
+	<img src="{php echo JueDuiUrl($_W['shezhi']['shezhi']['guanzhu'])}" />
+</div>
+<script type="text/javascript">
+	$z.post('{php echo  UA("gongyou/guanzhu")}', function(shu) {
+		if(shu.shi) {
+			if(shu.shu.guanzhu!=1){
+				$(".huibg").show();
+			}
+		} 
+	});
+</script>
+{mb jiao}
+
+	

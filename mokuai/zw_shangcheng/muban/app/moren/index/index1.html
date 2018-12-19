@@ -1,0 +1,459 @@
+{mb 'tou'}
+<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+	#app{
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		min-width: 355px;
+		padding-bottom: 5rem;
+	}
+	header a{
+		float: left; 
+		margin-left: 6%;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	header a:hover{
+		color: #C09853;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+	.c_ts p{
+		float: left;
+		margin-left: 13%;
+		color: #C09853;
+		margin-top: 5px;
+	}
+	.dog{
+		width: 100% ;
+	}
+	.sk{
+		width: 90%;
+		height: 1.6rem;
+		border-radius:5px;
+		margin-left: 5%;
+	}
+	.c_xs p{
+		margin-top: 0.3rem;
+		margin-left: 10px;
+	}
+	.c_xs span{
+		background-color: #C09853;
+		color: #FFFFFF;
+		padding-left: 0.1rem;
+		padding-right: 0.1rem;
+		border-radius: 3px;
+	}
+	.c_rm{
+		width: 100%;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.c_rm_y{
+		text-align: center;
+		width: 33%;
+		float: left;
+		margin-bottom: 0.2rem;
+	}
+	.c_rm_y img {
+		width: 80%;
+		height: 1.9rem;
+		margin-left: 10%;
+		margin-right: 10%;
+		border-radius: 50%;
+	}
+	.c_rm_y p{
+		line-height: 15px;
+	}
+	.c_rm_y p:nth-of-type(1){
+		color: #333;
+	}
+	.c_rm_y p:nth-of-type(2){
+		color: #CCCCCC;
+		font-size: 10px;
+	}
+	.c_rm_y p:nth-of-type(3){
+		color: red; 
+	}
+	.c_dd{
+		margin-top: 10px;
+		margin-bottom: 5px;
+	}
+	.x_xw{
+		width: 100%;
+		margin-top: 10px;
+	}
+	.x_hz{
+		text-align: center;
+		width: 20%;
+		float: left;
+		margin-left: 4%;
+	} 
+	.x_hz img{
+		width: 100%;
+		border-radius: 50%;
+		height: 1.4rem;
+	}
+	.x_hz p{
+		line-height: 20px;
+	}
+	.x_hz p:nth-of-type(1){color: #333;}
+	.x_hz p:nth-of-type(2){
+		color: red; 
+		margin-bottom: 10px;
+	}
+	.c_h{
+		width: 100%;
+		margin-top: 10px;
+	}
+	.x_ht{
+		text-align: center;
+		width: 20%;
+		float: left;
+		margin-left: 4%;
+	}
+	.x_ht img{
+		width: 100%;
+		border-radius: 50%;
+		margin-bottom: 0.2rem;
+		height: 1.4rem;
+	}
+	.x_ht p:nth-of-type(1){color: #333;}
+	.x_ht p:nth-of-type(2){
+		color: red; 
+		margin-bottom: 10px;
+	}
+	.c_j{
+		width: 100%;
+		margin-top: 10px;
+	}
+	.x_jz{
+		text-align: center;
+		width: 20%;
+		float: left;
+		margin-left: 4%;
+	}
+	.x_jz img{
+		width: 100%;
+		border-radius: 50%;
+		height: 1.4rem;
+	}
+	.x_jz p:nth-of-type(1){color: #333;}
+	.x_jz p:nth-of-type(2){
+		color: red; 
+		margin-bottom: 10px;
+	}
+	.c_xp{
+		margin-top: 10px;
+		margin-bottom: 5px;
+		margin-left: 10px;
+	}
+	.c_sf{
+		width: 100%;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.c_gq{
+		text-align: center;
+		width: 33%;
+		float: left;
+	}
+	.c_gq img {
+		width: 80%;
+		margin-left: 10%;
+		border-radius: 50%;
+		height: 1.9rem;
+	}
+	.c_gq p:nth-of-type(1){color: #333;}
+	.c_gq p:nth-of-type(2){
+		color: #CCCCCC;
+		font-size: 10px;
+	}
+	.c_gq p:nth-of-type(3){
+		color: red; 
+	}
+	.c_ls{
+		width: 98%;
+		margin-left: 1%;
+		margin-right: 1%;
+		line-height: 20px;
+	}
+	.c_ls img{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.c_ls p:nth-of-type(1) span{
+		color: red;
+		float: right;
+	}
+	.c_ls p:nth-of-type(2) span{
+		border: 1px solid #C09853;
+		font-size: 10px;
+		color: #C09853;
+		padding-top:0.05rem ;
+	}
+	.sss{
+		height: 1.3rem;
+	}
+	.sk_t{
+		height: 90px;
+		background-color: #edeef2;
+		padding-top: 6px;
+	}
+	strong{
+		color: #C09853;
+	}
+	.c_bj{
+		background-color: #edeef2;
+		height: 10px;
+		margin-top: -0.3rem;
+	}
+	.c_bj2{
+		background-color: #edeef2;
+		height: 10px;
+	}
+	a{
+		text-decoration: none;
+		color: #333;
+	}
+	.huadongcaidan{
+		display: inline;
+		width: 1024px;
+		float: left;
+	}
+	.huadongcaidan li{
+		width: 1.5rem;
+		line-height: 0.5rem;
+		text-align: center;
+		float: left;
+	}
+	.toubucaidan{
+		width: 100%;
+		overflow: hidden;
+		overflow-x: scroll;
+	}
+	.toubucaidan::-webkit-scrollbar {display:none}
+	#J_Slider{
+		width: 100%;
+		height: 4.3rem;
+	}
+</style>
+
+<div id="app" >
+	<header class="toubucaidan">
+			<!--<a href="#" v-for="hdd in hd">{{ hdd.h }}</a>-->
+			<ul class="huadongcaidan">
+				<li v-for="hdd in hd">{{hdd.h}}</li>
+			</ul>
+			<div style="clear: both;"></div>
+	</header>
+	<div class="m-slider" id="J_Slider">
+	    <div class="slider-wrapper">
+	        <div class="slider-item">
+	            <a href="#">
+	                <img src="http://static.ydcss.com/uploads/ydui/1.jpg">
+	            </a>
+	        </div>
+	        <div class="slider-item">
+	            <a href="#">
+	                <img src="http://static.ydcss.com/uploads/ydui/2.jpg">
+	            </a>
+	        </div>
+	        <div class="slider-item">
+	            <a href="#">
+	                <img src="http://static.ydcss.com/uploads/ydui/3.jpg">
+	            </a>
+	        </div>
+	    </div>
+	    <div class="slider-pagination"></div><!-- 分页标识 -->
+	</div>
+
+	<div class="c_ts">
+		<p v-for="ts_ts in ts_s"><i class="icon-checkoff"></i> {{ ts_ts.s }}</p>
+		<div style="clear: both;"></div>
+	</div>
+	<div class="sk_t">
+		<img class="sk" src="http://www.zhiwi.cn/mokuai/zw_shengxian/muban/app/moren/gongyou/images/datu_02.jpg" />
+	</div>
+	
+	<div class="c_xs">
+		<p><strong>·</strong>&nbsp;限时热卖&nbsp;<span>08</span> : <span>08</span> : <span>08</span></p>
+	</div>
+	<div class="c_rm">
+		<div class="c_rm_y">
+			<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522313187&di=e534cf24d9c7a726f56cee36fe392658&imgtype=jpg&er=1&src=http%3A%2F%2Fn1.itc.cn%2Fimg8%2Fwb%2Fsmccloud%2F2015%2F06%2F30%2F143564527551608684.JPEG">
+			<p>糖心苹果</p>
+			<p>"色泽鲜艳"</p>
+			<p>￥26.8</p>
+		</div>
+		<div class="c_rm_y">
+			<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522313187&di=e534cf24d9c7a726f56cee36fe392658&imgtype=jpg&er=1&src=http%3A%2F%2Fn1.itc.cn%2Fimg8%2Fwb%2Fsmccloud%2F2015%2F06%2F30%2F143564527551608684.JPEG">
+			<p>糖心苹果</p>
+			<p>"色泽鲜艳"</p>
+			<p>￥26.8</p>
+		</div>
+		<div class="c_rm_y">
+			<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522313187&di=e534cf24d9c7a726f56cee36fe392658&imgtype=jpg&er=1&src=http%3A%2F%2Fn1.itc.cn%2Fimg8%2Fwb%2Fsmccloud%2F2015%2F06%2F30%2F143564527551608684.JPEG">
+			<p>糖心苹果</p>
+			<p>"色泽鲜艳"</p>
+			<p>￥26.8</p>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	<div class="c_bj"></div>
+	<div class="c_dd">&nbsp;<strong>·</strong>&nbsp;寻味地道</div>
+	<img class="sk" src="http://www.zhiwi.cn/mokuai/zw_shengxian/muban/app/moren/gongyou/images/datu_02.jpg" />
+	<div class="x_xw">
+		<div class="x_hz">
+			<img src="http://img0.imgtn.bdimg.com/it/u=1021859388,457340886&fm=27&gp=0.jpg">
+			<p>新疆蜜枣</p>
+			<p>￥39.5</p>
+		</div>
+		<div class="x_hz">
+			<img src="http://img0.imgtn.bdimg.com/it/u=1021859388,457340886&fm=27&gp=0.jpg">
+			<p>新疆蜜枣</p>
+			<p>￥39.5</p>
+		</div>
+		<div class="x_hz">
+			<img src="http://img0.imgtn.bdimg.com/it/u=1021859388,457340886&fm=27&gp=0.jpg">
+			<p>新疆蜜枣</p>
+			<p>￥39.5</p>
+		</div>
+		<div class="x_hz">
+			<img src="http://img0.imgtn.bdimg.com/it/u=1021859388,457340886&fm=27&gp=0.jpg">
+			<p>新疆蜜枣</p>
+			<p>￥39.5</p>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	<img class="sk" src="http://www.zhiwi.cn/mokuai/zw_shengxian/muban/app/moren/gongyou/images/datu_02.jpg" />
+	<div class="c_h">
+		<div class="x_ht">
+			<img src="http://photocdn.sohu.com/20150605/mp17805960_1433484836445_2.jpeg">
+			<p>云南古法黑糖</p>
+			<p>￥78</p>
+		</div>
+		<div class="x_ht">
+			<img src="http://photocdn.sohu.com/20150605/mp17805960_1433484836445_2.jpeg">
+			<p>云南古法黑糖</p>
+			<p>￥78</p>
+		</div>
+		<div class="x_ht">
+			<img src="http://photocdn.sohu.com/20150605/mp17805960_1433484836445_2.jpeg">
+			<p>云南古法黑糖</p>
+			<p>￥78</p>
+		</div>
+		<div class="x_ht">
+			<img src="http://photocdn.sohu.com/20150605/mp17805960_1433484836445_2.jpeg">
+			<p>云南古法黑糖</p>
+			<p>￥78</p>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	<img class="sk" src="http://www.zhiwi.cn/mokuai/zw_shengxian/muban/app/moren/gongyou/images/datu_02.jpg" />
+	<div class="c_j">
+		<div class="x_jz">
+			<img src="http://s3.sinaimg.cn/mw690/003sQbc4zy7eBPM5dV8c2&690">
+			<p>脐橙</p>
+			<p>￥35.8</p>
+		</div>
+		<div class="x_jz">
+			<img src="http://s3.sinaimg.cn/mw690/003sQbc4zy7eBPM5dV8c2&690">
+			<p>脐橙</p>
+			<p>￥35.8</p>
+		</div>
+		<div class="x_jz">
+			<img src="http://s3.sinaimg.cn/mw690/003sQbc4zy7eBPM5dV8c2&690">
+			<p>脐橙</p>
+			<p>￥35.8</p>
+		</div>
+		<div class="x_jz">
+			<img src="http://s3.sinaimg.cn/mw690/003sQbc4zy7eBPM5dV8c2&690">
+			<p>脐橙</p>
+			<p>￥35.8</p>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	<div class="c_bj2"></div>
+	<p class="c_xp"><strong>·</strong>&nbsp;新品首发</p>
+	<div class="c_sf">
+		<div class="c_gq">
+			<img src="http://map1.zw3e.com:8080/zw_news_map/550/2016033/1458730634735577208.png">
+			<p>黑枸杞</p>
+			<p>"美容养颜"</p>
+			<p>￥26.8</p>
+		</div>
+		<div class="c_gq">
+			<img src="http://map1.zw3e.com:8080/zw_news_map/550/2016033/1458730634735577208.png">
+			<p>黑枸杞</p>
+			<p>"美容养颜"</p>
+			<p>￥26.8</p>
+		</div>
+		<div class="c_gq">
+			<img src="http://map1.zw3e.com:8080/zw_news_map/550/2016033/1458730634735577208.png">
+			<p>黑枸杞</p>
+			<p>"美容养颜"</p>
+			<p>￥26.8</p>
+		</div>
+		
+		<div class="c_gq">
+			<img src="http://0.rc.xiniu.com/g1/M00/3D/2A/CgAGTFeQKf6AD_EfAAETHXWvWwo040.jpg">
+			<p>海鸭蛋</p>
+			<p>"松沙冒油"</p>
+			<p>￥39.6</p>
+		</div>
+		<div class="c_gq">
+			<img src="http://0.rc.xiniu.com/g1/M00/3D/2A/CgAGTFeQKf6AD_EfAAETHXWvWwo040.jpg">
+			<p>海鸭蛋</p>
+			<p>"松沙冒油"</p>
+			<p>￥39.6</p>
+		</div>
+		<div class="c_gq">
+			<img src="http://0.rc.xiniu.com/g1/M00/3D/2A/CgAGTFeQKf6AD_EfAAETHXWvWwo040.jpg">
+			<p>海鸭蛋</p>
+			<p>"松沙冒油"</p>
+			<p>￥39.6</p>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	<div class="c_ls">
+		<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521806730384&di=6ed601b11670acda12a360376da8d1b7&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F35a85edf8db1cb1336c71c3bd654564e92584b6f.jpg">
+		<p>新鲜货源，公益添香<span>￥29.9</span></p>
+		<p>山东滨州落花生  5斤装&nbsp;<span><i class="icon-star"></i>星级好评</span></p>
+	</div>
+	<div class="sss"></div>
+	<div style="clear: both;"></div>
+</div>
+	{mb daohang}
+	{mb js}
+	<script type="text/javascript">	
+		
+		  new Vue({
+		  		el:'#app',
+		  		data:{
+		  			shu:[{'text':'标题','fubiaoti':"文字描述",'jiage':'12'},{'text':'标题','fubiaoti':"文字描述",'jiage':'12'},{'text':'标题','fubiaoti':"文字描述",'jiage':'¥12'}],
+		  			hd:[{'h':'地道推荐'},{'h':'礼品卡'},{'h':'水果生鲜'},{'h':'有机养生'},{'h':'粮油副食'},{'h':'粮油副食'},{'h':'粮油副食'},{'h':'粮油副食'},{'h':'粮油副食'},{'h':'粮油副食'},{'h':'粮油副食'},{'h':'粮油副食'}],
+		  			ts_s:[{'s':'特色精选'},{'s':'产品直供'},{'s':'全场包邮'}]
+		  		},		  		
+		  		beforeCreate:function(){		  			
+		  		           
+		  		},		
+				
+				updated:function(){
+				
+				},
+		  })
+		    $('#J_Slider').slider({
+		        speed: 200,
+		        autoplay: 2000,
+		        lazyLoad: true
+		    });
+	
+		</script>
+
+	
+{mb jiao}

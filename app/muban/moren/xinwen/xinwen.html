@@ -1,0 +1,144 @@
+{mb tou}
+<style>
+            .u-tab {
+                width: 100%;
+                height: 44px;
+                background: #FFFFFF;
+                display: flex;
+                justify-content: flex-start;
+            }
+            .u-tab > a {
+                padding: 0 15px;
+                line-height: 44px;
+                box-sizing: border-box;
+            }
+            .u-tab > a.active {
+                border-bottom: 2px #F74F32 solid;
+                color: #F74F32;
+            }
+            .u-tab-content {
+                position: relative;
+                /*margin-top: 10px;*/
+                min-height: 390px;
+            }
+            .u-tab-item{ display: none; background:#FFFFFF; }
+            .u-tab-item.active{ display: block; }
+            .mui-bar-nav~
+            .mui-content .u-tab-content .mui-pull-top-pocket {
+                top: 0;
+            }
+            .u-tab-content .mui-scroll {
+                
+            }
+            
+            .list-media{ padding: 0; list-style:none; }
+            .item-link{ display:flex; justify-content:flex-start; align-items: stretch; overflow:hidden; width:100%; }
+            .item-media>img{ width:100%; max-width:80px; max-height:80px; display:block; }
+            .item-media{ padding: 10px; width: 25%; }
+            .item-inner{ width: 75%; }
+            .item-inner>h3{ font-weight:400; padding: 5px 15px 0 0; overflow:hidden; text-overflow:ellipsis; color: #333 }
+            .item-inner>div{ padding-bottom: 5px; color:#999 }
+        </style>
+    </head>
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a  ontouchstart="api.closeWin()" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left back"></a>
+            <h1 class="mui-title">新闻列表</h1>
+        </header>
+        <div class="mui-content" style="margin-bottom: 51px;">
+            <div class="u-tab">
+                <!--<a class="active" >a</a>-->
+            </div>
+            <div class="u-tab-content">
+                <div id="refreshContainer" class="mui-scroll-wrapper">
+                    <div class="mui-scroll"> </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $.post('{php echo UAK("xinwen/index")}', {
+                c : "fenlei"
+            }, function(shu) {
+                if (shu.shi == 1) {
+                    var utabh = $(".u-tab");
+                    var utabb = $(".u-tab-content .mui-scroll");
+                    $(shu.shu).each(function(i, o){
+                        utabh.append('<a class="'+(i == 0?'active':'')+'" data-type="'+o.id+'">'+o.ming+'</a>');
+                        utabb.append('<div class="u-tab-item '+(i == 0?'active':'')+'"><ul class="mui-table-view" style="background:#fff;"></ul></div>');
+                    });
+                    mui.init({
+                        pullRefresh : {
+                            container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+                            down : {
+                                height:50,//可选,默认50.触发下拉刷新拖动距离,
+//                              auto: true,//可选,默认false.自动下拉刷新一次
+                                contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+                                contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+                                contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+                                callback :function(){
+                                    $(".u-tab-item.active ul").attr("data-ye", 1).html("");
+                                    datapull($(".u-tab>a.active").attr('data-type'), $(".u-tab-item.active ul"), function(){
+                                        mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+                                    });
+//                                  setTimeout(function(){
+        //                                                          mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+//                                  }, 2000)
+                                },
+                            },
+                            up: { 
+                                height:50,//可选.默认50.触发上拉加载拖动距离
+                                auto:true,//可选,默认false.自动上拉加载一次
+                                contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                                contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                                callback : function() {
+                                    datapull($(".u-tab>a.active").attr('data-type'), $(".u-tab-item.active ul"), function(){
+                                        mui('#refreshContainer').pullRefresh().endPullupToRefresh();
+                                    });
+                                }
+                            }
+                        }
+                    });
+                }
+            }, "json");
+            
+            $(".u-tab-content").height($(window).height()-88);
+            $(".u-tab").on('click', 'a',function(){
+                var t = $(this);
+                t.siblings().removeClass("active");
+                t.addClass("active");
+                $(".u-tab-item").not(t.index()).hide().removeClass('active');
+                $(".u-tab-item").eq(t.index()).show().addClass('active');
+                datapull($(this).attr('data-type'), $(".u-tab-item ul").eq(t.index()), function(){});
+            });
+            
+            function datapull(type, target, pullobj) {
+                var ye = target.attr('data-ye') || "1";
+                $.post('{php echo UAK("xinwen/index")}', {
+                    type : type,
+                    ye : ye,
+                    c: "app"
+                }, function(shu) {
+                    if (shu.shi == 1) {
+                        $(target).append(shu.shu);
+                        target.attr('data-ye', ++ye);
+                    }
+                    pullobj();
+                }, 'json');
+            }
+            
+            $(".u-tab-content").on('tap', 'li>a', function(){
+                var t = $(this);
+                // api.openWin({name:'wentineirong',url:'wentineirong.html',pageParam:{id:""+t.attr('data-id')}});
+                location.href = t.attr("data-zhijielianjie")
+            });
+
+            $(".u-tab-content").on('tap', '[data-xq]', function(e){
+                var t = $(this);
+                // api.openWin({name:'wentineirong',url:'wentineirong.html',pageParam:{id:""+t.attr('data-id')}});
+                
+                location.href = t.attr("data-xq");
+                e.stopPropagation()
+                return false;
+            });
+        </script>
+{mb jiao}

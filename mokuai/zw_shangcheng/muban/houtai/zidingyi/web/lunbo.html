@@ -1,0 +1,10 @@
+
+<div id="{$shu['ming']}" class="m-slider shengxian_lunbo" style="overflow: hidden;height: 150px;"  >
+	<div class="slider-wrapper  " >
+		<div class="slider-item" v-for="(item,index) in shu.{$k}.lunbo">
+			<a @click="DaKai(item.url)" ><img :src="item.tu" /></a>
+		</div>		
+	</div>
+	<div class="slider-pagination"></div>
+</div>
+

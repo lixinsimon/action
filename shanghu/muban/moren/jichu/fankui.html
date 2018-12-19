@@ -1,0 +1,74 @@
+ {mb tou}
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+              <h2 class="font-thin m-b" style="font-size:20px;">反馈问题</h2>
+        
+        
+        <!-- 内容开始 -->
+			<div class="table-responsive m-t-md" style="overflow:visible;">
+			    <table class="table table-striped b-light">
+			        <thead>
+			            <tr>
+			                <th width="10%">ID</th>
+			                <th width="20%">内容</th>
+			                <th width="15%">反馈人</th>
+			                <th width="20%">时间</th>
+			               
+			                <th>操作</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {loop $juan $j}
+			            <tr>
+			                <td style="vertical-align:middle;text-align: center;">{$j['id']}</td>
+			                <td style="vertical-align:middle;">{$j['neirong']}</td>
+			                <td style="vertical-align:middle;">
+							        <span class="thumb-sm pull-left m-l-xs">                        
+							          <img src="{php echo JueDuiUrl($j['touxiang'])}" style="width: 40px;height: 40px;" class="dker" alt="{$j['nicheng']}">
+							        </span>
+					            <div class="m-l-xs" style="line-height:40px;height: 40px;overflow:hidden; padding-left:5px;">{php echo empty($j['nicheng'])?$j['zhanghao']:$j['nicheng']}</div>
+					        </td>
+			                <td style="vertical-align:middle;">{php echo date('Y-m-d H:i:s',$j['shijian'])}</td>
+			                <td style="vertical-align:middle;overflow:visible;">
+			       
+			                    <a class="btn btn-default  btn-sm" href="{php echo US('jichu/fankui',array('c'=>'shanchu','id'=>$j['id']))}" title="删除" onclick="return confirm('确定要删除该反馈吗？');"><i class="fa fa-remove"></i></a>
+			                </td>
+			            </tr>
+			            {/loop}
+			        </tbody>
+			    </table>
+			</div>
+			<div class="text-left">
+			    {$fenye}
+			</div>
+
+
+  </section>
+          </section>
+        </section>
+
+
+      </section>
+    </section>    
+  </section>
+ 
+ {mb jiao}
+
+
+
+
+
+
+
+
+
+
+
+
+

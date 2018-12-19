@@ -1,0 +1,87 @@
+{mb 'tou'}
+<style type="text/css">
+	.youkuai{
+		position: absolute;
+		width: 24%;
+		height: 100%;
+		background: #ff6a00;
+		right: 0;
+		color: #fff;
+		line-height: 2rem;
+		text-align: center;
+		top: 0;
+	}
+	img{
+		width: 100%;
+	}
+ /*文章*/
+
+.zw-wenzhang-t{
+	float: left;
+	width: 100%;
+	box-sizing: border-box;
+	padding: .2rem;
+	text-align: center;
+}
+.zw-wenzhang-biaoti{
+	width: 100%;
+	float: left;
+	font-size: .6rem;
+}
+.zw-wenzhang-zhi{
+	width: 100%;
+	float: left;
+	line-height: 1rem;
+	font-size: .27rem;
+}
+.zw-wenzhang-b{
+	float: left;
+	padding: .2rem;
+}
+
+</style>
+<div id="app" style="background: #fff;">
+
+<div class="touhang">
+	<a onclick="$z.go()"><img style="width: auto !important; " src="{$_W['gongyou']}/images/左箭头.png" /></a>
+	<div ></div>
+</div>
+	<div class="zw-wenzhang-t zw-bg-fff">
+		<div class="zw-wenzhang-biaoti">{{zhi.biaoti}}</div>
+		<div class="zw-wenzhang-zhi">{{zhi.shijian}}     <span  class="zw-margin-l20 zw-zi-lan">作者：{{zhi.zuozhe}}</span></div>
+	</div>
+	<div v-html="zhi.neirong" class="zw-zuo zw-padding20 zw-w100 zw-bg-fff">
+		
+	</div>
+	<div class="zw-wenzhang-b ">
+		阅读 <span class="zw-margin-l20 zw-zi-lan"> {{zhi.yueducishu}}</span>
+	</div>
+	
+	
+	
+</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+		el:"#app",
+		data:{		
+			zhi:''
+		},
+		methods:{			
+			
+ 			
+		},
+		beforeCreate:function(){
+			var that=this;
+			$z.post('{$_W["url"]}',function(shu){
+				if(shu.shi){
+					that.zhi=shu.shu;
+				}
+			})
+			
+		},
+	}); 
+	
+	
+</script>		
+{mb jiao}

@@ -1,0 +1,59 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+		<meta name=ProgId content=Excel.Sheet>
+		<meta name=Generator content="Microsoft Excel 11">
+	</head>
+	<style>
+		td {
+			border: 1px solid #ccc;
+			padding: 5px 10px;
+			text-align: center;
+		}
+	</style>
+	<body>
+		<table  border=1 cellpadding=0 cellspacing=0 width="100%"  >
+			<tr>
+			   <td>序列</td>
+			   <td>订单号</td>
+			   <td>商品名</td>
+			   <td>单价</td>
+			   <td>数量</td>
+			   <td>收货人</td>
+			   <td>收货电话</td>
+			   <td>省市区</td>
+			   <td>收货地址</td>
+			   <td>商品总价</td>
+			   <td>订单总价</td>
+			   <td>状态</td>
+			   <td>下单时间</td>
+			   <td>支付时间</td>
+			   <td>支付渠道</td>
+			   <td>留言</td>
+			</tr>
+			{php $k=1}
+			{loop $data $val}
+                <tr>
+                   <td>{php echo $k++}</td>
+	               <td>{$val['订单号']}</td>
+				   <td>{$val['商品名']}</td>
+				   <td>{$val['单价']}</td>
+				   <td>{$val['数量']}</td>
+				   <td>{$val['收货人']}</td>
+				   <td>{$val['收货电话']}</td>
+				   <td>{$val['收货省市区']}</td>
+				   <td>{$val['收货地址']}</td>
+				   <td>{$val['商品总价']}</td>
+				   <td>{$val['订单总价']}</td>
+				   <td>{$val['状态']}</td>
+				   <td>{$val['下单时间']}</td>
+				   <td>{$val['支付时间']}</td>
+				   <td>{$val['支付渠道']}</td>
+				   <td>{$val['留言']}</td>
+                 
+               </tr>
+             {/loop}
+		</table>
+	</body>
+
+</html>

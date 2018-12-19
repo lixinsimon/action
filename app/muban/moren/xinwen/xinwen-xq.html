@@ -1,0 +1,17 @@
+{mb tou}
+	<header class="mui-bar mui-bar-nav">
+		<a href="#" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color:#222222"></a>
+		<h1 class="mui-title">{$wenzhang['zidingyishuxing']}新闻</h1>
+	</header>
+	<div class="mui-content" style="padding-top:32px;">
+		<h1 class="xiangqing_tit">{$wenzhang['biaoti']}</h1>
+		<span style="float:left;padding-left:15px;font-size:14px;color:#999;padding-bottom:10px;padding-top:10px;">来源：{$wenzhang['laiyuan']}</span>
+		<span style="float:right;padding-right:15px;font-size:14px;color:#999;padding-bottom:10px;padding-top:10px;">{php echo date("Y-m-d h:i", $wenzhang['shijian'])}</span>
+		<div class="borde" style="clear:both;"></div>
+		<div style="width:95%;margin:0 auto;">
+			{php echo htmlspecialchars_decode($wenzhang['neirong'])}
+		</div>
+		<span style="float:left;padding-left:15px;font-size:14px;color:#999;padding-bottom:10px;padding-top:10px;">点击量：{$wenzhang['yueducishu']}</span>
+		<span style="float:right;padding-right:15px;font-size:14px;color:#999;padding-bottom:10px;padding-top:10px;">作者：{$wenzhang['zuozhe']}</span>
+	</div>
+{mb jiao}

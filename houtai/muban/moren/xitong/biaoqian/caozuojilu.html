@@ -1,0 +1,24 @@
+<div class="table-responsive">
+	<table class="table table-striped b-light">
+		<thead>
+			<tr>
+				<th width="20%">操作</th>
+				<th width="10%">账号</th>
+				<th width="20%">操作时间</th>	
+				<th>链接</th>	
+			</tr>
+		</thead>
+		<tbody>
+			{loop $jilu $g}
+			<tr>
+				<td>{$g['jilu']}</td>				
+				<td title="ID:{$g['hyid']}">{$g['zhanghao']}</td>
+				<td>{php echo date('Y-m-d H:i:s',$g['shijian'])}</td>
+				<td>{$g['url']}</td>			
+			</tr>
+			{/loop}
+
+		</tbody>
+	</table>
+	{$fenye}
+</div>

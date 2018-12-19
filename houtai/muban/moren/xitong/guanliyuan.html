@@ -1,0 +1,35 @@
+{mb tou}
+
+<section class="vbox">
+    {mb dingbu_y}
+    <section>
+      <section class="hbox stretch">
+        {mb zuobu}
+        <!-- 内容开始 -->
+        <section id="content">
+          <section class="vbox">
+            <section class="scrollable m-t padder-lg">
+               <h2 class="font-thin m-b" style="font-size:20px;">用户管理</h2>
+               <!-- right tab -->
+              <section class="panel panel-default">
+                <header class="panel-heading text-right bg-light">
+                  <ul class="nav nav-tabs">
+                    <li {if $b=='moren'}class="active"{/if}><a href="#huguanli_lie" data-toggle="tab"  style="padding:9px 40px 10px;">用户管理</a></li>
+                    <li {if $b=='zulie'}class="active"{/if}><a href="#zuguanli_lie" data-toggle="tab" style="padding:9px 40px 10px;">用户组管理</a></li>                   
+                  </ul>
+                </header>
+                <div class="panel-body">
+                  <div class="tab-content">                   	
+                  	   {mb 'biaoqian/guanliyuan_lie'}                   
+                       {mb 'biaoqian/guanliyuan_zu'}                    
+                  </div>
+                </div>
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>    
+</section>  
+
+{mb jiao}

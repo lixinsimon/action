@@ -1,0 +1,74 @@
+{mb 'tou'}
+<link rel="stylesheet" type="text/css" href="{$_W['gongyou']}/css/kuangjia.css" />
+<style type="text/css">
+	body{
+		background: #eee;
+	}
+
+</style>
+<div id="app" style="display: none;">
+	<div class="touhang">
+			<a onclick="$z.go()"><img src="{$_W['gongyou']}/images/左箭头.png" /></a>
+			<div > {{zhuantai}}	</div>
+	</div>
+
+	<div class=" zw-youhui-bg3 zw-youhui"  v-for="A in lie" @click="lingquan(A.id)">
+			<div class="zw-youhui-z">
+				<div class="zw-youhui-qian">
+					<div class="zw-youhui-qian-k"><span>￥</span>{{A.e}}</div>
+				</div>
+				<div class="zw-youhui-man">满{{A.tiaojian}}元可用</div>
+			</div>
+			<div class="zw-youhui-y">
+				<div class="zw-youhui-biaoti">
+					<span class="zw-bg-huang">微券</span>
+				 	<div>{{A.biaoti}}</div> 
+				</div>
+				<div class="zw-youhui-shijian">{{A.kaishi}}-{{A.jieshu}}</div>
+				<div class="zw-youhui-di">官方<span class="zw-anniu-xiao zw-you zw-zi-huang" style="border: 1px solid #e4b16b;">点击领取</span></div>
+			</div>
+	</div>
+	
+</div>
+	{mb js}
+	<script type="text/javascript">
+		var V=new Vue({
+		el:"#app",
+		data:{		
+			zhuantai:'待领取',ye:1,cao:'',lie:[]
+		},
+		methods:{			
+			JiaZai:function(shu){	 	
+				this.lie=shu.quan;
+				
+ 			},	
+ 			lingquan:function(id){
+ 				$z.post('{$_W["url"]}',{c:'lingqu',id:id},function(shu){
+ 					$z.toast(shu.shu);
+ 					$z.jiazai_chushihua();
+ 				})
+ 			}
+		},
+		beforeCreate:function(){
+			var that=this;
+		
+		},
+	}); 
+	$z.jiazai('',function(){
+	    var zhuangtai=V.cao;
+	    var that=this;
+		var ye=V.ye;
+		$z.post('{$_W["url"]}',{c:zhuangtai,ye:ye},function(ret){
+			if(ret.shi){
+				V.JiaZai(ret.shu);	
+				
+			}else{
+				$z.toast(ret.shu);
+				V.lie=[];
+			}
+			$('#app').show();
+	        V.ye++;
+		});
+	},1);
+</script>		
+{mb jiao}

@@ -1,0 +1,82 @@
+<style>
+	.text-sm span{
+		margin-bottom: 15px;
+	}
+</style>
+
+
+<section class="panel panel-default">
+    <div class="panel-body text-sm">
+		<span class="btn btn-default">累计收入：<span>{$zongji}</span></span><br />
+		<span class="btn btn-default">可提现金额：<span>{$ketixian}</span></span><br />
+		<span class="btn btn-default">累计提现：<span>{$leiji}</span></span><br />
+		<span class="btn btn-default">待处理提现：<span>{$chuli}</span></span><br />
+		<form action="{php echo UDK('dangmianfu/index', array('c'=>'tiquxianjin'))}" method="post">
+			
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="fangshi" id="optionsRadios2" value="bao">
+			    支付宝
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="fangshi" id="optionsRadios2" value="ka">
+			   银行卡
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="fangshi" id="optionsRadios2" value="xin">
+			    微信
+			  </label>
+			</div>
+			<input type="hidden" name="dangmianfu_id" id="shid" value="{$_J['dangmianfu_id']}" />	
+			<input class="btn btn-success" type="submit" value="提取现金"/>
+		</form>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="table-responsive">
+        <table class="table table-striped b-light">
+            <thead>
+                <tr>
+                    <th width="10%">提现号</th>
+                    <th width="15%">金额</th>
+                    <th width="35%">体现方式</th>                    
+                    <th width="25%">提现时间</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                {loop $shanghulie $item}
+                <tr>
+                    <td>{$item['hao']}</td>
+                    <td>{$item['jine']}</td>
+                    <td>
+                	{if $item[fangshi]=='bao'}<span>支付宝</span>{/if}
+	                {if $item[fangshi]=='ka'}<span>银行卡</span>{/if}
+	                {if $item[fangshi]=='xin'}<span>微信</span>{/if}
+                    </td>               
+                    <td>{php echo date('Y-m-d H:i:s',$item[shijian])}</td>
+                    <td style="position:relative;">
+					{if empty($item[zhuangtai])}<label class="label label-danger padder">待核审</label>{/if}
+					{if $item[zhuangtai]==10}<label class="label label-success padder">已打款</label>{/if}  
+                    </td>
+                </tr>
+                {/loop}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-left">{$fenye}</div>
+</section>
+<script type="text/javascript">
+$(function() {    
+    require(['util'], function(util) {
+        $('.js-clip').each(function() {
+            util.clip(this, $(this).attr('data-url'));
+        });
+    });
+
+})
+</script>

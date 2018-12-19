@@ -1,0 +1,293 @@
+{mb 'tou'}
+<style type="text/css">
+	body{
+		background: #fff;
+	}
+	#wode1{
+		display: none;
+	}
+	
+	.tb-hexiaochuli:before{color: #EACF02;}
+	.cell-left .tb-ai-wallet:before{color: #d87049;}
+	.tb-youhuiquan:before{color: #ABC327;}
+	.tb-jifen:before{color: #DFB5B7;}
+	.tb-shoucang:before{color: #7F1874;}
+	.tb-dizhi:before{color: #DB9019;}
+	.cell-left .tb-tixian1:before{color: #943e3e;}
+	.tb-kefu1:before{color: #FF6E97;}
+	.baibeijing{
+		height: 2.2rem;
+		background: #000;
+	}
+	.huangguan{
+		position: initial;
+		top: initial;
+		left: initial;
+		margin: 0;
+		display: flex;
+		height: 100%;
+		width: auto;
+		padding-top: .3rem;
+	}
+	.user-phto{
+		width: 1.46rem;
+		height: 1.46rem;
+		border-radius: 50%;
+		margin: 0 .32rem;
+		overflow: hidden;
+	}
+	.user-phto img{
+		width: 100%;
+		display: block;
+	}
+	.user-msg{
+		flex: 1;
+		text-align: left;
+	}
+	.user-id{
+		font-size: .23rem;
+		margin: .1rem 0;
+		color: #fff;
+	}
+	.huiyuan{
+		margin: 0;
+		width: auto;
+		display: inline-block;
+	}
+	.huiyuan img,.huiyuan h5{
+		display: inline-block;
+	}
+	.m-grids-2{
+		display: flex;
+	}
+	.m-grids-2 .grids-item{
+		flex: 1;
+	}
+	.m-grids-2 .grids-item:not(:nth-child(2n)):before{
+		border-right: none;
+	}
+	.grids-item{
+		padding-top: 0;
+	}
+	.grids-item .grids-txt:last-child{
+		margin-top: .1rem;
+	}
+	.grids-txt{
+		color: #000;
+	}
+	.m-cell .cell-left img{
+		width: .38rem;
+		margin-right:.34rem ;
+	}
+	.cell-right{
+		min-height: .7rem;
+	}
+	.m-grids-2:before{
+		border-bottom: none;
+	}
+	.grids-item:after{
+		width: 0;
+	}
+	.gaix::after{
+		width:0px !important;
+	}
+	.xunzhang{
+		position: absolute;
+		right: 1rem;
+		top: .7rem;
+		text-align: center;
+		line-height: .4rem;
+		color: #fff;
+	}
+	.xunzhang img{
+		width: .6rem;
+		
+	}
+	
+	.k-si{
+		width: 100%;
+		float: left;
+		border-top: .2rem solid #EEEEEE ;
+		display: flex;
+		 flex-wrap:wrap ;
+		
+	}
+	.k-si a{
+		width: 25%;
+		box-sizing: border-box;
+		text-align: center;
+		border-bottom: 1px solid #EEEEEE;
+		border-right: 1px solid #EEEEEE;
+		height: 1.84rem;
+	}
+	.k-si a:nth-child(4){
+		border-right: none;
+	}
+	
+	.k-situ img{
+		width:100%;
+		height: auto;
+		display: inline-block;
+	}
+	.k-situ{
+		float: left;
+		width: 26%;
+		height: .5rem;
+	text-align: center;
+	margin-top: .36rem;
+	margin-left: 37%;
+	}
+	.k-sizi{
+		float: left;
+		width: 100%;
+		text-align: center;
+		font-size: .24rem;
+		color: #6b6b6b;
+		height: .9rem;
+		line-height: .9rem;
+	}
+	
+</style>
+
+<div id="wode1">
+	
+		<div class="baibeijing">
+			<a href="{php echo UAK('wode/shezhi')}"> <i class="icon-setting she" style="position: absolute;"></i></a> 
+			<div class="huangguan">
+				<div class="user-phto">
+					<img :src="shu.touxiang">
+				</div>
+				<div class="user-msg" style="padding-top: .13rem;">
+					<div style="color: #fff;font-size: .3rem;" >{{shu.nicheng?shu.nicheng:shu.xingming}}</div>
+					<div class="user-id">ID:{{shu.id}}</div>
+					<div class="user-id">{{shu.fenxiaodengjiming}}</div>
+				</div>
+			</div>
+			<a href="{php echo UAK('wode/xunzhang')}">
+			<div class="xunzhang" ><img style="margin: 0 auto;" src="{$_W['gongyou']}/images/wodexunzhang.png" />{{shu.xunzhang?shu.xunzhang:0}}</div>
+			</a>
+		</div>
+		<p style="padding-left: .36rem;font-size: .3rem;height: .6rem;background: #fff;"></p>
+		<div class="m-grids-2">
+		    <a href="{php echo UAK('fenxiao/yongjinmingxi',array('zhuangtai'=>1))}"  class="grids-item">
+		        <div class="grids-icon"><img src="{$_W[gongyou]}/images/yu_e.png"></div>
+		        <div class="grids-txt"><span>我的余额</span></div>
+		        <div class="grids-txt"><span>{{shu.yu_e?shu.yu_e:0}}</span></div>
+		    </a>
+		    <a href="{php echo UAK('wode/xliquan')}" class="grids-item">
+		        <div class="grids-icon"><img src="{$_W['gongyou']}/images/liquan.png"></div>
+		        <div class="grids-txt"><span>我的礼券</span></div>
+		        <div class="grids-txt"><span>{{shu.liquan?shu.liquan:0}}</span></div>
+		    </a>
+		     <!--<a  class="grids-item">-->
+		    <a href="{php echo UAK('wode/jifen')}" class="grids-item" >
+	    		 <div class="grids-icon"><img src="{$_W['gongyou']}/images/jifentu.png"></div>
+		        <div class="grids-txt"><span>我的积分</span></div>
+		        <div class="grids-txt"><span>{{shu.jifen?shu.jifen:0}}</span></div>
+		    </a>
+		     <!--</a>--> 
+		</div>
+		<div class="k-si">
+			<a  href="{php echo UAK('dingdan/dingdan',array('zhuangtai'=>'quanbu'))}">
+				<div class="k-situ" >
+					<img style="width:90%" src="{$_W['gongyou']}/images/tuu1.png" />
+				</div>
+				<div class="k-sizi" >我的订单</div>
+			</a>
+			<a  href="{php echo UAK('fenxiao')}">
+				<div class="k-situ" >
+					<img src="{$_W['gongyou']}/images/tuu2.png" />
+				</div>
+				<div class="k-sizi" >我的收益</div>
+			</a>
+			<a  href="{php echo UAK('fenxiao/wodetuandui')}">
+				<div class="k-situ" >
+					<img style="width:96%" src="{$_W['gongyou']}/images/tuu3.png" />
+				</div>
+				<div class="k-sizi" >团队管理</div>
+			</a>
+			<a  href="{php echo UAK('wode/dizhi')}">
+				<div class="k-situ" >
+					<img style="width:82%" src="{$_W['gongyou']}/images/tuu4.png" />
+				</div>
+				<div class="k-sizi" >地址管理</div>
+			</a>
+			
+			<a href="{php echo UAK('wode/quan')}">
+				<div class="k-situ" >
+					<img style="margin-top: .1rem;" src="{$_W['gongyou']}/images/tuu5.png" />
+				</div>
+				<div class="k-sizi" >优惠券</div>
+			</a>
+			<a  href="{php echo UAK('wode/shoucang')}">
+				<div class="k-situ" >
+					<img src="{$_W['gongyou']}/images/tuu6.png" />
+				</div>
+				<div class="k-sizi" >我的收藏</div>
+			</a>
+			<a  href="{php echo UAK('fenxiao/tuiguang')}">
+				<div class="k-situ" >
+					<img src="{$_W['gongyou']}/images/tuu7.png" />
+				</div>
+				<div class="k-sizi" >我的二维码</div>
+			</a>
+			<a  href="{php echo UAK('wode/kefu')}">
+				<div class="k-situ" >
+					<img src="{$_W['gongyou']}/images/tuu8.png" />
+				</div>
+				<div class="k-sizi" >客服与帮助</div>
+			</a>
+			<!--<a  href="{php echo UAK('wode/xxiaoxi')}">
+				<img src="{$_W['gongyou']}/images/xiaoxitongzhi.png" />
+			</a>-->
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+</div>	
+		<div style="width: 100%;height: 53px;">
+			
+		</div>
+		
+		{mb daohang}
+		{mb js}
+		<script type="text/javascript">
+			new Vue({
+				el:"#wode1",
+				data:{
+					shu:{}
+				},
+				beforeCreate:function(){
+					var that=this;
+					
+		            $z.post("{$_W['url']}",function(shu){
+		            	
+		                if(shu.shi==1){
+		                	if(shu.shu.nicheng){
+			                	shu.shu.nicheng=shu.shu.nicheng.substring(0,6);
+		                	}
+		                    that.shu=shu.shu;                
+		                }else if(shu.shi==-1){
+		                	$z.dakai("{php echo UA('denglu')}");
+		                }else{
+		                   	$z.toast(shu.shu);
+		                }
+		                $('#wode1').show();
+		            });
+					$z.dendai();
+				
+				},
+				mounted:function(){
+//					$z.gb_dendai(); 
+				},
+			});
+		</script>
+		
+		
+{mb jiao}

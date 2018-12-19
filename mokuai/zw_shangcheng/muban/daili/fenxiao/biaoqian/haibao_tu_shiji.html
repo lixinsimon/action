@@ -1,0 +1,297 @@
+<style type='text/css'>
+    #poster {
+        width: 320px;
+        height: 504px;
+        border: 1px solid #ccc;
+        position: relative
+    }
+
+    #poster .bg {
+        position: absolute;
+        width: 100%;
+        z-index: 0
+    }
+
+    #poster .drag[type=img] img,
+    #poster .drag[type=thumb] img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #poster .drag {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border: 1px solid #000;
+    }
+
+    #poster .drag[type=nickname] {
+        width: 80px;
+        height: 40px;
+        font-size: 16px;
+        font-family: 黑体;
+    }
+
+    #poster .drag img {
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+    }
+
+    #poster .rRightDown,
+    .rLeftDown,
+    .rLeftUp,
+    .rRightUp,
+    .rRight,
+    .rLeft,
+    .rUp,
+    .rDown {
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        z-index: 1;
+        font-size: 0;
+    }
+
+    #poster .rRightDown,
+    .rLeftDown,
+    .rLeftUp,
+    .rRightUp,
+    .rRight,
+    .rLeft,
+    .rUp,
+    .rDown {
+        background: #C00;
+    }
+
+    .rLeftDown,
+    .rRightUp {
+        cursor: ne-resize;
+    }
+
+    .rRightDown,
+    .rLeftUp {
+        cursor: nw-resize;
+    }
+
+    .rRight,
+    .rLeft {
+        cursor: e-resize;
+    }
+
+    .rUp,
+    .rDown {
+        cursor: n-resize;
+    }
+
+    .rLeftDown {
+        left: -4px;
+        bottom: -4px;
+    }
+
+    .rRightUp {
+        right: -4px;
+        top: -4px;
+    }
+
+    .rRightDown {
+        right: -4px;
+        bottom: -4px;
+    }
+
+    .rRightDown {
+        background-color: #00F;
+    }
+
+    .rLeftUp {
+        left: -4px;
+        top: -4px;
+    }
+
+    .rRight {
+        right: -4px;
+        top: 50%;
+        margin-top: -4px;
+    }
+
+    .rLeft {
+        left: -4px;
+        top: 50%;
+        margin-top: -4px;
+    }
+
+    .rUp {
+        top: -4px;
+        left: 50%;
+        margin-left: -4px;
+    }
+
+    .rDown {
+        bottom: -4px;
+        left: 50%;
+        margin-left: -4px;
+    }
+
+    .context-menu-layer {
+        z-index: 9999;
+    }
+
+    .context-menu-list {
+        z-index: 9999;
+    }
+</style>
+
+<table style="width:100%;">
+    <tbody>
+    <tr>
+        <td style="width:320px;padding:10px;" valign="top">
+            <!--<div id="poster">
+                {php echo $hb['data']}
+
+            </div>-->
+            <div id='poster'>
+                {if !empty($hb['data'])}
+                <img src='{php echo JueDuiUrl($hb['bg'])}' class='bg'/>
+                {/if}
+                {if !empty($hb['data'])}
+
+                {loop $hb['data'] $key $d}
+
+                <div class="drag" type="{$d['type']}" index="{php echo $key+1}"
+                     style="zindex:{php echo $key+1};left:{$d['left']};top:{$d['top']}; width:{$d['width']};height:{$d['height']}"
+                     src="{$d['src']}" size="{$d['size']}" color="{$d['color']}">
+                    {if $d['type']=='qr'}
+                    <img src="..///gongyong/js/haibao/qr.jpg"/>
+                    {elseif $d['type']=='head'}
+                    <img src="..///gongyong/js/haibao/head.jpg"/>
+                    {elseif $d['type']=='img' || $d['type']=='thumb'}
+                    <img src="{php echo empty($d['src'])?'..///gongyong/js/haibao/img.jpg':JueDuiUrl($d['src'])}"/>
+                    {elseif $d['type']=='nickname'}
+                    <div class=text style="font-size:{$d['size']};color:{$d['color']}">昵称</div>
+                    {elseif $d['type']=='title'}
+                    <div class=text style="font-size:{$d['size']};color:{$d['color']}">商品名称</div>
+                    {elseif $d['type']=='marketprice'}
+                    <div class=text style="font-size:{$d['size']};color:{$d['color']}">商品现价</div>
+                    {elseif $d['type']=='productprice'}
+                    <div class=text style="font-size:{$d['size']};color:{$d['color']}">商品原价</div>
+                    {/if}
+                    <div class="rRightDown"></div>
+                    <div class="rLeftDown"></div>
+                    <div class="rRightUp"></div>
+                    <div class="rLeftUp"></div>
+                    <div class="rRight"></div>
+                    <div class="rLeft"></div>
+                    <div class="rUp"></div>
+                    <div class="rDown"></div>
+                </div>
+                {/loop}
+                {/if}
+            </div>
+        </td>
+        <td valign="top" style="padding:10px;">
+            <div class="panel panel-default">
+                <div class='panel-body'>
+                    <div class="form-group" id="bgset">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">背景图片</label>
+                        <div class="col-sm-9 col-xs-12">
+                            {php echo ShangTu('bg',$hb['bg'])}
+                            <span class='help-block'>背景图片尺寸: 640 * 1008</span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">海报元素</label>
+                        <div class="col-sm-9 col-xs-12">
+                            <button class='btn btn-default btn-com' type='button' data-type='head'>头像</button>
+                            <button class='btn btn-default btn-com' type='button' data-type='nickname'>昵称</button>
+                            <button class='btn btn-default btn-com' type='button' data-type='qr'>二维码</button>
+                            <button class='btn btn-default btn-com' type='button' data-type='img'>图片</button>
+                            <span id="goodsparams" style="display:none">
+	                                          <button class='btn btn-default btn-com' type='button' data-type='title'>商品名称</button>
+	                                          <button class='btn btn-default btn-com' type='button' data-type='thumb'>商品图片</button>
+	                                          <button class='btn btn-default btn-com' type='button'
+                                                      data-type='marketprice'>商品现价</button>
+	                                          <button class='btn btn-default btn-com' type='button'
+                                                      data-type='productprice'>商品原价</button>
+	                                     </span>
+                        </div>
+                    </div>
+                    <div id='qrset' style='display:none'>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">二维码尺寸</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <select id='qrsize' class='form-control'>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                    <option value='6'>6</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id='nameset' style='display:none'>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">昵称颜色</label>
+                            <div class="col-sm-9 col-xs-12">
+
+                                <script type="text/javascript">
+                                    require(["jquery", "util"], function($, util){
+                                        $(function(){
+                                            $(".colorpicker").each(function(){
+                                                var elm = this;
+                                                util.colorpicker(elm, function(color){
+                                                    $(elm).parent().prev().prev().val(color.toHexString());
+                                                    $(elm).parent().prev().css("background-color", color.toHexString());
+                                                });
+                                            });
+                                            $(".colorclean").click(function(){
+                                                $(this).parent().prev().prev().val("");
+                                                $(this).parent().prev().css("background-color", "#FFF");
+                                            });
+                                        });
+                                    });
+                                </script>
+                                <div class="row row-fix">
+                                    <div class="col-xs-8 col-sm-8" style="padding-right:0;">
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="color" placeholder="请选择颜色" value="">
+                                            <span class="input-group-addon" style="width:35px;border-left:none;background-color:"></span>
+                                            <span class="input-group-btn">
+						<button class="btn btn-default colorpicker" type="button">选择颜色 <i class="fa fa-caret-down"></i></button>
+						<button class="btn btn-default colorclean" type="button"><span><i class="fa fa-remove"></i></span></button>
+					</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">昵称大小</label>
+                            <div class="col-sm-4">
+                                <div class='input-group'>
+                                    <input type="text" id="namesize" class="form-control namesize"
+                                           placeholder="例如: 14,16"/>
+                                    <div class='input-group-addon'>px</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="imgset" style="display:none">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">图片设置</label>
+                        <div class="col-sm-9 col-xs-12">
+                            {php echo ShangTu('img')}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

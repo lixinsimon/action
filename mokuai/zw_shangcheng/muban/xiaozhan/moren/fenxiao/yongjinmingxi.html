@@ -1,0 +1,46 @@
+{mb 'tou'}
+<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/ydui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/zhiwei.css"/>
+	</head>
+	<body>
+		<header class="m-navbar">
+			<a onclick="$z.go()" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">余额明细</div>
+		</header>
+		<section id="J_List" style="background: #FFFFFF;">
+		    <div id="J_ListContent"></div>
+		</section>
+		{mb js}
+	<script type="text/javascript">
+			var page = 1, pageSize = 10;
+		    $('#J_List').infiniteScroll({
+		        pageSize: pageSize,
+		        initLoad: true,
+		        loadingHtml: '<strong>加载中...</strong>',
+		        loadListFn: function () {
+		            var def = $.Deferred();
+		            $z.post("{$_W['url']}",{ye:page,jitiao:pageSize},function(ret){            	
+		            	if(ret.shi==1){	            		
+			            	  var html = '';             	
+			            	  for(var i=0;i<ret.shu.lie.length;i++){	
+			            	  	html+='<div class="yonjin" ><div class="yonjin-t">'+ret.shu.lie[i].nicheng+'<span>'+ret.shu.lie[i].shijian+'</span></div>';
+							    html+='<div class="yonjin-b">余额：+'+ret.shu.lie[i].jin_e+'<span>'+ret.shu.lie[i].zhuangtai_wenzi+'</span></div></div>';
+			            	  } 	            	 
+							   $('#J_ListContent').append(html);
+			            	}  
+		            	$('#J_ListContent').append(html);
+		                def.resolve(ret.shu.lie);
+		                ++page;
+		            });
+		            return def.promise();
+		        }
+		    });
+		</script>
+{mb jiao}
+
+	 

@@ -1,0 +1,26 @@
+<section class="panel panel-default">
+  <div class="table-responsive">
+    <table class="table table-striped b-light">
+      <thead>
+        <tr>
+          <th width="25%">显示顺序</th>
+          <th width="25%">分类名称</th>
+          <th width="25%">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {loop $fenlei $item}
+            <tr>
+                <td>{$item['shuxu']}</td>
+                <td>{$item['ming']}</td>
+                <td>
+                    <a href="#gong3" data-toggle="tab" data_id="{$item['id']}" class="btn btn-success padder-md fenlei_bianji">编辑</a>
+                    <a href="{php echo US('weizhan/fenlei', array('c'=>'shanchu', 'fenlei_id'=>$item['id']))}" class="btn btn-danger padder-md wenzhang_shanchu">删除</a>
+                </td>
+            </tr>
+        {/loop}
+      </tbody>
+    </table> 
+  </div> 
+  <div class="text-left">{$fenye}</div>
+</section>

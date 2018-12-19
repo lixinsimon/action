@@ -1,0 +1,100 @@
+<!-- <form action="" method="get" class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">昵称</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="input-id-1">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">昵称</label>
+    <div class="col-sm-10">
+      <select data-required="true" class="form-control parsley-validated">
+          <option value="">Please choose</option>
+          <option value="foo">Foo</option>
+          <option value="bar">Bar</option>
+      </select>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="input-id-1">昵称</label>
+    <div class="col-sm-10">
+      <select data-required="true" class="form-control parsley-validated">
+          <option value="">Please choose</option>
+          <option value="foo">Foo</option>
+          <option value="bar">Bar</option>
+      </select>
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">关注/取消关注时间</label>
+    <div class="col-sm-10">
+      <input class="input-sm input-s datepicker-input form-control pull-left" size="16" type="text" value="12-11-2016" data-date-format="dd-mm-yyyy">
+    </div>
+  </div>
+  <div class="line line-dashed b-b line-lg pull-in"></div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+    </div>
+  </div>
+</form> -->
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<div class="table-responsive m-t-md">
+  <table class="table table-striped b-light">
+    <thead>
+      <tr>
+        <th width="7%">订单ID</th>
+        <th width="15%">商品信息</th>
+        <th width="15%">评价者</th>
+        <th width="15%">评分角色</th>
+        <th width="15%">内容</th>
+        <th width="15%">回复</th>
+       <!--  <th width="10%">评价状态</th>
+        <th width="10%">回复状态</th> -->
+        <th width="14%">评价时间</th>
+        <th  >操作</th>
+      </tr>
+    </thead>
+    <tbody>
+    {loop $pj $p}
+      <tr>
+        <td>
+         {$p['dingdan']}
+        </td>
+        <td>
+          <span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{php echo JueDuiUrl($p['tu'])}" class="dker">
+          </span>
+          <font class="m-l-xs" style="line-height:40px;overflow: hidden; height: 40px;display: block;margin-left: 3px;"> {$p['ming']}</font>
+        </td>
+        <td><span class="thumb-sm pull-left m-l-xs">                        
+            <img src="{php echo JueDuiUrl($p['touxiang'])}" class="dker">
+          </span>
+          <font class="m-l-xs" style="line-height:40px;overflow: hidden; height: 40px;display: block;margin-left: 3px;">{$p['nicheng']}</font></td>
+        <td>
+        	{php for($i=0;$i<$p['xingji'];$i++){  }
+          <i class="fa fa-star text-xs m-t-xs" style="font-size:20px;color:#fe6700;"></i>
+          {php } }
+        </td>
+        <td>{$p['neirong']}</td>
+        <td>{$p['huifu']}</td>    
+        <td>
+          {php echo date('Y-m-d H:i:s',$p['shijian'])}
+        </td>
+        <td>          
+          <a href="{php echo UHK('dingdan/pingjia',array('c'=>'huifu','id'=>$p['id']))}" class="btn btn-success padder-xs pingjia_huifu">回复</a>
+          <!--<a href="{php echo UHK('dingdan/pingjia',array('c'=>'tianjia','id'=>$p['id']))}"  class="btn btn-info padder-xs add_pingjia">添加</a>-->
+          <a href="{php echo UHK('dingdan/pingjia',array('c'=>'shanchu','id'=>$p['id']))}" class="btn btn-default padder-xs">删除</a>
+        </td>
+      </tr>
+     {/loop}
+      
+    </tbody>
+  </table>
+</div>
+<div class="text-left">
+  {$fenye}
+</div>

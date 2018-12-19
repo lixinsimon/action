@@ -1,0 +1,45 @@
+ {mb tou}
+<section class="vbox">
+    {mb dingbu_caidan}
+    <section>
+        <section class="hbox stretch">
+            {mb zuobu}
+            <!-- 内容开始 -->
+            <section id="content">
+                <section class="vbox">
+                    <section class="scrollable m-t padder-lg">
+                        <!-- right tab -->
+                        <section class="panel panel-default">
+                            <header class="panel-heading text-right bg-light">
+                                <ul class="nav nav-tabs liebiao">
+                                    <li {if $cao=='moren' }class="active" {/if}><a href="{php echo UDK('dingdan/pingjia')}" style="padding:9px 40px 10px;">评价管理</a></li>
+                                    {if $cao=='tianjia'}
+                                    <li class="active"><a style="padding:9px 40px 10px;">添加此商品评价</a></li>
+                                    {elseif $cao=='huifu'}
+                                    <li class="active"><a style="padding:9px 40px 10px;">回复评价</a></li>
+                                    {/if}
+                                </ul>
+                            </header>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <!-- 全部订单 -->
+                                    <div class="tab-pane fade active in">
+                                        {if $cao=='moren'} 
+                                        {mb "biaoqian/pingjia_lie"} 
+                                        {elseif $cao=='tianjia'} 
+                                        {mb "biaoqian/pingjia_tianjia"} 
+                                        {elseif $cao=='huifu'} 
+                                        {mb "biaoqian/pingjia_huifu"} 
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- right tab -->
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+</section>
+{mb jiao}

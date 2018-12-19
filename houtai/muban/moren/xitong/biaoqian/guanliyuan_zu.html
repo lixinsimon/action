@@ -1,0 +1,64 @@
+<div class="tab-pane fade {if $b=='zulie'}active in{/if}" id="zuguanli_lie">
+	<ul class="nav nav-tabs nav-tabs-two m-t-sm" id="tabs_ul">
+		<li class="active">
+			<a href="#group1" data-toggle="tab"  style="padding:0 40px;margin-bottom:15px;">用户组列表</a>
+		</li>
+		<li>
+			<a href="#group2" data-toggle="tab" style="padding:0px 40px;margin-bottom:15px;">添加用户组</a>
+		</li>
+		
+		<li style="display: none;">
+			<a href="#group3" data-toggle="tab" style="padding:0px 40px;margin-bottom:15px;">编辑用户组</a>
+		</li>
+	
+	</ul>
+	<div class="panel-body" style="padding:15px 0px;">
+		<div class="tab-content">
+			<div class="tab-pane fade active in" id="group1">
+				<div class="table-responsive">
+					<table class="table table-striped b-light">
+						<thead>
+							<tr>
+								<th width="15%">名称</th>
+								<th width="25%">公众号数量</th>
+								<th width="25%">有效期限</th>
+								<th width="35%">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							{loop $zu_lie $z}
+							<tr>
+								<td>{$z['zuming']}</td>
+								<td>{if !empty($z['gongzhonghao_shu'])}{$z['gongzhonghao_shu']}个{else}不限{/if}</td>
+								<td>{if !empty($z['youxiao_tian'])}{$z['youxiao_tian']}天{else}不限{/if}</td>
+								<td>
+									<a class="btn btn-success m-r-md bianji" href="#group3" data-toggle="tab" val_id='{$z["id"]}'>编辑</a>
+									<a href="{php echo UH('xitong/guanliyuan',array('c'=>'zu_shanchu','id'=>$z['id'],'b'=>'zulie'))}" class="btn btn-default">删除</a>
+								</td>
+							</tr>
+							{/loop}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="group2">
+				{mb 'biaoqian/guanliyuan_zu_post'}
+			</div>
+			<div class="tab-pane fade" id="group3"></div>
+		</div>
+	</div>
+</div>
+  <script type="text/javascript">
+  $(".bianji").click(function(){
+  	$("#tabs_ul li").removeClass("active");
+  	$("#tabs_ul li:eq(2)").show().addClass("active");
+	$.get("{php echo UH('xitong/guanliyuan',array('c'=>'zu_bianji'))}",{id:$(this).attr('val_id')},function(data){
+		$("#group3").html(data);		
+		
+	})
+  })
+  $("#tabs_ul li:lt(2)").click(function(){
+  	 $("#tabs_ul li:eq(2)").removeClass("active").hide(); 
+  	 $("#group3").html('');	
+  })
+  </script>

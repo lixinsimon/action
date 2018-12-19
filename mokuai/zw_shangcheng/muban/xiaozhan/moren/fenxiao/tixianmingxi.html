@@ -1,0 +1,110 @@
+{mb 'tou'}
+<header class="m-navbar">
+	<a onclick="$z.go()" class="navbar-item">
+		<i class="back-ico"></i>
+	</a>
+	<div class="navbar-center">
+		提现明细
+	</div>
+
+</header>
+<div class="m-tab" id='VUE' data-ydui-tab>
+	<ul class="tab-nav">
+		<li :class="[(active==0)?'tab-active':'','tab-nav-item']"  @click="tab('quanbu')">
+			<a>全部</a>
+		</li>
+		<li :class="[(active==1)?'tab-active':'','tab-nav-item']" @click="tab(0)">
+			<a>待审核</a>
+		</li>
+		<li :class="[(active==2)?'tab-active':'','tab-nav-item']"  @click="tab(10)">
+			<a>待打款</a>
+		</li>
+		<li :class="[(active==3)?'tab-active':'','tab-nav-item']" @click="tab(20)">
+			<a>已打款</a>
+		</li>
+		<li :class="[(active==4)?'tab-active':'','tab-nav-item']"  @click="tab(5)">
+			<a>无效</a>
+		</li>
+	</ul>
+	<div class="tab-panel" id='APP' style="background: #eee;">
+	        <div :class="(active==index)?'tab-panel-item tab-active':'tab-panel-item'"  v-for="(A,index) in ALL">
+		        <div v-for="(L,i) in A" style="margin-top:.1rem;background: #fff;">		
+		        	<div class="yonjin" ><div class="yonjin-t">{{L.dingdanhao}}<span>{{L.zhuangtai_text}}</span></div>
+		        	
+					<div class="yonjin-b">{{L.dingdanhao}}<span>{{L.zhuangtai_text}}</span></div></div>
+	        	</div> 
+	        </div>	        
+	</div>
+</div>
+{mb js}
+ <script type="text/javascript">		 		 	
+ 	var V=new Vue({
+ 		el:"#VUE",
+ 		data:{
+ 			ALL:[{},{},{},{},{}],
+ 			active:0,
+ 			ye:1,
+ 			y:[],
+ 			z:[true,true,true,true,true],
+ 			zhuangtai:0,
+ 			maijiahaoma:''
+ 		},
+ 		methods:{
+ 			JiaZai:function(shu,zhuangtai){	 
+ 				if(zhuangtai=='quanbu'){
+ 				   this.active=0; 			
+ 				}else if(zhuangtai==10){
+ 				   this.active=2; 				
+ 				}else if(zhuangtai==20){
+ 				   this.active=3; 				
+ 				}else if(zhuangtai==5){
+ 				   this.active=4; 				
+ 				}else{
+ 				   this.active=1; 				  
+ 				} 
+ 				var u=this.ye*100;
+ 				for(var i=0;i<shu.length;i++){
+ 					u=Number(u)+Number(i);
+   					this.$set(this.ALL[this.active],u,shu[i]);
+ 				}
+ 			},
+ 			tab:function(zhuangtai){  
+ 				this.zhuangtai=zhuangtai;
+ 				if(!this.y[zhuangtai]){
+ 					this.ye=1;
+ 					$z.jiazai_mei(true);
+ 					$z.jiazai_chushihUX();
+ 				}else{ 					
+ 					$z.jiazai_mei(this.z[zhuangtai]);
+ 				}
+ 			},
+ 		},
+ 		created:function(){
+ 			var z=[];
+ 			    z['quanbu']=[0,'quanbu'];
+ 			    z['daishenhe']=[1,0];
+ 			    z['daidakuan']=[2,10];
+ 			    z['yidakuan']=[3,20];
+ 			    z['wuxiao']=[4,5];
+ 		    var zt=z['{php echo $_J["zhuangtai"]?$_J["zhuangtai"]:"quanbu"}']; 		 
+   			this.active=zt[0];
+   			this.zhuangtai=zt[1];
+ 		}
+ 	});	
+$z.jiazai(function(){
+    var zhuangtai=V.zhuangtai;
+	var ye=V.ye;
+	$z.post('{$_W['url']}',{zhuangtai:zhuangtai,ye:ye,jitiao:4},function(ret){
+		if(ret.shi==1){
+			V.JiaZai(ret.shu.lie,zhuangtai);	
+		}else{
+			V.z[zhuangtai]=false;
+			$z.jiazai_mei(false);
+		}
+        V.ye++;
+		V.y[zhuangtai]=V.ye;
+    });
+},1);
+
+</script>
+{mb jiao}

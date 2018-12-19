@@ -1,0 +1,48 @@
+
+  <div class="alert alert-info">
+    <font class="m-r-sm">提现单号：{$tixian['dingdanhao']}</font>
+  	<font class="m-r-sm">申请日期：{php echo date('Y-m-d H:i:s',$tixian['shijian'])}</font>
+		<font class="m-r-sm">昵称：{$tixian['nicheng']}</font></br>
+		<font class="m-r-sm">手机号：{$tixian['zhanghao']}</font>	
+  </div>
+  <div class="alert alert-info">  	
+    <font class="m-r-sm">提现方式：
+    	{if $tixian[dakuanfangshi]=='zhifubao'}
+    		<span>
+    			支付宝
+    		</span>
+    	{/if}
+    	{if $tixian[dakuanfangshi]=='weixin'}
+    		<span>
+    			微信
+    		</span>
+    	{/if}
+    	{if $tixian[dakuanfangshi]=='yinhang'}
+    		<span>
+    			银行卡
+    		</span>
+    	{/if}
+    </font>
+  	<font class="m-r-sm">卡号或账号：{$tixian[zhanghao]}</font>
+  	{if $tixian[kaifuhang] }
+  	<font class="m-r-sm">开户行：{$tixian[kaifuhang]}</font>
+		{/if}
+	</br>	
+	<font class="m-r-sm">金额：{$tixian['zhi']}元</font>	<br/>
+	<font class="m-r-sm">说明：{$tixian['shuoming']}</font>	
+ </div>  
+
+  <br>
+  <div class="form-group m-t-md">
+  <input type="hidden" id="tixianid" value="{$tixian['id']}" />
+  <input type="hidden" id="leibie" value="{$tixian['leibie']}" />
+  <input type="hidden" id="zhuangtai" value="{$tixian['zhuangtai']}" />
+  {if $tixian[zhuangtai]!=10}
+	<a href="{php echo UHK('yutixian/index',array('c'=>'xingqingpost','id'=>$tixian['id'],'gai'=>10))}" class="btn btn-success m-l-md">审核通过</a>
+	<a href="{php echo UHK('yutixian/index',array('c'=>'xingqingpost','id'=>$tixian['id'],'gai'=>5))}" class="btn btn-danger m-l-md">无效</a>
+	{/if}
+	{if $tixian[zhuangtai]==10 }
+	<a href="{php echo UHK('yutixian/index')}" class="btn btn-danger">返回</a>
+	{/if}
+  </div>
+

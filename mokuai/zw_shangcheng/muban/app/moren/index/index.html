@@ -1,0 +1,619 @@
+{mb 'tou'}
+<style>  
+	#app{
+		width: 100%;
+	}
+	.m-slider{
+		height: auto;
+	}
+	.slider-wrapper{
+		height: auto;
+	}
+	.slider-item{
+		height: auto;
+	}
+	.beijing{
+		background-color: #ecf0f1;
+		padding: 0.2rem;
+	}
+	.tuisong{
+		background-color: #FFFFFF;
+		padding: 0.15rem 0 0.15rem 0.2rem;
+	}
+	.tuisong span:nth-of-type(1){
+		color: #fe595d;
+		font-weight: bold;
+	}
+	.tuisong span:nth-of-type(2){
+		color: #aeaeae;
+	}
+	.fenlei{
+		height: auto;
+		width: 100%;
+		background-color: #FFFFFF;
+		padding: 0.2rem 0.2rem 0.15rem 0.3rem;
+		margin-top: 0.3rem;
+		font-weight: 500;
+		font-size: 0.27rem;
+	}
+	.fen_lei{
+		float: left;
+		width: 17%;
+		margin-right: 5%;
+		margin-left: 3%;
+		text-align: center;
+		line-height: 0.6rem;
+	}
+	.fen_lei img{
+		height: 1.2rem;
+		width: 100%;
+	}
+	.jifen{
+		text-align: center;
+		line-height: 0.4rem;
+		width: 32%;
+		padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+		float: left;
+		background-color: #FFFFFF;
+		margin-top: 0.2rem;
+		margin-bottom: 0.2rem;
+	}
+	.jifen:nth-of-type(3),.jifen:nth-of-type(4){
+		margin-left: 1.9%;
+	}
+	.jifen img{
+		width: 100%;
+	}
+	.jifen p:nth-of-type(1){
+		font-size: 0.35rem;
+		margin-bottom: 0.1rem;
+	}
+	.jifen p:nth-of-type(2){
+		font-size: 0.1rem;
+		color: #858585;
+		overflow : hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+	}
+	.img_1{
+		width: 100%;
+		height: 2rem;
+	}
+	.qianggou{
+		background: #FFFFFF;
+		margin-top: 0.2rem;
+		padding: 0.4rem 0.15rem 0.2rem 0.15rem;
+		position: relative;
+	}
+	.qg_shijian{
+		position: absolute;
+		right: 3%;
+		font-size: 13px;
+	}
+	.qg_shijian span{
+		background-color: #b3d564;
+		border-radius: 5px;
+		padding: 0.08rem 0.15rem 0.03rem 0.15rem;
+		color: #FFFFFF; 
+	}
+	.qg_qg{
+		color: #fe6700;
+		font-size: 22px;
+		font-weight: 600;
+		position: relative;
+		top: -0.17rem;
+	}
+	.qg_shangpin{
+		width: 31%;
+		color: #FFFFFF;
+		float: left;
+		margin-top: 0.2rem;
+	}
+	.qg_shangpin:nth-of-type(3),.qg_shangpin:nth-of-type(4){
+		margin-left: 2.9%;
+	}
+	.qg_shangpin img{
+		width: 100%;
+		height: 2rem;
+	}
+	.qg_shangpin div{
+		width: 100%;
+		padding: 0.1rem 0.2rem;
+		background-color: #75be0d;
+		text-align: center;
+		margin-top: 0.15rem;
+	}
+	.yuanjia{
+		text-decoration: line-through;
+		color: #d6eab5;
+	}
+	.mingcehng{
+		font-size: 15px;
+	}
+	.jiage{
+		font-size: 15px;
+	}
+	.jiage span{
+		font-size: 18px;
+	}
+	.img_2{
+		width: 100%;
+		height: 2rem;
+		margin-top: 0.2rem;
+	}
+	.huadong{
+		width: 1024px;
+	}
+	
+	.rou::-webkit-scrollbar {display:none}
+	.rou{
+		width: 100%;
+		overflow: hidden;
+		overflow-x: scroll;
+		margin: 0.2rem 0 0.2rem 0;
+	}
+	.roulei{
+		width: 15%;
+		float: left;
+		margin-right: 1%;
+	}
+	.rou img{
+		width: 100%;
+		height: 2.4rem;
+		font-weight: bold;
+	}
+	.roulei p{
+		background-color: #FFFFFF;
+		padding: 0.1rem 0.05rem;
+		position: relative;
+	}
+	.roujia{
+		position: absolute;
+		right: 2%;
+		color: #438724;
+		bottom: 0.05rem;
+	}
+	.roujia span{
+		font-size: 16px;
+	}
+	.img_3{
+		width: 100%;
+		height: 2.5rem;
+	}
+	.img_4{
+		width: 100%;
+		height: 0.6rem;
+	}
+	.shuiguo{
+		width: 49%;
+		float: left;
+		margin: 0.2rem 0 0.2rem 0;
+	}
+	.shuiguo:nth-of-type(odd){
+		margin-right: 2%;
+	}
+	.shuiguo img{
+		width: 100%;
+		height: 2.8rem;
+		font-weight: bold;
+	}
+	.pingzhong p{
+		background-color: #FFFFFF;
+		padding: 0.1rem 0.05rem;
+		position: relative;
+	}
+	.shuiguojia{
+		position: absolute;
+		right: 2%;
+		color: #438724;
+		bottom: 0.05rem;
+	}
+	.shuiguojia span{
+		font-size: 16px;
+	}
+	.didian{
+		position: fixed;
+		top: 0;
+		width: 100%;
+		background-color: #1c1b20;
+		padding: 0.3rem 0.3rem 0.4rem 0.3rem;
+		font-size: 16px;
+		height: 1rem;
+		z-index: 999;
+	}
+	.didian div{
+		color: white;
+		float: left;
+	}
+	.inp{
+		float: right;
+		border: none;
+		background-color: #eeebe6;
+		height: 0.6rem;
+		width: 4rem;
+		border-radius: 0.3rem;
+		padding-left: 0.25rem;
+		position: relative;
+		top: -0.07rem;
+		transition: all 0.5s;
+	}
+	#J_Address2{
+		color: white;
+	    border: none;
+	    width: 2rem;
+	}
+	.sou{
+		position: absolute;
+		right: 0.5rem;
+    	top: 0.4rem;
+	}
+	.b1{
+		width: 100% !important; 
+	}
+.didian input::-moz-placeholder{font-size: 12px;}
+.didian input::-webkit-input-placeholder{font-size: 12px;}
+.didian input:-ms-input-placeholder{font-size: 12px;}
+	.m-tabbar{
+		background-color:#000 !important; 
+	}
+	.m-tabbar:after{
+		border-top: none;
+	}
+
+</style>
+<div id="app" style="display: none;">
+	<!--<div class="didian">
+		<div class="lufeng">
+			<i class="icon-location"></i>
+			<input type="text" readonly id="J_Address2">
+		</div>
+		<input class="inp" type="text" placeholder="请输入商家或者商品名称"/>
+		<i class="icon-search sou"></i>
+	</div>-->
+	<div class="m-slider" id="J_Slider" style="padding-top: 0rem;">
+	    <div class="slider-wrapper">
+	        <div class="slider-item" v-for="(lunbotu,index) in lunbo">
+	            <a href="#">
+	                <img :src="lunbotu.tu">
+	            </a>
+	        </div>
+	        <div class="slider-item">
+	            <a href="#">
+	                <img src="http://static.ydcss.com/uploads/ydui/2.jpg">
+	            </a>
+	        </div>
+	        <div class="slider-item">
+	            <a href="#">
+	                <img src="http://static.ydcss.com/uploads/ydui/3.jpg">
+	            </a>
+	        </div>
+	    </div>
+	    <div class="slider-pagination"></div><!-- 分页标识 -->
+	</div>
+	<div class="beijing">
+    	<div class="tuisong">
+	    	<span>消息推送</span> ： <span>{{tuisong}}</span>
+	    </div>
+	    <a href="{php echo UA('pinpai/jieshao/zw_shanghu')}">
+		    <div class="fenlei">
+		    	<div class="fen_lei" v-for="(fen_lei,index) in fenlei">
+		    		<img :src="fen_lei.tu" />
+		    		<p>{{fen_lei.ming}}</p>
+		    	</div>
+		    	<!--<div class="fen_lei">
+		    		<img src="{$_W['gongyou']}/images/jiancai.png" />
+		    		<p>家居建材</p>
+		    	</div>
+		    	<div class="fen_lei">
+		    		<img src="{$_W['gongyou']}/images/ershou.png" />
+		    		<p>二手买卖</p>
+		    	</div>
+		    	<div class="fen_lei">
+		    		<img src="{$_W['gongyou']}/images/zufang.png" />
+		    		<p>租房售房</p>
+		    	</div>
+		    	<div class="fen_lei">
+		    		<img src="{$_W['gongyou']}/images/shengxian.png" />
+		    		<p>生鲜食材</p>
+		    	</div>-->
+		    	<div style="clear: both;"></div>
+		    </div>
+	    </a>
+	    <div class="jifen" v-for="(ji,index) in jifen">
+	    	<p>{{ji.qiang}}</p>
+	    	<p>{{ji.qiandao}}</p>
+	    	<img :src="ji.jifentu" />
+	    </div>
+	    <div class="jifen">
+	    	<!--<p>兑积分</p>
+	    	<p>积分当钱花</p>
+	    	<img src="/gongyong/images/qianbao.png" />-->
+    		<img src="{$_W['gongyou']}/images/huanjifen.jpg" />
+	    </div>
+	    <div class="jifen">
+	    	<!--<p>申请入驻</p>
+	    	<p>打造优质品台</p>
+	    	<img src="/gongyong/images/qianbao.png" />-->
+    		<img src="{$_W['gongyou']}/images/qiangjifen.jpg" />
+	    </div>
+	     <div class="jifen">
+	    	<!--<p>申请入驻</p>
+	    	<p>打造优质品台</p>
+	    	<img src="/gongyong/images/qianbao.png" />-->
+    		<img src="{$_W['gongyou']}/images/wanjifen.jpg" />
+	    </div>
+    		<img class="img_1" src="{$_W['gongyou']}/images/guanggao.jpg" />
+    	<a href="{php echo UA('pinpai/jieshao/zw_shanghu')}">
+	    <div class="qianggou">
+	    	<div>
+	    		<span class="qg_qg">抢购</span>
+	    		<span class="qg_shijian">
+	    			<span>01</span> 天
+		    		<span>20</span> 时
+		    		<span>56</span> 分
+		    		<span>01</span> 秒
+	    		</span>
+	    	</div>
+	    	<div class="qg_shangpin" v-for="(qg_shangpin,index) in qgshangpin">
+	    		<img :src="qg_shangpin.shangpintu" />
+	    		<div>
+	    			<p class="mingcehng">{{qg_shangpin.ming}}</p>
+	    			<p class="jiage">￥<span>{{qg_shangpin.jiage}}</span>.00</p>
+	    			<p class="yuanjia">原价：<span>￥{{qg_shangpin.yuanjia}}</span></p>
+	    		</div>
+	    	</div>
+	    	<div class="qg_shangpin">
+	    		<img src="/gongyong/images/fenlei_02.jpg" />
+	    		<div>
+	    			<p class="mingcehng">新鲜野生鲈鱼</p>
+	    			<p class="jiage">￥<span>83</span>.00</p>
+	    			<p class="yuanjia">原价：<span>￥183.00</span></p>
+	    		</div>  
+	    	</div>
+	    	<div class="qg_shangpin">
+	    		<img src="/gongyong/images/fenlei_02.jpg" />
+	    		<div>
+	    			<p class="mingcehng">新鲜野生鲈鱼</p>
+	    			<p class="jiage">￥<span>83</span>.00</p>
+	    			<p class="yuanjia">原价：<span>￥183.00</span></p>
+	    		</div>
+	    	</div>
+	    	<div class="qg_shangpin">
+	    		<img src="/gongyong/images/fenlei_02.jpg" />
+	    		<div>
+	    			<p class="mingcehng">新鲜野生鲈鱼</p>
+	    			<p class="jiage">￥<span>83</span>.00</p>
+	    			<p class="yuanjia">原价：<span>￥183.00</span></p>
+	    		</div>
+	    	</div>
+	    	 <div style="clear: both;"></div>
+	    </div>
+	    </a>
+    		<img class="img_1" src="{$_W['gongyou']}/images/xia_43.jpg" />
+	    <div class="rou">
+	    	<div class="huadong">
+	    		<!--<div class="roulei" v-for="(rou_lei,index) roulei">
+		    		<img :src="rou_lei.tu" />
+		    		<p>{{rou_lei.ming}}<span class="roujia">￥<span>{{rou_lei.jiage}}</span></span></p>
+		    	</div>-->
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/pingjia_img02.jpg" />
+		    		<p>进口牛肉牛腩块<span class="roujia">￥<span>29.9</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/pingjia_img02.jpg" />
+		    		<p>进口牛肉牛腩块<span class="roujia">￥<span>29.9</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/pingjia_img02.jpg" />
+		    		<p>进口牛肉牛腩块<span class="roujia">￥<span>29.9</span></span></p>
+		    	</div>
+	    	</div>
+	    </div>
+    		<img class="img_3" src="{$_W['gongyou']}/images/jiancaitu.jpg" />
+	    <!--<img class="img_3" :src="img_3" />-->
+	    <div class="rou">
+	    	<div class="huadong">
+	    		<div class="roulei" v-for="(gui_zi,index) in guizi">
+		    		<img :src="gui_zi.tu" />
+		    		<p>{{gui_zi.ming}}<span class="roujia">￥<span>{{gui_zi.jiage}}</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/fenlei_01.jpg" />
+		    		<p>一体式复古床柜<span class="roujia">￥<span>1888</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/fenlei_01.jpg" />
+		    		<p>一体式复古床柜<span class="roujia">￥<span>1888</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/fenlei_01.jpg" />
+		    		<p>一体式复古床柜<span class="roujia">￥<span>1888</span></span></p>
+		    	</div>
+	    	</div>
+	    </div>
+	    <!--<img class="img_3" :src="img_4" />-->
+    		<img class="img_3" src="{$_W['gongyou']}/images/jiancaitu.jpg" />
+	    
+	    <div class="rou">
+	    	<div class="huadong">
+	    		<div class="roulei" v-for="(qun_zi,index) in qunzi">
+		    		<img :src="qun_zi.tu" />
+		    		<p>{{qun_zi.ming}}<span class="roujia">￥<span>{{qun_zi.jiage}}</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/73804298046882877.jpg" />
+		    		<p>红色连衣裙<span class="roujia">￥<span>45</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/73804298046882877.jpg" />
+		    		<p>红色连衣裙<span class="roujia">￥<span>45</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/73804298046882877.jpg" />
+		    		<p>红色连衣裙<span class="roujia">￥<span>45</span></span></p>
+		    	</div>
+	    	</div>
+	    </div>
+	    <!--<img class="img_3" :src="img_5" />-->
+    		<img class="img_3" src="{$_W['gongyou']}/images/maimaitu.jpg" />
+	    
+	    <div class="rou">
+	    	<div class="huadong">
+	    		<div class="roulei" v-for="(jia_ju,index) in jiaju">
+		    		<img :src="jia_ju.tu" />
+		    		<p>{{jia_ju.ming}}<span class="roujia">￥<span>{{jia_ju.jiage}}</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>130平米欧美三居<span class="roujia">￥<span>6500</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>130平米欧美三居<span class="roujia">￥<span>6500</span></span></p>
+		    	</div>
+		    	<div class="roulei">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>130平米欧美三居<span class="roujia">￥<span>6500</span></span></p>
+		    	</div>
+	    	</div>
+	    </div>
+	    <!--<img class="img_4" :src="img_6" />-->
+    		<img class="img_3" src="{$_W['gongyou']}/images/ershoutu.jpg" />
+	    
+	    <div class="shuiguo" v-for="(shui_guo,index) in shuiguo">
+	    	<div class="pingzhong">
+		    		<img :src="shui_guo.tu" />
+		    		<p>{{shui_guo.ming}}<span class="shuiguojia">￥<span>{{shui_guo.jiage}}</span></span></p>
+		    	</div>
+	    </div>
+	    <div class="shuiguo">
+	    	<div class="pingzhong">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>南非黄柠檬3个装<span class="shuiguojia">￥<span>10</span></span></p>
+		    	</div>
+	    </div>
+	    <div class="shuiguo">
+	    	<div class="pingzhong">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>南非黄柠檬3个装<span class="shuiguojia">￥<span>10</span></span></p>
+		    	</div>
+	    </div>
+	    <div class="shuiguo">
+	    	<div class="pingzhong">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>南非黄柠檬3个装<span class="shuiguojia">￥<span>10</span></span></p>
+		    	</div>
+	    </div>
+	    <div class="shuiguo">
+	    	<div class="pingzhong">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>南非黄柠檬3个装<span class="shuiguojia">￥<span>10</span></span></p>
+		    	</div>
+	    </div>
+	    <div class="shuiguo">
+	    	<div class="pingzhong">
+		    		<img src="/gongyong/images/118223927905862602.jpg" />
+		    		<p>南非黄柠檬3个装<span class="shuiguojia">￥<span>10</span></span></p>
+		    	</div>
+	    </div>
+	    <div style="clear: both;"></div>
+    </div>
+	<div style="width: 100%;height: 53px;"></div>
+</div>
+	<!--{mb daohang}-->
+	{mb js}
+	<script src="http://static.ydcss.com/uploads/ydui/ydui.citys.js"></script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=bWVVbvF9vAzBKLA1bsNEX5agMu0jv9kd"></script>
+	<script>
+		new Vue({
+			el:'#app',
+			data:{
+				lunbo:[],
+				tuisong:'',
+				fenlei:[],
+				jifen:[],
+				img_1:'',
+				qgshangpin:[],
+				img_2:'',
+				rou_lei:[],
+				img_3:'',
+				guizi:[],
+				img_4:'',
+				qunzi:[],
+				img_5:'',
+				jiaju:[],
+				img_6:'',
+				shuiguo:[]
+			},
+			beforeCreate: function(){
+				var that = this;
+				$z.post('{$_W["url"]}',function(s){
+					if(s.shi==1){
+						that.lunbo=s.shu.dianzhao;
+						that.fenlei=s.shu.fenlei;
+					}
+				});
+				$('#app').show();
+			}
+		})
+	    $('#J_Slider').slider({
+	        speed: 200,
+	        autoplay: 2000,
+	        lazyLoad: true
+	    });
+	    $(function(){
+		    var $target = $('#J_Address2');
+		    $(window).scroll( function() {
+		        var h =	250;
+		        if( $(document).scrollTop() > h ){
+		        	$('.lufeng').css('position','absolute').hide();
+		        	$('.inp').addClass('b1');
+		        }else{
+		        	$('.inp').removeClass('b1');
+			        setTimeout(function(){$('.lufeng').show();},500);
+		        }
+		        
+		    });
+		    var sj;
+		    var cs;
+		    var qx;
+		    var geolocation = new BMap.Geolocation();  
+			// 创建地理编码实例      
+			var myGeo = new BMap.Geocoder();      
+			geolocation.getCurrentPosition(function(r){  
+				if(this.getStatus() == BMAP_STATUS_SUCCESS){  
+					var pt = r.point;   
+					// 根据坐标得到地址描述    
+					myGeo.getLocation(pt, function(result){      
+					if (result){      
+						var addComp = result.addressComponents;  
+							sj = addComp.province;
+							sj = sj.substring(0,sj.length-1);
+							cs = addComp.city;
+							qx = addComp.district;
+							$target.citySelect({
+						        provance: sj,
+						        city: cs,
+						        area: qx
+						    });
+							$('#J_Address2').val(cs);
+						}      
+					});   
+				}  
+			});  
+ 
+		
+		    $target.on('click', function () {
+		        $target.citySelect('open');
+		    });
+		
+		    $target.on('done.ydui.cityselect', function (ret) {
+		        $(this).val(ret.area);
+		    });
+		});
+		
+	</script>
+{mb jiao}

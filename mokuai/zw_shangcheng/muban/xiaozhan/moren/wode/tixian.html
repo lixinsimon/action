@@ -1,0 +1,157 @@
+{mb tou}
+<style type="text/css">
+	.tixian .cell-left {
+		width: 20%;
+	}	
+	.cell-right input[type="radio"]:checked+.cell-checkbox-icon:after,
+	.cell-right input[type="checkbox"]:not(.m-switch):checked+.cell-checkbox-icon:after {
+		font-size: 0.32rem;
+	}
+</style>
+<header class="m-navbar">
+	<a onclick="$z.go()" class="navbar-item"><i class="back-ico"></i></a>
+	<div class="navbar-center">提现记录</div>
+</header>
+<div class="m-tab" data-ydui-tab id="tixian">
+	<ul class="tab-nav">
+		<li class="tab-nav-item tab-active">
+			<a href="javascript:;">提现</a>
+		</li>
+		<li class="tab-nav-item">
+			<a href="javascript:;">记录</a>
+		</li>
+	</ul>
+	<div class="tab-panel">
+		<div class="tab-panel-item tab-active tixian">
+            <form @submit.prevent="onSubmit">			
+            	<div class="cell-item">
+				<div class="cell-left">提现方式</div>
+				<div class="cell-right" style="position: relative;">
+					<label class="cell-item" @click="gai" style="position: absolute;left: 0px;padding-left: 0px;">
+				        <span class="cell-left">微信</span>
+				        <label class="cell-right">
+				            <input type="radio" name="radio" ref="dian" value="weixin"  checked v-model="from.dakuaifangshi"/>
+				            <i class="cell-checkbox-icon"></i>
+				        </label>
+					</label>
+					<label class="cell-item" @click="gai" style="float: left;position: absolute;left: 20%;">
+				        <span class="cell-left">银行/支付宝</span>
+				        <label class="cell-right">
+				            <input type="radio" name="radio" value="yinhang" v-model="from.dakuaifangshi"/>
+				             <i class="cell-checkbox-icon"></i>
+				        </label>
+					</label>
+				</div>
+			</div>
+			<div class="cell-item">
+				<div class="cell-left">金额</div>
+				<div class="cell-right"><input type="number" pattern="[0-9]*" class="cell-input" :placeholder="'可提现'+ketixian+'元'" v-model="from.jin_e"/></div>
+			</div>
+			<div v-if="kai">
+				<div class="cell-item">
+					<div class="cell-left">姓名</div>
+					<div class="cell-right"><input type="text" class="cell-input" placeholder="请输入姓名" v-model="from.ming"/></div>
+				</div>
+				<div class="cell-item">
+					<div class="cell-left">账号</div>
+					<div class="cell-right"><input type="text" class="cell-input" placeholder="银行账号/支付宝" v-model="from.zhanghao"/></div>
+				</div>
+				<div class="cell-item">
+					<div class="cell-left">开户银行</div>
+					<div class="cell-right"><input type="text" class="cell-input" placeholder="如是支付宝不填写" v-model="from.kaihhang"/></div>
+				</div>
+			</div>
+			<button type="submit" class="btn-block btn-danger" style="margin:.4rem 1%;width: 98%;">申请提现</button>
+			</form>
+		</div>
+		<div class="tab-panel-item">
+			<div class="cell-item">
+				<div class="cell-left">已提现总额</div>
+				<div class="cell-right">{{yitixian}}元</div>
+			</div>
+			<section id="J_List" style="background: #FFFFFF;">
+				<div id="J_ListContent">
+				    <div class="jilu" v-for="L in lie">
+						<div class="jilu-z">
+							<p>{{L.shuoming}}</p>
+							<font style="color: #6F6F6F;">{{L.shijian}}</font>
+						</div>
+						<div class="jilu-y">{{L.zhi}}</div>
+				    </div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{mb js}
+<script type="text/javascript">
+	var V=new Vue({
+		el: "#tixian",
+		data: {
+			kai: false,
+			ketixian: 0.00,
+			yitixian:0.00,
+			from:[],
+			lie:[]
+		},
+		beforeCreate: function() {
+			var that = this;
+			$z.post('{$_W["url"]}', function(shu) {
+				if(shu.shi) {
+					that.ketixian = shu.shu.ketixian;
+					that.yitixian = shu.shu.yitixian;					
+				}
+			})
+		},
+		methods: {
+			gai: function() {
+				if(this.$refs.dian.checked) {
+					this.kai = false;
+				} else {
+					this.kai = true;
+				}
+
+			},
+			onSubmit:function(e){
+				var that=this;			  
+				$z.post('{php echo UXK("wode/tixian",array("c"=>"tixian"))}',{
+					jin_e:this.from.jin_e,
+					dakuaifangshi:this.from.dakuaifangshi,
+					ming:this.from.ming,
+					zhanghao:this.from.zhanghao,
+					kaihhang:this.from.kaihhang,					
+				},function(s){
+					$z.toast(s.shu);
+					if(s.shi==1){
+						setTimeout(function(){
+							history.go(0) 
+						},1000);					 
+					}					
+				});			
+			}
+		},
+
+	});
+
+    var page = 1, pageSize = 10;
+    $('#J_List').infiniteScroll({
+        pageSize: pageSize,
+        initLoad: true,
+        loadingHtml: '<strong>加载中...</strong>',
+        loadListFn: function () {
+            var def = $.Deferred();
+            $z.post("{$_W['url']}",{c:'jilu',ye:page,jitiao:pageSize},function(ret){            	
+            	if(ret.shi==1){            		  
+        		    for(var i in ret.shu){
+        		    	V.$set(V.lie,V.lie.length++,ret.shu[i]);            		    	
+        		    }            	   
+	            }            
+                def.resolve(ret.shu);
+                ++page;
+            });
+            return def.promise();
+        }
+    });
+</script>
+
+{mb jiao}

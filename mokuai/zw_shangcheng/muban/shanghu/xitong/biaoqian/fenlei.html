@@ -1,0 +1,17 @@
+<div class="dd" id="nestable1" style="max-width:1920px;">
+  <ol class="dd-list">
+  	{loop $feileilie[fenlei] $k $l}
+    <li class="dd-item" data-id="2">
+      <div class="dd-handle-self">{$l[0][ming]}
+        <span class="hidden-sm">
+        	<a href="{php echo USK('xitong/index',array('id'=>"+$k+",'c'=>'shanchu'))}" class="btn btn-default pull-right m-t-xs">删除</a>
+        	<a href="{php echo USK('xitong/index',array('id'=>"+$k+",'c'=>'fenlei2'))}"  class="btn btn-success pull-right m-t-xs">编辑</a>
+        	<!--<button class="btn btn-success pull-right m-t-xs m-r-xs edit_fenlei" href="#gong7" data_id="{$fl['id']}" data-toggle="tab">编辑</button>-->
+        </span>
+      </div>
+    </li>
+   {/loop}
+  </ol>
+</div>
+<div class="line line-dashed b-b line-lg pull-in"></div>
+<a class="btn btn-danger padder-lg add_fenlei"  href="#gong7" data-toggle="tab">添加新分类</a>

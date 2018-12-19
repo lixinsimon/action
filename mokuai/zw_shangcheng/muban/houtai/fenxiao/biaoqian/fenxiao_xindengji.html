@@ -1,0 +1,68 @@
+  <form action="" method="post" class="form-horizontal" role="form">
+  	<input type="hidden" value="postdengji" name="c"/>
+  	<input type="hidden" value="{$dengji['id']}" name="id"/>
+  	<div class="form-group">
+      <label class="col-sm-2 control-label" for="input-id-1"><font class="text-danger"></font>角色</label>
+      <div class="col-sm-10">
+        <input type='number' class="form-control"   name="paixu" value="{$dengji['paixu']}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="input-id-1"><font class="text-danger">*</font>角色名称</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="input-id-1" name="ming" value="{$dengji['ming']}">
+      </div>
+    </div>
+    <div class="line line-dashed b-b line-lg"></div>
+    {php for($i=1;$i<=$jichupeizhi['cenji'];$i++){ }
+    <div class="form-group">
+      <label class="col-sm-2 control-label">{$i}级余额</label>
+      <div class="col-sm-10">
+        <div class="input-group">
+        	{if $dengji['id']>0}
+          <span class="input-group-addon">比例（%）</span>
+          <input type="text" name="cenji[{$i}][bilie]" class="form-control" value="{$dengji['cenji'][$i]['bilie']}" >
+         <!-- <span class="input-group-addon">分享奖（%）</span>
+          <input type="text" name="cenji[{$i}][guding]" class="form-control" value="{$dengji['cenji'][$i]['guding']}"> -->
+          {else}
+          <span class="input-group-addon">比例（%）</span>
+          <input type="text" name="cenji[{$i}][bilie]" class="form-control" value="" >
+          <!-- <span class="input-group-addon">分享奖（%）</span>
+          <input type="text" name="cenji[{$i}][guding]" class="form-control" value=""> -->
+          {/if}
+        </div>
+      </div>
+    </div> 
+    <div class="line line-dashed b-b line-lg"></div>
+    {php }} 
+   
+   
+    
+    
+    <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">升级条件</label>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <span class="input-group-addon">支付金额</span>
+          <input type="text" name="tiaojian" class="form-control" value="{$dengji['tiaojian']}">
+          <span class="input-group-addon">元</span> 
+        </div>
+          <span class="help-block">同时满足条件，升级为此角色；</span>
+        </div>
+        <!--<div class="input-group">
+          <span class="input-group-addon">团队人数满</span>
+          <input type="text" name="tuandui" class="form-control" value="{$dengji['tuandui']}">
+          <span class="input-group-addon">人</span> 
+        </div>-->
+        
+      </div>
+    </div>
+    
+    <div class="line line-dashed b-b line-lg"></div>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <button type="submit" class="btn btn-sm padder-lg btn-danger">提交</button>
+      </div>
+    </div>
+  </form>

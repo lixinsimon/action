@@ -1,0 +1,60 @@
+<header class="tou">搜索框</header>	
+<div class="form-group" style="margin-right:0px;">	
+        <div class="input-group m-b">
+	      <span class="input-group-addon">按钮</span>
+	      <input type="text"  class="form-control "  name="z[{$shu['ming']}][zi]" value="{$s['zi']}">	     
+	    </div>	
+  </div>
+  <div class="form-group" style="margin-right:0px;">	
+        <div class="input-group m-b">
+	      <span class="input-group-addon">按钮颜色</span>
+	     <input class="color-box" name="z[{$shu['ming']}][bg]" style="background: {$s['bg']};" readonly="readonly"  value="{$s['bg']}"></input>
+	     
+	    </div>	
+  </div>
+  <div class="form-group" style="margin-right:0px;">	
+        <div class="input-group m-b">
+	      	<span class="input-group-addon">按钮文字颜色</span>
+	     	<input class="color-box" name="z[{$shu['ming']}][zise]" style="background: {$s['zise']};" readonly="readonly"  value="{$s['zise']}"></input>
+	    </div>	
+  </div>
+  <div class="form-group" style="margin-right:0px;">	
+        <div class="input-group m-b">
+	      <span class="input-group-addon">默认提示</span>
+	      <input type="text" class="form-control"  name="z[{$shu['ming']}][tishi]" value="{$s['tishi']}">	     
+	    </div>	
+  </div>
+<script>	
+	
+	$('#{$shu["ming"]} input[name="z[{$shu['ming']}][zi]"]').blur(function(){	
+		var m=$(this).val();
+		  if(!m){
+		  	m='搜索';
+		  }
+		  I("#{$shu['ming']} .annui").text(m);		
+	});
+	
+	$('#{$shu["ming"]} input[name="z[{$shu['ming']}][tishi]"]').blur(function(){		
+		var m=$(this).val();	
+		I("#{$shu['ming']} .sousuo").attr('placeholder',m);		
+	});
+	
+	$('.color-box').colpick({
+		colorScheme:'dark',
+		layout:'rgbhex',
+		color:'ff8800',
+		onSubmit:function(hsb,hex,rgb,el) {
+			$(el).css('background-color', '#'+hex);
+			$(el).val('#'+hex);
+			$(el).colpickHide();
+			var she=$(el).attr('name');
+			if(she=="z[{$shu['ming']}][bg]"){
+				I("#{$shu['ming']} .annui").css('background-color','#'+hex);
+			}else if(she=="z[{$shu['ming']}][zise]"){
+				I("#{$shu['ming']} .annui").css('color','#'+hex);
+			}
+		}
+	})
+	
+	
+</script>

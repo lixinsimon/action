@@ -1,0 +1,87 @@
+<section style="padding: 0 !important;" class="panel panel-default">
+  <div class="panel-heading" style="border: 0;border-bottom: 1px solid transparent !important;">
+  	<!--data-toggle="collapse"-->
+        <a class="ceshi"  data-parent="#accordion2" href="#collapseOne" >
+           	 筛选
+        </a>
+    </div>
+    <script>
+    	var a = 0;
+    	$('.ceshi').click(function(){
+    			$('#collapseOne').slideToggle(1000);
+    	});
+    </script>
+    <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body text-sm">
+            <form class="form-horizontal" action="{php echo US('jichu/wenzhang', array('search'=>'wenzhang'))}" method="post">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">关键字</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="" name="guanjianzi" value="">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">文章分类</label>
+                    <div class="col-sm-5">
+                        <select name="account" class="form-control m-b">
+					                <option>请选择一级分类</option>
+					                {loop $fenlei1 $l}
+					                	<option value="{$l['id']}">{$l[ming]}</option>
+				               	  {/loop}
+           						 </select>
+                    </div>
+                    <!-- <div class="col-sm-5">
+                        <select name="account" class="form-control m-b">
+                            <option>请选择二级分类</option>
+                        </select>
+                    </div> -->
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-sm padder-lg btn-dark">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="panel panel-default">
+    <div class="table-responsive">
+        <table class="table table-striped b-light">
+            <thead>
+                <tr>
+                    <th width="8%">排序</th>
+                    <th width="8%">缩略图</th>
+                    <th width="35%">标题</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {loop $wenzhang $item}
+                <tr>
+                    <td>{$item['paixu']}</td>
+                    <td><img src="{php echo JueDuiUrl($item['suoluetu'])}" style="width:30px;height:30px;" /></td>
+                    <td>{$item['biaoti']}【{$item['zidingyishuxing']}】</td>
+                    <td style="position:relative;">
+                        <a href="javascript:;" data-url="{php echo UA('xinwen/xinwen-xq',array('id'=>$item['id']))}" title="复制连接" class="btn btn-default btn-sm js-clip"><i class="icon icon-link"></i></a>
+                        <a href="{php echo US('jichu/wenzhang', array('c'=>'bianji_', 'wenzhang_id'=>$item['id']))}" class="btn btn-sm btn-default" title="编辑"><i class="icon icon-edit"></i></a>
+                        <a href="{php echo US('jichu/wenzhang', array('c'=>'shanchu', 'wenzhang_id'=>$item['id']))}" onclick="return confirm('确认删除此商品？');return false;" class="btn btn-default  btn-sm" title="删除"><i class="icon icon-times"></i></a>
+                    </td>
+                    {/loop}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-left">{$fenye}</div>
+</section>
+<script type="text/javascript">
+$(function() {    
+    require(['util'], function(util) {
+        $('.js-clip').each(function() {
+            util.clip(this, $(this).attr('data-url'));
+        });
+    });
+
+})
+</script>
